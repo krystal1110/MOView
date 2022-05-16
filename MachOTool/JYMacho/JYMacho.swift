@@ -12,7 +12,7 @@ class JYMacho : Equatable {
     static func == (lhs: JYMacho, rhs: JYMacho) -> Bool {
         return lhs.id == rhs.id
     }
-    
+    var is64bit = false
     let id = UUID()
     let data: JYDataSlice
     var fileSize: Int { data.count }
@@ -33,6 +33,7 @@ class JYMacho : Equatable {
         guard let magicType = MagicType(machoData.raw) else {fatalError()}
         
         let is64bit = magicType == .macho64
+        self.is64bit = is64bit
         
         // 获取machoHeader
         self.header = JYMachoHeader(from: machoData.interception(from: .zero, length: is64bit ? 32 : 28) , is64Bit: is64bit)
@@ -80,6 +81,8 @@ class JYMacho : Equatable {
             let segment =  JYSegment(with: loadCommandData, commandType: loadCommandType)
             let segmentHeader = segment.sectionHeaders
             self.sectionHeaders.append(contentsOf: segmentHeader)
+           
+            
             if segment.fileoff == 0 && segment.filesize != 0{
                 // __TEXT段
                 print(segment.segname)
@@ -92,14 +95,24 @@ class JYMacho : Equatable {
         
         case .symbolTable: //LC_SYMTAB
             let segment = JYSymbolTableCommand(with: loadCommandData, commandType: loadCommandType)
-            #warning("TODO 解析符号表")
+            
+//            let symbolTableComponent = symbolTableComponent(from: segment)
+            let  interpreter = JYSymbolTableInterpreter()
+            interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            
             return segment
             
         case .dynamicSymbolTable: //LC_DYSYMTAB
             /* symtab_command must be present when this load command is present */
             /* also we assume symtab_command locates before dysymtab_command */
             let segment =  JYDynamicSymbolTableCompont(with: loadCommandData, commandType: loadCommandType)
+            
             #warning("TODO 解析动态符号表")
+            return segment
+        
+        case .buildVersion:
+            let segment =   JYBuildVersionCommand(with: loadCommandData, commandType: loadCommandType)
             return segment
         default:
             return  JYLoadCommand(with: data, commandType: loadCommandType, translationStore: nil)
@@ -111,3 +124,26 @@ class JYMacho : Equatable {
 }
 
 
+
+
+extension JYMacho {
+    fileprivate func symbolTableComponent(from symbolTableCommand: JYSymbolTableCommand)  {
+        
+        //起始位置
+        let symbolTableStartOffset = Int(symbolTableCommand.symbolTableOffset)
+       
+        //有多少个符号
+        let numberOfEntries = Int(symbolTableCommand.numberOfSymbolTable)
+        
+        let entrySize = is64bit ? 16 : 12
+
+        //symbol长度
+        let symbolSize = numberOfEntries * entrySize
+        
+        // symbol的data
+        let symbolTableData = data.interception(from: symbolTableStartOffset, length: symbolSize)
+        
+ 
+        
+    }
+}

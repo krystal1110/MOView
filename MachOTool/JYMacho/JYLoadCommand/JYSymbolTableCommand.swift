@@ -11,9 +11,9 @@ import Foundation
 class JYSymbolTableCommand:JYLoadCommand{
     
     let symbolTableOffset: UInt32
-    let numberOfSymbolTableEntries: UInt32
+    let numberOfSymbolTable: UInt32
     let stringTableOffset: UInt32
-    let sizeOfStringTable: UInt32
+    let stringTableSize: UInt32
     
     
     required init(with dataSlice: JYDataSlice, commandType: LoadCommandType, translationStore: JYTranslationRead? = nil) {
@@ -24,7 +24,7 @@ class JYSymbolTableCommand:JYLoadCommand{
             ExplanationModel(description: "Symbol table offset", explanation: value.hex)
         })
         
-        self.numberOfSymbolTableEntries = translationStore.translate(next: .doubleWords, dataInterpreter: {$0.UInt32}, itemContentGenerator: { value in
+        self.numberOfSymbolTable = translationStore.translate(next: .doubleWords, dataInterpreter: {$0.UInt32}, itemContentGenerator: { value in
             ExplanationModel(description: "Number of entries", explanation: "\(value)")
         })
      
@@ -32,7 +32,7 @@ class JYSymbolTableCommand:JYLoadCommand{
             ExplanationModel(description: "String table offset", explanation:  value.hex )
         })
         
-        self.sizeOfStringTable = translationStore.translate(next: .doubleWords, dataInterpreter: {$0.UInt32}, itemContentGenerator: { value in
+        self.stringTableSize = translationStore.translate(next: .doubleWords, dataInterpreter: {$0.UInt32}, itemContentGenerator: { value in
             ExplanationModel(description: "Size of string table", explanation: value.hex)
         })
         
