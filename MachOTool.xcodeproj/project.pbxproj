@@ -22,6 +22,7 @@
 		FBCEE95A28311D590090B4E6 /* JYMainCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE95928311D590090B4E6 /* JYMainCommand.swift */; };
 		FBCEE95C283123BD0090B4E6 /* JYSymbolTableCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE95B283123BD0090B4E6 /* JYSymbolTableCommand.swift */; };
 		FBCEE95E28312E950090B4E6 /* JYDynamicSymbolTableCompont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE95D28312E950090B4E6 /* JYDynamicSymbolTableCompont.swift */; };
+		FBCEE9632832207D0090B4E6 /* iOSToolsTest in Resources */ = {isa = PBXBuildFile; fileRef = FBCEE9622832207D0090B4E6 /* iOSToolsTest */; };
 		FBFB25BC28224A8E00BF6C89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB25BB28224A8E00BF6C89 /* AppDelegate.swift */; };
 		FBFB25BE28224A8E00BF6C89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB25BD28224A8E00BF6C89 /* ViewController.swift */; };
 		FBFB25C028224A9100BF6C89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBFB25BF28224A9100BF6C89 /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		FBCEE95928311D590090B4E6 /* JYMainCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYMainCommand.swift; sourceTree = "<group>"; };
 		FBCEE95B283123BD0090B4E6 /* JYSymbolTableCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYSymbolTableCommand.swift; sourceTree = "<group>"; };
 		FBCEE95D28312E950090B4E6 /* JYDynamicSymbolTableCompont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYDynamicSymbolTableCompont.swift; sourceTree = "<group>"; };
+		FBCEE9622832207D0090B4E6 /* iOSToolsTest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iOSToolsTest; sourceTree = SOURCE_ROOT; };
 		FBFB25B828224A8E00BF6C89 /* MachOTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MachOTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBFB25BB28224A8E00BF6C89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FBFB25BD28224A8E00BF6C89 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		FBFB25BA28224A8E00BF6C89 /* MachOTool */ = {
 			isa = PBXGroup;
 			children = (
+				FBCEE9622832207D0090B4E6 /* iOSToolsTest */,
 				FBCEE93E282F4EAD0090B4E6 /* JYConversionTools(转换) */,
 				FBCEE937282F4EAD0090B4E6 /* JYMacho */,
 				FBCEE941282F4EAD0090B4E6 /* Model */,
@@ -337,6 +340,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBCEE9632832207D0090B4E6 /* iOSToolsTest in Resources */,
 				FBFB25C028224A9100BF6C89 /* Assets.xcassets in Resources */,
 				FBFB25C328224A9100BF6C89 /* Main.storyboard in Resources */,
 			);
@@ -550,7 +554,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SJ7JKKYH4C;
+				DEVELOPMENT_TEAM = G7ANJPJ6VB;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

@@ -718,9 +718,9 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="file_cad" id="qq1-er-7Vb"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pPU-js-F1p">
-                                <rect key="frame" x="66" y="475" width="69" height="16"/>
+                                <rect key="frame" x="62" y="475" width="76" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="MachO文件" id="Kcf-UE-1H9">
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -730,7 +730,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="无用代码检测" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zxM-DY-30W">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="deadCodeAnalysis:" target="XfG-lQ-9wD" id="ggw-m7-Y9U"/>
@@ -760,6 +760,17 @@
                                     <font key="font" size="13" name="STSongti-SC-Regular"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nje-JT-7tT">
+                                <rect key="frame" x="63" y="328" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8tK-Tq-RQK">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="test:" target="XfG-lQ-9wD" id="I7L-Pi-q4u"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="p38-Io-JUY" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="Fsi-b5-OTt"/>
@@ -778,6 +789,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="file_cad" width="64" height="64"/>
+        <image name="file_cad" width="128" height="128"/>
     </resources>
 </document>

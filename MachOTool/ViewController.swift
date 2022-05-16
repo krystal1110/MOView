@@ -29,10 +29,18 @@ class ViewController: NSViewController {
 
     @IBAction func deadCodeAnalysis(_ sender: Any) {
     // 无用代码检测
-        File(fileURL:URL(string: "file:///Users/karthrine/Documents/iOSToolsTest")!)
+        
         
     }
  
+    @IBAction func test(_ sender: Any) {
+        let str = "file://" + getFilePath();
+        File(fileURL:URL(string:str)!)
+    }
+    
+    func getFilePath() ->String {
+        return Bundle.main.path(forResource: "iOSToolsTest", ofType: nil)!
+    }
     
     func shell(_ url:URL){
     do {

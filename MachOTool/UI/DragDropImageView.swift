@@ -9,9 +9,7 @@ import Foundation
 import Cocoa
 
 class DragDropImageView:NSImageView {
-    
- 
- 
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
     }
@@ -20,15 +18,10 @@ class DragDropImageView:NSImageView {
         super.init(coder: coder)
     }
     
-//    override func draw(_ dirtyRect: NSRect) {
-//        super.draw(dirtyRect)
-//    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setUp()
     }
-        
         
     func setUp() {
         self.image = NSImage(named: "file_cad")
@@ -64,20 +57,14 @@ class DragDropImageView:NSImageView {
         guard let x = pboard.pasteboardItems else{
             return false;
         }
-        
         if (x.count <= 1){
             //获取文件路径
             fileURL = (NSURL.init(from: pboard)?.path )!
         }
-        
-//        var data = JYFileMananger.readArm64(fromFile: fileURL  as String)
-         
-//        fileURL    Foundation.URL    "/Users/karthrine/Documents/iOSToolsTest"
-        File(fileURL:URL(string: "file:///Users/karthrine/Documents/iOSToolsTest")!)
-//        print("url 地址为 \(fileURL)")
+        let fileString = "file://" + fileURL
+        print("file的文件地址为 \(fileString)")
+        File(fileURL:URL(string: fileString)!)
         return true
-        
     }
- 
 }
 
