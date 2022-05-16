@@ -7,99 +7,64 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FBC566832827ACA900AB2BD2 /* JYFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC566822827ACA900AB2BD2 /* JYFile.swift */; };
-		FBCEE943282F4EAD0090B4E6 /* JYUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE934282F4EAD0090B4E6 /* JYUtils.swift */; };
-		FBCEE944282F4EAD0090B4E6 /* DragDropImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE936282F4EAD0090B4E6 /* DragDropImageView.swift */; };
-		FBCEE945282F4EAD0090B4E6 /* JYMachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE939282F4EAD0090B4E6 /* JYMachoHeader.swift */; };
-		FBCEE946282F4EAD0090B4E6 /* JYMachoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE93A282F4EAD0090B4E6 /* JYMachoComponent.swift */; };
-		FBCEE947282F4EAD0090B4E6 /* JYSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE93B282F4EAD0090B4E6 /* JYSegment.swift */; };
-		FBCEE948282F4EAD0090B4E6 /* JYMacho.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE93C282F4EAD0090B4E6 /* JYMacho.swift */; };
-		FBCEE94A282F4EAD0090B4E6 /* JYTranslationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE93F282F4EAD0090B4E6 /* JYTranslationRead.swift */; };
-		FBCEE94B282F4EAD0090B4E6 /* JYDataSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE940282F4EAD0090B4E6 /* JYDataSlice.swift */; };
-		FBCEE94E282F4FCA0090B4E6 /* JYSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE94D282F4FCA0090B4E6 /* JYSectionHeader.swift */; };
-		FBCEE9502830B8A00090B4E6 /* JYDataExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE94F2830B8A00090B4E6 /* JYDataExplanation.swift */; };
-		FBCEE9542830F7150090B4E6 /* JYLoadCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9532830F7150090B4E6 /* JYLoadCommand.swift */; };
-		FBCEE95A28311D590090B4E6 /* JYMainCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE95928311D590090B4E6 /* JYMainCommand.swift */; };
-		FBCEE95C283123BD0090B4E6 /* JYSymbolTableCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE95B283123BD0090B4E6 /* JYSymbolTableCommand.swift */; };
-		FBCEE95E28312E950090B4E6 /* JYDynamicSymbolTableCompont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE95D28312E950090B4E6 /* JYDynamicSymbolTableCompont.swift */; };
-		FBCEE9632832207D0090B4E6 /* iOSToolsTest in Resources */ = {isa = PBXBuildFile; fileRef = FBCEE9622832207D0090B4E6 /* iOSToolsTest */; };
-		FBCEE965283236340090B4E6 /* JYBuildVersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE964283236340090B4E6 /* JYBuildVersionCommand.swift */; };
-		FBCEE969283261700090B4E6 /* JYSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE968283261700090B4E6 /* JYSymbolTableInterpreter.swift */; };
-		FBFB25BC28224A8E00BF6C89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB25BB28224A8E00BF6C89 /* AppDelegate.swift */; };
-		FBFB25BE28224A8E00BF6C89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB25BD28224A8E00BF6C89 /* ViewController.swift */; };
-		FBFB25C028224A9100BF6C89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBFB25BF28224A9100BF6C89 /* Assets.xcassets */; };
-		FBFB25C328224A9100BF6C89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBFB25C128224A9100BF6C89 /* Main.storyboard */; };
-		FBFB25CE28224A9100BF6C89 /* MachOToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB25CD28224A9100BF6C89 /* MachOToolTests.swift */; };
-		FBFB25D828224A9100BF6C89 /* MachOToolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB25D728224A9100BF6C89 /* MachOToolUITests.swift */; };
-		FBFB25DA28224A9100BF6C89 /* MachOToolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFB25D928224A9100BF6C89 /* MachOToolUITestsLaunchTests.swift */; };
+		FBCEE977283290150090B4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE976283290150090B4E6 /* main.swift */; };
+		FBCEE98C283290400090B4E6 /* JYMachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE97F283290400090B4E6 /* JYMachoHeader.swift */; };
+		FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE980283290400090B4E6 /* JYMachoComponent.swift */; };
+		FBCEE98E283290400090B4E6 /* JYSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE982283290400090B4E6 /* JYSymbolTableInterpreter.swift */; };
+		FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE983283290400090B4E6 /* JYSegment.swift */; };
+		FBCEE990283290400090B4E6 /* JYMacho.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE984283290400090B4E6 /* JYMacho.swift */; };
+		FBCEE991283290400090B4E6 /* JYMainCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE986283290400090B4E6 /* JYMainCommand.swift */; };
+		FBCEE992283290400090B4E6 /* JYSymbolTableCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE987283290400090B4E6 /* JYSymbolTableCommand.swift */; };
+		FBCEE993283290400090B4E6 /* JYBuildVersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE988283290400090B4E6 /* JYBuildVersionCommand.swift */; };
+		FBCEE994283290400090B4E6 /* JYLoadCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE989283290400090B4E6 /* JYLoadCommand.swift */; };
+		FBCEE995283290400090B4E6 /* JYDynamicSymbolTableCompont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE98A283290400090B4E6 /* JYDynamicSymbolTableCompont.swift */; };
+		FBCEE996283290400090B4E6 /* JYSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE98B283290400090B4E6 /* JYSectionHeader.swift */; };
+		FBCEE99A283290470090B4E6 /* JYTranslationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE998283290470090B4E6 /* JYTranslationRead.swift */; };
+		FBCEE99B283290470090B4E6 /* JYDataSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE999283290470090B4E6 /* JYDataSlice.swift */; };
+		FBCEE99E2832904D0090B4E6 /* JYDataExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE99D2832904D0090B4E6 /* JYDataExplanation.swift */; };
+		FBCEE9A1283290530090B4E6 /* JYUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A0283290530090B4E6 /* JYUtils.swift */; };
+		FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A4283290630090B4E6 /* JYFile.swift */; };
+		FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		FBFB25CA28224A9100BF6C89 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FBFB25B028224A8E00BF6C89 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FBFB25B728224A8E00BF6C89;
-			remoteInfo = MachOTool;
+/* Begin PBXCopyFilesBuildPhase section */
+		FBCEE971283290150090B4E6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
-		FBFB25D428224A9100BF6C89 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FBFB25B028224A8E00BF6C89 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FBFB25B728224A8E00BF6C89;
-			remoteInfo = MachOTool;
-		};
-/* End PBXContainerItemProxy section */
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FBC566822827ACA900AB2BD2 /* JYFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYFile.swift; sourceTree = "<group>"; };
-		FBCEE934282F4EAD0090B4E6 /* JYUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYUtils.swift; sourceTree = "<group>"; };
-		FBCEE936282F4EAD0090B4E6 /* DragDropImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragDropImageView.swift; sourceTree = "<group>"; };
-		FBCEE939282F4EAD0090B4E6 /* JYMachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYMachoHeader.swift; sourceTree = "<group>"; };
-		FBCEE93A282F4EAD0090B4E6 /* JYMachoComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYMachoComponent.swift; sourceTree = "<group>"; };
-		FBCEE93B282F4EAD0090B4E6 /* JYSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYSegment.swift; sourceTree = "<group>"; };
-		FBCEE93C282F4EAD0090B4E6 /* JYMacho.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYMacho.swift; sourceTree = "<group>"; };
-		FBCEE93F282F4EAD0090B4E6 /* JYTranslationRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYTranslationRead.swift; sourceTree = "<group>"; };
-		FBCEE940282F4EAD0090B4E6 /* JYDataSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYDataSlice.swift; sourceTree = "<group>"; };
-		FBCEE94D282F4FCA0090B4E6 /* JYSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYSectionHeader.swift; sourceTree = "<group>"; };
-		FBCEE94F2830B8A00090B4E6 /* JYDataExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYDataExplanation.swift; sourceTree = "<group>"; };
-		FBCEE9532830F7150090B4E6 /* JYLoadCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYLoadCommand.swift; sourceTree = "<group>"; };
-		FBCEE95928311D590090B4E6 /* JYMainCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYMainCommand.swift; sourceTree = "<group>"; };
-		FBCEE95B283123BD0090B4E6 /* JYSymbolTableCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYSymbolTableCommand.swift; sourceTree = "<group>"; };
-		FBCEE95D28312E950090B4E6 /* JYDynamicSymbolTableCompont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYDynamicSymbolTableCompont.swift; sourceTree = "<group>"; };
-		FBCEE9622832207D0090B4E6 /* iOSToolsTest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iOSToolsTest; sourceTree = SOURCE_ROOT; };
-		FBCEE964283236340090B4E6 /* JYBuildVersionCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYBuildVersionCommand.swift; sourceTree = "<group>"; };
-		FBCEE968283261700090B4E6 /* JYSymbolTableInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYSymbolTableInterpreter.swift; sourceTree = "<group>"; };
-		FBFB25B828224A8E00BF6C89 /* MachOTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MachOTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FBFB25BB28224A8E00BF6C89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FBFB25BD28224A8E00BF6C89 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FBFB25BF28224A9100BF6C89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FBFB25C228224A9100BF6C89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FBFB25C428224A9100BF6C89 /* MachOTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MachOTool.entitlements; sourceTree = "<group>"; };
-		FBFB25C928224A9100BF6C89 /* MachOToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MachOToolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FBFB25CD28224A9100BF6C89 /* MachOToolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachOToolTests.swift; sourceTree = "<group>"; };
-		FBFB25D328224A9100BF6C89 /* MachOToolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MachOToolUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FBFB25D728224A9100BF6C89 /* MachOToolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachOToolUITests.swift; sourceTree = "<group>"; };
-		FBFB25D928224A9100BF6C89 /* MachOToolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachOToolUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		FBFB25EC2823671300BF6C89 /* MachOTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MachOTool-Bridging-Header.h"; sourceTree = "<group>"; };
+		FBCEE973283290150090B4E6 /* MachoTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MachoTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBCEE976283290150090B4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		FBCEE97F283290400090B4E6 /* JYMachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYMachoHeader.swift; sourceTree = "<group>"; };
+		FBCEE980283290400090B4E6 /* JYMachoComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYMachoComponent.swift; sourceTree = "<group>"; };
+		FBCEE982283290400090B4E6 /* JYSymbolTableInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYSymbolTableInterpreter.swift; sourceTree = "<group>"; };
+		FBCEE983283290400090B4E6 /* JYSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYSegment.swift; sourceTree = "<group>"; };
+		FBCEE984283290400090B4E6 /* JYMacho.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYMacho.swift; sourceTree = "<group>"; };
+		FBCEE986283290400090B4E6 /* JYMainCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYMainCommand.swift; sourceTree = "<group>"; };
+		FBCEE987283290400090B4E6 /* JYSymbolTableCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYSymbolTableCommand.swift; sourceTree = "<group>"; };
+		FBCEE988283290400090B4E6 /* JYBuildVersionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYBuildVersionCommand.swift; sourceTree = "<group>"; };
+		FBCEE989283290400090B4E6 /* JYLoadCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYLoadCommand.swift; sourceTree = "<group>"; };
+		FBCEE98A283290400090B4E6 /* JYDynamicSymbolTableCompont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYDynamicSymbolTableCompont.swift; sourceTree = "<group>"; };
+		FBCEE98B283290400090B4E6 /* JYSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYSectionHeader.swift; sourceTree = "<group>"; };
+		FBCEE998283290470090B4E6 /* JYTranslationRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYTranslationRead.swift; sourceTree = "<group>"; };
+		FBCEE999283290470090B4E6 /* JYDataSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYDataSlice.swift; sourceTree = "<group>"; };
+		FBCEE99D2832904D0090B4E6 /* JYDataExplanation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYDataExplanation.swift; sourceTree = "<group>"; };
+		FBCEE9A0283290530090B4E6 /* JYUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYUtils.swift; sourceTree = "<group>"; };
+		FBCEE9A3283290630090B4E6 /* MachOTool-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachOTool-Bridging-Header.h"; sourceTree = "<group>"; };
+		FBCEE9A4283290630090B4E6 /* JYFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYFile.swift; sourceTree = "<group>"; };
+		FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineTool.swift; sourceTree = "<group>"; };
+		FBCEE9A9283295760090B4E6 /* iOSToolsTest */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = iOSToolsTest; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FBFB25B528224A8E00BF6C89 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FBFB25C628224A9100BF6C89 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FBFB25D028224A9100BF6C89 /* Frameworks */ = {
+		FBCEE970283290150090B4E6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -109,227 +74,149 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FBCEE933282F4EAD0090B4E6 /* Tools */ = {
+		FBCEE96A283290150090B4E6 = {
 			isa = PBXGroup;
 			children = (
-				FBCEE934282F4EAD0090B4E6 /* JYUtils.swift */,
-			);
-			path = Tools;
-			sourceTree = "<group>";
-		};
-		FBCEE935282F4EAD0090B4E6 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				FBCEE936282F4EAD0090B4E6 /* DragDropImageView.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		FBCEE937282F4EAD0090B4E6 /* JYMacho */ = {
-			isa = PBXGroup;
-			children = (
-				FBCEE967283261500090B4E6 /* Interpreter(解释器) */,
-				FBCEE9522830F7150090B4E6 /* JYLoadCommand */,
-				FBCEE938282F4EAD0090B4E6 /* JYMachoHeader */,
-				FBCEE93A282F4EAD0090B4E6 /* JYMachoComponent.swift */,
-				FBCEE93B282F4EAD0090B4E6 /* JYSegment.swift */,
-				FBCEE93C282F4EAD0090B4E6 /* JYMacho.swift */,
-				FBCEE94D282F4FCA0090B4E6 /* JYSectionHeader.swift */,
-			);
-			path = JYMacho;
-			sourceTree = "<group>";
-		};
-		FBCEE938282F4EAD0090B4E6 /* JYMachoHeader */ = {
-			isa = PBXGroup;
-			children = (
-				FBCEE939282F4EAD0090B4E6 /* JYMachoHeader.swift */,
-			);
-			path = JYMachoHeader;
-			sourceTree = "<group>";
-		};
-		FBCEE93E282F4EAD0090B4E6 /* JYConversionTools(转换) */ = {
-			isa = PBXGroup;
-			children = (
-				FBCEE93F282F4EAD0090B4E6 /* JYTranslationRead.swift */,
-				FBCEE940282F4EAD0090B4E6 /* JYDataSlice.swift */,
-			);
-			path = "JYConversionTools(转换)";
-			sourceTree = "<group>";
-		};
-		FBCEE941282F4EAD0090B4E6 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				FBCEE94F2830B8A00090B4E6 /* JYDataExplanation.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		FBCEE9522830F7150090B4E6 /* JYLoadCommand */ = {
-			isa = PBXGroup;
-			children = (
-				FBCEE9532830F7150090B4E6 /* JYLoadCommand.swift */,
-				FBCEE95928311D590090B4E6 /* JYMainCommand.swift */,
-				FBCEE95B283123BD0090B4E6 /* JYSymbolTableCommand.swift */,
-				FBCEE95D28312E950090B4E6 /* JYDynamicSymbolTableCompont.swift */,
-				FBCEE964283236340090B4E6 /* JYBuildVersionCommand.swift */,
-			);
-			path = JYLoadCommand;
-			sourceTree = "<group>";
-		};
-		FBCEE967283261500090B4E6 /* Interpreter(解释器) */ = {
-			isa = PBXGroup;
-			children = (
-				FBCEE968283261700090B4E6 /* JYSymbolTableInterpreter.swift */,
-			);
-			path = "Interpreter(解释器)";
-			sourceTree = "<group>";
-		};
-		FBFB25AF28224A8E00BF6C89 = {
-			isa = PBXGroup;
-			children = (
-				FBFB25BA28224A8E00BF6C89 /* MachOTool */,
-				FBFB25CC28224A9100BF6C89 /* MachOToolTests */,
-				FBFB25D628224A9100BF6C89 /* MachOToolUITests */,
-				FBFB25B928224A8E00BF6C89 /* Products */,
+				FBCEE975283290150090B4E6 /* MachoTool */,
+				FBCEE974283290150090B4E6 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		FBFB25B928224A8E00BF6C89 /* Products */ = {
+		FBCEE974283290150090B4E6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FBFB25B828224A8E00BF6C89 /* MachOTool.app */,
-				FBFB25C928224A9100BF6C89 /* MachOToolTests.xctest */,
-				FBFB25D328224A9100BF6C89 /* MachOToolUITests.xctest */,
+				FBCEE973283290150090B4E6 /* MachoTool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FBFB25BA28224A8E00BF6C89 /* MachOTool */ = {
+		FBCEE975283290150090B4E6 /* MachoTool */ = {
 			isa = PBXGroup;
 			children = (
-				FBCEE9622832207D0090B4E6 /* iOSToolsTest */,
-				FBCEE93E282F4EAD0090B4E6 /* JYConversionTools(转换) */,
-				FBCEE937282F4EAD0090B4E6 /* JYMacho */,
-				FBCEE941282F4EAD0090B4E6 /* Model */,
-				FBCEE933282F4EAD0090B4E6 /* Tools */,
-				FBCEE935282F4EAD0090B4E6 /* UI */,
-				FBFB25E82822D18B00BF6C89 /* JYFileManager */,
-				FBFB25BB28224A8E00BF6C89 /* AppDelegate.swift */,
-				FBFB25BD28224A8E00BF6C89 /* ViewController.swift */,
-				FBFB25BF28224A9100BF6C89 /* Assets.xcassets */,
-				FBFB25C128224A9100BF6C89 /* Main.storyboard */,
-				FBFB25C428224A9100BF6C89 /* MachOTool.entitlements */,
+				FBCEE9A2283290630090B4E6 /* FileManager */,
+				FBCEE99F283290530090B4E6 /* Tools */,
+				FBCEE99C2832904D0090B4E6 /* Model */,
+				FBCEE997283290470090B4E6 /* ConversionTools(转换) */,
+				FBCEE97D283290400090B4E6 /* Macho */,
+				FBCEE976283290150090B4E6 /* main.swift */,
+				FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */,
+				FBCEE9A9283295760090B4E6 /* iOSToolsTest */,
 			);
-			path = MachOTool;
+			path = MachoTool;
 			sourceTree = "<group>";
 		};
-		FBFB25CC28224A9100BF6C89 /* MachOToolTests */ = {
+		FBCEE97D283290400090B4E6 /* Macho */ = {
 			isa = PBXGroup;
 			children = (
-				FBFB25CD28224A9100BF6C89 /* MachOToolTests.swift */,
+				FBCEE97E283290400090B4E6 /* JYMachoHeader */,
+				FBCEE980283290400090B4E6 /* JYMachoComponent.swift */,
+				FBCEE981283290400090B4E6 /* Interpreter(解释器) */,
+				FBCEE983283290400090B4E6 /* JYSegment.swift */,
+				FBCEE984283290400090B4E6 /* JYMacho.swift */,
+				FBCEE985283290400090B4E6 /* JYLoadCommand */,
+				FBCEE98B283290400090B4E6 /* JYSectionHeader.swift */,
 			);
-			path = MachOToolTests;
+			path = Macho;
 			sourceTree = "<group>";
 		};
-		FBFB25D628224A9100BF6C89 /* MachOToolUITests */ = {
+		FBCEE97E283290400090B4E6 /* JYMachoHeader */ = {
 			isa = PBXGroup;
 			children = (
-				FBFB25D728224A9100BF6C89 /* MachOToolUITests.swift */,
-				FBFB25D928224A9100BF6C89 /* MachOToolUITestsLaunchTests.swift */,
+				FBCEE97F283290400090B4E6 /* JYMachoHeader.swift */,
 			);
-			path = MachOToolUITests;
+			path = JYMachoHeader;
 			sourceTree = "<group>";
 		};
-		FBFB25E82822D18B00BF6C89 /* JYFileManager */ = {
+		FBCEE981283290400090B4E6 /* Interpreter(解释器) */ = {
 			isa = PBXGroup;
 			children = (
-				FBFB25EC2823671300BF6C89 /* MachOTool-Bridging-Header.h */,
-				FBC566822827ACA900AB2BD2 /* JYFile.swift */,
+				FBCEE982283290400090B4E6 /* JYSymbolTableInterpreter.swift */,
 			);
-			path = JYFileManager;
+			path = "Interpreter(解释器)";
+			sourceTree = "<group>";
+		};
+		FBCEE985283290400090B4E6 /* JYLoadCommand */ = {
+			isa = PBXGroup;
+			children = (
+				FBCEE986283290400090B4E6 /* JYMainCommand.swift */,
+				FBCEE987283290400090B4E6 /* JYSymbolTableCommand.swift */,
+				FBCEE988283290400090B4E6 /* JYBuildVersionCommand.swift */,
+				FBCEE989283290400090B4E6 /* JYLoadCommand.swift */,
+				FBCEE98A283290400090B4E6 /* JYDynamicSymbolTableCompont.swift */,
+			);
+			path = JYLoadCommand;
+			sourceTree = "<group>";
+		};
+		FBCEE997283290470090B4E6 /* ConversionTools(转换) */ = {
+			isa = PBXGroup;
+			children = (
+				FBCEE998283290470090B4E6 /* JYTranslationRead.swift */,
+				FBCEE999283290470090B4E6 /* JYDataSlice.swift */,
+			);
+			path = "ConversionTools(转换)";
+			sourceTree = "<group>";
+		};
+		FBCEE99C2832904D0090B4E6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FBCEE99D2832904D0090B4E6 /* JYDataExplanation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FBCEE99F283290530090B4E6 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				FBCEE9A0283290530090B4E6 /* JYUtils.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		FBCEE9A2283290630090B4E6 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				FBCEE9A3283290630090B4E6 /* MachOTool-Bridging-Header.h */,
+				FBCEE9A4283290630090B4E6 /* JYFile.swift */,
+			);
+			path = FileManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FBFB25B728224A8E00BF6C89 /* MachOTool */ = {
+		FBCEE972283290150090B4E6 /* MachoTool */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FBFB25DD28224A9100BF6C89 /* Build configuration list for PBXNativeTarget "MachOTool" */;
+			buildConfigurationList = FBCEE97A283290150090B4E6 /* Build configuration list for PBXNativeTarget "MachoTool" */;
 			buildPhases = (
-				FBFB25B428224A8E00BF6C89 /* Sources */,
-				FBFB25B528224A8E00BF6C89 /* Frameworks */,
-				FBFB25B628224A8E00BF6C89 /* Resources */,
+				FBCEE96F283290150090B4E6 /* Sources */,
+				FBCEE970283290150090B4E6 /* Frameworks */,
+				FBCEE971283290150090B4E6 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MachOTool;
-			productName = MachOTool;
-			productReference = FBFB25B828224A8E00BF6C89 /* MachOTool.app */;
-			productType = "com.apple.product-type.application";
-		};
-		FBFB25C828224A9100BF6C89 /* MachOToolTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FBFB25E028224A9100BF6C89 /* Build configuration list for PBXNativeTarget "MachOToolTests" */;
-			buildPhases = (
-				FBFB25C528224A9100BF6C89 /* Sources */,
-				FBFB25C628224A9100BF6C89 /* Frameworks */,
-				FBFB25C728224A9100BF6C89 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FBFB25CB28224A9100BF6C89 /* PBXTargetDependency */,
-			);
-			name = MachOToolTests;
-			productName = MachOToolTests;
-			productReference = FBFB25C928224A9100BF6C89 /* MachOToolTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		FBFB25D228224A9100BF6C89 /* MachOToolUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FBFB25E328224A9100BF6C89 /* Build configuration list for PBXNativeTarget "MachOToolUITests" */;
-			buildPhases = (
-				FBFB25CF28224A9100BF6C89 /* Sources */,
-				FBFB25D028224A9100BF6C89 /* Frameworks */,
-				FBFB25D128224A9100BF6C89 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FBFB25D528224A9100BF6C89 /* PBXTargetDependency */,
-			);
-			name = MachOToolUITests;
-			productName = MachOToolUITests;
-			productReference = FBFB25D328224A9100BF6C89 /* MachOToolUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
+			name = MachoTool;
+			productName = MachoTool;
+			productReference = FBCEE973283290150090B4E6 /* MachoTool */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		FBFB25B028224A8E00BF6C89 /* Project object */ = {
+		FBCEE96B283290150090B4E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
-					FBFB25B728224A8E00BF6C89 = {
+					FBCEE972283290150090B4E6 = {
 						CreatedOnToolsVersion = 13.3.1;
-						LastSwiftMigration = 1330;
-					};
-					FBFB25C828224A9100BF6C89 = {
-						CreatedOnToolsVersion = 13.3.1;
-						TestTargetID = FBFB25B728224A8E00BF6C89;
-					};
-					FBFB25D228224A9100BF6C89 = {
-						CreatedOnToolsVersion = 13.3.1;
-						TestTargetID = FBFB25B728224A8E00BF6C89;
 					};
 				};
 			};
-			buildConfigurationList = FBFB25B328224A8E00BF6C89 /* Build configuration list for PBXProject "MachOTool" */;
+			buildConfigurationList = FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachoTool" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -337,117 +224,46 @@
 				en,
 				Base,
 			);
-			mainGroup = FBFB25AF28224A8E00BF6C89;
-			productRefGroup = FBFB25B928224A8E00BF6C89 /* Products */;
+			mainGroup = FBCEE96A283290150090B4E6;
+			productRefGroup = FBCEE974283290150090B4E6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FBFB25B728224A8E00BF6C89 /* MachOTool */,
-				FBFB25C828224A9100BF6C89 /* MachOToolTests */,
-				FBFB25D228224A9100BF6C89 /* MachOToolUITests */,
+				FBCEE972283290150090B4E6 /* MachoTool */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		FBFB25B628224A8E00BF6C89 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FBCEE9632832207D0090B4E6 /* iOSToolsTest in Resources */,
-				FBFB25C028224A9100BF6C89 /* Assets.xcassets in Resources */,
-				FBFB25C328224A9100BF6C89 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FBFB25C728224A9100BF6C89 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FBFB25D128224A9100BF6C89 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		FBFB25B428224A8E00BF6C89 /* Sources */ = {
+		FBCEE96F283290150090B4E6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBCEE965283236340090B4E6 /* JYBuildVersionCommand.swift in Sources */,
-				FBCEE95E28312E950090B4E6 /* JYDynamicSymbolTableCompont.swift in Sources */,
-				FBCEE947282F4EAD0090B4E6 /* JYSegment.swift in Sources */,
-				FBCEE94B282F4EAD0090B4E6 /* JYDataSlice.swift in Sources */,
-				FBCEE943282F4EAD0090B4E6 /* JYUtils.swift in Sources */,
-				FBFB25BE28224A8E00BF6C89 /* ViewController.swift in Sources */,
-				FBCEE9502830B8A00090B4E6 /* JYDataExplanation.swift in Sources */,
-				FBCEE95C283123BD0090B4E6 /* JYSymbolTableCommand.swift in Sources */,
-				FBCEE948282F4EAD0090B4E6 /* JYMacho.swift in Sources */,
-				FBCEE969283261700090B4E6 /* JYSymbolTableInterpreter.swift in Sources */,
-				FBCEE945282F4EAD0090B4E6 /* JYMachoHeader.swift in Sources */,
-				FBCEE95A28311D590090B4E6 /* JYMainCommand.swift in Sources */,
-				FBCEE94E282F4FCA0090B4E6 /* JYSectionHeader.swift in Sources */,
-				FBCEE944282F4EAD0090B4E6 /* DragDropImageView.swift in Sources */,
-				FBCEE94A282F4EAD0090B4E6 /* JYTranslationRead.swift in Sources */,
-				FBFB25BC28224A8E00BF6C89 /* AppDelegate.swift in Sources */,
-				FBC566832827ACA900AB2BD2 /* JYFile.swift in Sources */,
-				FBCEE9542830F7150090B4E6 /* JYLoadCommand.swift in Sources */,
-				FBCEE946282F4EAD0090B4E6 /* JYMachoComponent.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FBFB25C528224A9100BF6C89 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FBFB25CE28224A9100BF6C89 /* MachOToolTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FBFB25CF28224A9100BF6C89 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FBFB25D828224A9100BF6C89 /* MachOToolUITests.swift in Sources */,
-				FBFB25DA28224A9100BF6C89 /* MachOToolUITestsLaunchTests.swift in Sources */,
+				FBCEE993283290400090B4E6 /* JYBuildVersionCommand.swift in Sources */,
+				FBCEE99A283290470090B4E6 /* JYTranslationRead.swift in Sources */,
+				FBCEE996283290400090B4E6 /* JYSectionHeader.swift in Sources */,
+				FBCEE99B283290470090B4E6 /* JYDataSlice.swift in Sources */,
+				FBCEE99E2832904D0090B4E6 /* JYDataExplanation.swift in Sources */,
+				FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */,
+				FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */,
+				FBCEE98C283290400090B4E6 /* JYMachoHeader.swift in Sources */,
+				FBCEE995283290400090B4E6 /* JYDynamicSymbolTableCompont.swift in Sources */,
+				FBCEE98E283290400090B4E6 /* JYSymbolTableInterpreter.swift in Sources */,
+				FBCEE994283290400090B4E6 /* JYLoadCommand.swift in Sources */,
+				FBCEE990283290400090B4E6 /* JYMacho.swift in Sources */,
+				FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */,
+				FBCEE9A1283290530090B4E6 /* JYUtils.swift in Sources */,
+				FBCEE992283290400090B4E6 /* JYSymbolTableCommand.swift in Sources */,
+				FBCEE991283290400090B4E6 /* JYMainCommand.swift in Sources */,
+				FBCEE977283290150090B4E6 /* main.swift in Sources */,
+				FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		FBFB25CB28224A9100BF6C89 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FBFB25B728224A8E00BF6C89 /* MachOTool */;
-			targetProxy = FBFB25CA28224A9100BF6C89 /* PBXContainerItemProxy */;
-		};
-		FBFB25D528224A9100BF6C89 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FBFB25B728224A8E00BF6C89 /* MachOTool */;
-			targetProxy = FBFB25D428224A9100BF6C89 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FBFB25C128224A9100BF6C89 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FBFB25C228224A9100BF6C89 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		FBFB25DB28224A9100BF6C89 /* Debug */ = {
+		FBCEE978283290150090B4E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -507,7 +323,7 @@
 			};
 			name = Debug;
 		};
-		FBFB25DC28224A9100BF6C89 /* Release */ = {
+		FBCEE979283290150090B4E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -560,179 +376,50 @@
 			};
 			name = Release;
 		};
-		FBFB25DE28224A9100BF6C89 /* Debug */ = {
+		FBCEE97B283290150090B4E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = MachOTool/MachOTool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = G7ANJPJ6VB;
+				DEVELOPMENT_TEAM = 72A32H9VNN;
 				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-23.MachOTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MachOTool/JYFileManager/MachOTool-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		FBFB25DF28224A9100BF6C89 /* Release */ = {
+		FBCEE97C283290150090B4E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = MachOTool/MachOTool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SJ7JKKYH4C;
+				DEVELOPMENT_TEAM = 72A32H9VNN;
 				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-23.MachOTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MachOTool/JYFileManager/MachOTool-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		FBFB25E128224A9100BF6C89 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 72A32H9VNN;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-23.MachOToolTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MachOTool.app/Contents/MacOS/MachOTool";
-			};
-			name = Debug;
-		};
-		FBFB25E228224A9100BF6C89 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 72A32H9VNN;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-23.MachOToolTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MachOTool.app/Contents/MacOS/MachOTool";
-			};
-			name = Release;
-		};
-		FBFB25E428224A9100BF6C89 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 72A32H9VNN;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-23.MachOToolUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = MachOTool;
-			};
-			name = Debug;
-		};
-		FBFB25E528224A9100BF6C89 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 72A32H9VNN;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-23.MachOToolUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = MachOTool;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FBFB25B328224A8E00BF6C89 /* Build configuration list for PBXProject "MachOTool" */ = {
+		FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachoTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FBFB25DB28224A9100BF6C89 /* Debug */,
-				FBFB25DC28224A9100BF6C89 /* Release */,
+				FBCEE978283290150090B4E6 /* Debug */,
+				FBCEE979283290150090B4E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FBFB25DD28224A9100BF6C89 /* Build configuration list for PBXNativeTarget "MachOTool" */ = {
+		FBCEE97A283290150090B4E6 /* Build configuration list for PBXNativeTarget "MachoTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FBFB25DE28224A9100BF6C89 /* Debug */,
-				FBFB25DF28224A9100BF6C89 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FBFB25E028224A9100BF6C89 /* Build configuration list for PBXNativeTarget "MachOToolTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FBFB25E128224A9100BF6C89 /* Debug */,
-				FBFB25E228224A9100BF6C89 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FBFB25E328224A9100BF6C89 /* Build configuration list for PBXNativeTarget "MachOToolUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FBFB25E428224A9100BF6C89 /* Debug */,
-				FBFB25E528224A9100BF6C89 /* Release */,
+				FBCEE97B283290150090B4E6 /* Debug */,
+				FBCEE97C283290150090B4E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = FBFB25B028224A8E00BF6C89 /* Project object */;
+	rootObject = FBCEE96B283290150090B4E6 /* Project object */;
 }
