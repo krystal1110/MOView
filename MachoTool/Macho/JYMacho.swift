@@ -22,6 +22,12 @@ class JYMacho : Equatable {
     // 每个section的header 合集
     private(set) var sectionHeaders: [JYSectionHeader64] = []
     
+    // stringTable解析器
+    var stringTableInterpreter: CStringInterpreter?
+
+    // 符号表解析器
+//    var symbolTableInterpreter: BaseInterpreter?
+    
     init(machoDataRaw:Data, machoFileName:String){
         let machoData = JYDataSlice(machoDataRaw)
         self.data = machoData
@@ -95,11 +101,11 @@ class JYMacho : Equatable {
         
         case .symbolTable: //LC_SYMTAB
             let segment = JYSymbolTableCommand(with: loadCommandData, commandType: loadCommandType)
-            
-//            let symbolTableComponent = symbolTableComponent(from: segment)
             let  interpreter = JYSymbolTableInterpreter()
             interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
             interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            
+            
             
             return segment
             

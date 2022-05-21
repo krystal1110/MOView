@@ -17,11 +17,13 @@ class JYSymbolTableInterpreter{
         let numberOfEntries = Int(symbolTableCommand.numberOfSymbolTable)
         let entrySize = is64Bit ? 16 : 12
         let symbolTableData = data.interception(from: symbolTableStartOffset, length: numberOfEntries * entrySize)
-        
+       
+        JYMachoModel<JYSymbolTableEntryModel>.init().generateVessel(data: symbolTableData, is64Bit: is64Bit)
         
     }
     
     // stringTable解释器
+    
     func stringTableInterpreter(with symbolTableCommand:JYSymbolTableCommand , is64Bit:Bool , data:JYDataSlice){
         let stringTableStartOffset = Int(symbolTableCommand.stringTableOffset)
         let symbolTableStartOffset = Int(symbolTableCommand.symbolTableOffset)
