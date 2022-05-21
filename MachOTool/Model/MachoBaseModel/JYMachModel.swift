@@ -8,10 +8,10 @@
 import Foundation
 
 
-protocol JYMachoExplainModel{
+protocol MachoExplainModel{
     
     // init
-    init(with data:JYDataSlice, is64Bit: Bool)
+    init(with data:DataSlice, is64Bit: Bool)
    
     // 搜索某一个Item
 //    func explanationItem(at index: Int) -> ExplanationItem
@@ -23,10 +23,10 @@ protocol JYMachoExplainModel{
     static func numberOfExplanationItem()-> Int
 }
 
-class JYMachoModel<Model :JYMachoExplainModel>{
+class MachoModel<Model :MachoExplainModel>{
     
     // 生成容器
-    func generateVessel(data:JYDataSlice, is64Bit: Bool) -> [Model] {
+    func generateVessel(data:DataSlice, is64Bit: Bool) -> [Model] {
         let modelSize = Model.modelSize(is64Bit: is64Bit)
         let numberOfModels =  data.count / modelSize
         var models: [Model] = []

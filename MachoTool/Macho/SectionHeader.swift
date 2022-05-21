@@ -1,5 +1,5 @@
 //
-//  JYSectionHeader.swift
+//  SectionHeader.swift
 //  MachOTool
 //
 //  Created by karthrine on 2022/5/14.
@@ -35,7 +35,7 @@ import Foundation
 //#define SECTION_ATTRIBUTES     0xffffff00    /*  24 section attributes */
 
 
-struct JYSectionHeader64 {
+struct SectionHeader64 {
     let segment: String
     let section: String
     let addr: UInt64
@@ -51,14 +51,14 @@ struct JYSectionHeader64 {
     let reserved3: UInt32? // exists only for 64 bit
     
     let is64Bit: Bool
-    let data: JYDataSlice
-    let translationStore: JYTranslationRead
+    let data: DataSlice
+    let translationStore: TranslationRead
     
-    init(is64Bit: Bool, data: JYDataSlice) {
+    init(is64Bit: Bool, data: DataSlice) {
         self.is64Bit = is64Bit
         self.data = data
         
-        let translationStore = JYTranslationRead(machoDataSlice: data)
+        let translationStore = TranslationRead(machoDataSlice: data)
         
         self.section =
         translationStore.translate(next: .rawNumber(16),

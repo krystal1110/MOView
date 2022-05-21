@@ -58,7 +58,7 @@ struct File {
     
     let fileName:String
     let fileSize: Int
-    let machos:[JYMacho]
+    let machos:[Macho]
     
     init(fileURL:URL) {
         let fileName = fileURL.lastPathComponent
@@ -73,13 +73,13 @@ struct File {
         guard let magicType = MagicType(fileData) else { fatalError() }
         switch magicType{
         case .macho32, .macho64:
-            self.machos = [JYMacho(machoDataRaw: fileData, machoFileName: fileName )]
+            self.machos = [Macho(machoDataRaw: fileData, machoFileName: fileName )]
         case .ar:
             #warning("TODO")
-            self.machos = [JYMacho(machoDataRaw: fileData, machoFileName: fileName )]
+            self.machos = [Macho(machoDataRaw: fileData, machoFileName: fileName )]
         case .fat:
             #warning("TODO")
-            self.machos = [JYMacho(machoDataRaw: fileData, machoFileName: fileName )]
+            self.machos = [Macho(machoDataRaw: fileData, machoFileName: fileName )]
         }
     }
 }

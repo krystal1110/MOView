@@ -185,11 +185,11 @@ enum LoadCommandType: UInt32 {
     }
 }
 
-class JYLoadCommand: JYMachoComponent {
+class JYLoadCommand: MachoComponent {
 
     let type: LoadCommandType
     
-    required init(with dataSlice: JYDataSlice , commandType:LoadCommandType, translationStore:JYTranslationRead?  ) {
+    required init(with dataSlice: DataSlice , commandType:LoadCommandType, translationStore:TranslationRead?  ) {
         self.type = commandType
         super.init(dataSlice)
     }

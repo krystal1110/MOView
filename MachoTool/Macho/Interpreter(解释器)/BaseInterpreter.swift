@@ -12,24 +12,24 @@ import Foundation
 protocol SeachStringTable: AnyObject {
     
     // cpu信息
-    var cpuType: CPUType{get}
-    var cpuSubType: CPUSubtype{get}
+//    var cpuType: CPUType{get}
+//    var cpuSubType: CPUSubtype{get}
     
     
     //搜索str
-    func searchStrInStringTable(at offset: Int) ->String?
-    func searchString(wiht virtualAddress: UInt64) -> String?
-    
-    //搜索符号表
-    func symbolInSymbolTable(with virtualAddress: UInt64) -> JYSymbolTableEntryModel?
-    func symbolInSymbolTable(at index:Int) -> JYSymbolTableEntryModel?
-    
-    //在间接符号表中搜索
-    func searchIndirectSymbolTable(at index:Int)
+//    func searchStrInStringTable(at offset: Int) ->String?
+//    func searchString(wiht virtualAddress: UInt64) -> String?
+//    
+//    //搜索符号表
+//    func symbolInSymbolTable(with virtualAddress: UInt64) -> JYSymbolTableEntryModel?
+//    func symbolInSymbolTable(at index:Int) -> JYSymbolTableEntryModel?
+//    
+//    //在间接符号表中搜索
+//    func searchIndirectSymbolTable(at index:Int)
     
 }
 
-//extension JYMacho: SeachStringTable{
+//extension Macho: SeachStringTable{
 //    var cpuType: CPUType {
 //        header.cpuType
 //    }

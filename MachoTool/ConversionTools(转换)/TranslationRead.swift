@@ -1,5 +1,5 @@
 //
-//  JYTranslationRead.swift
+//  TranslationRead.swift
 //  MachOTool
 //
 //  Created by karthrine on 2022/5/8.
@@ -8,13 +8,13 @@
 import Foundation
 
 
-class JYTranslationRead {
+class TranslationRead {
     
-    let machoDataSlice: JYDataSlice
+    let machoDataSlice: DataSlice
     private(set) var translated: Int = 0
     private(set) var items: [ExplanationItem] = []
     
-    init(machoDataSlice: JYDataSlice) {
+    init(machoDataSlice: DataSlice) {
         self.machoDataSlice = machoDataSlice
     }
     

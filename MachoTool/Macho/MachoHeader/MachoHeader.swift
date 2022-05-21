@@ -1,5 +1,5 @@
 //
-//  JYMachoHeader.swift
+//  MachoHeader.swift
 //  MachOTool
 //
 //  Created by karthrine on 2022/5/9.
@@ -23,7 +23,7 @@ import Foundation
  };
  **/
 
-class JYMachoHeader: JYMachoComponent {
+class MachoHeader: MachoComponent {
     
     let is64Bit: Bool
 //    let magic:UInt32
@@ -36,11 +36,11 @@ class JYMachoHeader: JYMachoComponent {
     let reserved: UInt32?
      
     
-    init(from machoDataSlice: JYDataSlice, is64Bit: Bool) {
+    init(from machoDataSlice: DataSlice, is64Bit: Bool) {
         self.is64Bit = is64Bit
         
         
-        let transStore = JYTranslationRead(machoDataSlice: machoDataSlice)
+        let transStore = TranslationRead(machoDataSlice: machoDataSlice)
         
         // mach magic number identifier
         _ = transStore.translate(next: .doubleWords,

@@ -1,5 +1,5 @@
 //
-//  JYMacho.swift
+//  Macho.swift
 //  MachOTool
 //
 //  Created by karthrine on 2022/5/8.
@@ -8,19 +8,19 @@
 import Foundation
 
 
-class JYMacho : Equatable {
-    static func == (lhs: JYMacho, rhs: JYMacho) -> Bool {
+class Macho : Equatable {
+    static func == (lhs: Macho, rhs: Macho) -> Bool {
         return lhs.id == rhs.id
     }
     var is64bit = false
     let id = UUID()
-    let data: JYDataSlice
+    let data: DataSlice
     var fileSize: Int { data.count }
     let machoFileName: String
-    let header: JYMachoHeader
+    let header: MachoHeader
     
     // 每个section的header 合集
-    private(set) var sectionHeaders: [JYSectionHeader64] = []
+    private(set) var sectionHeaders: [SectionHeader64] = []
     
     // stringTable解析器
     var stringTableInterpreter: CStringInterpreter?
@@ -29,12 +29,12 @@ class JYMacho : Equatable {
 //    var symbolTableInterpreter: BaseInterpreter?
     
     init(machoDataRaw:Data, machoFileName:String){
-        let machoData = JYDataSlice(machoDataRaw)
+        let machoData = DataSlice(machoDataRaw)
         self.data = machoData
         self.machoFileName = machoFileName
         
         
-        var loadCommands: [JYMachoComponent] = []
+        var loadCommands: [MachoComponent] = []
         
         guard let magicType = MagicType(machoData.raw) else {fatalError()}
         
@@ -42,7 +42,7 @@ class JYMacho : Equatable {
         self.is64bit = is64bit
         
         // 获取machoHeader
-        self.header = JYMachoHeader(from: machoData.interception(from: .zero, length: is64bit ? 32 : 28) , is64Bit: is64bit)
+        self.header = MachoHeader(from: machoData.interception(from: .zero, length: is64bit ? 32 : 28) , is64Bit: is64bit)
         
         // header大小之后 就是 load_command
         var loadCommondsStartOffset = self.header.componentSize
@@ -80,7 +80,7 @@ class JYMacho : Equatable {
     }
     
     
-    func translationLoadCommands(with  loadCommandData:JYDataSlice , loadCommandType:LoadCommandType ) -> JYLoadCommand {
+    func translationLoadCommands(with  loadCommandData:DataSlice , loadCommandType:LoadCommandType ) -> JYLoadCommand {
         
         switch loadCommandType {
         case .segment, .segment64: //__PAGEZERO  __Text  __DATA  __LINKEDIT
@@ -101,9 +101,16 @@ class JYMacho : Equatable {
         
         case .symbolTable: //LC_SYMTAB
             let segment = JYSymbolTableCommand(with: loadCommandData, commandType: loadCommandType)
-            let  interpreter = JYSymbolTableInterpreter()
-            interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
-            interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            let  interpreter = SymbolTableInterpreter()
+         
+            //用于存放符号表数据 [JYSymbolTableEntryModel]
+            // 但是缺少symbolName,因为SymbolName存放在stringTable,
+            // n_strx + 字符串表的起始位置 =  符号名称
+            let symbolTableInterpretModel  = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            
+            
+            
+           let stringTableInterpretModel = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
             
             
             
@@ -132,7 +139,7 @@ class JYMacho : Equatable {
 
 
 
-extension JYMacho {
+extension Macho {
     fileprivate func symbolTableComponent(from symbolTableCommand: JYSymbolTableCommand)  {
         
         //起始位置

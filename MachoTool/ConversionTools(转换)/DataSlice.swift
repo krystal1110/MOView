@@ -1,5 +1,5 @@
 //
-//  JYDataSlice.swift
+//  DataSlice.swift
 //  MachOTool
 //
 //  Created by karthrine on 2022/5/8.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JYDataSlice{
+struct DataSlice{
     
     private let machoData: Data
     let startOffset: Int // 初始偏移量
@@ -32,18 +32,18 @@ struct JYDataSlice{
     }
     
     
-    func interception(from:Int, length:Int? = nil)-> JYDataSlice {
+    func interception(from:Int, length:Int? = nil)-> DataSlice {
         if let length = length {
             // 截取的是 from + length
             if length == .zero{ print("error")}
             
             // 如果截取超过了 本身长度 则fatalError
             guard from + length <= self.count else {fatalError()}
-            return JYDataSlice(machoData: machoData, startOffset: startOffset + from , length: length)
+            return DataSlice(machoData: machoData, startOffset: startOffset + from , length: length)
         }else{
             guard from < self.count else {fatalError()}
             // 截取的是 from ~ 文件末尾的地址
-            return JYDataSlice(machoData: machoData, startOffset: startOffset + from, length: self.count - from)
+            return DataSlice(machoData: machoData, startOffset: startOffset + from, length: self.count - from)
         }
     }
     
@@ -52,7 +52,7 @@ struct JYDataSlice{
     
 }
 
-extension JYDataSlice {
+extension DataSlice {
     func absoluteRange(_ start: Int, _ length: Int) -> Range<Int> {
         return startOffset+start..<startOffset+start+length
     }

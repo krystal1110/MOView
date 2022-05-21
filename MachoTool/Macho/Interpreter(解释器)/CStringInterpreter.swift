@@ -11,30 +11,53 @@ struct CStringPosition {
     let startOffset: Int
     let virtualAddress: Swift.UInt64
     let length: Int
+    let value:String?
 }
 
 
 class CStringInterpreter{
-//    var cpuType: CPUType
     
-//    var cpuSubType: CPUSubtype
-    
-    let data: JYDataSlice
+    let data: DataSlice
     
     let is64bit: Bool
     
-    weak var searchSource: SeachStringTable!
+    weak var searchSource: SeachStringTable?
+    let sectionVirtualAddress: UInt64
     
-//    let sectionVirtualAddress: UInt64
-    
-    init(_ data: JYDataSlice, is64Bit: Bool ,searchSouce:SeachStringTable ) {
+    init(with data: DataSlice, is64Bit: Bool ,sectionVirtualAddress: UInt64,searchSouce:SeachStringTable? = nil ) {
         self.data = data
         self.is64bit = is64Bit
+        self.sectionVirtualAddress = sectionVirtualAddress
         self.searchSource = searchSouce
         
     }
     
-    
+     func generatePayload() -> [CStringPosition] {
+        let rawData = self.data.raw
+        var cStringPositions: [CStringPosition] = []
+        var indexOfLastNull: Int? // index of last null char ( "\0" )
+        
+        for (indexOfCurNull, byte) in rawData.enumerated() {
+            guard byte == 0 else { continue } // find null characters
+            
+            let lastIndex = indexOfLastNull ?? -1
+            if indexOfCurNull - lastIndex == 1 {
+                indexOfLastNull = indexOfCurNull // skip continuous \0
+                continue
+            }
+            let nextCStringStartIndex = lastIndex + 1 // lastIdnex points to last null, ignore
+            let nextCStringDataLength = indexOfCurNull - nextCStringStartIndex
+            let value =  self.findString(at: nextCStringStartIndex);
+            let cStringPosition = CStringPosition(startOffset: nextCStringStartIndex,
+                                                  virtualAddress: Swift.UInt64(nextCStringStartIndex) + sectionVirtualAddress,
+                                                  length: nextCStringDataLength,
+                                                  value: value)
+            cStringPositions.append(cStringPosition)
+            indexOfLastNull = indexOfCurNull
+        }
+        
+        return cStringPositions
+    }
     
     
 //    func searchStrInStringTable(at offset: Int) -> String? {
@@ -83,23 +106,19 @@ class CStringInterpreter{
 
 extension CStringInterpreter {
     
+    // 根据距离字符串表首地址 首地址 + 偏移地址 = offset 拿到字符串
     func findString(at offset: Int) -> String? {
         let rawData = self.data.raw
         for index in offset..<rawData.count {
             let byte = rawData[rawData.startIndex+index]
             if byte != 0 { continue }
             let length = index - offset + 1
-            return self.data.interception(from: offset, length: length).raw.utf8String
+            let value = self.data.interception(from: offset, length: length).raw.utf8String
+            return  value?.spaceRemoved
         }
         return nil
     }
     
-//    func findString(with virtualAddress: Swift.UInt64) -> String? {
-//        for cStringPosition in self.payload {
-//            if cStringPosition.virtualAddress == virtualAddress {
-//                return self.data.truncated(from: cStringPosition.startOffset, length: cStringPosition.length).raw.utf8String
-//            }
-//        }
-//        return nil
-//    }
+ 
 }
+ 

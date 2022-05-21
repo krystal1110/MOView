@@ -16,9 +16,9 @@ class JYSymbolTableCommand:JYLoadCommand{
     let stringTableSize: UInt32
     
     
-    required init(with dataSlice: JYDataSlice, commandType: LoadCommandType, translationStore: JYTranslationRead? = nil) {
+    required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
         
-        let translationStore = JYTranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
+        let translationStore = TranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
         
         self.symbolTableOffset = translationStore.translate(next: .doubleWords, dataInterpreter: {$0.UInt32}, itemContentGenerator: { value in
             ExplanationModel(description: "Symbol table offset", explanation: value.hex)

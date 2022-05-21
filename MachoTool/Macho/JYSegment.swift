@@ -41,13 +41,13 @@ class JYSegment : JYLoadCommand{
     let initprot: UInt32
     let nsects: UInt32
     let flags: UInt32
-    let sectionHeaders: [JYSectionHeader64]
+    let sectionHeaders: [SectionHeader64]
     
-    required init(with dataSlice: JYDataSlice, commandType: LoadCommandType, translationStore: JYTranslationRead? = nil) {
+    required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
         
         let is64Bit = commandType == LoadCommandType.segment64
         self.is64Bit = is64Bit;
-        let translationStore = JYTranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
+        let translationStore = TranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
 
         self.segname = translationStore.translate(next: .rawNumber(16),
                                                     dataInterpreter: { $0.utf8String!.spaceRemoved /* Unlikely Error */ },
@@ -86,13 +86,13 @@ class JYSegment : JYLoadCommand{
                                               itemContentGenerator: { flags in ExplanationModel(description: "Flags",
                                                                                                       explanation: JYSegment.flags(for: flags))})
         
-        var sectionHeaders: [JYSectionHeader64] = []
+        var sectionHeaders: [SectionHeader64] = []
         for index in 0..<Int(nsects) {
             // section header data length for 32-bit is 68, and 64-bit 80
             let sectionHeaderLength = is64Bit ? 80 : 68
             let segmentCommandSize = is64Bit ? 72 : 56
             let sectionHeaderData = dataSlice.interception(from: segmentCommandSize + index * sectionHeaderLength, length: sectionHeaderLength)
-            let sectionHeader = JYSectionHeader64(is64Bit: is64Bit, data: sectionHeaderData)
+            let sectionHeader = SectionHeader64(is64Bit: is64Bit, data: sectionHeaderData)
             sectionHeaders.append(sectionHeader)
         }
         self.sectionHeaders = sectionHeaders

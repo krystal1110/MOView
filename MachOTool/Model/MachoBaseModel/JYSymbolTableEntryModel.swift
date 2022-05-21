@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct JYSymbolTableEntryModel : JYMachoExplainModel{
+struct JYSymbolTableEntryModel : MachoExplainModel{
  
     
 //    let machoSearchSource: MachoSearchSource
@@ -25,7 +25,7 @@ struct JYSymbolTableEntryModel : JYMachoExplainModel{
     
     let translaitonItems: [ExplanationItem]
     
-    init(with data: JYDataSlice, is64Bit: Bool) {
+    init(with data: DataSlice, is64Bit: Bool) {
         
         var translaitonItems: [ExplanationItem] = []
         
