@@ -28,7 +28,8 @@ class Macho : Equatable {
     //存放SymbolTable的信息
     var symbolTableInterpretInfo: SymbolTableInterpretInfo?
      
-    
+    // 存放indirectSymbol的信息
+    var indirectSymbolTableInterpreterInfo: IndirectSymbolTableInterpreterInfo?
     
     init(machoDataRaw:Data, machoFileName:String){
         let machoData = DataSlice(machoDataRaw)
@@ -108,12 +109,9 @@ class Macho : Equatable {
             //用于存放符号表数据 [JYSymbolTableEntryModel]
             // 但是缺少symbolName,因为SymbolName存放在stringTable,
             // n_strx + 字符串表的起始位置 =  符号名称
-            let symbolTableInterpretInfo  = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
-            self.symbolTableInterpretInfo = symbolTableInterpretInfo
+            self.symbolTableInterpretInfo  = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
             
-            
-           let stringTableInterpretInfo = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
-           self.stringTableInterpretInfo = stringTableInterpretInfo
+            self.stringTableInterpretInfo = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
             
             return segment
             
@@ -121,11 +119,8 @@ class Macho : Equatable {
             /* symtab_command must be present when this load command is present */
             /* also we assume symtab_command locates before dysymtab_command */
             let segment =  DynamicSymbolTableCompont(with: loadCommandData, commandType: loadCommandType)
-         
             let interpreter = IndirectSymbolTableInterpreter(with: data, is64Bit: is64bit, machoProtocol: self)
-            
-            interpreter.indirectSymbolTableInterpreter(from: segment)
-            #warning("TODO 解析动态符号表")
+            self.indirectSymbolTableInterpreterInfo = interpreter.indirectSymbolTableInterpreter(from: segment)
             return segment
         
         case .buildVersion:

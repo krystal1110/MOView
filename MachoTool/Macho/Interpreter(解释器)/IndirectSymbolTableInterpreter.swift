@@ -26,20 +26,30 @@ class IndirectSymbolTableInterpreter {
         let indirectSymbolTableData = data.interception(from: indirectSymbolTableStartOffset, length: indirectSymbolTableSize)
        
         let interpreter =  MachoModel<IndirectSymbolTableEntryModel>.init().generateVessel(data: indirectSymbolTableData, is64Bit: is64Bit)
-        
+     
  
-        let model:IndirectSymbolTableEntryModel = interpreter[1]
-        let symbolEntryModel  = self.machoProtocol.indexInSymbolTable(at: model.symbolTableIndex)
-        let symbolName  = self.machoProtocol.stringInStringTable(at: Int(symbolEntryModel?.indexInStringTable ?? 0))
-        
-        
-        print("🔥🔥🔥🔥🔥🔥 symbolNmae = \(symbolName)")
+
+         let indirectSymbolTableList =  translation(array: interpreter)
+
         
         return IndirectSymbolTableInterpreterInfo(with: indirectSymbolTableData,
                                               is64Bit: is64Bit,
-                                              interpreter: interpreter,
+                                              indirectSymbolTableList: indirectSymbolTableList,
                                               title: "Indirect Symbol Table",
                                               subTitle: "__LINKEDIT")
+    }
+    
+    func translation(array:Array<IndirectSymbolTableEntryModel>) -> Array<IndirectSymbolTableEntryModel>{
+        
+        var indirectSymbolTableList:Array<IndirectSymbolTableEntryModel> = []
+        
+        for index in 0..<array.count {
+           var model = array[index]
+//           var explanationItem = model.translationItem( machoProtocol: self.machoProtocol)
+            model.explanationItem = model.translationItem( machoProtocol: self.machoProtocol)
+            indirectSymbolTableList.append(model)
+        }
+        return indirectSymbolTableList
     }
     
        

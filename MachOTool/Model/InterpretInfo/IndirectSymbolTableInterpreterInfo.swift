@@ -9,7 +9,7 @@ import Foundation
 
 class IndirectSymbolTableInterpreterInfo:BaseInterpretInfo{
     let dataSlice: DataSlice
-    let interpreter: Array<IndirectSymbolTableEntryModel>
+    let indirectSymbolTableList: Array<IndirectSymbolTableEntryModel>
     var componentTitle: String { title }
     var componentSubTitle: String? { subTitle }
     let title: String
@@ -17,10 +17,10 @@ class IndirectSymbolTableInterpreterInfo:BaseInterpretInfo{
     
     init(with dataSlice: DataSlice,
          is64Bit: Bool,
-         interpreter: Array<IndirectSymbolTableEntryModel>,
+         indirectSymbolTableList: Array<IndirectSymbolTableEntryModel>,
          title: String,
          subTitle: String? = nil) {
-        self.interpreter = interpreter
+        self.indirectSymbolTableList = indirectSymbolTableList
         self.title = title
         self.subTitle = subTitle
         self.dataSlice = dataSlice

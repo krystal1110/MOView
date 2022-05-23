@@ -9,6 +9,9 @@ import Foundation
 
 
 struct IndirectSymbolTableEntryModel:MachoExplainModel{
+  
+    
+    
     static func modelSize(is64Bit: Bool) -> Int {
         4
     }
@@ -19,20 +22,25 @@ struct IndirectSymbolTableEntryModel:MachoExplainModel{
     
     let entryRange: Range<Int>
     let symbolTableIndex: Int
-//    let machoSearchSource: MachoSearchSource
+    var explanationItem:ExplanationItem? = nil
+
     
     init(with data: DataSlice, is64Bit: Bool) {
         self.entryRange = data.absoluteRange(.zero, 4)
         self.symbolTableIndex = Int(data.raw.UInt32)
-//        self.machoSearchSource = machoSearchSource
     }
     
-    func translationItem() -> ExplanationItem {
+    func translationItem(machoProtocol:MachoProtocol) -> ExplanationItem? {
         var symbolName: String?
-//        var symbolTableInterpreter:SymbolTableInterpretInfo = SymbolTableInterpretInfo()
-//        var stringInterpreter:StringInterpreter = StringInterpreter()
-//        let symbolTableEntryModel =  symbolTableInterpreter.symbolTableList[self.symbolTableIndex]
-//        symbolName = stringInterpreter.findString(at:Int(symbolTableEntryModel.indexInStringTable))
+        let symbolEntryModel  = machoProtocol.indexInSymbolTable(at:self.symbolTableIndex)
+        guard let symbolEntryModel = symbolEntryModel?.indexInStringTable else{
+            return ExplanationItem(sourceDataRange: entryRange,
+                                   model: ExplanationModel(description: "Symbol Table Index",
+                                                                   explanation: "\(symbolTableIndex)",
+                                                                   extraDescription: "Referrenced Symbol",
+                                                                   extraExplanation: "🔥🔥🔥 Unknown Symbol"))
+        }
+        symbolName = machoProtocol.stringInStringTable(at: Int(symbolEntryModel))
         return ExplanationItem(sourceDataRange: entryRange,
                                        model: ExplanationModel(description: "Symbol Table Index",
                                                                        explanation: "\(symbolTableIndex)",

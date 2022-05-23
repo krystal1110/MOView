@@ -9,6 +9,8 @@ import Foundation
 
 
 struct JYSymbolTableEntryModel : MachoExplainModel{
+  
+    
  
     
 //    let machoSearchSource: MachoSearchSource

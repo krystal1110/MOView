@@ -13,9 +13,6 @@ protocol MachoExplainModel{
     // init
     init(with data:DataSlice, is64Bit: Bool)
    
-    // 搜索某一个Item
-//    func explanationItem(at index: Int) -> ExplanationItem
-   
     // model的大小
     static func modelSize(is64Bit: Bool)-> Int
     
@@ -23,7 +20,7 @@ protocol MachoExplainModel{
     static func numberOfExplanationItem()-> Int
 }
 
-class MachoModel<Model :MachoExplainModel>{
+class MachoModel<Model :MachoExplainModel> {
     
     // 生成容器
     func generateVessel(data:DataSlice, is64Bit: Bool) -> [Model] {
