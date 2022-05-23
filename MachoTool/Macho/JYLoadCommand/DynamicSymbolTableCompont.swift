@@ -1,5 +1,5 @@
 //
-//  JYDynamicSymbolTableCompont.swift
+//  DynamicSymbolTableCompont.swift
 //  MachOTool
 //
 //  Created by karthrine on 2022/5/15.
@@ -8,7 +8,7 @@
 import Foundation
 
 
-class JYDynamicSymbolTableCompont: JYLoadCommand{
+class DynamicSymbolTableCompont: JYLoadCommand{
     let ilocalsym: UInt32       /* index to local symbols */
     let nlocalsym: UInt32       /* number of local symbols */
     

@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FB072DFF2839231A000B370B /* SymbolTableInterpretModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072DFE2839231A000B370B /* SymbolTableInterpretModel.swift */; };
-		FB072E01283929B8000B370B /* StringTableInterpretModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E00283929B8000B370B /* StringTableInterpretModel.swift */; };
+		FB072DFF2839231A000B370B /* SymbolTableInterpretInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072DFE2839231A000B370B /* SymbolTableInterpretInfo.swift */; };
+		FB072E01283929B8000B370B /* StringTableInterpretInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E00283929B8000B370B /* StringTableInterpretInfo.swift */; };
+		FB072E03283A601B000B370B /* BaseInterpretInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E02283A601B000B370B /* BaseInterpretInfo.swift */; };
+		FB072E05283B220E000B370B /* IndirectSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */; };
+		FB072E07283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E06283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift */; };
+		FB072E09283B235F000B370B /* IndirectSymbolTableEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */; };
+		FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E0A283B8560000B370B /* MachoProtocol.swift */; };
 		FBCEE977283290150090B4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE976283290150090B4E6 /* main.swift */; };
 		FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE97F283290400090B4E6 /* MachoHeader.swift */; };
 		FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE980283290400090B4E6 /* JYMachoComponent.swift */; };
@@ -19,7 +24,7 @@
 		FBCEE992283290400090B4E6 /* JYSymbolTableCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE987283290400090B4E6 /* JYSymbolTableCommand.swift */; };
 		FBCEE993283290400090B4E6 /* JYBuildVersionCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE988283290400090B4E6 /* JYBuildVersionCommand.swift */; };
 		FBCEE994283290400090B4E6 /* JYLoadCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE989283290400090B4E6 /* JYLoadCommand.swift */; };
-		FBCEE995283290400090B4E6 /* JYDynamicSymbolTableCompont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE98A283290400090B4E6 /* JYDynamicSymbolTableCompont.swift */; };
+		FBCEE995283290400090B4E6 /* DynamicSymbolTableCompont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE98A283290400090B4E6 /* DynamicSymbolTableCompont.swift */; };
 		FBCEE996283290400090B4E6 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE98B283290400090B4E6 /* SectionHeader.swift */; };
 		FBCEE99A283290470090B4E6 /* TranslationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE998283290470090B4E6 /* TranslationRead.swift */; };
 		FBCEE99B283290470090B4E6 /* DataSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE999283290470090B4E6 /* DataSlice.swift */; };
@@ -29,7 +34,7 @@
 		FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */; };
 		FBCEE9AC283370E80090B4E6 /* JYMachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9AB283370E80090B4E6 /* JYMachModel.swift */; };
 		FBCEE9AE2833800C0090B4E6 /* JYSymbolTableEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9AD2833800C0090B4E6 /* JYSymbolTableEntryModel.swift */; };
-		FBCEE9B52834D5A30090B4E6 /* CStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9B42834D5A30090B4E6 /* CStringInterpreter.swift */; };
+		FBCEE9B52834D5A30090B4E6 /* StringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */; };
 		FBCEE9B72834D6710090B4E6 /* BaseInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +51,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FB072DFE2839231A000B370B /* SymbolTableInterpretModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTableInterpretModel.swift; sourceTree = "<group>"; };
-		FB072E00283929B8000B370B /* StringTableInterpretModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTableInterpretModel.swift; sourceTree = "<group>"; };
+		FB072DFE2839231A000B370B /* SymbolTableInterpretInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTableInterpretInfo.swift; sourceTree = "<group>"; };
+		FB072E00283929B8000B370B /* StringTableInterpretInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTableInterpretInfo.swift; sourceTree = "<group>"; };
+		FB072E02283A601B000B370B /* BaseInterpretInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterpretInfo.swift; sourceTree = "<group>"; };
+		FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreter.swift; sourceTree = "<group>"; };
+		FB072E06283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreterInfo.swift; sourceTree = "<group>"; };
+		FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableEntryModel.swift; sourceTree = "<group>"; };
+		FB072E0A283B8560000B370B /* MachoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoProtocol.swift; sourceTree = "<group>"; };
 		FBCEE973283290150090B4E6 /* MachoTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MachoTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBCEE976283290150090B4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FBCEE97F283290400090B4E6 /* MachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoHeader.swift; sourceTree = "<group>"; };
@@ -59,7 +69,7 @@
 		FBCEE987283290400090B4E6 /* JYSymbolTableCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYSymbolTableCommand.swift; sourceTree = "<group>"; };
 		FBCEE988283290400090B4E6 /* JYBuildVersionCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYBuildVersionCommand.swift; sourceTree = "<group>"; };
 		FBCEE989283290400090B4E6 /* JYLoadCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYLoadCommand.swift; sourceTree = "<group>"; };
-		FBCEE98A283290400090B4E6 /* JYDynamicSymbolTableCompont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYDynamicSymbolTableCompont.swift; sourceTree = "<group>"; };
+		FBCEE98A283290400090B4E6 /* DynamicSymbolTableCompont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSymbolTableCompont.swift; sourceTree = "<group>"; };
 		FBCEE98B283290400090B4E6 /* SectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		FBCEE998283290470090B4E6 /* TranslationRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationRead.swift; sourceTree = "<group>"; };
 		FBCEE999283290470090B4E6 /* DataSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSlice.swift; sourceTree = "<group>"; };
@@ -71,7 +81,7 @@
 		FBCEE9A9283295760090B4E6 /* iOSToolsTest */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = iOSToolsTest; sourceTree = "<group>"; };
 		FBCEE9AB283370E80090B4E6 /* JYMachModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYMachModel.swift; sourceTree = "<group>"; };
 		FBCEE9AD2833800C0090B4E6 /* JYSymbolTableEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYSymbolTableEntryModel.swift; sourceTree = "<group>"; };
-		FBCEE9B42834D5A30090B4E6 /* CStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CStringInterpreter.swift; sourceTree = "<group>"; };
+		FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringInterpreter.swift; sourceTree = "<group>"; };
 		FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterpreter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,13 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FB072DFD28392307000B370B /* InterpretModel */ = {
+		FB072DFD28392307000B370B /* InterpretInfo */ = {
 			isa = PBXGroup;
 			children = (
-				FB072DFE2839231A000B370B /* SymbolTableInterpretModel.swift */,
-				FB072E00283929B8000B370B /* StringTableInterpretModel.swift */,
+				FB072DFE2839231A000B370B /* SymbolTableInterpretInfo.swift */,
+				FB072E00283929B8000B370B /* StringTableInterpretInfo.swift */,
+				FB072E02283A601B000B370B /* BaseInterpretInfo.swift */,
+				FB072E06283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift */,
 			);
-			path = InterpretModel;
+			path = InterpretInfo;
 			sourceTree = "<group>";
 		};
 		FBCEE96A283290150090B4E6 = {
@@ -129,13 +141,14 @@
 		FBCEE97D283290400090B4E6 /* Macho */ = {
 			isa = PBXGroup;
 			children = (
-				FBCEE97E283290400090B4E6 /* MachoHeader */,
 				FBCEE980283290400090B4E6 /* JYMachoComponent.swift */,
+				FBCEE97E283290400090B4E6 /* MachoHeader */,
 				FBCEE981283290400090B4E6 /* Interpreter(解释器) */,
 				FBCEE983283290400090B4E6 /* JYSegment.swift */,
 				FBCEE984283290400090B4E6 /* Macho.swift */,
 				FBCEE985283290400090B4E6 /* JYLoadCommand */,
 				FBCEE98B283290400090B4E6 /* SectionHeader.swift */,
+				FB072E0A283B8560000B370B /* MachoProtocol.swift */,
 			);
 			path = Macho;
 			sourceTree = "<group>";
@@ -152,8 +165,9 @@
 			isa = PBXGroup;
 			children = (
 				FBCEE982283290400090B4E6 /* SymbolTableInterpreter.swift */,
-				FBCEE9B42834D5A30090B4E6 /* CStringInterpreter.swift */,
+				FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */,
 				FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */,
+				FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */,
 			);
 			path = "Interpreter(解释器)";
 			sourceTree = "<group>";
@@ -165,7 +179,7 @@
 				FBCEE987283290400090B4E6 /* JYSymbolTableCommand.swift */,
 				FBCEE988283290400090B4E6 /* JYBuildVersionCommand.swift */,
 				FBCEE989283290400090B4E6 /* JYLoadCommand.swift */,
-				FBCEE98A283290400090B4E6 /* JYDynamicSymbolTableCompont.swift */,
+				FBCEE98A283290400090B4E6 /* DynamicSymbolTableCompont.swift */,
 			);
 			path = JYLoadCommand;
 			sourceTree = "<group>";
@@ -182,7 +196,7 @@
 		FBCEE99C2832904D0090B4E6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FB072DFD28392307000B370B /* InterpretModel */,
+				FB072DFD28392307000B370B /* InterpretInfo */,
 				FBCEE9AA283370BA0090B4E6 /* MachoBaseModel */,
 				FBCEE99D2832904D0090B4E6 /* DataExplanation.swift */,
 			);
@@ -211,6 +225,7 @@
 			children = (
 				FBCEE9AB283370E80090B4E6 /* JYMachModel.swift */,
 				FBCEE9AD2833800C0090B4E6 /* JYSymbolTableEntryModel.swift */,
+				FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */,
 			);
 			path = MachoBaseModel;
 			sourceTree = "<group>";
@@ -273,30 +288,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB072DFF2839231A000B370B /* SymbolTableInterpretModel.swift in Sources */,
+				FB072DFF2839231A000B370B /* SymbolTableInterpretInfo.swift in Sources */,
 				FBCEE993283290400090B4E6 /* JYBuildVersionCommand.swift in Sources */,
+				FB072E09283B235F000B370B /* IndirectSymbolTableEntryModel.swift in Sources */,
 				FBCEE99A283290470090B4E6 /* TranslationRead.swift in Sources */,
 				FBCEE996283290400090B4E6 /* SectionHeader.swift in Sources */,
 				FBCEE99B283290470090B4E6 /* DataSlice.swift in Sources */,
 				FBCEE99E2832904D0090B4E6 /* DataExplanation.swift in Sources */,
 				FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */,
-				FBCEE9B52834D5A30090B4E6 /* CStringInterpreter.swift in Sources */,
+				FBCEE9B52834D5A30090B4E6 /* StringInterpreter.swift in Sources */,
 				FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */,
 				FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */,
-				FBCEE995283290400090B4E6 /* JYDynamicSymbolTableCompont.swift in Sources */,
+				FBCEE995283290400090B4E6 /* DynamicSymbolTableCompont.swift in Sources */,
 				FBCEE98E283290400090B4E6 /* SymbolTableInterpreter.swift in Sources */,
+				FB072E03283A601B000B370B /* BaseInterpretInfo.swift in Sources */,
 				FBCEE994283290400090B4E6 /* JYLoadCommand.swift in Sources */,
 				FBCEE990283290400090B4E6 /* Macho.swift in Sources */,
 				FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */,
 				FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */,
 				FBCEE992283290400090B4E6 /* JYSymbolTableCommand.swift in Sources */,
+				FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */,
 				FBCEE991283290400090B4E6 /* JYMainCommand.swift in Sources */,
 				FBCEE9AE2833800C0090B4E6 /* JYSymbolTableEntryModel.swift in Sources */,
+				FB072E07283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift in Sources */,
 				FBCEE9AC283370E80090B4E6 /* JYMachModel.swift in Sources */,
 				FBCEE977283290150090B4E6 /* main.swift in Sources */,
 				FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */,
 				FBCEE9B72834D6710090B4E6 /* BaseInterpreter.swift in Sources */,
-				FB072E01283929B8000B370B /* StringTableInterpretModel.swift in Sources */,
+				FB072E01283929B8000B370B /* StringTableInterpretInfo.swift in Sources */,
+				FB072E05283B220E000B370B /* IndirectSymbolTableInterpreter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

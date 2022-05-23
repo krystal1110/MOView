@@ -1,5 +1,5 @@
 //
-//  CStringInterpreter.swift
+//  StringInterpreter.swift
 //  MachoTool
 //
 //  Created by karthrine on 2022/5/18.
@@ -7,22 +7,22 @@
 
 import Foundation
 
-struct CStringPosition {
+struct StringPosition {
     let startOffset: Int
     let virtualAddress: Swift.UInt64
     let length: Int
-    let value:String?
+    var explanationItem:ExplanationItem? = nil
 }
 
 
-class CStringInterpreter{
+class StringInterpreter{
     
     let data: DataSlice
-    
     let is64bit: Bool
-    
     weak var searchSource: SeachStringTable?
     let sectionVirtualAddress: UInt64
+    
+    
     
     init(with data: DataSlice, is64Bit: Bool ,sectionVirtualAddress: UInt64,searchSouce:SeachStringTable? = nil ) {
         self.data = data
@@ -32,9 +32,9 @@ class CStringInterpreter{
         
     }
     
-     func generatePayload() -> [CStringPosition] {
+     func generatePayload() -> [StringPosition] {
         let rawData = self.data.raw
-        var cStringPositions: [CStringPosition] = []
+        var cStringPositions: [StringPosition] = []
         var indexOfLastNull: Int? // index of last null char ( "\0" )
         
         for (indexOfCurNull, byte) in rawData.enumerated() {
@@ -47,41 +47,21 @@ class CStringInterpreter{
             }
             let nextCStringStartIndex = lastIndex + 1 // lastIdnex points to last null, ignore
             let nextCStringDataLength = indexOfCurNull - nextCStringStartIndex
-            let value =  self.findString(at: nextCStringStartIndex);
-            let cStringPosition = CStringPosition(startOffset: nextCStringStartIndex,
+            var cStringPosition = StringPosition(startOffset: nextCStringStartIndex,
                                                   virtualAddress: Swift.UInt64(nextCStringStartIndex) + sectionVirtualAddress,
-                                                  length: nextCStringDataLength,
-                                                  value: value)
+                                                  length: nextCStringDataLength)
+            
+            cStringPosition.explanationItem =   self.translationItem(with: cStringPosition)
             cStringPositions.append(cStringPosition)
             indexOfLastNull = indexOfCurNull
         }
-        
+         
         return cStringPositions
     }
     
-    
-//    func searchStrInStringTable(at offset: Int) -> String? {
-//
-//    }
-//
-//    func searchString(wiht virtualAddress: UInt64) -> String? {
-//
-//    }
-//
-//    func symbolInSymbolTable(with virtualAddress: UInt64) -> JYSymbolTableEntryModel? {
-//
-//    }
-//
-//    func symbolInSymbolTable(at index: Int) -> JYSymbolTableEntryModel? {
-//
-//    }
-//
-//    func searchIndirectSymbolTable(at index: Int) {
-//
-//    }
-    
-    
-    func translationItem(with stringPosition: CStringPosition) -> ExplanationItem {
+ 
+    //将StringTable index转换为ExplanationItem模型
+    func translationItem(with stringPosition: StringPosition) -> ExplanationItem {
         let cStringPosition = stringPosition
         let cStringRelativeRange = cStringPosition.startOffset..<cStringPosition.startOffset+cStringPosition.length
         let cStringAbsoluteRange = self.data.absoluteRange(cStringRelativeRange)
@@ -95,16 +75,12 @@ class CStringInterpreter{
       
         return ExplanationItem(sourceDataRange: cStringAbsoluteRange,
                                model: ExplanationModel(description: "UTF8-String", explanation: explanation, extraExplanation: explanation))
-        
-        
     }
-    
-    
 }
 
 
 
-extension CStringInterpreter {
+extension StringInterpreter {
     
     // 根据距离字符串表首地址 首地址 + 偏移地址 = offset 拿到字符串
     func findString(at offset: Int) -> String? {

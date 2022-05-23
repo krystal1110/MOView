@@ -1,17 +1,15 @@
 //
-//  StringTableInterpretModel.swift
+//  IndirectSymbolTableInterpreterInfo.swift
 //  MachoTool
 //
-//  Created by karthrine on 2022/5/21.
+//  Created by karthrine on 2022/5/23.
 //
 
 import Foundation
 
-class StringTableInterpretModel{
-    
+class IndirectSymbolTableInterpreterInfo:BaseInterpretInfo{
     let dataSlice: DataSlice
-    let interpreter: Array<CStringPosition>
-    
+    let interpreter: Array<IndirectSymbolTableEntryModel>
     var componentTitle: String { title }
     var componentSubTitle: String? { subTitle }
     let title: String
@@ -19,7 +17,7 @@ class StringTableInterpretModel{
     
     init(with dataSlice: DataSlice,
          is64Bit: Bool,
-         interpreter: Array<CStringPosition>,
+         interpreter: Array<IndirectSymbolTableEntryModel>,
          title: String,
          subTitle: String? = nil) {
         self.interpreter = interpreter
