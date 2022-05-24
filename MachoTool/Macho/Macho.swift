@@ -28,6 +28,9 @@ class Macho : Equatable {
     //存放SymbolTable的信息
     var symbolTableInterpretInfo: SymbolTableInterpretInfo?
      
+    // 存储section里面数据为Cstring类型
+    var allCstringInterpretInfo : [StringTableInterpretInfo] = []
+    
     // 存放indirectSymbol的信息
     var indirectSymbolTableInterpreterInfo: IndirectSymbolTableInterpreterInfo?
     
@@ -88,9 +91,12 @@ class Macho : Equatable {
         switch loadCommandType {
         case .segment, .segment64: //__PAGEZERO  __Text  __DATA  __LINKEDIT
             let segment =  JYSegment(with: loadCommandData, commandType: loadCommandType)
-            let segmentHeader = segment.sectionHeaders
-            self.sectionHeaders.append(contentsOf: segmentHeader)
+            let segmentHeaders = segment.sectionHeaders
+            self.sectionHeaders.append(contentsOf: segmentHeaders)
            
+            #warning("TODO存储")
+          let stringInterpretInfo =  segmentHeaders.compactMap({self.machoComponent(from:$0 )})
+             
             
             if segment.fileoff == 0 && segment.filesize != 0{
                 // __TEXT段
@@ -131,6 +137,48 @@ class Macho : Equatable {
         }
         
     }
+    
+    
+    fileprivate func machoComponent(from sectionHeader: SectionHeader64) -> BaseInterpretInfo? {
+        let componentTitle = "Section"
+        let componentSubTitle = sectionHeader.segment + "," + sectionHeader.section
+        print("🔥🔥🔥 \(componentSubTitle)")
+        
+        
+        
+        
+        switch sectionHeader.sectionType {
+        
+        /*
+          __TEXT,__cstring    __TEXT,__objc_classname   __TEXT,__objc_methtype 均会来到此处
+         因为都是存储的都为字符串类型
+         **/
+        case .S_CSTRING_LITERALS:
+            let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+            let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: self.is64bit, sectionVirtualAddress: sectionHeader.addr,searchSouce: nil)
+            let cStringTableList =  cStringInterpreter.generatePayload()
+           let  info = StringTableInterpretInfo(with: dataSlice,
+                                              is64Bit: self.is64bit,
+                                              interpreter: cStringInterpreter,
+                                              stringTableList: cStringTableList,
+                                              title: componentTitle,
+                                              subTitle: componentSubTitle)
+            
+            allCstringInterpretInfo.append(info)
+        return info
+        default:
+            break
+            
+            
+        }
+        
+        
+        
+        
+        
+        return nil
+    }
+    
     
     
 }
