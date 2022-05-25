@@ -82,6 +82,11 @@ class Macho : Equatable {
             loadCommands.append(loadCommand)
         }
         
+          #warning("TODO存储")
+ 
+         let stringInterpretInfo =  self.sectionHeaders.compactMap({self.machoComponent(from:$0 )})
+
+        
         
     }
     
@@ -93,11 +98,7 @@ class Macho : Equatable {
             let segment =  JYSegment(with: loadCommandData, commandType: loadCommandType)
             let segmentHeaders = segment.sectionHeaders
             self.sectionHeaders.append(contentsOf: segmentHeaders)
-           
-            #warning("TODO存储")
-          let stringInterpretInfo =  segmentHeaders.compactMap({self.machoComponent(from:$0 )})
-             
-            
+ 
             if segment.fileoff == 0 && segment.filesize != 0{
                 // __TEXT段
                 print(segment.segname)
@@ -127,6 +128,7 @@ class Macho : Equatable {
             let segment =  DynamicSymbolTableCompont(with: loadCommandData, commandType: loadCommandType)
             let interpreter = IndirectSymbolTableInterpreter(with: data, is64Bit: is64bit, machoProtocol: self)
             self.indirectSymbolTableInterpreterInfo = interpreter.indirectSymbolTableInterpreter(from: segment)
+            
             return segment
         
         case .buildVersion:
@@ -136,6 +138,10 @@ class Macho : Equatable {
             return  JYLoadCommand(with: data, commandType: loadCommandType, translationStore: nil)
         }
         
+
+ 
+            
+        
     }
     
     
@@ -143,16 +149,12 @@ class Macho : Equatable {
         let componentTitle = "Section"
         let componentSubTitle = sectionHeader.segment + "," + sectionHeader.section
         print("🔥🔥🔥 \(componentSubTitle)")
-        
-        
-        
-        
         switch sectionHeader.sectionType {
         
         /*
-          __TEXT,__cstring    __TEXT,__objc_classname   __TEXT,__objc_methtype 均会来到此处
-         因为都是存储的都为字符串类型
-         **/
+            __TEXT,__cstring    __TEXT,__objc_classname   __TEXT,__objc_methtype 均会来到此处
+            因为都是存储的都为字符串类型
+        **/
         case .S_CSTRING_LITERALS:
             let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
             let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: self.is64bit, sectionVirtualAddress: sectionHeader.addr,searchSouce: nil)
@@ -165,7 +167,31 @@ class Macho : Equatable {
                                               subTitle: componentSubTitle)
             
             allCstringInterpretInfo.append(info)
-        return info
+            return info
+            
+            
+        /*
+            __DATA,__got ->  Non-Lazy Symbol Pointers
+            __DATA,__la_symbol_ptr -> Lazy Symbol Pointers
+            解析非懒加载和懒加载符号表
+            拿到对应的Secton64 -> DATA段
+         **/
+        case .S_LAZY_SYMBOL_POINTERS, .S_NON_LAZY_SYMBOL_POINTERS, .S_LAZY_DYLIB_SYMBOL_POINTERS:
+           
+            let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+            let lazySymbolInterpreter = LazySymbolInterpreter(wiht: dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionType: sectionHeader.sectionType, startIndexInIndirectSymbolTable: Int(sectionHeader.reserved1))
+            
+           // 后续更改
+           let xxx = lazySymbolInterpreter.generatePayload()
+            
+            for index in 0..<xxx.count {
+                let item = xxx[index]
+                print("symbolName = \(item.model.extraExplanation)")
+            }
+            
+            
+            return nil
+            
         default:
             break
             
@@ -187,6 +213,15 @@ class Macho : Equatable {
 
 
 extension Macho : MachoProtocol {
+    
+    func indexInIndirectSymbolTable(at index: Int) -> IndirectSymbolTableEntryModel? {
+        if let indirectInterpreInfo = self.indirectSymbolTableInterpreterInfo {
+            let indirectEntryModel = indirectInterpreInfo.indirectSymbolTableList[index]
+            return indirectEntryModel
+        }
+        return nil
+    }
+    
     
     func indexInSymbolTable(at index: Int) -> JYSymbolTableEntryModel? {
         if let symbolTableInterpretInfo = self.symbolTableInterpretInfo {
