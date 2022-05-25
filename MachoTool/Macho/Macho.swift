@@ -36,7 +36,7 @@ class Macho: Equatable {
 
     init(machoDataRaw: Data, machoFileName: String) {
         let machoData = DataSlice(machoDataRaw)
-        data = machoData
+        self.data = machoData
         self.machoFileName = machoFileName
 
         var loadCommands: [MachoComponent] = []
@@ -47,17 +47,17 @@ class Macho: Equatable {
         self.is64bit = is64bit
 
         // 获取machoHeader
-        header = MachoHeader(from: machoData.interception(from: .zero, length: is64bit ? 32 : 28), is64Bit: is64bit)
+        self.header = MachoHeader(from: machoData.interception(from: .zero, length: is64bit ? 32 : 28), is64Bit: is64bit)
 
         // header大小之后 就是 load_command
-        var loadCommondsStartOffset = header.componentSize
+        var loadCommondsStartOffset = self.header.componentSize
 
-        for _ in 0 ..< header.ncmds {
+        for _ in 0 ..< self.header.ncmds {
             // 读取的Command
             let loadCommand: JYLoadCommand
 
             // 读取第一条load_command
-            let loadCommandTypeRaw = data.interception(from: loadCommondsStartOffset, length: 4).raw.UInt32
+            let loadCommandTypeRaw = self.data.interception(from: loadCommondsStartOffset, length: 4).raw.UInt32
 
             // command的类型
             guard let loadCommandType = LoadCommandType(rawValue: loadCommandTypeRaw) else {
@@ -78,6 +78,10 @@ class Macho: Equatable {
             // 统一加到 Load Commands
             loadCommands.append(loadCommand)
         }
+
+        #warning("TODO存储")
+
+        let stringInterpretInfo = self.sectionHeaders.compactMap { self.machoComponent(from: $0) }
     }
 
     func translationLoadCommands(with loadCommandData: DataSlice, loadCommandType: LoadCommandType) -> JYLoadCommand {
@@ -85,10 +89,7 @@ class Macho: Equatable {
         case .segment, .segment64: // __PAGEZERO  __Text  __DATA  __LINKEDIT
             let segment = JYSegment(with: loadCommandData, commandType: loadCommandType)
             let segmentHeaders = segment.sectionHeaders
-            sectionHeaders.append(contentsOf: segmentHeaders)
-
-            #warning("TODO存储")
-            let stringInterpretInfo = segmentHeaders.compactMap { self.machoComponent(from: $0) }
+            self.sectionHeaders.append(contentsOf: segmentHeaders)
 
             if segment.fileoff == 0, segment.filesize != 0 {
                 // __TEXT段
@@ -107,9 +108,9 @@ class Macho: Equatable {
             // 用于存放符号表数据 [JYSymbolTableEntryModel]
             // 但是缺少symbolName,因为SymbolName存放在stringTable,
             // n_strx + 字符串表的起始位置 =  符号名称
-            symbolTableInterpretInfo = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            self.symbolTableInterpretInfo = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
 
-            stringTableInterpretInfo = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            self.stringTableInterpretInfo = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
 
             return segment
 
@@ -118,7 +119,8 @@ class Macho: Equatable {
             /* also we assume symtab_command locates before dysymtab_command */
             let segment = DynamicSymbolTableCompont(with: loadCommandData, commandType: loadCommandType)
             let interpreter = IndirectSymbolTableInterpreter(with: data, is64Bit: is64bit, machoProtocol: self)
-            indirectSymbolTableInterpreterInfo = interpreter.indirectSymbolTableInterpreter(from: segment)
+            self.indirectSymbolTableInterpreterInfo = interpreter.indirectSymbolTableInterpreter(from: segment)
+
             return segment
 
         case .buildVersion:
@@ -133,18 +135,17 @@ class Macho: Equatable {
         let componentTitle = "Section"
         let componentSubTitle = sectionHeader.segment + "," + sectionHeader.section
         print("🔥🔥🔥 \(componentSubTitle)")
-
         switch sectionHeader.sectionType {
         /*
-          __TEXT,__cstring    __TEXT,__objc_classname   __TEXT,__objc_methtype 均会来到此处
-         因为都是存储的都为字符串类型
+             __TEXT,__cstring    __TEXT,__objc_classname   __TEXT,__objc_methtype 均会来到此处
+             因为都是存储的都为字符串类型
          **/
         case .S_CSTRING_LITERALS:
             let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-            let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: is64bit, sectionVirtualAddress: sectionHeader.addr, searchSouce: nil)
+            let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: self.is64bit, sectionVirtualAddress: sectionHeader.addr, searchSouce: nil)
             let cStringTableList = cStringInterpreter.generatePayload()
             let info = StringTableInterpretInfo(with: dataSlice,
-                                                is64Bit: is64bit,
+                                                is64Bit: self.is64bit,
                                                 interpreter: cStringInterpreter,
                                                 stringTableList: cStringTableList,
                                                 title: componentTitle,
@@ -152,6 +153,28 @@ class Macho: Equatable {
 
             allCstringInterpretInfo.append(info)
             return info
+
+        /*
+            __DATA,__got ->  Non-Lazy Symbol Pointers
+            __DATA,__la_symbol_ptr -> Lazy Symbol Pointers
+            解析非懒加载和懒加载符号表
+            拿到对应的Secton64 -> DATA段
+         **/
+        case .S_LAZY_SYMBOL_POINTERS, .S_NON_LAZY_SYMBOL_POINTERS, .S_LAZY_DYLIB_SYMBOL_POINTERS:
+
+            let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+            let lazySymbolInterpreter = LazySymbolInterpreter(wiht: dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionType: sectionHeader.sectionType, startIndexInIndirectSymbolTable: Int(sectionHeader.reserved1))
+
+            // 后续更改
+            let xxx = lazySymbolInterpreter.generatePayload()
+
+            for index in 0 ..< xxx.count {
+                let item = xxx[index]
+                print("symbolName = \(item.model.extraExplanation)")
+            }
+
+            return nil
+
         default:
             break
         }
@@ -161,6 +184,14 @@ class Macho: Equatable {
 }
 
 extension Macho: MachoProtocol {
+    func indexInIndirectSymbolTable(at index: Int) -> IndirectSymbolTableEntryModel? {
+        if let indirectInterpreInfo = self.indirectSymbolTableInterpreterInfo {
+            let indirectEntryModel = indirectInterpreInfo.indirectSymbolTableList[index]
+            return indirectEntryModel
+        }
+        return nil
+    }
+
     func indexInSymbolTable(at index: Int) -> JYSymbolTableEntryModel? {
         if let symbolTableInterpretInfo = self.symbolTableInterpretInfo {
             let symbolTableEntryModel = symbolTableInterpretInfo.symbolTableList[index]
@@ -171,7 +202,7 @@ extension Macho: MachoProtocol {
 
     // 查找字符串
     func stringInStringTable(at offset: Int) -> String? {
-        let value = stringTableInterpretInfo?.interpreter.findString(at: offset)
+        let value = self.stringTableInterpretInfo?.interpreter.findString(at: offset)
         return value
     }
 
