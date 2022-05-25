@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D0129E0283E8A4A00FF4186 /* ShellUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */; };
+		2D0129EA283E93B600FF4186 /* iOSToolsTest.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D0129E8283E939400FF4186 /* iOSToolsTest.zip */; };
 		FB072DFF2839231A000B370B /* SymbolTableInterpretInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072DFE2839231A000B370B /* SymbolTableInterpretInfo.swift */; };
 		FB072E01283929B8000B370B /* StringTableInterpretInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E00283929B8000B370B /* StringTableInterpretInfo.swift */; };
 		FB072E03283A601B000B370B /* BaseInterpretInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E02283A601B000B370B /* BaseInterpretInfo.swift */; };
@@ -43,16 +45,19 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		FBCEE971283290150090B4E6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				2D0129EA283E93B600FF4186 /* iOSToolsTest.zip in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShellUtils.swift; path = MachOTool/Tools/ShellUtils.swift; sourceTree = SOURCE_ROOT; };
+		2D0129E8283E939400FF4186 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = iOSToolsTest.zip; path = Resoure/iOSToolsTest.zip; sourceTree = SOURCE_ROOT; };
 		FB072DFE2839231A000B370B /* SymbolTableInterpretInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTableInterpretInfo.swift; sourceTree = "<group>"; };
 		FB072E00283929B8000B370B /* StringTableInterpretInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTableInterpretInfo.swift; sourceTree = "<group>"; };
 		FB072E02283A601B000B370B /* BaseInterpretInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterpretInfo.swift; sourceTree = "<group>"; };
@@ -82,7 +87,6 @@
 		FBCEE9A3283290630090B4E6 /* MachOTool-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachOTool-Bridging-Header.h"; sourceTree = "<group>"; };
 		FBCEE9A4283290630090B4E6 /* JYFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYFile.swift; sourceTree = "<group>"; };
 		FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineTool.swift; sourceTree = "<group>"; };
-		FBCEE9A9283295760090B4E6 /* iOSToolsTest */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = iOSToolsTest; sourceTree = "<group>"; };
 		FBCEE9AB283370E80090B4E6 /* JYMachModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYMachModel.swift; sourceTree = "<group>"; };
 		FBCEE9AD2833800C0090B4E6 /* JYSymbolTableEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYSymbolTableEntryModel.swift; sourceTree = "<group>"; };
 		FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringInterpreter.swift; sourceTree = "<group>"; };
@@ -100,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D0129E9283E939B00FF4186 /* Resoure */ = {
+			isa = PBXGroup;
+			children = (
+				2D0129E8283E939400FF4186 /* iOSToolsTest.zip */,
+			);
+			path = Resoure;
+			sourceTree = "<group>";
+		};
 		FB072DFD28392307000B370B /* InterpretInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +126,7 @@
 		FBCEE96A283290150090B4E6 = {
 			isa = PBXGroup;
 			children = (
+				2D0129E9283E939B00FF4186 /* Resoure */,
 				FBCEE975283290150090B4E6 /* MachoTool */,
 				FBCEE974283290150090B4E6 /* Products */,
 			);
@@ -130,14 +143,13 @@
 		FBCEE975283290150090B4E6 /* MachoTool */ = {
 			isa = PBXGroup;
 			children = (
-				FBCEE9A2283290630090B4E6 /* FileManager */,
 				FBCEE99F283290530090B4E6 /* Tools */,
+				FBCEE9A2283290630090B4E6 /* FileManager */,
 				FBCEE99C2832904D0090B4E6 /* Model */,
 				FBCEE997283290470090B4E6 /* ConversionTools(转换) */,
 				FBCEE97D283290400090B4E6 /* Macho */,
 				FBCEE976283290150090B4E6 /* main.swift */,
 				FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */,
-				FBCEE9A9283295760090B4E6 /* iOSToolsTest */,
 			);
 			path = MachoTool;
 			sourceTree = "<group>";
@@ -211,6 +223,7 @@
 		FBCEE99F283290530090B4E6 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */,
 				FBCEE9A0283290530090B4E6 /* Utils.swift */,
 			);
 			path = Tools;
@@ -314,6 +327,7 @@
 				FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */,
 				FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */,
 				FBCEE992283290400090B4E6 /* JYSymbolTableCommand.swift in Sources */,
+				2D0129E0283E8A4A00FF4186 /* ShellUtils.swift in Sources */,
 				FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */,
 				FBCEE991283290400090B4E6 /* JYMainCommand.swift in Sources */,
 				FBCEE9AE2833800C0090B4E6 /* JYSymbolTableEntryModel.swift in Sources */,

@@ -15,27 +15,19 @@ public final class CommandLineTool {
     }
 
     public func run() throws {
-        let str = "file:///Users/karthrine/Documents/MachoTool/MachoTool/iOSToolsTest"
-        File(fileURL: URL(string: str)!)
+        let result = ShellUtils.runShellAndOutput("pwd")
+        if result.isSuccess, let productPath = result.result {
+            var path = productPath.trimmingCharacters(in: CharacterSet(charactersIn: "\n"))
+            let unzipResult = ShellUtils.runShell("unzip -o \(path)/iOSToolsTest.zip")
+            if unzipResult {
+                path = "\(path)/iOSToolsTest"
+                _ = File(fileURL: URL(fileURLWithPath: path))
+            } else {
+                fatalError("unzip error")
+            }
+
+        } else {
+            fatalError("shell error")
+        }
     }
-}
-
-@discardableResult
-func runShell(_ command: String) -> Int32 {
-    let task = Process()
-    task.launchPath = "/bin/bash"
-    task.arguments = ["-c", command]
-    task.launch()
-    task.waitUntilExit()
-    return task.terminationStatus
-}
-
-@discardableResult
-func runShellWithArgs(_ args: String...) -> Int32 {
-    let task = Process()
-    task.launchPath = "/usr/bin/env"
-    task.arguments = args
-    task.launch()
-    task.waitUntilExit()
-    return task.terminationStatus
 }
