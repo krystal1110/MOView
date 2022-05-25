@@ -43,6 +43,4 @@ struct ShellUtils {
         task.waitUntilExit()
         return task.terminationStatus == 0
     }
-
-
 }
