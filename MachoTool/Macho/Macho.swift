@@ -36,7 +36,7 @@ class Macho: Equatable {
 
     init(machoDataRaw: Data, machoFileName: String) {
         let machoData = DataSlice(machoDataRaw)
-        self.data = machoData
+        data = machoData
         self.machoFileName = machoFileName
 
         var loadCommands: [MachoComponent] = []
@@ -47,17 +47,17 @@ class Macho: Equatable {
         self.is64bit = is64bit
 
         // 获取machoHeader
-        self.header = MachoHeader(from: machoData.interception(from: .zero, length: is64bit ? 32 : 28), is64Bit: is64bit)
+        header = MachoHeader(from: machoData.interception(from: .zero, length: is64bit ? 32 : 28), is64Bit: is64bit)
 
         // header大小之后 就是 load_command
-        var loadCommondsStartOffset = self.header.componentSize
+        var loadCommondsStartOffset = header.componentSize
 
-        for _ in 0 ..< self.header.ncmds {
+        for _ in 0 ..< header.ncmds {
             // 读取的Command
             let loadCommand: JYLoadCommand
 
             // 读取第一条load_command
-            let loadCommandTypeRaw = self.data.interception(from: loadCommondsStartOffset, length: 4).raw.UInt32
+            let loadCommandTypeRaw = data.interception(from: loadCommondsStartOffset, length: 4).raw.UInt32
 
             // command的类型
             guard let loadCommandType = LoadCommandType(rawValue: loadCommandTypeRaw) else {
@@ -81,7 +81,7 @@ class Macho: Equatable {
 
         #warning("TODO存储")
 
-        let stringInterpretInfo = self.sectionHeaders.compactMap { self.machoComponent(from: $0) }
+        let stringInterpretInfo = sectionHeaders.compactMap { self.machoComponent(from: $0) }
     }
 
     func translationLoadCommands(with loadCommandData: DataSlice, loadCommandType: LoadCommandType) -> JYLoadCommand {
@@ -89,7 +89,7 @@ class Macho: Equatable {
         case .segment, .segment64: // __PAGEZERO  __Text  __DATA  __LINKEDIT
             let segment = JYSegment(with: loadCommandData, commandType: loadCommandType)
             let segmentHeaders = segment.sectionHeaders
-            self.sectionHeaders.append(contentsOf: segmentHeaders)
+            sectionHeaders.append(contentsOf: segmentHeaders)
 
             if segment.fileoff == 0, segment.filesize != 0 {
                 // __TEXT段
@@ -108,9 +108,9 @@ class Macho: Equatable {
             // 用于存放符号表数据 [JYSymbolTableEntryModel]
             // 但是缺少symbolName,因为SymbolName存放在stringTable,
             // n_strx + 字符串表的起始位置 =  符号名称
-            self.symbolTableInterpretInfo = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            symbolTableInterpretInfo = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
 
-            self.stringTableInterpretInfo = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            stringTableInterpretInfo = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
 
             return segment
 
@@ -119,7 +119,7 @@ class Macho: Equatable {
             /* also we assume symtab_command locates before dysymtab_command */
             let segment = DynamicSymbolTableCompont(with: loadCommandData, commandType: loadCommandType)
             let interpreter = IndirectSymbolTableInterpreter(with: data, is64Bit: is64bit, machoProtocol: self)
-            self.indirectSymbolTableInterpreterInfo = interpreter.indirectSymbolTableInterpreter(from: segment)
+            indirectSymbolTableInterpreterInfo = interpreter.indirectSymbolTableInterpreter(from: segment)
 
             return segment
 
@@ -142,10 +142,10 @@ class Macho: Equatable {
          **/
         case .S_CSTRING_LITERALS:
             let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-            let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: self.is64bit, sectionVirtualAddress: sectionHeader.addr, searchSouce: nil)
+            let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: is64bit, sectionVirtualAddress: sectionHeader.addr, searchSouce: nil)
             let cStringTableList = cStringInterpreter.generatePayload()
             let info = StringTableInterpretInfo(with: dataSlice,
-                                                is64Bit: self.is64bit,
+                                                is64Bit: is64bit,
                                                 interpreter: cStringInterpreter,
                                                 stringTableList: cStringTableList,
                                                 title: componentTitle,
@@ -163,7 +163,7 @@ class Macho: Equatable {
         case .S_LAZY_SYMBOL_POINTERS, .S_NON_LAZY_SYMBOL_POINTERS, .S_LAZY_DYLIB_SYMBOL_POINTERS:
 
             let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-            let lazySymbolInterpreter = LazySymbolInterpreter(wiht: dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionType: sectionHeader.sectionType, startIndexInIndirectSymbolTable: Int(sectionHeader.reserved1))
+            let lazySymbolInterpreter = LazySymbolInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionType: sectionHeader.sectionType, startIndexInIndirectSymbolTable: Int(sectionHeader.reserved1))
 
             // 后续更改
             let xxx = lazySymbolInterpreter.generatePayload()
@@ -185,7 +185,7 @@ class Macho: Equatable {
 
 extension Macho: MachoProtocol {
     func indexInIndirectSymbolTable(at index: Int) -> IndirectSymbolTableEntryModel? {
-        if let indirectInterpreInfo = self.indirectSymbolTableInterpreterInfo {
+        if let indirectInterpreInfo = indirectSymbolTableInterpreterInfo {
             let indirectEntryModel = indirectInterpreInfo.indirectSymbolTableList[index]
             return indirectEntryModel
         }
@@ -202,7 +202,7 @@ extension Macho: MachoProtocol {
 
     // 查找字符串
     func stringInStringTable(at offset: Int) -> String? {
-        let value = self.stringTableInterpretInfo?.interpreter.findString(at: offset)
+        let value = stringTableInterpretInfo?.interpreter.findString(at: offset)
         return value
     }
 
