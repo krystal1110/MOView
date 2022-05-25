@@ -265,7 +265,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachoTool" */;
+			buildConfigurationList = FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachOTool" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -440,8 +440,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 72A32H9VNN;
+				DEVELOPMENT_TEAM = SJ7JKKYH4C;
 				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -451,8 +452,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 72A32H9VNN;
+				DEVELOPMENT_TEAM = SJ7JKKYH4C;
 				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -461,7 +463,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachoTool" */ = {
+		FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachOTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FBCEE978283290150090B4E6 /* Debug */,

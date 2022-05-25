@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 /*
  struct mach_header_64 {
      uint32_t    magic;        /* mach magic number identifier */
@@ -24,7 +21,6 @@ import Foundation
  **/
 
 class MachoHeader: MachoComponent {
-    
     let is64Bit: Bool
 //    let magic:UInt32
     let cpuType: CPUType
@@ -34,83 +30,72 @@ class MachoHeader: MachoComponent {
     let sizeofcmds: UInt32
     let flags: UInt32
     let reserved: UInt32?
-     
-    
+
     init(from machoDataSlice: DataSlice, is64Bit: Bool) {
         self.is64Bit = is64Bit
-        
-        
+
         let transStore = TranslationRead(machoDataSlice: machoDataSlice)
-        
+
         // mach magic number identifier
         _ = transStore.translate(next: .doubleWords,
-                             dataInterpreter: { $0 },
-                             itemContentGenerator: { magic  in ExplanationModel(description: "File Magic", explanation: (is64Bit ? MagicType.macho64 : MagicType.macho32).readable) })
-         
-        
-        
+                                 dataInterpreter: { $0 },
+                                 itemContentGenerator: { _ in ExplanationModel(description: "File Magic", explanation: (is64Bit ? MagicType.macho64 : MagicType.macho32).readable) })
+
         // cpu specifier
         let cpuType = transStore.translate(next: .doubleWords,
                                            dataInterpreter: { CPUType($0.UInt32) },
-                                           itemContentGenerator: { cpuType  in ExplanationModel(description: "CPU Type", explanation: cpuType.name) })
-        self.cpuType = cpuType;
-        
- 
-        self.cpuSubtype =
-        transStore.translate(next: .doubleWords,
-                             dataInterpreter: { CPUSubtype($0.UInt32,cpuType: cpuType) },
-                             itemContentGenerator: { cpuSubtype  in ExplanationModel(description: "CPU Sub Type", explanation: cpuSubtype.name) })
- 
-        
-         // filetype;
-        self.filetype =
-        transStore.translate(next: .doubleWords,
-                             dataInterpreter: { MachoType(with: $0.UInt32) },
-                             itemContentGenerator: { machoType  in ExplanationModel(description: "Macho Type", explanation: machoType.readable) })
+                                           itemContentGenerator: { cpuType in ExplanationModel(description: "CPU Type", explanation: cpuType.name) })
+        self.cpuType = cpuType
 
-        //ncmds;
-        self.ncmds =
-        transStore.translate(next: .doubleWords,
-                             dataInterpreter: JYDataTranslationRead.UInt32,
-                             itemContentGenerator: { numberOfLoadCommands  in ExplanationModel(description: "Number of Load Commands", explanation: "\(numberOfLoadCommands)") })
+        cpuSubtype =
+            transStore.translate(next: .doubleWords,
+                                 dataInterpreter: { CPUSubtype($0.UInt32, cpuType: cpuType) },
+                                 itemContentGenerator: { cpuSubtype in ExplanationModel(description: "CPU Sub Type", explanation: cpuSubtype.name) })
 
-        
+        // filetype;
+        filetype =
+            transStore.translate(next: .doubleWords,
+                                 dataInterpreter: { MachoType(with: $0.UInt32) },
+                                 itemContentGenerator: { machoType in ExplanationModel(description: "Macho Type", explanation: machoType.readable) })
+
+        // ncmds;
+        ncmds =
+            transStore.translate(next: .doubleWords,
+                                 dataInterpreter: JYDataTranslationRead.UInt32,
+                                 itemContentGenerator: { numberOfLoadCommands in ExplanationModel(description: "Number of Load Commands", explanation: "\(numberOfLoadCommands)") })
+
         // sizeofcmds;
-        self.sizeofcmds =
-        transStore.translate(next: .doubleWords,
-                             dataInterpreter: JYDataTranslationRead.UInt32,
-                             itemContentGenerator: { sizeOfAllLoadCommand  in ExplanationModel(description: "Size of all Load Commands", explanation: sizeOfAllLoadCommand.hex) })
+        sizeofcmds =
+            transStore.translate(next: .doubleWords,
+                                 dataInterpreter: JYDataTranslationRead.UInt32,
+                                 itemContentGenerator: { sizeOfAllLoadCommand in ExplanationModel(description: "Size of all Load Commands", explanation: sizeOfAllLoadCommand.hex) })
 
         // flags;
-        self.flags =
-        transStore.translate(next: .doubleWords,
-                             dataInterpreter: JYDataTranslationRead.UInt32,
-                             itemContentGenerator: { flags  in ExplanationModel(description: "Valid Flags", explanation: flagsDescriptionFrom(flags)) })
+        flags =
+            transStore.translate(next: .doubleWords,
+                                 dataInterpreter: JYDataTranslationRead.UInt32,
+                                 itemContentGenerator: { flags in ExplanationModel(description: "Valid Flags", explanation: flagsDescriptionFrom(flags)) })
 
         // reserved;
         if is64Bit {
-            self.reserved =
-            transStore.translate(next: .doubleWords,
-                                 dataInterpreter: JYDataTranslationRead.UInt32,
-                                 itemContentGenerator: { reserved  in ExplanationModel(description: "Reversed", explanation: reserved.hex) })
+            reserved =
+                transStore.translate(next: .doubleWords,
+                                     dataInterpreter: JYDataTranslationRead.UInt32,
+                                     itemContentGenerator: { reserved in ExplanationModel(description: "Reversed", explanation: reserved.hex) })
         } else {
-            self.reserved = nil
+            reserved = nil
         }
-         
+
         super.init(machoDataSlice)
     }
- 
-    
-    
 }
- 
 
 enum MachoType {
     case object
     case execute
     case dylib
     case unknown(UInt32)
-    
+
     init(with value: UInt32) {
         switch value {
         case 0x1:
@@ -123,7 +108,7 @@ enum MachoType {
             self = .unknown(value)
         }
     }
-    
+
     var readable: String {
         switch self {
         case .object:
@@ -132,17 +117,13 @@ enum MachoType {
             return "MH_EXECUTE" // : Demand paged executable file
         case .dylib:
             return "MH_DYLIB" // : Dynamically bound shared library
-        case .unknown(let value):
+        case let .unknown(value):
             return "unknown macho file: (\(value)"
         }
     }
 }
 
- 
-
-
-
-//ref: <mach/machine.h>
+// ref: <mach/machine.h>
 enum CPUType {
     case x86
     case x86_64
@@ -150,7 +131,7 @@ enum CPUType {
     case arm64
     case arm64_32
     case unknown(UInt32)
-    
+
     var name: String {
         switch self {
         case .x86:
@@ -163,28 +144,28 @@ enum CPUType {
             return "CPU_TYPE_ARM64"
         case .arm64_32:
             return "CPU_TYPE_ARM64_32"
-        case .unknown(let raw):
+        case let .unknown(raw):
             return "UNKNOWN(\(raw.hex))"
         }
     }
-    
+
     init(_ value: UInt32) {
         switch value {
         case 0x00000007:
             self = .x86
         case 0x01000007:
             self = .x86_64
-        case 0x0000000c:
+        case 0x0000000C:
             self = .arm
-        case 0x0100000c:
+        case 0x0100000C:
             self = .arm64
-        case 0x0200000c:
+        case 0x0200000C:
             self = .arm64_32
         default:
             self = .unknown(value)
         }
     }
-    
+
     var isARMChip: Bool {
         switch self {
         case .arm, .arm64, .arm64_32:
@@ -193,7 +174,7 @@ enum CPUType {
             return false
         }
     }
-    
+
     var isIntelChip: Bool {
         switch self {
         case .x86, .x86_64:
@@ -204,7 +185,7 @@ enum CPUType {
     }
 }
 
-//ref: <macho/machine.h>
+// ref: <macho/machine.h>
 enum CPUSubtype {
     case x86_all
     case x86_arch1
@@ -222,7 +203,7 @@ enum CPUSubtype {
     case arm64_32_all
     case arm64_32_v8
     case unknown(UInt32)
-    
+
     var name: String {
         switch self {
         case .x86_all:
@@ -255,11 +236,11 @@ enum CPUSubtype {
             return "CPU_SUBTYPE_ARM64_32_ALL"
         case .arm64_32_v8:
             return "CPU_SUBTYPE_ARM64_32_V8"
-        case .unknown(let raw):
+        case let .unknown(raw):
             return "UNKNOWN(\(raw.hex)"
         }
     }
-    
+
     init(_ value: UInt32, cpuType: CPUType) {
         switch cpuType {
         case .x86:
@@ -317,21 +298,17 @@ enum CPUSubtype {
             default:
                 self = .unknown(value)
             }
-        case .unknown(_):
+        case .unknown:
             self = .unknown(value)
         }
     }
-    
-    
- 
 }
-
 
 /*
  用于标识flags
  Constants for the flags field of the mach_header
  xnu - loader.h  127
-*/
+ */
 private func flagsDescriptionFrom(_ flags: UInt32) -> String {
     // this line of shit I'll never understand.. after today...
     return [

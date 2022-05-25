@@ -7,36 +7,32 @@
 
 import Foundation
 
-
-class JYBuildVersionCommand : JYLoadCommand{
-    
+class JYBuildVersionCommand: JYLoadCommand {
     let platform: BuildPlatform?
     let minOSVersion: String
     let sdkVersion: String
     required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
         let translationStore = TranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
-        
-        self.platform = translationStore.translate(next: .doubleWords, dataInterpreter: {BuildPlatform(rawValue: $0.UInt32)}, itemContentGenerator:{ value in
-            ExplanationModel.init(description: "Target Platform", explanation: value?.readable ?? "Unkown Platfrom")
+
+        platform = translationStore.translate(next: .doubleWords, dataInterpreter: { BuildPlatform(rawValue: $0.UInt32) }, itemContentGenerator: { value in
+            ExplanationModel(description: "Target Platform", explanation: value?.readable ?? "Unkown Platfrom")
         })
-        
-        self.minOSVersion = translationStore.translate(next: .doubleWords, dataInterpreter: {JYBuildVersionCommand.version(for: $0.UInt32)}, itemContentGenerator:{ value in
-            ExplanationModel.init(description: "Min OS Version", explanation: value)
+
+        minOSVersion = translationStore.translate(next: .doubleWords, dataInterpreter: { JYBuildVersionCommand.version(for: $0.UInt32) }, itemContentGenerator: { value in
+            ExplanationModel(description: "Min OS Version", explanation: value)
         })
-        
-        self.sdkVersion = translationStore.translate(next: .doubleWords, dataInterpreter: {JYBuildVersionCommand.version(for: $0.UInt32)}, itemContentGenerator:{ value in
-            ExplanationModel.init(description: "Min SDK Version", explanation: value)
+
+        sdkVersion = translationStore.translate(next: .doubleWords, dataInterpreter: { JYBuildVersionCommand.version(for: $0.UInt32) }, itemContentGenerator: { value in
+            ExplanationModel(description: "Min SDK Version", explanation: value)
         })
- 
+
         super.init(with: dataSlice, commandType: commandType, translationStore: translationStore)
     }
-    
-    
+
     static func version(for value: UInt32) -> String {
-        return String(format: "%d.%d.%d", value >> 16, (value >> 8) & 0xff, value & 0xff)
+        return String(format: "%d.%d.%d", value >> 16, (value >> 8) & 0xFF, value & 0xFF)
     }
 }
-
 
 enum BuildPlatform: UInt32 {
     case macOS = 1
@@ -49,7 +45,7 @@ enum BuildPlatform: UInt32 {
     case tvOSSimulator
     case watchOSSimulator
     case driverKit
-    
+
     var readable: String {
         switch self {
         case .macOS:

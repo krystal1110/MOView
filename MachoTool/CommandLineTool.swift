@@ -6,23 +6,19 @@
 //
 
 import Foundation
- 
+
 public final class CommandLineTool {
     private let arguments: [String]
- 
+
     public init(arguments: [String] = CommandLine.arguments) {
         self.arguments = arguments
     }
- 
+
     public func run() throws {
         let str = "file:///Users/karthrine/Documents/MachoTool/MachoTool/iOSToolsTest"
-        File(fileURL: URL(string:str)!)
+        File(fileURL: URL(string: str)!)
     }
-    
- 
 }
-
- 
 
 @discardableResult
 func runShell(_ command: String) -> Int32 {

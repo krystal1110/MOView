@@ -13,20 +13,19 @@ import Foundation
    interpreter -> 符号表数组 里面存放着所有的符号模型(JYSymbolTableEntryModel)
  */
 
-class SymbolTableInterpretInfo:BaseInterpretInfo{
-    
+class SymbolTableInterpretInfo: BaseInterpretInfo {
     let dataSlice: DataSlice
     let interpreter: SymbolTableInterpreter
-    let symbolTableList : Array<JYSymbolTableEntryModel>
+    let symbolTableList: [JYSymbolTableEntryModel]
     var componentTitle: String { title }
     var componentSubTitle: String? { subTitle }
     let title: String
     let subTitle: String?
-    
+
     init(with dataSlice: DataSlice,
          is64Bit: Bool,
          interpreter: SymbolTableInterpreter,
-         symbolTableList: Array<JYSymbolTableEntryModel>,
+         symbolTableList: [JYSymbolTableEntryModel],
          title: String,
          subTitle: String? = nil) {
         self.interpreter = interpreter
@@ -35,6 +34,4 @@ class SymbolTableInterpretInfo:BaseInterpretInfo{
         self.subTitle = subTitle
         self.dataSlice = dataSlice
     }
-    
-    
 }

@@ -7,117 +7,132 @@
 
 import Foundation
 
+class DynamicSymbolTableCompont: JYLoadCommand {
+    let ilocalsym: UInt32 /* index to local symbols */
+    let nlocalsym: UInt32 /* number of local symbols */
 
-class DynamicSymbolTableCompont: JYLoadCommand{
-    let ilocalsym: UInt32       /* index to local symbols */
-    let nlocalsym: UInt32       /* number of local symbols */
-    
-    let iextdefsym: UInt32      /* index to externally defined symbols */
-    let nextdefsym: UInt32      /* number of externally defined symbols */
-    
-    let iundefsym: UInt32       /* index to undefined symbols */
-    let nundefsym: UInt32       /* number of undefined symbols */
-    
-    let tocoff: UInt32          /* file offset to table of contents */
-    let ntoc: UInt32            /* number of entries in table of contents */
-    
-    let modtaboff: UInt32       /* file offset to module table */
-    let nmodtab: UInt32         /* number of module table entries */
-    
-    let extrefsymoff: UInt32    /* offset to referenced symbol table */
-    let nextrefsyms: UInt32     /* number of referenced symbol table entries */
-    
-    let indirectsymoff: UInt32  /* file offset to the indirect symbol table */
-    let nindirectsyms: UInt32   /* number of indirect symbol table entries */
-    
-    let extreloff: UInt32       /* offset to external relocation entries */
-    let nextrel: UInt32         /* number of external relocation entries */
-    
-    let locreloff: UInt32       /* offset to local relocation entries */
-    let nlocrel: UInt32         /* number of local relocation entries */
-    
+    let iextdefsym: UInt32 /* index to externally defined symbols */
+    let nextdefsym: UInt32 /* number of externally defined symbols */
+
+    let iundefsym: UInt32 /* index to undefined symbols */
+    let nundefsym: UInt32 /* number of undefined symbols */
+
+    let tocoff: UInt32 /* file offset to table of contents */
+    let ntoc: UInt32 /* number of entries in table of contents */
+
+    let modtaboff: UInt32 /* file offset to module table */
+    let nmodtab: UInt32 /* number of module table entries */
+
+    let extrefsymoff: UInt32 /* offset to referenced symbol table */
+    let nextrefsyms: UInt32 /* number of referenced symbol table entries */
+
+    let indirectsymoff: UInt32 /* file offset to the indirect symbol table */
+    let nindirectsyms: UInt32 /* number of indirect symbol table entries */
+
+    let extreloff: UInt32 /* offset to external relocation entries */
+    let nextrel: UInt32 /* number of external relocation entries */
+
+    let locreloff: UInt32 /* offset to local relocation entries */
+    let nlocrel: UInt32 /* number of local relocation entries */
+
     required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
         let translationStore = TranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
-        
-        self.ilocalsym =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "Start Index of Local Symbols ",
-                                                                                         explanation: "\(value)") })
-        
-        self.nlocalsym =
-        translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
-            ExplanationModel(description: "Number of Local Symbols ", explanation: "\(value)") })
-        
-        self.iextdefsym =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "Start Index of External Defined Symbols ",explanation: "\(value)") })
-        
-        self.nextdefsym =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "Number of External Defined Symbols ", explanation: "\(value)") })
-        
-        self.iundefsym =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "Start Index of Undefined Symbols ",
-                                                                                         explanation: "\(value)") })
-        
-        self.nundefsym =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "Number of Undefined Symbols ", explanation: "\(value)") })
-        
-        self.tocoff =
-        translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "file offset to table of contents ", explanation: "\(value.hex)") })
-        
-        self.ntoc =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "number of entries in table of contents ", explanation: "\(value)") })
-        
-        self.modtaboff =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "file offset to module table ", explanation: "\(value.hex)") })
-        
-        self.nmodtab =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "number of module table entries ", explanation: "\(value)") })
-        
-        self.extrefsymoff =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "offset to referenced symbol table ", explanation: "\(value.hex)") })
-        
-        self.nextrefsyms =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "number of referenced symbol table entries ", explanation: "\(value)") })
-        
-        self.indirectsymoff =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "file offset to the indirect symbol table ", explanation: "\(value.hex)") })
-        
-        self.nindirectsyms =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "number of indirect symbol table entries ", explanation: "\(value)") })
-        
-        self.extreloff =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "offset to external relocation entries ", explanation: "\(value.hex)") })
-        
-        self.nextrel =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "number of external relocation entries ", explanation: "\(value)") })
-        
-        self.locreloff =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "offset to local relocation entries ", explanation: "\(value.hex)") })
-        
-        self.nlocrel =
-        translationStore.translate(next: .doubleWords,dataInterpreter: DataInterpreterPreset.UInt32,itemContentGenerator: { value in
-            ExplanationModel(description: "number of local relocation entries ", explanation: "\(value)") })
-        
+
+        ilocalsym =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "Start Index of Local Symbols ",
+                                 explanation: "\(value)")
+            })
+
+        nlocalsym =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "Number of Local Symbols ", explanation: "\(value)")
+            })
+
+        iextdefsym =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "Start Index of External Defined Symbols ", explanation: "\(value)")
+            })
+
+        nextdefsym =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "Number of External Defined Symbols ", explanation: "\(value)")
+            })
+
+        iundefsym =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "Start Index of Undefined Symbols ",
+                                 explanation: "\(value)")
+            })
+
+        nundefsym =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "Number of Undefined Symbols ", explanation: "\(value)")
+            })
+
+        tocoff =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "file offset to table of contents ", explanation: "\(value.hex)")
+            })
+
+        ntoc =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "number of entries in table of contents ", explanation: "\(value)")
+            })
+
+        modtaboff =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "file offset to module table ", explanation: "\(value.hex)")
+            })
+
+        nmodtab =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "number of module table entries ", explanation: "\(value)")
+            })
+
+        extrefsymoff =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "offset to referenced symbol table ", explanation: "\(value.hex)")
+            })
+
+        nextrefsyms =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "number of referenced symbol table entries ", explanation: "\(value)")
+            })
+
+        indirectsymoff =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "file offset to the indirect symbol table ", explanation: "\(value.hex)")
+            })
+
+        nindirectsyms =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "number of indirect symbol table entries ", explanation: "\(value)")
+            })
+
+        extreloff =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "offset to external relocation entries ", explanation: "\(value.hex)")
+            })
+
+        nextrel =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "number of external relocation entries ", explanation: "\(value)")
+            })
+
+        locreloff =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "offset to local relocation entries ", explanation: "\(value.hex)")
+            })
+
+        nlocrel =
+            translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
+                ExplanationModel(description: "number of local relocation entries ", explanation: "\(value)")
+            })
+
         super.init(with: dataSlice, commandType: commandType, translationStore: translationStore)
     }
-    
 }
-
 
 /*
  struct dysymtab_command {
@@ -142,8 +157,8 @@ class DynamicSymbolTableCompont: JYLoadCommand{
      uint32_t ilocalsym;    /* index to local symbols */
      uint32_t nlocalsym;    /* number of local symbols */
 
-     uint32_t iextdefsym;/* index to externally defined symbols */
-     uint32_t nextdefsym;/* number of externally defined symbols */
+     uint32_t iextdefsym; /* index to externally defined symbols */
+     uint32_t nextdefsym; /* number of externally defined symbols */
 
      uint32_t iundefsym;    /* index to undefined symbols */
      uint32_t nundefsym;    /* number of undefined symbols */

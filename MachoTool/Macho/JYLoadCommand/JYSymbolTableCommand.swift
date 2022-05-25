@@ -7,36 +7,31 @@
 
 import Foundation
 
-
-class JYSymbolTableCommand:JYLoadCommand{
-    
+class JYSymbolTableCommand: JYLoadCommand {
     let symbolTableOffset: UInt32
     let numberOfSymbolTable: UInt32
     let stringTableOffset: UInt32
     let stringTableSize: UInt32
-    
-    
+
     required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
-        
         let translationStore = TranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
-        
-        self.symbolTableOffset = translationStore.translate(next: .doubleWords, dataInterpreter: {$0.UInt32}, itemContentGenerator: { value in
+
+        symbolTableOffset = translationStore.translate(next: .doubleWords, dataInterpreter: { $0.UInt32 }, itemContentGenerator: { value in
             ExplanationModel(description: "Symbol table offset", explanation: value.hex)
         })
-        
-        self.numberOfSymbolTable = translationStore.translate(next: .doubleWords, dataInterpreter: {$0.UInt32}, itemContentGenerator: { value in
+
+        numberOfSymbolTable = translationStore.translate(next: .doubleWords, dataInterpreter: { $0.UInt32 }, itemContentGenerator: { value in
             ExplanationModel(description: "Number of entries", explanation: "\(value)")
         })
-     
-        self.stringTableOffset = translationStore.translate(next: .doubleWords, dataInterpreter: {$0.UInt32}, itemContentGenerator: { value in
-            ExplanationModel(description: "String table offset", explanation:  value.hex )
+
+        stringTableOffset = translationStore.translate(next: .doubleWords, dataInterpreter: { $0.UInt32 }, itemContentGenerator: { value in
+            ExplanationModel(description: "String table offset", explanation: value.hex)
         })
-        
-        self.stringTableSize = translationStore.translate(next: .doubleWords, dataInterpreter: {$0.UInt32}, itemContentGenerator: { value in
+
+        stringTableSize = translationStore.translate(next: .doubleWords, dataInterpreter: { $0.UInt32 }, itemContentGenerator: { value in
             ExplanationModel(description: "Size of string table", explanation: value.hex)
         })
-        
+
         super.init(with: dataSlice, commandType: commandType, translationStore: translationStore)
     }
-    
 }

@@ -7,15 +7,13 @@
 
 import Foundation
 
-
 enum LoadCommandType: UInt32 {
-    
     // ref: <mach-o/loader.h>
     /* After MacOS X 10.1 when a new load command is added that is required to be
-      understood by the dynamic linker for the image to execute properly the
-      LC_REQ_DYLD bit will be or'ed into the load command constant. */
+     understood by the dynamic linker for the image to execute properly the
+     LC_REQ_DYLD bit will be or'ed into the load command constant. */
     // So we remove the mask value here
-    
+
     case segment = 0x1
     case symbolTable
     case symseg
@@ -43,10 +41,10 @@ enum LoadCommandType: UInt32 {
     case segment64 = 0x19
     case routines64
     case uuid
-    case rpath = 0x8000001c
-    case codeSignature = 0x1d
+    case rpath = 0x8000001C
+    case codeSignature = 0x1D
     case segmentSplitInfo
-    case reexportDylib = 0x8000001f
+    case reexportDylib = 0x8000001F
     case lazyLoadDylib = 0x20
     case encryptionInfo
     case dyldInfo
@@ -70,7 +68,7 @@ enum LoadCommandType: UInt32 {
     case dyldExportsTrie = 0x80000033
     case dyldChainedFixups
     case fileSetEntry
-    
+
     var name: String {
         switch self {
         case .segment:
@@ -186,15 +184,13 @@ enum LoadCommandType: UInt32 {
 }
 
 class JYLoadCommand: MachoComponent {
-
     let type: LoadCommandType
-    
-    required init(with dataSlice: DataSlice , commandType:LoadCommandType, translationStore:TranslationRead?  ) {
-        self.type = commandType
+
+    required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead?) {
+        type = commandType
         super.init(dataSlice)
     }
-    
-    
+
 //    let type: LoadCommandType
 //    let translationStore: TranslationStore
 //
@@ -222,4 +218,3 @@ class JYLoadCommand: MachoComponent {
 //        super.init(data)
 //    }
 }
-

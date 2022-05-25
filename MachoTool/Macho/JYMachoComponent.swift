@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MachoComponent{
+class MachoComponent {
     let dataSlice: DataSlice
     var componentSize: Int { dataSlice.count }
     init(_ dataSlice: DataSlice) {

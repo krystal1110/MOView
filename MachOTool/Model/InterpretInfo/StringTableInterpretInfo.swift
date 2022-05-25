@@ -12,19 +12,19 @@ import Foundation
    里面存着字符串表的信息
    interpreter -> 字符串表数组 里面存放着所有的符号模型(StringPosition)
  */
-class StringTableInterpretInfo:BaseInterpretInfo{
+class StringTableInterpretInfo: BaseInterpretInfo {
     let dataSlice: DataSlice
     let interpreter: StringInterpreter
-    let stringTableList:Array<StringPosition>
+    let stringTableList: [StringPosition]
     var componentTitle: String { title }
     var componentSubTitle: String? { subTitle }
     let title: String
     let subTitle: String?
-    
+
     init(with dataSlice: DataSlice,
          is64Bit: Bool,
          interpreter: StringInterpreter,
-         stringTableList: Array<StringPosition>,
+         stringTableList: [StringPosition],
          title: String,
          subTitle: String? = nil) {
         self.interpreter = interpreter
@@ -33,6 +33,4 @@ class StringTableInterpretInfo:BaseInterpretInfo{
         self.subTitle = subTitle
         self.dataSlice = dataSlice
     }
-    
-    
 }
