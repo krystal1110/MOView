@@ -8,7 +8,7 @@
 import Foundation
 
 struct JYSymbolTableEntryModel: MachoExplainModel {
-//    let machoSearchSource: MachoSearchSource
+
     let indexInStringTableRange: Range<Int>
     let indexInStringTable: UInt32
     let symbolType: SymbolType

@@ -1,5 +1,5 @@
 //
-//  JYMachModel.swift
+//  MachModel.swift
 //  MachoTool
 //
 //  Created by karthrine on 2022/5/17.
@@ -13,9 +13,6 @@ protocol MachoExplainModel {
 
     // model的大小
     static func modelSize(is64Bit: Bool) -> Int
-
-    // 有多少条数据模型
-    static func numberOfExplanationItem() -> Int
 }
 
 class MachoModel<Model: MachoExplainModel> {

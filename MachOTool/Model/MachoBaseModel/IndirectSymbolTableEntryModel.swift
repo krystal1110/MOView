@@ -8,14 +8,11 @@
 import Foundation
 
 struct IndirectSymbolTableEntryModel: MachoExplainModel {
+    
     static func modelSize(is64Bit: Bool) -> Int {
-        4
+        return 4
     }
-
-    static func numberOfExplanationItem() -> Int {
-        1
-    }
-
+ 
     let entryRange: Range<Int>
     let symbolTableIndex: Int
     var explanationItem: ExplanationItem?

@@ -7,4 +7,4 @@
 
 import Foundation
 
-class BaseInterpretInfo {}
+class BaseStoreInfo {}

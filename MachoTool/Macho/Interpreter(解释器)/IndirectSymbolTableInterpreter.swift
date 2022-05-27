@@ -18,7 +18,7 @@ class IndirectSymbolTableInterpreter {
         self.machoProtocol = machoProtocol
     }
 
-    func indirectSymbolTableInterpreter(from dynamicSymbolCommand: DynamicSymbolTableCompont) -> IndirectSymbolTableInterpreterInfo? {
+    func indirectSymbolTableInterpreter(from dynamicSymbolCommand: DynamicSymbolTableCompont) -> IndirectSymbolTableStoreInfo? {
         let indirectSymbolTableStartOffset = Int(dynamicSymbolCommand.indirectsymoff)
         let indirectSymbolTableSize = Int(dynamicSymbolCommand.nindirectsyms * 4)
         if indirectSymbolTableSize == .zero { return nil }
@@ -28,7 +28,7 @@ class IndirectSymbolTableInterpreter {
 
         let indirectSymbolTableList = translation(array: interpreter)
 
-        return IndirectSymbolTableInterpreterInfo(with: indirectSymbolTableData,
+        return IndirectSymbolTableStoreInfo(with: indirectSymbolTableData,
                                                   is64Bit: is64Bit,
                                                   indirectSymbolTableList: indirectSymbolTableList,
                                                   title: "Indirect Symbol Table",

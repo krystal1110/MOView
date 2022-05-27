@@ -9,7 +9,7 @@ import Foundation
 
 class SymbolTableInterpreter: SeachStringTable {
     // symbolTable解释器
-    func symbolTableInterpreter(with symbolTableCommand: JYSymbolTableCommand, is64Bit: Bool, data: DataSlice) -> SymbolTableInterpretInfo {
+    func symbolTableInterpreter(with symbolTableCommand: JYSymbolTableCommand, is64Bit: Bool, data: DataSlice) -> SymbolTableStoreInfo {
         let symbolTableStartOffset = Int(symbolTableCommand.symbolTableOffset)
         let numberOfEntries = Int(symbolTableCommand.numberOfSymbolTable)
         let entrySize = is64Bit ? 16 : 12
@@ -19,11 +19,11 @@ class SymbolTableInterpreter: SeachStringTable {
 
         let symbolTableList = interpreter.generateVessel(data: symbolTableData, is64Bit: is64Bit)
 
-        return SymbolTableInterpretInfo(with: data, is64Bit: is64Bit, interpreter: self, symbolTableList: symbolTableList, title: "Symbol Table", subTitle: "__LINKEDIT")
+        return SymbolTableStoreInfo(with: data, is64Bit: is64Bit, interpreter: self, symbolTableList: symbolTableList, title: "Symbol Table", subTitle: "__LINKEDIT")
     }
 
     // stringTable解释器
-    func stringTableInterpreter(with symbolTableCommand: JYSymbolTableCommand, is64Bit: Bool, data: DataSlice) -> StringTableInterpretInfo {
+    func stringTableInterpreter(with symbolTableCommand: JYSymbolTableCommand, is64Bit: Bool, data: DataSlice) -> StringTableStoreInfo{
         let stringTableStartOffset = Int(symbolTableCommand.stringTableOffset)
         let stringTableSize = Int(symbolTableCommand.stringTableSize)
         let stringTableData = data.interception(from: stringTableStartOffset, length: stringTableSize)
@@ -34,7 +34,7 @@ class SymbolTableInterpreter: SeachStringTable {
                                             searchSouce: nil)
         let stringTableList = interpreter.generatePayload()
 
-        return StringTableInterpretInfo(with: stringTableData,
+        return StringTableStoreInfo(with: stringTableData,
                                         is64Bit: is64Bit,
                                         interpreter: interpreter,
                                         stringTableList: stringTableList,

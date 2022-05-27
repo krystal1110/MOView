@@ -9,15 +9,16 @@
 /* Begin PBXBuildFile section */
 		2D0129E0283E8A4A00FF4186 /* ShellUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */; };
 		2D0129EA283E93B600FF4186 /* iOSToolsTest.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D0129E8283E939400FF4186 /* iOSToolsTest.zip */; };
-		FB072DFF2839231A000B370B /* SymbolTableInterpretInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072DFE2839231A000B370B /* SymbolTableInterpretInfo.swift */; };
-		FB072E01283929B8000B370B /* StringTableInterpretInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E00283929B8000B370B /* StringTableInterpretInfo.swift */; };
-		FB072E03283A601B000B370B /* BaseInterpretInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E02283A601B000B370B /* BaseInterpretInfo.swift */; };
+		FB072DFF2839231A000B370B /* SymbolTableStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072DFE2839231A000B370B /* SymbolTableStoreInfo.swift */; };
+		FB072E03283A601B000B370B /* BaseStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E02283A601B000B370B /* BaseStoreInfo.swift */; };
 		FB072E05283B220E000B370B /* IndirectSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */; };
-		FB072E07283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E06283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift */; };
+		FB072E07283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E06283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift */; };
 		FB072E09283B235F000B370B /* IndirectSymbolTableEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */; };
 		FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E0A283B8560000B370B /* MachoProtocol.swift */; };
 		FB072E0F283E818E000B370B /* LazySymbolEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E0E283E818E000B370B /* LazySymbolEntryModel.swift */; };
 		FB072E13283E8714000B370B /* LazySymbolInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E12283E8714000B370B /* LazySymbolInterpreter.swift */; };
+		FB63EC4A283F125E003CCCF7 /* StringTableStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63EC49283F125E003CCCF7 /* StringTableStoreInfo.swift */; };
+		FB63EC4C283F58C6003CCCF7 /* LazySymbolStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63EC4B283F58C6003CCCF7 /* LazySymbolStoreInfo.swift */; };
 		FBCEE977283290150090B4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE976283290150090B4E6 /* main.swift */; };
 		FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE97F283290400090B4E6 /* MachoHeader.swift */; };
 		FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE980283290400090B4E6 /* JYMachoComponent.swift */; };
@@ -36,7 +37,7 @@
 		FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A0283290530090B4E6 /* Utils.swift */; };
 		FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A4283290630090B4E6 /* JYFile.swift */; };
 		FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */; };
-		FBCEE9AC283370E80090B4E6 /* JYMachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9AB283370E80090B4E6 /* JYMachModel.swift */; };
+		FBCEE9AC283370E80090B4E6 /* MachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9AB283370E80090B4E6 /* MachModel.swift */; };
 		FBCEE9AE2833800C0090B4E6 /* JYSymbolTableEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9AD2833800C0090B4E6 /* JYSymbolTableEntryModel.swift */; };
 		FBCEE9B52834D5A30090B4E6 /* StringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */; };
 		FBCEE9B72834D6710090B4E6 /* BaseInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */; };
@@ -58,15 +59,16 @@
 /* Begin PBXFileReference section */
 		2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShellUtils.swift; path = MachOTool/Tools/ShellUtils.swift; sourceTree = SOURCE_ROOT; };
 		2D0129E8283E939400FF4186 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = iOSToolsTest.zip; path = Resoure/iOSToolsTest.zip; sourceTree = SOURCE_ROOT; };
-		FB072DFE2839231A000B370B /* SymbolTableInterpretInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTableInterpretInfo.swift; sourceTree = "<group>"; };
-		FB072E00283929B8000B370B /* StringTableInterpretInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTableInterpretInfo.swift; sourceTree = "<group>"; };
-		FB072E02283A601B000B370B /* BaseInterpretInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterpretInfo.swift; sourceTree = "<group>"; };
+		FB072DFE2839231A000B370B /* SymbolTableStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTableStoreInfo.swift; sourceTree = "<group>"; };
+		FB072E02283A601B000B370B /* BaseStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStoreInfo.swift; sourceTree = "<group>"; };
 		FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreter.swift; sourceTree = "<group>"; };
-		FB072E06283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreterInfo.swift; sourceTree = "<group>"; };
+		FB072E06283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableStoreInfo.swift; sourceTree = "<group>"; };
 		FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableEntryModel.swift; sourceTree = "<group>"; };
 		FB072E0A283B8560000B370B /* MachoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoProtocol.swift; sourceTree = "<group>"; };
 		FB072E0E283E818E000B370B /* LazySymbolEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazySymbolEntryModel.swift; sourceTree = "<group>"; };
 		FB072E12283E8714000B370B /* LazySymbolInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazySymbolInterpreter.swift; sourceTree = "<group>"; };
+		FB63EC49283F125E003CCCF7 /* StringTableStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTableStoreInfo.swift; sourceTree = "<group>"; };
+		FB63EC4B283F58C6003CCCF7 /* LazySymbolStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazySymbolStoreInfo.swift; sourceTree = "<group>"; };
 		FBCEE973283290150090B4E6 /* MachoTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MachoTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBCEE976283290150090B4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FBCEE97F283290400090B4E6 /* MachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoHeader.swift; sourceTree = "<group>"; };
@@ -87,7 +89,7 @@
 		FBCEE9A3283290630090B4E6 /* MachOTool-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachOTool-Bridging-Header.h"; sourceTree = "<group>"; };
 		FBCEE9A4283290630090B4E6 /* JYFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYFile.swift; sourceTree = "<group>"; };
 		FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineTool.swift; sourceTree = "<group>"; };
-		FBCEE9AB283370E80090B4E6 /* JYMachModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYMachModel.swift; sourceTree = "<group>"; };
+		FBCEE9AB283370E80090B4E6 /* MachModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachModel.swift; sourceTree = "<group>"; };
 		FBCEE9AD2833800C0090B4E6 /* JYSymbolTableEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JYSymbolTableEntryModel.swift; sourceTree = "<group>"; };
 		FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringInterpreter.swift; sourceTree = "<group>"; };
 		FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterpreter.swift; sourceTree = "<group>"; };
@@ -112,15 +114,16 @@
 			path = Resoure;
 			sourceTree = "<group>";
 		};
-		FB072DFD28392307000B370B /* InterpretInfo */ = {
+		FB072DFD28392307000B370B /* StoreInfo(存储信息) */ = {
 			isa = PBXGroup;
 			children = (
-				FB072DFE2839231A000B370B /* SymbolTableInterpretInfo.swift */,
-				FB072E00283929B8000B370B /* StringTableInterpretInfo.swift */,
-				FB072E02283A601B000B370B /* BaseInterpretInfo.swift */,
-				FB072E06283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift */,
+				FB072DFE2839231A000B370B /* SymbolTableStoreInfo.swift */,
+				FB072E02283A601B000B370B /* BaseStoreInfo.swift */,
+				FB072E06283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift */,
+				FB63EC49283F125E003CCCF7 /* StringTableStoreInfo.swift */,
+				FB63EC4B283F58C6003CCCF7 /* LazySymbolStoreInfo.swift */,
 			);
-			path = InterpretInfo;
+			path = "StoreInfo(存储信息)";
 			sourceTree = "<group>";
 		};
 		FBCEE96A283290150090B4E6 = {
@@ -213,7 +216,7 @@
 		FBCEE99C2832904D0090B4E6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FB072DFD28392307000B370B /* InterpretInfo */,
+				FB072DFD28392307000B370B /* StoreInfo(存储信息) */,
 				FBCEE9AA283370BA0090B4E6 /* MachoBaseModel */,
 				FBCEE99D2832904D0090B4E6 /* DataExplanation.swift */,
 			);
@@ -241,7 +244,7 @@
 		FBCEE9AA283370BA0090B4E6 /* MachoBaseModel */ = {
 			isa = PBXGroup;
 			children = (
-				FBCEE9AB283370E80090B4E6 /* JYMachModel.swift */,
+				FBCEE9AB283370E80090B4E6 /* MachModel.swift */,
 				FBCEE9AD2833800C0090B4E6 /* JYSymbolTableEntryModel.swift */,
 				FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */,
 				FB072E0E283E818E000B370B /* LazySymbolEntryModel.swift */,
@@ -284,7 +287,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachOTool" */;
+			buildConfigurationList = FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachoTool" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -307,7 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB072DFF2839231A000B370B /* SymbolTableInterpretInfo.swift in Sources */,
+				FB072DFF2839231A000B370B /* SymbolTableStoreInfo.swift in Sources */,
 				FBCEE993283290400090B4E6 /* JYBuildVersionCommand.swift in Sources */,
 				FB072E09283B235F000B370B /* IndirectSymbolTableEntryModel.swift in Sources */,
 				FBCEE99A283290470090B4E6 /* TranslationRead.swift in Sources */,
@@ -320,8 +323,9 @@
 				FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */,
 				FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */,
 				FBCEE995283290400090B4E6 /* DynamicSymbolTableCompont.swift in Sources */,
+				FB63EC4A283F125E003CCCF7 /* StringTableStoreInfo.swift in Sources */,
 				FBCEE98E283290400090B4E6 /* SymbolTableInterpreter.swift in Sources */,
-				FB072E03283A601B000B370B /* BaseInterpretInfo.swift in Sources */,
+				FB072E03283A601B000B370B /* BaseStoreInfo.swift in Sources */,
 				FBCEE994283290400090B4E6 /* JYLoadCommand.swift in Sources */,
 				FBCEE990283290400090B4E6 /* Macho.swift in Sources */,
 				FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */,
@@ -330,14 +334,14 @@
 				2D0129E0283E8A4A00FF4186 /* ShellUtils.swift in Sources */,
 				FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */,
 				FBCEE991283290400090B4E6 /* JYMainCommand.swift in Sources */,
+				FB63EC4C283F58C6003CCCF7 /* LazySymbolStoreInfo.swift in Sources */,
 				FBCEE9AE2833800C0090B4E6 /* JYSymbolTableEntryModel.swift in Sources */,
-				FB072E07283B22B3000B370B /* IndirectSymbolTableInterpreterInfo.swift in Sources */,
-				FBCEE9AC283370E80090B4E6 /* JYMachModel.swift in Sources */,
+				FB072E07283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift in Sources */,
+				FBCEE9AC283370E80090B4E6 /* MachModel.swift in Sources */,
 				FBCEE977283290150090B4E6 /* main.swift in Sources */,
 				FB072E13283E8714000B370B /* LazySymbolInterpreter.swift in Sources */,
 				FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */,
 				FBCEE9B72834D6710090B4E6 /* BaseInterpreter.swift in Sources */,
-				FB072E01283929B8000B370B /* StringTableInterpretInfo.swift in Sources */,
 				FB072E05283B220E000B370B /* IndirectSymbolTableInterpreter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,7 +466,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SJ7JKKYH4C;
+				DEVELOPMENT_TEAM = G7ANJPJ6VB;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -474,7 +478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SJ7JKKYH4C;
+				DEVELOPMENT_TEAM = G7ANJPJ6VB;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -485,7 +489,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachOTool" */ = {
+		FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachoTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FBCEE978283290150090B4E6 /* Debug */,
