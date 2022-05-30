@@ -85,4 +85,13 @@ extension StringInterpreter {
         }
         return nil
     }
+    
+    func findString(with virtualAddress: Swift.UInt64, stringPositionList:[StringPosition]) -> String? {
+        for stringPosition in stringPositionList {
+            if stringPosition.virtualAddress == virtualAddress {
+                return self.data.interception(from: stringPosition.startOffset, length: stringPosition.length).raw.utf8String
+            }
+        }
+        return nil
+    }
 }
