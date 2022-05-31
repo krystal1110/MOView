@@ -9,7 +9,7 @@ import Foundation
 
 class SymbolTableInterpreter: SeachStringTable {
     // symbolTable解释器
-    func symbolTableInterpreter(with symbolTableCommand: JYSymbolTableCommand, is64Bit: Bool, data: DataSlice) -> SymbolTableStoreInfo {
+    func symbolTableInterpreter(with symbolTableCommand: JYSymbolTableCommand, is64Bit: Bool, data: DataSlice ) -> SymbolTableStoreInfo {
         let symbolTableStartOffset = Int(symbolTableCommand.symbolTableOffset)
         let numberOfEntries = Int(symbolTableCommand.numberOfSymbolTable)
         let entrySize = is64Bit ? 16 : 12

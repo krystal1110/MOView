@@ -50,13 +50,19 @@ class ReferencesInterpreter{
     
     
     func translationItem(with pointer:ReferencesPointer) -> ExplanationItem {
-        guard let searchedString = self.machoProtocol.searchString(by: pointer.pointerValue) else {
-            fatalError()
+        
+        var searchedString = self.machoProtocol.searchString(by: pointer.pointerValue)
+        
+        if (searchedString == nil){
+            searchedString = self.machoProtocol.searchStringInSymbolTable(by: pointer.pointerValue)
         }
+        
+        
         return ExplanationItem(sourceDataRange: self.data.absoluteRange(pointer.relativeDataOffset, self.pointerLength),
                                model: ExplanationModel(description: "Pointer Value (Virtual Address)",
                                                                explanation: pointer.pointerValue.hex,
-                                                               extraDescription: "Referenced String Symbol",
+                                              
+                                                       extraDescription: "Referenced String Symbol",
                                                                extraExplanation: searchedString))
     }
     

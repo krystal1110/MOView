@@ -67,3 +67,14 @@ class Utils {
         return range.upperBound + distance ..< range.upperBound + distance + length
     }
 }
+
+extension String {
+    
+    /// 是否为空字符串
+    var isBlank: Bool {
+        let trimmedStr = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmedStr.isEmpty
+    }
+ 
+}
+ 

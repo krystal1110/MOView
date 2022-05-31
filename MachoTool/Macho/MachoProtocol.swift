@@ -18,4 +18,7 @@ protocol MachoProtocol: AnyObject {
     func indexInIndirectSymbolTable(at index: Int) -> IndirectSymbolTableEntryModel?
     
     func searchString(by virtualAddress: UInt64) -> String?
+    
+    func searchStringInSymbolTable(by nValue:UInt64) -> String?
+    
 }

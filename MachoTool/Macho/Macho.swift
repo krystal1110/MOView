@@ -34,9 +34,6 @@ class Macho: Equatable {
     // 存放indirectSymbol的信息
     var indirectSymbolTableStoreInfo: IndirectSymbolTableStoreInfo?
     
-    // 存放__DATA,__objc_classrefs -> Objc2 References
-    var referencesStoreInfo:ReferencesStoreInfo?
-    
     init(machoDataRaw: Data, machoFileName: String) {
         let machoData = DataSlice(machoDataRaw)
         data = machoData
@@ -111,10 +108,11 @@ class Macho: Equatable {
             // 用于存放符号表数据 [JYSymbolTableEntryModel]
             // 但是缺少symbolName,因为SymbolName存放在stringTable,
             // n_strx + 字符串表的起始位置 =  符号名称
-            symbolTableStoreInfo = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
-            
-            stringTableStoreInfo = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
-            
+            let symbolTableStoreInfo = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            self.symbolTableStoreInfo = symbolTableStoreInfo
+            let stringTableStoreInfo = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            self.stringTableStoreInfo = stringTableStoreInfo
+            allCstringInterpretInfo.append(stringTableStoreInfo)
             return segment
             
         case .dynamicSymbolTable: // LC_DYSYMTAB
@@ -137,7 +135,9 @@ class Macho: Equatable {
     fileprivate func machoComponent(from sectionHeader: SectionHeader64) -> BaseStoreInfo? {
         let componentTitle = "Section"
         let componentSubTitle = sectionHeader.segment + "," + sectionHeader.section
-        
+        if (componentSubTitle == "__DATA,__objc_protolist"){
+            print("---")
+        }
         print(componentSubTitle)
         switch sectionHeader.sectionType {
             /*
@@ -184,11 +184,32 @@ class Macho: Equatable {
                 let cStringInterpreter = CFStringInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 #warning("TODO解析Cstring")
                 print("---")
-            }else if (componentSubTitle == "__DATA,__objc_classlist"){
+            }
+            else if (componentSubTitle == "__DATA,__objc_classlist"){
                 // 解析classList
                 let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let xx = ObjcPointer64Interpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
-                print("---")
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
+                let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                return referencesStoreInfo
+            }
+            else if (componentSubTitle == "__DATA,__objc_superrefs"){
+                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
+                let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                return referencesStoreInfo
+            }
+            else if (componentSubTitle == "__DATA,__objc_catlist"){
+                // __category_list 分类
+                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
+                let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                return referencesStoreInfo
+            }else if (componentSubTitle == "__DATA,__objc_protolist"){
+                // __protocol_list 协议
+                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
+                let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                return referencesStoreInfo
             }
             
             return nil
@@ -198,9 +219,8 @@ class Macho: Equatable {
             // __DATA,__objc_classrefs -> Objc2 References
             let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
             let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
-            self.referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
-             
-            return nil
+            let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+            return referencesStoreInfo
             
             
         default:
@@ -234,15 +254,30 @@ extension Macho: MachoProtocol {
         return value
     }
     
+    func searchStringInSymbolTable(by nValue:UInt64) -> String?{
+        guard let symbolTableList = self.symbolTableStoreInfo?.symbolTableList else{return nil}
+        for model in symbolTableList {
+            if (nValue == model.nValue){
+                return self.stringInStringTable(at: Int(model.indexInStringTable))
+            }
+        }
+        return nil
+    }
+    
     
     
     func searchString(by virtualAddress: UInt64) -> String? {
         for stringTableStoreInfo in self.allCstringInterpretInfo {
+            // 判断区间范围
             if virtualAddress >= stringTableStoreInfo.interpreter.sectionVirtualAddress
                 && virtualAddress < (stringTableStoreInfo.interpreter.sectionVirtualAddress + UInt64(stringTableStoreInfo.interpreter.data.count)) {
                 return stringTableStoreInfo.interpreter.findString(with: virtualAddress, stringPositionList: stringTableStoreInfo.stringTableList)
             }
         }
+        
+        
+        
+        
         return nil
     }
     
