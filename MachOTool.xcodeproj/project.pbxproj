@@ -25,6 +25,8 @@
 		FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B11D028424CA200B53C61 /* ObjcPointer64EnterModel.swift */; };
 		FB9103742844F8D50000AD84 /* ReferencesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */; };
 		FB9103762845013A0000AD84 /* ReferencesStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */; };
+		FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */; };
+		FB91037A284601C10000AD84 /* UStringStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB910379284601C10000AD84 /* UStringStoreInfo.swift */; };
 		FBCEE977283290150090B4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE976283290150090B4E6 /* main.swift */; };
 		FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE97F283290400090B4E6 /* MachoHeader.swift */; };
 		FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE980283290400090B4E6 /* JYMachoComponent.swift */; };
@@ -81,6 +83,8 @@
 		FB8B11D028424CA200B53C61 /* ObjcPointer64EnterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjcPointer64EnterModel.swift; sourceTree = "<group>"; };
 		FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesInterpreter.swift; sourceTree = "<group>"; };
 		FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesStoreInfo.swift; sourceTree = "<group>"; };
+		FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringInterpreter.swift; sourceTree = "<group>"; };
+		FB910379284601C10000AD84 /* UStringStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringStoreInfo.swift; sourceTree = "<group>"; };
 		FBCEE973283290150090B4E6 /* MachoTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MachoTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBCEE976283290150090B4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FBCEE97F283290400090B4E6 /* MachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoHeader.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 				FB63EC49283F125E003CCCF7 /* StringTableStoreInfo.swift */,
 				FB63EC4B283F58C6003CCCF7 /* LazySymbolStoreInfo.swift */,
 				FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */,
+				FB910379284601C10000AD84 /* UStringStoreInfo.swift */,
 			);
 			path = "StoreInfo(存储信息)";
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 				FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */,
 				FB8B11CE28424ABD00B53C61 /* ObjcPointer64Interpreter.swift */,
 				FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */,
+				FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */,
 			);
 			path = "Interpreter(解释器)";
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 				FBCEE996283290400090B4E6 /* SectionHeader.swift in Sources */,
 				FBCEE99B283290470090B4E6 /* DataSlice.swift in Sources */,
 				FB072E0F283E818E000B370B /* LazySymbolEntryModel.swift in Sources */,
+				FB91037A284601C10000AD84 /* UStringStoreInfo.swift in Sources */,
 				FBCEE99E2832904D0090B4E6 /* DataExplanation.swift in Sources */,
 				FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */,
 				FBCEE9B52834D5A30090B4E6 /* StringInterpreter.swift in Sources */,
@@ -355,6 +362,7 @@
 				FB8B11CF28424ABD00B53C61 /* ObjcPointer64Interpreter.swift in Sources */,
 				FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */,
 				FBCEE991283290400090B4E6 /* JYMainCommand.swift in Sources */,
+				FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */,
 				FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */,
 				FB63EC4C283F58C6003CCCF7 /* LazySymbolStoreInfo.swift in Sources */,
 				FBCEE9AE2833800C0090B4E6 /* JYSymbolTableEntryModel.swift in Sources */,

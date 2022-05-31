@@ -34,6 +34,10 @@ class Macho: Equatable {
     // 存放indirectSymbol的信息
     var indirectSymbolTableStoreInfo: IndirectSymbolTableStoreInfo?
     
+    var allBaseStoreInfoList: [BaseStoreInfo] = []
+     
+    
+    
     init(machoDataRaw: Data, machoFileName: String) {
         let machoData = DataSlice(machoDataRaw)
         data = machoData
@@ -79,9 +83,10 @@ class Macho: Equatable {
             loadCommands.append(loadCommand)
         }
         
-#warning("TODO存储")
+ 
         // 加载对应的 section64
-        let stringInterpretInfo = sectionHeaders.compactMap { self.machoComponent(from: $0) }
+        let allBaseStoreInfoList = sectionHeaders.compactMap {self.machoComponent(from: $0)}
+        self.allBaseStoreInfoList = allBaseStoreInfoList
     }
     
     func translationLoadCommands(with loadCommandData: DataSlice, loadCommandType: LoadCommandType) -> JYLoadCommand {
@@ -121,7 +126,6 @@ class Macho: Equatable {
             let segment = DynamicSymbolTableCompont(with: loadCommandData, commandType: loadCommandType)
             let interpreter = IndirectSymbolTableInterpreter(with: data, is64Bit: is64bit, machoProtocol: self)
             indirectSymbolTableStoreInfo = interpreter.indirectSymbolTableInterpreter(from: segment)
-            
             return segment
             
         case .buildVersion:
@@ -135,9 +139,11 @@ class Macho: Equatable {
     fileprivate func machoComponent(from sectionHeader: SectionHeader64) -> BaseStoreInfo? {
         let componentTitle = "Section"
         let componentSubTitle = sectionHeader.segment + "," + sectionHeader.section
-        if (componentSubTitle == "__DATA,__objc_protolist"){
+ 
+        if (componentSubTitle == "__TEXT,__ustring"){
             print("---")
         }
+        
         print(componentSubTitle)
         switch sectionHeader.sectionType {
             /*
@@ -185,6 +191,7 @@ class Macho: Equatable {
                 #warning("TODO解析Cstring")
                 print("---")
             }
+            
             else if (componentSubTitle == "__DATA,__objc_classlist"){
                 // 解析classList
                 let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
@@ -192,24 +199,34 @@ class Macho: Equatable {
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return referencesStoreInfo
             }
+            
             else if (componentSubTitle == "__DATA,__objc_superrefs"){
                 let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return referencesStoreInfo
             }
+            
             else if (componentSubTitle == "__DATA,__objc_catlist"){
                 // __category_list 分类
                 let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return referencesStoreInfo
-            }else if (componentSubTitle == "__DATA,__objc_protolist"){
+            }
+            
+            else if (componentSubTitle == "__DATA,__objc_protolist"){
                 // __protocol_list 协议
                 let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return referencesStoreInfo
+            }
+            
+            else if (componentSubTitle == "__TEXT,__ustring"){
+                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let uStringStoreInfo  = UStringInterpreter(wiht:dataSlice, is64Bit:self.is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                return uStringStoreInfo;
             }
             
             return nil
@@ -227,6 +244,32 @@ class Macho: Equatable {
             break
         }
         
+//        // recognize section by section name
+//        let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+//        switch sectionHeader.segment {
+//        case "__TEXT":
+//            switch sectionHeader.section {
+//            case "__ustring":
+//                let uStringStoreInfo  = UStringInterpreter(wiht:dataSlice, is64Bit:self.is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+//                return uStringStoreInfo;
+//            case "__swift5_reflstr":
+//                return nil
+//                // https://knight.sc/reverse%20engineering/2019/07/17/swift-metadata.html
+//                // a great article on introducing swift metadata sections
+////                interpreter = CStringInterpreter(dataSlice, is64Bit: is64Bit,
+////                                                 machoSearchSource: self,
+////                                                 sectionVirtualAddress: sectionHeader.addr,
+////                                                 demanglingCString: false)
+//            default:
+//                return nil
+////                interpreter = ASCIIInterpreter(dataSlice, is64Bit: is64Bit, machoSearchSource: self)
+//            }
+//        default:
+//            return nil
+////            interpreter = ASCIIInterpreter(dataSlice, is64Bit: is64Bit, machoSearchSource: self)
+//        }
+        
+        
         return nil
     }
 }
@@ -242,6 +285,7 @@ extension Macho: MachoProtocol {
     
     func indexInSymbolTable(at index: Int) -> JYSymbolTableEntryModel? {
         if let SymbolTableStoreInfo = self.symbolTableStoreInfo {
+            if(index > SymbolTableStoreInfo.symbolTableList.count){return nil}
             let symbolTableEntryModel = SymbolTableStoreInfo.symbolTableList[index]
             return symbolTableEntryModel
         }
