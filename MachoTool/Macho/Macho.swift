@@ -185,11 +185,9 @@ class Macho: Equatable {
              _DATA_cfstring  -> objc CFStrings
              **/
             if (componentSubTitle == "__DATA,__cfstring"){
-//                0x18 - 24
                 let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let cStringInterpreter = CFStringInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
-                #warning("TODO解析Cstring")
-                print("---")
+                let cStringStoreInfo = CFStringInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                return cStringStoreInfo
             }
             
             else if (componentSubTitle == "__DATA,__objc_classlist"){
@@ -226,7 +224,20 @@ class Macho: Equatable {
             else if (componentSubTitle == "__TEXT,__ustring"){
                 let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 let uStringStoreInfo  = UStringInterpreter(wiht:dataSlice, is64Bit:self.is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
-                return uStringStoreInfo;
+                return uStringStoreInfo
+            }
+            
+            else if (componentSubTitle == "__TEXT,__swift5_reflstr"){
+                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: is64bit, sectionVirtualAddress: sectionHeader.addr, searchSouce: nil)
+                let cStringTableList = cStringInterpreter.generatePayload()
+                let reflstrStoreInfo = StringTableStoreInfo(with: dataSlice,
+                                                is64Bit: is64bit,
+                                                interpreter: cStringInterpreter,
+                                                stringTableList: cStringTableList,
+                                                title: componentTitle,
+                                                subTitle: componentSubTitle)
+                return reflstrStoreInfo
             }
             
             return nil
@@ -243,32 +254,6 @@ class Macho: Equatable {
         default:
             break
         }
-        
-//        // recognize section by section name
-//        let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-//        switch sectionHeader.segment {
-//        case "__TEXT":
-//            switch sectionHeader.section {
-//            case "__ustring":
-//                let uStringStoreInfo  = UStringInterpreter(wiht:dataSlice, is64Bit:self.is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
-//                return uStringStoreInfo;
-//            case "__swift5_reflstr":
-//                return nil
-//                // https://knight.sc/reverse%20engineering/2019/07/17/swift-metadata.html
-//                // a great article on introducing swift metadata sections
-////                interpreter = CStringInterpreter(dataSlice, is64Bit: is64Bit,
-////                                                 machoSearchSource: self,
-////                                                 sectionVirtualAddress: sectionHeader.addr,
-////                                                 demanglingCString: false)
-//            default:
-//                return nil
-////                interpreter = ASCIIInterpreter(dataSlice, is64Bit: is64Bit, machoSearchSource: self)
-//            }
-//        default:
-//            return nil
-////            interpreter = ASCIIInterpreter(dataSlice, is64Bit: is64Bit, machoSearchSource: self)
-//        }
-        
         
         return nil
     }
