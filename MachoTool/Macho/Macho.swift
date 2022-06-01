@@ -31,8 +31,13 @@ class Macho: Equatable {
     // 存储section里面数据为Cstring类型
     var allCstringInterpretInfo: [StringTableStoreInfo] = []
     
+    // 存储__TEXT,__ustring
+    var uStringStoreInfo : UStringStoreInfo?
+    
     // 存放indirectSymbol的信息
     var indirectSymbolTableStoreInfo: IndirectSymbolTableStoreInfo?
+    
+    
     
     var allBaseStoreInfoList: [BaseStoreInfo] = []
      
@@ -98,7 +103,7 @@ class Macho: Equatable {
             
             if segment.fileoff == 0, segment.filesize != 0 {
                 // __TEXT段
-                print(segment.segname)
+//                print(segment.segname)
             }
             return segment
             
@@ -139,12 +144,8 @@ class Macho: Equatable {
     fileprivate func machoComponent(from sectionHeader: SectionHeader64) -> BaseStoreInfo? {
         let componentTitle = "Section"
         let componentSubTitle = sectionHeader.segment + "," + sectionHeader.section
- 
-        if (componentSubTitle == "__TEXT,__ustring"){
-            print("---")
-        }
         
-        print(componentSubTitle)
+        
         switch sectionHeader.sectionType {
             /*
              __TEXT,__cstring    __TEXT,__objc_classname   __TEXT,__objc_methtype 均会来到此处
@@ -185,8 +186,9 @@ class Macho: Equatable {
              _DATA_cfstring  -> objc CFStrings
              **/
             if (componentSubTitle == "__DATA,__cfstring"){
+                 
                 let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let cStringStoreInfo = CFStringInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                let cStringStoreInfo = CFStringInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self,sectionVirtualAddress: sectionHeader.addr).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return cStringStoreInfo
             }
             
@@ -223,7 +225,8 @@ class Macho: Equatable {
             
             else if (componentSubTitle == "__TEXT,__ustring"){
                 let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let uStringStoreInfo  = UStringInterpreter(wiht:dataSlice, is64Bit:self.is64bit, machoProtocol: self).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                let uStringStoreInfo  = UStringInterpreter(wiht:dataSlice, is64Bit:self.is64bit, machoProtocol: self,sectionVirtualAddress: sectionHeader.addr).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                self.uStringStoreInfo = uStringStoreInfo
                 return uStringStoreInfo
             }
             
@@ -293,9 +296,16 @@ extension Macho: MachoProtocol {
         return nil
     }
     
-    
-    
     func searchString(by virtualAddress: UInt64) -> String? {
+        
+        if (self.uStringStoreInfo != nil){
+                for item in self.uStringStoreInfo!.uStringPositionList {
+                  let itemVirtualAddress =  Int(self.uStringStoreInfo!.interpreter.sectionVirtualAddress) + item.relativeStartOffset
+                    if (itemVirtualAddress == virtualAddress){
+                        return item.explanationItem?.model.explanation
+                    }
+                }
+        }
         for stringTableStoreInfo in self.allCstringInterpretInfo {
             // 判断区间范围
             if virtualAddress >= stringTableStoreInfo.interpreter.sectionVirtualAddress
@@ -303,27 +313,6 @@ extension Macho: MachoProtocol {
                 return stringTableStoreInfo.interpreter.findString(with: virtualAddress, stringPositionList: stringTableStoreInfo.stringTableList)
             }
         }
-        
-        
-        
-        
         return nil
-    }
-    
-    
-    fileprivate func symbolTableComponent(from symbolTableCommand: JYSymbolTableCommand) {
-        // 起始位置
-        let symbolTableStartOffset = Int(symbolTableCommand.symbolTableOffset)
-        
-        // 有多少个符号
-        let numberOfEntries = Int(symbolTableCommand.numberOfSymbolTable)
-        
-        let entrySize = is64bit ? 16 : 12
-        
-        // symbol长度
-        let symbolSize = numberOfEntries * entrySize
-        
-        // symbol的data
-        let symbolTableData = data.interception(from: symbolTableStartOffset, length: symbolSize)
     }
 }

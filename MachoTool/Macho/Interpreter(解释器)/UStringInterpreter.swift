@@ -19,15 +19,19 @@ class UStringInterpreter{
     let data: DataSlice
     let machoProtocol: MachoProtocol
     let is64Bit: Bool
+    let sectionVirtualAddress: UInt64
+
  
 
     init(wiht data: DataSlice,
          is64Bit: Bool,
-         machoProtocol: MachoProtocol) {
+         machoProtocol: MachoProtocol,
+         sectionVirtualAddress:UInt64) {
         self.pointerLength = is64Bit ? 8 : 4
         self.is64Bit = is64Bit
         self.machoProtocol = machoProtocol
         self.data = data
+        self.sectionVirtualAddress = sectionVirtualAddress
     }
     
  
@@ -53,7 +57,7 @@ class UStringInterpreter{
             uStringPositions.append(uStringPosition)
             indexOfLastNull = curNullIndex
         }
-        return UStringStoreInfo(with: self.data, is64Bit: is64Bit, uStringPositionList: uStringPositions, title: title, subTitle: subTitle)
+        return UStringStoreInfo(with: self.data, is64Bit: is64Bit, interpreter: self, uStringPositionList: uStringPositions, title: subTitle, subTitle: subTitle)
     }
     
     

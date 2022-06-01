@@ -9,6 +9,7 @@ import Foundation
 
 class UStringStoreInfo: BaseStoreInfo {
     let dataSlice: DataSlice
+    let interpreter: UStringInterpreter
     let uStringPositionList: [UStringPosition]
     var componentTitle: String { title }
     var componentSubTitle: String? { subTitle }
@@ -17,10 +18,12 @@ class UStringStoreInfo: BaseStoreInfo {
 
     init(with dataSlice: DataSlice,
          is64Bit: Bool,
+         interpreter: UStringInterpreter,
          uStringPositionList: [UStringPosition],
          title: String,
          subTitle: String? = nil) {
         self.uStringPositionList = uStringPositionList
+        self.interpreter = interpreter
         self.title = title
         self.subTitle = subTitle
         self.dataSlice = dataSlice

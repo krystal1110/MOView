@@ -12,7 +12,8 @@ import Foundation
 struct ObjcCFString {
     let ptr: UInt64
     let data: UInt64
-    let cstr: UInt64
+    let cstrPointer: UInt64
+    let cstrValue: String?
     let size: UInt64
 }
 
@@ -24,14 +25,17 @@ class CFStringInterpreter {
     let machoProtocol: MachoProtocol
     let is64Bit: Bool
     let pointerLength: Int
+    let sectionVirtualAddress: UInt64
 
     init(wiht data: DataSlice,
          is64Bit: Bool,
-         machoProtocol: MachoProtocol) {
+         machoProtocol: MachoProtocol,
+         sectionVirtualAddress: UInt64) {
         self.is64Bit = is64Bit
         self.pointerLength = is64Bit ? 32 : 4
         self.machoProtocol = machoProtocol
         self.data = data
+        self.sectionVirtualAddress = sectionVirtualAddress
     }
     
  
@@ -48,29 +52,26 @@ class CFStringInterpreter {
             let numberOfPointers = rawData.count / 32
             for index in 0..<numberOfPointers {
                 let relativeDataOffset = index * pointerLength
-                var pointerRawData = rawData.select(from: relativeDataOffset, length: pointerLength)
-                
-                 
+                let pointerRawData = rawData.select(from: relativeDataOffset, length: pointerLength)
+               
+                var ptr:UInt64 = 0 ,data:UInt64 = 0,cstr:UInt64 = 0,size:UInt64 = 0
+                var str: String? = ""
                 for index in 0..<4 {
                     let pointer = pointerRawData.select(from: (index * 8) , length: 8)
-                    var ptr:UInt64 = 0
-                    var data:UInt64 = 0
-                    var cstr:UInt64 = 0
-                    var size :UInt64 = 0
+                    
                     if (index == 0) {
                         ptr = pointer.UInt64
                     }else if (index == 1){
                         data = pointer.UInt64
                     }else if (index == 2){
                         cstr = pointer.UInt64
-                       let str =  self.machoProtocol.searchString(by: pointer.UInt64)
-                        print(str)
+                        str =  self.machoProtocol.searchString(by: pointer.UInt64)
                     }else{
                         size = pointer.UInt64
                     }
-                    let objcCFString = ObjcCFString(ptr: ptr, data: data, cstr: cstr, size: size)
-                    pointers.append(objcCFString)
                 }
+                let objcCFString = ObjcCFString(ptr: ptr, data: data, cstrPointer: cstr, cstrValue: str, size: size)
+                pointers.append(objcCFString)
             }
             return CFStringStoreInfo(with: self.data, is64Bit:is64Bit,objcCFStringList: pointers,title:title,subTitle: subTitle)
         }
