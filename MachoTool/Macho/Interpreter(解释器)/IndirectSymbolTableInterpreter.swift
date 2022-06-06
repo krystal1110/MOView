@@ -8,11 +8,11 @@
 import Foundation
 
 class IndirectSymbolTableInterpreter {
-    let data: DataSlice
+    let data: Data
     let is64Bit: Bool
     let machoProtocol: MachoProtocol
 
-    init(with data: DataSlice, is64Bit: Bool, machoProtocol: MachoProtocol) {
+    init(with data: Data, is64Bit: Bool, machoProtocol: MachoProtocol) {
         self.data = data
         self.is64Bit = is64Bit
         self.machoProtocol = machoProtocol
@@ -22,7 +22,7 @@ class IndirectSymbolTableInterpreter {
         let indirectSymbolTableStartOffset = Int(dynamicSymbolCommand.indirectsymoff)
         let indirectSymbolTableSize = Int(dynamicSymbolCommand.nindirectsyms * 4)
         if indirectSymbolTableSize == .zero { return nil }
-        let indirectSymbolTableData = data.interception(from: indirectSymbolTableStartOffset, length: indirectSymbolTableSize)
+        let indirectSymbolTableData = DataTool.interception(with: data, from: indirectSymbolTableStartOffset, length: indirectSymbolTableSize)
 
         let interpreter = MachoModel<IndirectSymbolTableEntryModel>.init().generateVessel(data: indirectSymbolTableData, is64Bit: is64Bit)
 
@@ -30,9 +30,9 @@ class IndirectSymbolTableInterpreter {
 
         return IndirectSymbolTableStoreInfo(with: indirectSymbolTableData,
                                                   is64Bit: is64Bit,
-                                                  indirectSymbolTableList: indirectSymbolTableList,
                                                   title: "Indirect Symbol Table",
-                                                  subTitle: "__LINKEDIT")
+                                                  subTitle: "__LINKEDIT",
+                                                  indirectSymbolTableList: indirectSymbolTableList)
     }
 
     func translation(array: [IndirectSymbolTableEntryModel]) -> [IndirectSymbolTableEntryModel] {

@@ -14,21 +14,14 @@ struct StringPosition {
     var explanationItem: ExplanationItem? = nil
 }
 
-class StringInterpreter {
-    let data: DataSlice
-    let is64bit: Bool
-    weak var searchSource: SeachStringTable?
-    let sectionVirtualAddress: UInt64
+class StringInterpreter : BaseInterpreter {
 
-    init(with data: DataSlice, is64Bit: Bool, sectionVirtualAddress: UInt64, searchSouce: SeachStringTable? = nil) {
-        self.data = data
-        is64bit = is64Bit
-        self.sectionVirtualAddress = sectionVirtualAddress
-        searchSource = searchSouce
+    init(with dataSlice: Data, is64Bit: Bool, machoProtocol: MachoProtocol, sectionVirtualAddress:UInt64) {
+        super.init(dataSlice, is64Bit: is64Bit, machoProtocol: machoProtocol, sectionVirtualAddress: sectionVirtualAddress)
     }
 
     func generatePayload() -> [StringPosition] {
-        let rawData = data.raw
+        let rawData = self.data
         var cStringPositions: [StringPosition] = []
         var indexOfLastNull: Int? // index of last null char ( "\0" )
 
@@ -58,8 +51,8 @@ class StringInterpreter {
     func translationItem(with stringPosition: StringPosition) -> ExplanationItem {
         let cStringPosition = stringPosition
         let cStringRelativeRange = cStringPosition.startOffset ..< cStringPosition.startOffset + cStringPosition.length
-        let cStringAbsoluteRange = data.absoluteRange(cStringRelativeRange)
-        let cStringRaw = data.interception(from: cStringPosition.startOffset, length: cStringPosition.length).raw
+        let cStringAbsoluteRange = DataTool.absoluteRange(with: self.data, relativeRange: cStringRelativeRange)
+        let cStringRaw = DataTool.interception(with: self.data, from: cStringPosition.startOffset, length: cStringPosition.length)
 
         guard let string = cStringRaw.utf8String else {
             return ExplanationItem(sourceDataRange: cStringAbsoluteRange, model: ExplanationModel(description: "Unable to decode", explanation: "🔥Invalid UTF8 String"))
@@ -72,15 +65,20 @@ class StringInterpreter {
     }
 }
 
+
+
+
+
+
 extension StringInterpreter {
     // 根据距离字符串表首地址 首地址 + 偏移地址 = offset 拿到字符串
     func findString(at offset: Int) -> String? {
-        let rawData = data.raw
+        let rawData = self.data
         for index in offset ..< rawData.count {
             let byte = rawData[rawData.startIndex + index]
             if byte != 0 { continue }
             let length = index - offset + 1
-            let value = data.interception(from: offset, length: length).raw.utf8String
+            let value = DataTool.interception(with: self.data, from: offset, length: length).utf8String
             return value?.spaceRemoved
         }
         return nil
@@ -89,7 +87,7 @@ extension StringInterpreter {
     func findString(with virtualAddress: Swift.UInt64, stringPositionList:[StringPosition]) -> String? {
         for stringPosition in stringPositionList {
             if stringPosition.virtualAddress == virtualAddress {
-                return self.data.interception(from: stringPosition.startOffset, length: stringPosition.length).raw.utf8String
+                return DataTool.interception(with: self.data, from: stringPosition.startOffset, length:  stringPosition.length).utf8String
             }
         }
         return nil

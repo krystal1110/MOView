@@ -12,28 +12,23 @@ struct SymbolPointer {}
 /*
   LazySymobl 以及 No-LazySymbol 解析器
  **/
-class LazySymbolInterpreter {
-    let data: DataSlice
+class LazySymbolInterpreter :BaseInterpreter {
     let numberOfPointers: Int
-    let machoProtocol: MachoProtocol
     let pointerSize: Int
-    let is64Bit: Bool
     let startIndexInIndirectSymbolTable: Int
     let sectionType: SectionType
 
-    init(wiht data: DataSlice, is64Bit: Bool,
+    init(wiht data: Data, is64Bit: Bool,
          machoProtocol: MachoProtocol,
+         sectionVirtualAddress:UInt64,
          sectionType: SectionType,
          startIndexInIndirectSymbolTable: Int) {
-        self.is64Bit = is64Bit
-        self.data = data
         let pointerSize = is64Bit ? 8 : 4
         self.pointerSize = pointerSize
-        self.machoProtocol = machoProtocol
         numberOfPointers = data.count / pointerSize
         self.sectionType = sectionType
         self.startIndexInIndirectSymbolTable = startIndexInIndirectSymbolTable
-        
+        super.init(data, is64Bit: is64Bit, machoProtocol: machoProtocol, sectionVirtualAddress: sectionVirtualAddress)
     }
 
     // 转换为 stroeInfo 存储信息
@@ -49,12 +44,12 @@ class LazySymbolInterpreter {
             modelList[index] = model
         }
         
-        return LazySymbolStoreInfo(with: self.data, is64Bit:is64Bit, lazySymbolTableList: modelList, title: title, subTitle: subTitle)
+        return LazySymbolStoreInfo(with: self.data, is64Bit:is64Bit, title: title, subTitle: subTitle, sectionVirtualAddress: sectionVirtualAddress,lazySymbolTableList: modelList)
     }
     
     
     func translationItem(at index:Int) -> ExplanationItem {
-        let pointerRawData = self.data.interception(from: index * pointerSize, length: pointerSize).raw
+        let pointerRawData = DataTool.interception(with: data, from: index * pointerSize, length: pointerSize)
         let pointerRawValue = self.is64Bit ? pointerRawData.UInt64 : UInt64(pointerRawData.UInt32)
         let indirectSymbolTableIndex = index + startIndexInIndirectSymbolTable
         
@@ -73,8 +68,8 @@ class LazySymbolInterpreter {
         } else if sectionType == .S_NON_LAZY_SYMBOL_POINTERS {
             description += " (To be fixed by dyld)"
         }
-        
-        return ExplanationItem(sourceDataRange: data.absoluteRange(index * pointerSize, pointerSize),
+         
+        return ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: data, start: index * pointerSize, pointerSize),
                                model: ExplanationModel(description: description,
                                                        explanation: pointerRawValue.hex,
                                                        

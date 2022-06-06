@@ -20,22 +20,15 @@ struct ObjcCFString {
 /*
     用于解析 （__DATA，_cfstring） -> Objc CFString
  **/
-class CFStringInterpreter {
-    let data: DataSlice
-    let machoProtocol: MachoProtocol
-    let is64Bit: Bool
+class CFStringInterpreter:BaseInterpreter {
     let pointerLength: Int
-    let sectionVirtualAddress: UInt64
 
-    init(wiht data: DataSlice,
+    init(wiht data: Data,
          is64Bit: Bool,
          machoProtocol: MachoProtocol,
          sectionVirtualAddress: UInt64) {
-        self.is64Bit = is64Bit
         self.pointerLength = is64Bit ? 32 : 4
-        self.machoProtocol = machoProtocol
-        self.data = data
-        self.sectionVirtualAddress = sectionVirtualAddress
+        super.init(data, is64Bit: is64Bit, machoProtocol: machoProtocol, sectionVirtualAddress: sectionVirtualAddress)
     }
     
  
@@ -45,8 +38,8 @@ class CFStringInterpreter {
          内部指针，指向__TEXT，__cstring中字符串的位置；
          外部指针 isa，指向类对象的，这就是为什么可以对 Objective C 的字符串字面量发消息的原因。
         */
-        func transitionStoreInfo(title:String , subTitle:String ) -> CFStringStoreInfo  {
-            let rawData = self.data.raw
+    func transitionStoreInfo(title:String , subTitle:String) -> CFStringStoreInfo  {
+            let rawData = self.data
             guard rawData.count % pointerLength == 0 else { fatalError() /* section of type S_LITERAL_POINTERS should be in align of 8 (bytes) */  }
             var pointers: [ObjcCFString] = []
             let numberOfPointers = rawData.count / 32
@@ -73,7 +66,7 @@ class CFStringInterpreter {
                 let objcCFString = ObjcCFString(ptr: ptr, data: data, cstrPointer: cstr, cstrValue: str, size: size)
                 pointers.append(objcCFString)
             }
-            return CFStringStoreInfo(with: self.data, is64Bit:is64Bit,objcCFStringList: pointers,title:title,subTitle: subTitle)
+            return CFStringStoreInfo(with: data, is64Bit: is64Bit, title: title, subTitle: subTitle, sectionVirtualAddress: sectionVirtualAddress, objcCFStringList: pointers)
         }
  
 }

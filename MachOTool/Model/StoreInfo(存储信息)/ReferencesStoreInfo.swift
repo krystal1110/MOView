@@ -8,22 +8,16 @@
 import Foundation
 
 class ReferencesStoreInfo: BaseStoreInfo {
-    let dataSlice: DataSlice
     let referencesPointerList: [ReferencesPointer]
-    var componentTitle: String { title }
-    var componentSubTitle: String? { subTitle }
-    let title: String
-    let subTitle: String?
 
-    init(with dataSlice: DataSlice,
+    init(with dataSlice: Data,
          is64Bit: Bool,
-         referencesPointerList: [ReferencesPointer],
          title: String,
-         subTitle: String? = nil) {
+         subTitle: String? = nil,
+         sectionVirtualAddress: UInt64,
+         referencesPointerList: [ReferencesPointer]) {
         self.referencesPointerList = referencesPointerList
-        self.title = title
-        self.subTitle = subTitle
-        self.dataSlice = dataSlice
+        super.init(with: dataSlice, title: title, subTitle: subTitle, sectionVirtualAddress: sectionVirtualAddress)
     }
 }
  

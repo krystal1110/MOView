@@ -14,7 +14,7 @@ class Macho: Equatable {
     
     var is64bit = false
     let id = UUID()
-    let data: DataSlice
+    let data:Data
     var fileSize: Int { data.count }
     let machoFileName: String
     let header: MachoHeader
@@ -44,19 +44,18 @@ class Macho: Equatable {
     
     
     init(machoDataRaw: Data, machoFileName: String) {
-        let machoData = DataSlice(machoDataRaw)
-        data = machoData
+        data = machoDataRaw
         self.machoFileName = machoFileName
         
         var loadCommands: [MachoComponent] = []
         
-        guard let magicType = MagicType(machoData.raw) else { fatalError() }
+        guard let magicType = MagicType(data) else { fatalError() }
         
         let is64bit = magicType == .macho64
         self.is64bit = is64bit
         
         // 获取machoHeader
-        header = MachoHeader(from: machoData.interception(from: .zero, length: is64bit ? 32 : 28), is64Bit: is64bit)
+        header = MachoHeader(from: DataTool.interception(with: data, from: .zero, length: is64bit ? 32 : 28), is64Bit: is64bit)
         
         // header大小之后 就是 load_command
         var loadCommondsStartOffset = header.componentSize
@@ -66,7 +65,7 @@ class Macho: Equatable {
             let loadCommand: JYLoadCommand
             
             // 读取第一条load_command
-            let loadCommandTypeRaw = data.interception(from: loadCommondsStartOffset, length: 4).raw.UInt32
+            let loadCommandTypeRaw =  DataTool.interception(with: data, from: loadCommondsStartOffset, length: 4).UInt32
             
             // command的类型
             guard let loadCommandType = LoadCommandType(rawValue: loadCommandTypeRaw) else {
@@ -74,10 +73,11 @@ class Macho: Equatable {
                 fatalError()
             }
             // command的大小
-            let loadCommandSize = Int(machoData.interception(from: loadCommondsStartOffset + 4, length: 4).raw.UInt32)
+             
+            let loadCommandSize = Int(DataTool.interception(with: data, from: loadCommondsStartOffset + 4, length: 4).UInt32)
             
             // comand的data
-            let loadCommandData = machoData.interception(from: loadCommondsStartOffset, length: loadCommandSize)
+            let loadCommandData = DataTool.interception(with: data, from: loadCommondsStartOffset, length: loadCommandSize)
             
             // 下一个command的起始位置
             loadCommondsStartOffset += loadCommandSize
@@ -94,7 +94,7 @@ class Macho: Equatable {
         self.allBaseStoreInfoList = allBaseStoreInfoList
     }
     
-    func translationLoadCommands(with loadCommandData: DataSlice, loadCommandType: LoadCommandType) -> JYLoadCommand {
+    func translationLoadCommands(with loadCommandData: Data, loadCommandType: LoadCommandType) -> JYLoadCommand {
         switch loadCommandType {
         case .segment, .segment64: // __PAGEZERO  __Text  __DATA  __LINKEDIT
             let segment = JYSegment(with: loadCommandData, commandType: loadCommandType)
@@ -118,9 +118,11 @@ class Macho: Equatable {
             // 用于存放符号表数据 [JYSymbolTableEntryModel]
             // 但是缺少symbolName,因为SymbolName存放在stringTable,
             // n_strx + 字符串表的起始位置 =  符号名称
-            let symbolTableStoreInfo = interpreter.symbolTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+            let symbolTableStoreInfo = interpreter.symbolTableInterpreter(with: data, is64Bit: is64bit, symbolTableCommand: segment)
             self.symbolTableStoreInfo = symbolTableStoreInfo
-            let stringTableStoreInfo = interpreter.stringTableInterpreter(with: segment, is64Bit: is64bit, data: data)
+           
+            
+            let stringTableStoreInfo = interpreter.stringTableInterpreter(with: data, is64Bit: is64bit, machoProtocol: self, symbolTableCommand: segment)
             self.stringTableStoreInfo = stringTableStoreInfo
             allCstringInterpretInfo.append(stringTableStoreInfo)
             return segment
@@ -132,6 +134,14 @@ class Macho: Equatable {
             let interpreter = IndirectSymbolTableInterpreter(with: data, is64Bit: is64bit, machoProtocol: self)
             indirectSymbolTableStoreInfo = interpreter.indirectSymbolTableInterpreter(from: segment)
             return segment
+            
+            
+        case .dyldInfo, .dyldInfoOnly:
+            let dyldInfo = DyldInfoCommand(with: loadCommandData, commandType: loadCommandType)
+//            let dyldInfoComponents =
+            let dyldInfoCompoents = dyldInfoComponts(wiht: dyldInfo)
+            #warning("TODO")
+            return JYLoadCommand(with: data, commandType: loadCommandType, translationStore: nil)
             
         case .buildVersion:
             let segment = JYBuildVersionCommand(with: loadCommandData, commandType: loadCommandType)
@@ -152,15 +162,16 @@ class Macho: Equatable {
              因为都是存储的都为字符串类型
              **/
         case .S_CSTRING_LITERALS:
-            let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-            let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: is64bit, sectionVirtualAddress: sectionHeader.addr, searchSouce: nil)
+            let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+            let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
             let cStringTableList = cStringInterpreter.generatePayload()
             let info = StringTableStoreInfo(with: dataSlice,
                                             is64Bit: is64bit,
                                             interpreter: cStringInterpreter,
-                                            stringTableList: cStringTableList,
                                             title: componentTitle,
-                                            subTitle: componentSubTitle)
+                                            subTitle: componentSubTitle,
+                                            sectionVirtualAddress: sectionHeader.addr,
+                                            stringTableList: cStringTableList)
             
             allCstringInterpretInfo.append(info)
             return info
@@ -173,73 +184,75 @@ class Macho: Equatable {
              **/
         case .S_LAZY_SYMBOL_POINTERS, .S_NON_LAZY_SYMBOL_POINTERS, .S_LAZY_DYLIB_SYMBOL_POINTERS:
             
-            let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-            let symbolStoreInfo = LazySymbolInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionType: sectionHeader.sectionType, startIndexInIndirectSymbolTable: Int(sectionHeader.reserved1)).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+            let dataSlice = DataTool.interception(with: data, from:  Int(sectionHeader.offset), length: Int(sectionHeader.size))
+            let symbolStoreInfo = LazySymbolInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr, sectionType: sectionHeader.sectionType, startIndexInIndirectSymbolTable: Int(sectionHeader.reserved1)).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
             return symbolStoreInfo
-            
-            
-            
-            
- 
         case .S_REGULAR:
             /*
              _DATA_cfstring  -> objc CFStrings
              **/
             if (componentSubTitle == "__DATA,__cfstring"){
                  
-                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 let cStringStoreInfo = CFStringInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self,sectionVirtualAddress: sectionHeader.addr).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return cStringStoreInfo
+            }else if (componentSubTitle == "__DATA,__objc_classrefs"){
+                #warning("TODO")
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ClassRefsInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
+                let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                return nil
             }
             
             else if (componentSubTitle == "__DATA,__objc_classlist"){
                 // 解析classList
-                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return referencesStoreInfo
             }
             
             else if (componentSubTitle == "__DATA,__objc_superrefs"){
-                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return referencesStoreInfo
             }
             
             else if (componentSubTitle == "__DATA,__objc_catlist"){
                 // __category_list 分类
-                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return referencesStoreInfo
             }
             
             else if (componentSubTitle == "__DATA,__objc_protolist"){
                 // __protocol_list 协议
-                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return referencesStoreInfo
             }
             
             else if (componentSubTitle == "__TEXT,__ustring"){
-                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let uStringStoreInfo  = UStringInterpreter(wiht:dataSlice, is64Bit:self.is64bit, machoProtocol: self,sectionVirtualAddress: sectionHeader.addr).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let uStringStoreInfo  = UStringInterpreter(with:dataSlice, is64Bit:self.is64bit, machoProtocol: self,sectionVirtualAddress: sectionHeader.addr).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 self.uStringStoreInfo = uStringStoreInfo
                 return uStringStoreInfo
             }
             
             else if (componentSubTitle == "__TEXT,__swift5_reflstr"){
-                let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-                let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: is64bit, sectionVirtualAddress: sectionHeader.addr, searchSouce: nil)
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let cStringInterpreter = StringInterpreter(with: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
                 let cStringTableList = cStringInterpreter.generatePayload()
                 let reflstrStoreInfo = StringTableStoreInfo(with: dataSlice,
                                                 is64Bit: is64bit,
                                                 interpreter: cStringInterpreter,
-                                                stringTableList: cStringTableList,
                                                 title: componentTitle,
-                                                subTitle: componentSubTitle)
+                                                subTitle: componentSubTitle,
+                                                sectionVirtualAddress: sectionHeader.addr,
+                                                stringTableList: cStringTableList)
                 return reflstrStoreInfo
             }
             
@@ -247,9 +260,9 @@ class Macho: Equatable {
             
             
         case .S_LITERAL_POINTERS:
-            // __DATA,__objc_classrefs -> Objc2 References
-            let dataSlice = data.interception(from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
-            let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self)
+            // __DATA,__objc_selrefs
+            let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+            let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self ,sectionVirtualAddress: sectionHeader.addr)
             let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
             return referencesStoreInfo
             
@@ -260,6 +273,35 @@ class Macho: Equatable {
         
         return nil
     }
+    
+    
+    
+    func dyldInfoComponts(wiht command:DyldInfoCommand){
+        
+        /*
+         处理rebase数据
+         **/
+        let rebaseInfoStart = Int(command.rebaseOffset)
+        let rebaseInfoSize = Int(command.rebaseSize)
+        if rebaseInfoStart.isNotZero && rebaseInfoSize.isNotZero { // 非空判断
+            let rebaseInfoData = DataTool.interception(with: data, from: rebaseInfoStart, length: rebaseInfoSize)
+            
+        }
+        
+        
+        
+        /*
+         处理bind数据
+         **/
+        let bindInfoStart = Int(command.bindOffset)
+        let bindInfoSize = Int(command.bindSize)
+        if bindInfoStart.isNotZero && bindInfoSize.isNotZero { // 非空判断
+            let bindInfoData = DataTool.interception(with: data, from: bindInfoStart, length: bindInfoSize)
+        }
+        
+        
+    }
+    
 }
 
 extension Macho: MachoProtocol {

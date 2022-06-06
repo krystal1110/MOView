@@ -7,49 +7,23 @@
 
 import Foundation
 
-protocol SeachStringTable: AnyObject {
-    // cpu信息
-//    var cpuType: CPUType{get}
-//    var cpuSubType: CPUSubtype{get}
-
-    // 搜索str
-//    func searchStrInStringTable(at offset: Int) ->String?
-//    func searchString(wiht virtualAddress: UInt64) -> String?
-//
-//    //搜索符号表
-//    func symbolInSymbolTable(with virtualAddress: UInt64) -> JYSymbolTableEntryModel?
-//    func symbolInSymbolTable(at index:Int) -> JYSymbolTableEntryModel?
-//
-//    //在间接符号表中搜索
-//    func searchIndirectSymbolTable(at index:Int)
+class BaseInterpreter {
+    
+    let data: Data
+    let machoProtocol: MachoProtocol
+    let is64Bit: Bool
+    let sectionVirtualAddress: UInt64
+    let startOffset: Int // 初始偏移量
+    let count: Int
+       
+    init(_ data:Data, is64Bit:Bool, machoProtocol:MachoProtocol, sectionVirtualAddress:UInt64) {
+        
+        self.data = data
+        self.is64Bit = is64Bit
+        self.machoProtocol = machoProtocol
+        self.sectionVirtualAddress = sectionVirtualAddress
+        self.startOffset = .zero
+        self.count = data.count
+    }
+    
 }
-
-// extension Macho: SeachStringTable{
-//    var cpuType: CPUType {
-//        header.cpuType
-//    }
-//
-//    var cpuSubType: CPUSubtype {
-//        header.cpuSubtype
-//    }
-//
-//    func searchStrInStringTable(at offset: Int) -> String? {
-//        return nil
-//    }
-//
-//    func searchString(wiht virtualAddress: UInt64) -> String? {
-//        return nil
-//    }
-//
-//    func symbolInSymbolTable(with virtualAddress: UInt64) -> JYSymbolTableEntryModel? {
-////        if let symbolTableInterpreter = self.
-//    }
-//
-//    func symbolInSymbolTable(at index: Int) -> JYSymbolTableEntryModel? {
-//
-//    }
-//
-//    func searchIndirectSymbolTable(at index: Int) {
-//
-//    }
-// }

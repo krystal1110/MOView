@@ -8,21 +8,14 @@
 import Foundation
 
 class IndirectSymbolTableStoreInfo: BaseStoreInfo {
-    let dataSlice: DataSlice
     let indirectSymbolTableList: [IndirectSymbolTableEntryModel]
-    var componentTitle: String { title }
-    var componentSubTitle: String? { subTitle }
-    let title: String
-    let subTitle: String?
 
-    init(with dataSlice: DataSlice,
+    init(with dataSlice: Data,
          is64Bit: Bool,
-         indirectSymbolTableList: [IndirectSymbolTableEntryModel],
          title: String,
-         subTitle: String? = nil) {
+         subTitle: String? = nil,
+         indirectSymbolTableList: [IndirectSymbolTableEntryModel]) {
         self.indirectSymbolTableList = indirectSymbolTableList
-        self.title = title
-        self.subTitle = subTitle
-        self.dataSlice = dataSlice
+        super.init(with: dataSlice, title: title, subTitle: subTitle)
     }
 }

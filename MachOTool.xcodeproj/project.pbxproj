@@ -26,6 +26,12 @@
 		FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */; };
 		FB91037A284601C10000AD84 /* UStringStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB910379284601C10000AD84 /* UStringStoreInfo.swift */; };
 		FB91037C284674320000AD84 /* CFStringStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB91037B284674320000AD84 /* CFStringStoreInfo.swift */; };
+		FBB6569E284BB8E60081C991 /* DataExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB6569D284BB8E60081C991 /* DataExpand.swift */; };
+		FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB6569F284BBCBC0081C991 /* DataTool.swift */; };
+		FBB656A8284DC0830081C991 /* DyldInfoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656A7284DC0830081C991 /* DyldInfoCommand.swift */; };
+		FBB656AA284DDAE80081C991 /* DyldInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656A9284DDAE70081C991 /* DyldInterpreter.swift */; };
+		FBC3489C28489141009B4AAE /* UnusedScanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3489B28489141009B4AAE /* UnusedScanManager.swift */; };
+		FBC3489F2848AF75009B4AAE /* ClassRefsInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */; };
 		FBCEE977283290150090B4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE976283290150090B4E6 /* main.swift */; };
 		FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE97F283290400090B4E6 /* MachoHeader.swift */; };
 		FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE980283290400090B4E6 /* JYMachoComponent.swift */; };
@@ -39,7 +45,6 @@
 		FBCEE995283290400090B4E6 /* DynamicSymbolTableCompont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE98A283290400090B4E6 /* DynamicSymbolTableCompont.swift */; };
 		FBCEE996283290400090B4E6 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE98B283290400090B4E6 /* SectionHeader.swift */; };
 		FBCEE99A283290470090B4E6 /* TranslationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE998283290470090B4E6 /* TranslationRead.swift */; };
-		FBCEE99B283290470090B4E6 /* DataSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE999283290470090B4E6 /* DataSlice.swift */; };
 		FBCEE99E2832904D0090B4E6 /* DataExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE99D2832904D0090B4E6 /* DataExplanation.swift */; };
 		FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A0283290530090B4E6 /* Utils.swift */; };
 		FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A4283290630090B4E6 /* JYFile.swift */; };
@@ -83,6 +88,12 @@
 		FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringInterpreter.swift; sourceTree = "<group>"; };
 		FB910379284601C10000AD84 /* UStringStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringStoreInfo.swift; sourceTree = "<group>"; };
 		FB91037B284674320000AD84 /* CFStringStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStringStoreInfo.swift; sourceTree = "<group>"; };
+		FBB6569D284BB8E60081C991 /* DataExpand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExpand.swift; sourceTree = "<group>"; };
+		FBB6569F284BBCBC0081C991 /* DataTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTool.swift; sourceTree = "<group>"; };
+		FBB656A7284DC0830081C991 /* DyldInfoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyldInfoCommand.swift; sourceTree = "<group>"; };
+		FBB656A9284DDAE70081C991 /* DyldInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyldInterpreter.swift; sourceTree = "<group>"; };
+		FBC3489B28489141009B4AAE /* UnusedScanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnusedScanManager.swift; sourceTree = "<group>"; };
+		FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRefsInterpreter.swift; sourceTree = "<group>"; };
 		FBCEE973283290150090B4E6 /* MachoTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MachoTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBCEE976283290150090B4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FBCEE97F283290400090B4E6 /* MachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoHeader.swift; sourceTree = "<group>"; };
@@ -97,7 +108,6 @@
 		FBCEE98A283290400090B4E6 /* DynamicSymbolTableCompont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicSymbolTableCompont.swift; sourceTree = "<group>"; };
 		FBCEE98B283290400090B4E6 /* SectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		FBCEE998283290470090B4E6 /* TranslationRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationRead.swift; sourceTree = "<group>"; };
-		FBCEE999283290470090B4E6 /* DataSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSlice.swift; sourceTree = "<group>"; };
 		FBCEE99D2832904D0090B4E6 /* DataExplanation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExplanation.swift; sourceTree = "<group>"; };
 		FBCEE9A0283290530090B4E6 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FBCEE9A3283290630090B4E6 /* MachOTool-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachOTool-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -131,8 +141,8 @@
 		FB072DFD28392307000B370B /* StoreInfo(存储信息) */ = {
 			isa = PBXGroup;
 			children = (
-				FB072DFE2839231A000B370B /* SymbolTableStoreInfo.swift */,
 				FB072E02283A601B000B370B /* BaseStoreInfo.swift */,
+				FB072DFE2839231A000B370B /* SymbolTableStoreInfo.swift */,
 				FB072E06283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift */,
 				FB63EC49283F125E003CCCF7 /* StringTableStoreInfo.swift */,
 				FB63EC4B283F58C6003CCCF7 /* LazySymbolStoreInfo.swift */,
@@ -141,6 +151,22 @@
 				FB91037B284674320000AD84 /* CFStringStoreInfo.swift */,
 			);
 			path = "StoreInfo(存储信息)";
+			sourceTree = "<group>";
+		};
+		FBB656A6284DB8860081C991 /* DyldInfoInterpreter */ = {
+			isa = PBXGroup;
+			children = (
+				FBB656A9284DDAE70081C991 /* DyldInterpreter.swift */,
+			);
+			path = DyldInfoInterpreter;
+			sourceTree = "<group>";
+		};
+		FBC3489A28489115009B4AAE /* UnusedScan */ = {
+			isa = PBXGroup;
+			children = (
+				FBC3489B28489141009B4AAE /* UnusedScanManager.swift */,
+			);
+			path = UnusedScan;
 			sourceTree = "<group>";
 		};
 		FBCEE96A283290150090B4E6 = {
@@ -163,6 +189,7 @@
 		FBCEE975283290150090B4E6 /* MachoTool */ = {
 			isa = PBXGroup;
 			children = (
+				FBC3489A28489115009B4AAE /* UnusedScan */,
 				FBCEE99F283290530090B4E6 /* Tools */,
 				FBCEE9A2283290630090B4E6 /* FileManager */,
 				FBCEE99C2832904D0090B4E6 /* Model */,
@@ -200,14 +227,16 @@
 		FBCEE981283290400090B4E6 /* Interpreter(解释器) */ = {
 			isa = PBXGroup;
 			children = (
+				FBB656A6284DB8860081C991 /* DyldInfoInterpreter */,
+				FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */,
 				FBCEE982283290400090B4E6 /* SymbolTableInterpreter.swift */,
 				FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */,
-				FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */,
 				FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */,
 				FB072E12283E8714000B370B /* LazySymbolInterpreter.swift */,
 				FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */,
 				FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */,
 				FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */,
+				FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */,
 			);
 			path = "Interpreter(解释器)";
 			sourceTree = "<group>";
@@ -220,6 +249,7 @@
 				FBCEE988283290400090B4E6 /* JYBuildVersionCommand.swift */,
 				FBCEE989283290400090B4E6 /* JYLoadCommand.swift */,
 				FBCEE98A283290400090B4E6 /* DynamicSymbolTableCompont.swift */,
+				FBB656A7284DC0830081C991 /* DyldInfoCommand.swift */,
 			);
 			path = JYLoadCommand;
 			sourceTree = "<group>";
@@ -228,7 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				FBCEE998283290470090B4E6 /* TranslationRead.swift */,
-				FBCEE999283290470090B4E6 /* DataSlice.swift */,
+				FBB6569D284BB8E60081C991 /* DataExpand.swift */,
 			);
 			path = "ConversionTools(转换)";
 			sourceTree = "<group>";
@@ -248,6 +278,7 @@
 			children = (
 				2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */,
 				FBCEE9A0283290530090B4E6 /* Utils.swift */,
+				FBB6569F284BBCBC0081C991 /* DataTool.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -336,7 +367,6 @@
 				FB072E09283B235F000B370B /* IndirectSymbolTableEntryModel.swift in Sources */,
 				FBCEE99A283290470090B4E6 /* TranslationRead.swift in Sources */,
 				FBCEE996283290400090B4E6 /* SectionHeader.swift in Sources */,
-				FBCEE99B283290470090B4E6 /* DataSlice.swift in Sources */,
 				FB072E0F283E818E000B370B /* LazySymbolEntryModel.swift in Sources */,
 				FB91037A284601C10000AD84 /* UStringStoreInfo.swift in Sources */,
 				FBCEE99E2832904D0090B4E6 /* DataExplanation.swift in Sources */,
@@ -348,10 +378,13 @@
 				FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */,
 				FBCEE995283290400090B4E6 /* DynamicSymbolTableCompont.swift in Sources */,
 				FB63EC4A283F125E003CCCF7 /* StringTableStoreInfo.swift in Sources */,
+				FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */,
 				FBCEE98E283290400090B4E6 /* SymbolTableInterpreter.swift in Sources */,
 				FB072E03283A601B000B370B /* BaseStoreInfo.swift in Sources */,
 				FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */,
 				FBCEE994283290400090B4E6 /* JYLoadCommand.swift in Sources */,
+				FBC3489F2848AF75009B4AAE /* ClassRefsInterpreter.swift in Sources */,
+				FBB6569E284BB8E60081C991 /* DataExpand.swift in Sources */,
 				FBCEE990283290400090B4E6 /* Macho.swift in Sources */,
 				FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */,
 				FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */,
@@ -361,9 +394,12 @@
 				FBCEE991283290400090B4E6 /* JYMainCommand.swift in Sources */,
 				FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */,
 				FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */,
+				FBB656A8284DC0830081C991 /* DyldInfoCommand.swift in Sources */,
 				FB63EC4C283F58C6003CCCF7 /* LazySymbolStoreInfo.swift in Sources */,
+				FBC3489C28489141009B4AAE /* UnusedScanManager.swift in Sources */,
 				FBCEE9AE2833800C0090B4E6 /* JYSymbolTableEntryModel.swift in Sources */,
 				FB072E07283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift in Sources */,
+				FBB656AA284DDAE80081C991 /* DyldInterpreter.swift in Sources */,
 				FBCEE9AC283370E80090B4E6 /* MachModel.swift in Sources */,
 				FBCEE977283290150090B4E6 /* main.swift in Sources */,
 				FB072E13283E8714000B370B /* LazySymbolInterpreter.swift in Sources */,

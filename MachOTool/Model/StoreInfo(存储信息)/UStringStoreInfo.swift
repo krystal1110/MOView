@@ -8,25 +8,18 @@
 import Foundation
 
 class UStringStoreInfo: BaseStoreInfo {
-    let dataSlice: DataSlice
     let interpreter: UStringInterpreter
     let uStringPositionList: [UStringPosition]
-    var componentTitle: String { title }
-    var componentSubTitle: String? { subTitle }
-    let title: String
-    let subTitle: String?
 
-    init(with dataSlice: DataSlice,
-         is64Bit: Bool,
+    init(with dataSlice: Data,
          interpreter: UStringInterpreter,
-         uStringPositionList: [UStringPosition],
          title: String,
-         subTitle: String? = nil) {
+         subTitle: String? = nil,
+         sectionVirtualAddress: UInt64,
+         uStringPositionList: [UStringPosition]) {
         self.uStringPositionList = uStringPositionList
         self.interpreter = interpreter
-        self.title = title
-        self.subTitle = subTitle
-        self.dataSlice = dataSlice
+        super.init(with: dataSlice, title: title, subTitle: subTitle, sectionVirtualAddress: sectionVirtualAddress)
     }
 }
  

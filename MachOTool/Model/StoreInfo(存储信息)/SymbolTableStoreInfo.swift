@@ -14,24 +14,19 @@ import Foundation
  */
 
 class SymbolTableStoreInfo: BaseStoreInfo {
-    let dataSlice: DataSlice
     let interpreter: SymbolTableInterpreter
     let symbolTableList: [JYSymbolTableEntryModel]
-    var componentTitle: String { title }
-    var componentSubTitle: String? { subTitle }
-    let title: String
-    let subTitle: String?
+ 
 
-    init(with dataSlice: DataSlice,
+    init(with dataSlice:Data,
          is64Bit: Bool,
          interpreter: SymbolTableInterpreter,
-         symbolTableList: [JYSymbolTableEntryModel],
          title: String,
-         subTitle: String? = nil) {
+         subTitle: String? = nil,
+         symbolTableList: [JYSymbolTableEntryModel]) {
         self.interpreter = interpreter
         self.symbolTableList = symbolTableList
-        self.title = title
-        self.subTitle = subTitle
-        self.dataSlice = dataSlice
+        super.init(with: dataSlice, title: title, subTitle: subTitle)
+        
     }
 }

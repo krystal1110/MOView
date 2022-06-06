@@ -8,6 +8,9 @@
 import Foundation
 
 struct JYSymbolTableEntryModel: MachoExplainModel {
+    
+   
+     
 
     let indexInStringTableRange: Range<Int>
     let indexInStringTable: UInt32
@@ -22,15 +25,15 @@ struct JYSymbolTableEntryModel: MachoExplainModel {
 
     let translaitonItems: [ExplanationItem]
 
-    init(with data: DataSlice, is64Bit: Bool) {
+    init(with data: Data, is64Bit: Bool) {
         var translaitonItems: [ExplanationItem] = []
 
-        let indexInStringTable = data.interception(from: .zero, length: 4).raw.UInt32
+        let indexInStringTable = DataTool.interception(with: data, from: .zero, length: 4).UInt32
         self.indexInStringTable = indexInStringTable
 
-        indexInStringTableRange = data.absoluteRange(.zero, 4)
-        let nTypeByteRange = data.absoluteRange(4, 1)
-        let nTypeRaw = data.interception(from: 4, length: 1).raw.UInt8
+        indexInStringTableRange = DataTool.absoluteRange(with: data, start: .zero, 4)
+        let nTypeByteRange =  DataTool.absoluteRange(with: data, start: 4, 1)
+        let nTypeRaw =  DataTool.interception(with: data, from: 4, length: 1).UInt8
         let symbolType = SymbolType(nTypeRaw: nTypeRaw)
         self.symbolType = symbolType
 
@@ -45,10 +48,14 @@ struct JYSymbolTableEntryModel: MachoExplainModel {
          * n_value
          */
 
-        let nSect = data.interception(from: 5, length: 1).raw.UInt8
-        let nDesc = data.interception(from: 6, length: 2).raw.UInt16
-        let nValueRawData = data.interception(from: 8, length: is64Bit ? 8 : 4).raw
-        let nValue = is64Bit ? nValueRawData.UInt64 : UInt64(nValueRawData.UInt32)
+         
+        let nSect = DataTool.interception(with: data, from: 5, length: 1).UInt8
+         
+        let nDesc = DataTool.interception(with: data, from: 6, length: 2).UInt16
+        
+
+        let nValueRawData =  DataTool.interception(with: data, from: 8, length: 8)
+        let nValue =  nValueRawData.UInt64
         self.nSect = nSect
         self.nDesc = nDesc
         self.nValue = nValue
@@ -60,7 +67,10 @@ struct JYSymbolTableEntryModel: MachoExplainModel {
         var nSectExplanation: String = "\(nSect)"
 
         let nDescDesp: String = "Descriptions"
-//        let nDescExplanation: String = SymbolTableEntry.flagsFrom(nDesc: nDesc, symbolType: symbolType).joined(separator: "\n")
+        
+        
+        
+//        let nDescExplanation: String = JYSymbolTableEntryModel.flagsFrom(nDesc: nDesc, symbolType: symbolType).joined(separator: "\n")
 //
 //        var nValueDesp: String = "Value"
 //        var nValueExplanation: String = "\(nValue)"
@@ -85,8 +95,8 @@ struct JYSymbolTableEntryModel: MachoExplainModel {
         self.translaitonItems = translaitonItems
     }
 
-    static func modelSize(is64Bit: Bool) -> Int {
-        return is64Bit ? 16 : 12
+    static func modelSize() -> Int {
+        return 16
     }
 
     static func numberOfExplanationItem() -> Int {

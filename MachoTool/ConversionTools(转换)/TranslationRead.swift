@@ -8,11 +8,11 @@
 import Foundation
 
 class TranslationRead {
-    let machoDataSlice: DataSlice
+    let machoDataSlice: Data
     private(set) var translated: Int = 0
     private(set) var items: [ExplanationItem] = []
 
-    init(machoDataSlice: DataSlice) {
+    init(machoDataSlice: Data) {
         self.machoDataSlice = machoDataSlice
     }
 
@@ -20,9 +20,10 @@ class TranslationRead {
     func translate<T>(next straddle: Straddle, dataInterpreter: (Data) -> T, itemContentGenerator: (T) -> ExplanationModel) -> T {
         defer { translated += straddle.raw }
 
-        let rawData = machoDataSlice.interception(from: translated, length: straddle.raw).raw
+        let rawData = DataTool.interception(with: machoDataSlice, from: translated, length: straddle.raw)
 
-        let rawDataAbsoluteRange = machoDataSlice.startOffset + translated ..< machoDataSlice.startOffset + translated + straddle.raw
+        let rawDataAbsoluteRange = machoDataSlice.startIndex + translated ..<  machoDataSlice.startIndex + translated + straddle.raw
+//        machoDataSlice.startOffset + translated ..< machoDataSlice.startOffset + translated + straddle.raw
 
         let interpreted: T = dataInterpreter(rawData)
 

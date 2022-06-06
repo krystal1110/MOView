@@ -8,22 +8,17 @@
 import Foundation
 
 class CFStringStoreInfo: BaseStoreInfo {
-    let dataSlice: DataSlice
+    
     let objcCFStringList: [ObjcCFString]
-    var componentTitle: String { title }
-    var componentSubTitle: String? { subTitle }
-    let title: String
-    let subTitle: String?
 
-    init(with dataSlice: DataSlice,
+    init(with dataSlice: Data,
          is64Bit: Bool,
-         objcCFStringList: [ObjcCFString],
          title: String,
-         subTitle: String? = nil) {
+         subTitle: String? = nil,
+         sectionVirtualAddress: UInt64,
+         objcCFStringList: [ObjcCFString]) {
         self.objcCFStringList = objcCFStringList
-        self.title = title
-        self.subTitle = subTitle
-        self.dataSlice = dataSlice
+        super.init(with: dataSlice, title: title, subTitle: subTitle, sectionVirtualAddress: sectionVirtualAddress)
     }
 }
  

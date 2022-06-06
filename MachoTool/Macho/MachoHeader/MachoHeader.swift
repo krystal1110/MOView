@@ -31,7 +31,7 @@ class MachoHeader: MachoComponent {
     let flags: UInt32
     let reserved: UInt32?
 
-    init(from machoDataSlice: DataSlice, is64Bit: Bool) {
+    init(from machoDataSlice: Data, is64Bit: Bool) {
         self.is64Bit = is64Bit
 
         let transStore = TranslationRead(machoDataSlice: machoDataSlice)

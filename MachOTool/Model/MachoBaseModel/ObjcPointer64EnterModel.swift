@@ -10,13 +10,13 @@ import Foundation
 
 struct ObjcPointer64EnterModel: MachoExplainModel {
     
-    static func modelSize(is64Bit: Bool) -> Int {
-        return is64Bit ? 8 : 4
+    static func modelSize( ) -> Int {
+        return 8
     }
 
     var explanationItem: ExplanationItem? = nil
-    var data:DataSlice
-    init(with data: DataSlice, is64Bit: Bool) {
+    var data:Data
+    init(with data: Data, is64Bit: Bool) {
 
         self.data = data
     }

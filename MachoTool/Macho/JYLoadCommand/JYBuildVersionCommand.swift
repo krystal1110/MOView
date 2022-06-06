@@ -11,7 +11,7 @@ class JYBuildVersionCommand: JYLoadCommand {
     let platform: BuildPlatform?
     let minOSVersion: String
     let sdkVersion: String
-    required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
+    required init(with dataSlice: Data, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
         let translationStore = TranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
 
         platform = translationStore.translate(next: .doubleWords, dataInterpreter: { BuildPlatform(rawValue: $0.UInt32) }, itemContentGenerator: { value in

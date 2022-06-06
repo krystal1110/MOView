@@ -35,8 +35,8 @@ class DynamicSymbolTableCompont: JYLoadCommand {
     let locreloff: UInt32 /* offset to local relocation entries */
     let nlocrel: UInt32 /* number of local relocation entries */
 
-    required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
-        let translationStore = TranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
+    required init(with data: Data, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
+        let translationStore = TranslationRead(machoDataSlice: data).skip(.quadWords)
 
         ilocalsym =
             translationStore.translate(next: .doubleWords, dataInterpreter: DataInterpreterPreset.UInt32, itemContentGenerator: { value in
@@ -130,7 +130,7 @@ class DynamicSymbolTableCompont: JYLoadCommand {
                 ExplanationModel(description: "number of local relocation entries ", explanation: "\(value)")
             })
 
-        super.init(with: dataSlice, commandType: commandType, translationStore: translationStore)
+        super.init(with: data, commandType: commandType, translationStore: translationStore)
     }
 }
 

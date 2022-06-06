@@ -20,7 +20,7 @@ class JYMainCommand: JYLoadCommand {
     let entryOffset: UInt64
     let stackSize: UInt64
 
-    required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
+    required init(with dataSlice: Data, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
         let translationStore = TranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
 
         entryOffset = translationStore.translate(next: .quadWords, dataInterpreter: { $0.UInt64 }, itemContentGenerator: { value in

@@ -8,8 +8,10 @@
 import Foundation
 
 struct IndirectSymbolTableEntryModel: MachoExplainModel {
+ 
     
-    static func modelSize(is64Bit: Bool) -> Int {
+    
+    static func modelSize() -> Int {
         return 4
     }
  
@@ -17,9 +19,9 @@ struct IndirectSymbolTableEntryModel: MachoExplainModel {
     let symbolTableIndex: Int
     var explanationItem: ExplanationItem?
 
-    init(with data: DataSlice, is64Bit: Bool) {
-        entryRange = data.absoluteRange(.zero, 4)
-        symbolTableIndex = Int(data.raw.UInt32)
+    init(with data: Data, is64Bit: Bool) {
+        entryRange = DataTool.absoluteRange(with: data, start: .zero, 4)
+        symbolTableIndex = Int(data.UInt32)
     }
 
     func translationItem(machoProtocol: MachoProtocol) -> ExplanationItem? {

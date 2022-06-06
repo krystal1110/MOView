@@ -13,24 +13,18 @@ import Foundation
    interpreter -> 字符串表数组 里面存放着所有的符号模型(StringPosition)
  */
 class StringTableStoreInfo: BaseStoreInfo {
-    let dataSlice: DataSlice
     let interpreter: StringInterpreter
     let stringTableList: [StringPosition]
-    var componentTitle: String { title }
-    var componentSubTitle: String? { subTitle }
-    let title: String
-    let subTitle: String?
-
-    init(with dataSlice: DataSlice,
+    
+    init(with dataSlice: Data,
          is64Bit: Bool,
          interpreter: StringInterpreter,
-         stringTableList: [StringPosition],
          title: String,
-         subTitle: String? = nil) {
+         subTitle: String? = nil,
+         sectionVirtualAddress: UInt64?,
+         stringTableList: [StringPosition]) {
         self.interpreter = interpreter
         self.stringTableList = stringTableList
-        self.title = title
-        self.subTitle = subTitle
-        self.dataSlice = dataSlice
+        super.init(with: dataSlice, title: title, subTitle: subTitle, sectionVirtualAddress: sectionVirtualAddress)
     }
 }

@@ -42,7 +42,7 @@ class JYSegment: JYLoadCommand {
     let flags: UInt32
     let sectionHeaders: [SectionHeader64]
 
-    required init(with dataSlice: DataSlice, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
+    required init(with dataSlice: Data, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
         let is64Bit = commandType == LoadCommandType.segment64
         self.is64Bit = is64Bit
         let translationStore = TranslationRead(machoDataSlice: dataSlice).skip(.quadWords)
@@ -89,7 +89,7 @@ class JYSegment: JYLoadCommand {
             // section header data length for 32-bit is 68, and 64-bit 80
             let sectionHeaderLength = is64Bit ? 80 : 68
             let segmentCommandSize = is64Bit ? 72 : 56
-            let sectionHeaderData = dataSlice.interception(from: segmentCommandSize + index * sectionHeaderLength, length: sectionHeaderLength)
+            let sectionHeaderData = DataTool.interception(with: dataSlice, from: segmentCommandSize + index * sectionHeaderLength, length: sectionHeaderLength)
             let sectionHeader = SectionHeader64(is64Bit: is64Bit, data: sectionHeaderData)
             sectionHeaders.append(sectionHeader)
         }

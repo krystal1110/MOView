@@ -11,22 +11,17 @@ import Foundation
   用于存储懒加载符号表以及非懒加载符号表信息
  **/
 class LazySymbolStoreInfo: BaseStoreInfo {
-    let dataSlice: DataSlice
-    let lazySymbolTableList: [LazySymbolEntryModel]
     
-    var componentTitle: String { title }
-    var componentSubTitle: String? { subTitle }
-    let title: String
-    let subTitle: String?
+    let lazySymbolTableList: [LazySymbolEntryModel]
+ 
 
-    init(with dataSlice: DataSlice,
+    init(with dataSlice: Data,
          is64Bit: Bool,
-         lazySymbolTableList: [LazySymbolEntryModel],
          title: String,
-         subTitle: String? = nil) {
+         subTitle: String? = nil,
+         sectionVirtualAddress: UInt64,
+         lazySymbolTableList: [LazySymbolEntryModel]) {
         self.lazySymbolTableList = lazySymbolTableList
-        self.title = title
-        self.subTitle = subTitle
-        self.dataSlice = dataSlice
+        super.init(with: dataSlice, title: title, subTitle: subTitle, sectionVirtualAddress: sectionVirtualAddress)
     }
 }

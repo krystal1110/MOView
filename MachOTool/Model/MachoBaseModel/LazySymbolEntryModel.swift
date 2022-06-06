@@ -9,17 +9,15 @@ import Foundation
 
 struct LazySymbolEntryModel: MachoExplainModel {
     
-    static func modelSize(is64Bit: Bool) -> Int {
-        return is64Bit ? 8 : 4
+    static func modelSize( ) -> Int {
+        return 8
     }
 
     let startOffset:Int
-    let startOffsetHex:String
     var explanationItem: ExplanationItem? = nil
     
-    init(with data: DataSlice, is64Bit: Bool) {
-        self.startOffset = data.startOffset
-        self.startOffsetHex = self.startOffset.hex
+    init(with data: Data, is64Bit: Bool) {
+        self.startOffset = data.startIndex
     }
 
 }

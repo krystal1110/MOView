@@ -8,9 +8,9 @@
 import Foundation
 
 class MachoComponent {
-    let dataSlice: DataSlice
+    let dataSlice: Data
     var componentSize: Int { dataSlice.count }
-    init(_ dataSlice: DataSlice) {
+    init(_ dataSlice: Data) {
         self.dataSlice = dataSlice
     }
 }

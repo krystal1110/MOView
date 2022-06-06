@@ -49,10 +49,10 @@ struct SectionHeader64 {
     let reserved3: UInt32? // exists only for 64 bit
 
     let is64Bit: Bool
-    let data: DataSlice
+    let data: Data
     let translationStore: TranslationRead
 
-    init(is64Bit: Bool, data: DataSlice) {
+    init(is64Bit: Bool, data: Data) {
         self.is64Bit = is64Bit
         self.data = data
 
@@ -96,8 +96,8 @@ struct SectionHeader64 {
         nreloc = relocValues.1
 
         // parse flags
-        let flags = data.interception(from: translationStore.translated, length: 4).raw.UInt32
-        let rangeOfNextDWords = data.absoluteRange(translationStore.translated, 4)
+        let flags = DataTool.interception(with: data, from: translationStore.translated, length: 4).UInt32
+        let rangeOfNextDWords = DataTool.absoluteRange(with: data, start: translationStore.translated, 4)
 
         let sectionTypeRawValue = flags & 0x000000FF
         guard let sectionType = SectionType(rawValue: sectionTypeRawValue) else {
