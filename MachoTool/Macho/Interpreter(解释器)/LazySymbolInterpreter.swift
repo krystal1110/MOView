@@ -18,7 +18,7 @@ class LazySymbolInterpreter :BaseInterpreter {
     let startIndexInIndirectSymbolTable: Int
     let sectionType: SectionType
 
-    init(wiht data: Data, is64Bit: Bool,
+    init(with data: Data, is64Bit: Bool,
          machoProtocol: MachoProtocol,
          sectionVirtualAddress:UInt64,
          sectionType: SectionType,

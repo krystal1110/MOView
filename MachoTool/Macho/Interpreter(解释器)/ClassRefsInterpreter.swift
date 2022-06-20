@@ -7,11 +7,7 @@
  
 import Foundation
  
-struct ClassRefsPointer {
-    let relativeDataOffset: Int
-    let pointerValue: Swift.UInt64
-    var explanationItem: ExplanationItem? = nil
-}
+ 
 
 class ClassRefsInterpreter: BaseInterpreter{
     
@@ -28,27 +24,26 @@ class ClassRefsInterpreter: BaseInterpreter{
     
  
     // 转换为 stroeInfo 存储信息
-    func transitionStoreInfo(title:String , subTitle:String )   {
+    func transitionStoreInfo(title:String , subTitle:String ) -> ClassRefsStoreInfo   {
         let rawData = self.data
         guard rawData.count % pointerLength == 0 else { fatalError() /* section of type S_LITERAL_POINTERS should be in align of 8 (bytes) */  }
-        var pointers: [ClassRefsPointer] = []
+        var pointers: [ReferencesPointer] = []
         let numberOfPointers = rawData.count / 8
         for index in 0..<numberOfPointers {
             let relativeDataOffset = index * pointerLength
-            let virtualAddress = Int(self.sectionVirtualAddress)  + relativeDataOffset
-//            virtualAddress.hex
             let pointerRawData = rawData.select(from: relativeDataOffset, length: pointerLength)
-            var pointer = ClassRefsPointer(relativeDataOffset: relativeDataOffset,
+            var pointer = ReferencesPointer(relativeDataOffset: relativeDataOffset,
                                            pointerValue: is64Bit ? pointerRawData.UInt64 : UInt64(pointerRawData.UInt32))
             pointer.explanationItem  = translationItem(with: pointer)
             
-//            pointers.append(pointer)
+            pointers.append(pointer)
         }
-//        return ReferencesStoreInfo(with: self.data, is64Bit:is64Bit, referencesPointerList: pointers, title: title, subTitle: subTitle)
+        return ClassRefsStoreInfo(with: self.data, is64Bit:is64Bit,title: title, subTitle: subTitle,sectionVirtualAddress: self.sectionVirtualAddress,classRefsPointerList: pointers)
+        
     }
     
     
-    func translationItem(with pointer:ClassRefsPointer) -> ExplanationItem {
+    func translationItem(with pointer:ReferencesPointer) -> ExplanationItem {
         
         var searchedString = self.machoProtocol.searchString(by: pointer.pointerValue)
         

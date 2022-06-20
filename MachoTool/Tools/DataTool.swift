@@ -34,6 +34,18 @@ class DataTool{
    class func absoluteRange(with data: Data, relativeRange: Range<Int>) -> Range<Int> {
         return data.startIndex  + relativeRange.lowerBound ..< data.startIndex  + relativeRange.upperBound
     }
-    
-    
 }
+
+
+class PointerTool{
+   class func add(_ address:UInt64, offset: Int64) -> UInt64 {
+        var address: UInt64 = 0
+        if (offset < 0) {
+            address = address - UInt64(abs(offset) )
+        } else {
+            address = address + UInt64(offset)
+        }
+        return address
+    }
+}
+ 

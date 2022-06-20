@@ -18,6 +18,8 @@ extension Data {
     var UInt32: Swift.UInt32 { cast(to: Swift.UInt32.self) }
     var UInt64: Swift.UInt64 { cast(to: Swift.UInt64.self) }
 
+    var Int32: Swift.Int32 { cast(to: Swift.Int32.self)}
+    
     func select(from: Data.Index, length: Data.Index) -> Self {
         return self[startIndex + from ..< startIndex + from + length]
     }
@@ -25,11 +27,53 @@ extension Data {
     var utf8String: String? {
         return String(data: self, encoding: .utf8)
     }
+    
+    var asciiString: String? {
+        return String(data: self, encoding: .ascii)
+    }
+    
+    func readCString(from: Int) -> String? {
+        if (from >= self.count) {
+            return nil;
+        }
+        var address: Int = (from);
+        var result:[UInt8] = [];
+        while true {
+            let val: UInt8 = self[address];
+            if (val == 0) {
+                break;
+            }
+            address += 1;
+            result.append(val);
+        }
+        
+        if let str = String(bytes: result, encoding: String.Encoding.ascii) {
+            if (str.isAsciiStr()) {
+                return str;
+            }
+        }
+        
+        if (result.count > 10000) {
+            return nil
+        }
+        
+        let tmp = result.reduce("0x") { (result, val:UInt8) -> String in
+            return result + String(format: "%02x", val);
+        }
+        return tmp;
+    }
+    
+    
+ 
 }
 
 extension String {
     var spaceRemoved: String {
         return trimmingCharacters(in: .whitespaces).replacingOccurrences(of: "\0", with: "")
+    }
+    
+    func isAsciiStr() -> Bool {
+        return self.range(of: ".*[^A-Za-z0-9_$ ].*", options: .regularExpression) == nil;
     }
 }
 
@@ -37,6 +81,20 @@ extension Int {
     var hex: String { String(format: "0x%0X", self) }
     var isNotZero: Bool { self != .zero }
     func bitAnd(_ v: Self) -> Bool { self & v != 0 }
+    
+    func add(_ offset: Int64) -> UInt64 {
+        var address: UInt64 = 0
+        if offset < 0 {
+            address = UInt64(self)  - UInt64(abs(offset) );
+        }else{
+            address = UInt64(self)  + UInt64(offset);
+        }
+        return address
+    }
+    
+    func fix() -> Int {
+        return   self & 0xFFFFFFFF
+    }
 }
 
 extension UInt16 {
@@ -55,6 +113,23 @@ extension UInt64 {
     var hex: String { String(format: "0x%llX", self) }
     var isNotZero: Bool { self != .zero }
     func bitAnd(_ v: Self) -> Bool { self & v != 0 }
+   
+    func add(_ offset: Int) -> UInt64 {
+        var address: UInt64 = 0
+        if offset < 0 {
+            address = self  - UInt64(abs(offset) );
+        }else{
+            address = self  + UInt64(offset);
+        }
+        return address
+    }
+    
+    var toInt:Int{ Int(self)}
+    
+    func fix() -> UInt64 {
+        return  UInt64(self & 0xFFFFFFFF)
+    }
+    
 }
 
 class Utils {
@@ -75,6 +150,68 @@ extension String {
         let trimmedStr = self.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmedStr.isEmpty
     }
+    
+    public func removingPrefix(_ prefix: String) -> String {
+        guard hasPrefix(prefix) else { return self }
+        return String(dropFirst(prefix.count))
+    }
+    
+    public func removingSuffix(_ suffix: String) -> String {
+        guard hasSuffix(suffix) else { return self }
+        return String(dropLast(suffix.count))
+    }
+    
+    func toPointer() -> UnsafePointer<UInt8>? {
+        guard let data = self.data(using: String.Encoding.utf8) else { return nil }
+        
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: data.count)
+        let stream = OutputStream(toBuffer: buffer, capacity: data.count)
+        
+        stream.open()
+        data.withUnsafeBytes { (bp:UnsafeRawBufferPointer) in
+            if let sp:UnsafePointer<UInt8> = bp.baseAddress?.bindMemory(to: UInt8.self, capacity: MemoryLayout<Any>.stride) {
+                stream.write(sp, maxLength: data.count)
+            }
+        }
+        
+        stream.close()
+        
+        return UnsafePointer<UInt8>(buffer)
+    }
  
 }
  
+
+ 
+extension Data {
+ 
+    func readI32(offset: Int) -> Int32 {
+        return readValue(offset) ?? 0
+    }
+    
+    func readU32(offset: Int) -> UInt32 {
+        return readValue(offset) ?? 0
+    }
+    
+    func readU64(offset: Int) -> UInt64 {
+        return readValue(offset) ?? 0
+    }
+    
+    
+    
+    func readValue<Type>(_ offset: Int) -> Type? {
+        let val:Type? = self.withUnsafeBytes { (ptr:UnsafeRawBufferPointer) -> Type? in
+            return ptr.baseAddress?.advanced(by: offset).load(as: Type.self);
+        }
+        return val;
+    }
+    
+    
+    func readMove(_ offset: Int) -> UInt64 {
+        let val = readU32(offset: offset)
+        return offset.add(Int64(val))
+    }
+    
+    
+   
+}

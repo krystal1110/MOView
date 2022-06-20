@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2D0129E0283E8A4A00FF4186 /* ShellUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */; };
-		2D0129EA283E93B600FF4186 /* iOSToolsTest.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D0129E8283E939400FF4186 /* iOSToolsTest.zip */; };
 		FB072DFF2839231A000B370B /* SymbolTableStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072DFE2839231A000B370B /* SymbolTableStoreInfo.swift */; };
 		FB072E03283A601B000B370B /* BaseStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E02283A601B000B370B /* BaseStoreInfo.swift */; };
 		FB072E05283B220E000B370B /* IndirectSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */; };
@@ -21,15 +20,25 @@
 		FB63EC4C283F58C6003CCCF7 /* LazySymbolStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63EC4B283F58C6003CCCF7 /* LazySymbolStoreInfo.swift */; };
 		FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */; };
 		FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B11D028424CA200B53C61 /* ObjcPointer64EnterModel.swift */; };
+		FB8F48272854AAF4005D0586 /* iOSToolsTest.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = FB8F48262854AA1C005D0586 /* iOSToolsTest.zip */; };
+		FB8F483328571B0A005D0586 /* SwiftTypesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F483228571B0A005D0586 /* SwiftTypesInterpreter.swift */; };
+		FB8F483C285AD1C0005D0586 /* SwiftClassUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F483B285AD1C0005D0586 /* SwiftClassUtils.swift */; };
+		FB8F4884285C22FD005D0586 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F4883285C22FD005D0586 /* Consts.swift */; };
+		FB8F488B285DDCAE005D0586 /* SwiftNominalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F488A285DDCAE005D0586 /* SwiftNominalModel.swift */; };
+		FB8F488D285F04A7005D0586 /* RuntimeBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */; };
+		FB8F4890285F059A005D0586 /* libswiftDemangle.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */; };
 		FB9103742844F8D50000AD84 /* ReferencesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */; };
 		FB9103762845013A0000AD84 /* ReferencesStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */; };
 		FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */; };
 		FB91037A284601C10000AD84 /* UStringStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB910379284601C10000AD84 /* UStringStoreInfo.swift */; };
 		FB91037C284674320000AD84 /* CFStringStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB91037B284674320000AD84 /* CFStringStoreInfo.swift */; };
+		FB9CCF04285347CB00EE910F /* ClassRefsStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9CCF03285347CB00EE910F /* ClassRefsStoreInfo.swift */; };
 		FBB6569E284BB8E60081C991 /* DataExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB6569D284BB8E60081C991 /* DataExpand.swift */; };
 		FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB6569F284BBCBC0081C991 /* DataTool.swift */; };
 		FBB656A8284DC0830081C991 /* DyldInfoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656A7284DC0830081C991 /* DyldInfoCommand.swift */; };
 		FBB656AA284DDAE80081C991 /* DyldInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656A9284DDAE70081C991 /* DyldInterpreter.swift */; };
+		FBB656AC284E0BF10081C991 /* BindOperationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656AB284E0BF10081C991 /* BindOperationCode.swift */; };
+		FBB656AE285073F80081C991 /* OperationCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656AD285073F80081C991 /* OperationCodeModel.swift */; };
 		FBC3489C28489141009B4AAE /* UnusedScanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3489B28489141009B4AAE /* UnusedScanManager.swift */; };
 		FBC3489F2848AF75009B4AAE /* ClassRefsInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */; };
 		FBCEE977283290150090B4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE976283290150090B4E6 /* main.swift */; };
@@ -62,7 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				2D0129EA283E93B600FF4186 /* iOSToolsTest.zip in CopyFiles */,
+				FB8F48272854AAF4005D0586 /* iOSToolsTest.zip in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +79,6 @@
 
 /* Begin PBXFileReference section */
 		2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShellUtils.swift; path = MachOTool/Tools/ShellUtils.swift; sourceTree = SOURCE_ROOT; };
-		2D0129E8283E939400FF4186 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = iOSToolsTest.zip; path = Resoure/iOSToolsTest.zip; sourceTree = SOURCE_ROOT; };
 		FB072DFE2839231A000B370B /* SymbolTableStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTableStoreInfo.swift; sourceTree = "<group>"; };
 		FB072E02283A601B000B370B /* BaseStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStoreInfo.swift; sourceTree = "<group>"; };
 		FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreter.swift; sourceTree = "<group>"; };
@@ -83,15 +91,25 @@
 		FB63EC4B283F58C6003CCCF7 /* LazySymbolStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazySymbolStoreInfo.swift; sourceTree = "<group>"; };
 		FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStringInterpreter.swift; sourceTree = "<group>"; };
 		FB8B11D028424CA200B53C61 /* ObjcPointer64EnterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjcPointer64EnterModel.swift; sourceTree = "<group>"; };
+		FB8F48262854AA1C005D0586 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = iOSToolsTest.zip; sourceTree = "<group>"; };
+		FB8F483228571B0A005D0586 /* SwiftTypesInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTypesInterpreter.swift; sourceTree = "<group>"; };
+		FB8F483B285AD1C0005D0586 /* SwiftClassUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftClassUtils.swift; sourceTree = "<group>"; };
+		FB8F4883285C22FD005D0586 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		FB8F488A285DDCAE005D0586 /* SwiftNominalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNominalModel.swift; sourceTree = "<group>"; };
+		FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeBridge.swift; sourceTree = "<group>"; };
+		FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
 		FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesInterpreter.swift; sourceTree = "<group>"; };
 		FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesStoreInfo.swift; sourceTree = "<group>"; };
 		FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringInterpreter.swift; sourceTree = "<group>"; };
 		FB910379284601C10000AD84 /* UStringStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringStoreInfo.swift; sourceTree = "<group>"; };
 		FB91037B284674320000AD84 /* CFStringStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStringStoreInfo.swift; sourceTree = "<group>"; };
+		FB9CCF03285347CB00EE910F /* ClassRefsStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRefsStoreInfo.swift; sourceTree = "<group>"; };
 		FBB6569D284BB8E60081C991 /* DataExpand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExpand.swift; sourceTree = "<group>"; };
 		FBB6569F284BBCBC0081C991 /* DataTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTool.swift; sourceTree = "<group>"; };
 		FBB656A7284DC0830081C991 /* DyldInfoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyldInfoCommand.swift; sourceTree = "<group>"; };
 		FBB656A9284DDAE70081C991 /* DyldInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyldInterpreter.swift; sourceTree = "<group>"; };
+		FBB656AB284E0BF10081C991 /* BindOperationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindOperationCode.swift; sourceTree = "<group>"; };
+		FBB656AD285073F80081C991 /* OperationCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationCodeModel.swift; sourceTree = "<group>"; };
 		FBC3489B28489141009B4AAE /* UnusedScanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnusedScanManager.swift; sourceTree = "<group>"; };
 		FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRefsInterpreter.swift; sourceTree = "<group>"; };
 		FBCEE973283290150090B4E6 /* MachoTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MachoTool; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB8F4890285F059A005D0586 /* libswiftDemangle.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +152,7 @@
 		2D0129E9283E939B00FF4186 /* Resoure */ = {
 			isa = PBXGroup;
 			children = (
-				2D0129E8283E939400FF4186 /* iOSToolsTest.zip */,
+				FB8F48262854AA1C005D0586 /* iOSToolsTest.zip */,
 			);
 			path = Resoure;
 			sourceTree = "<group>";
@@ -149,14 +168,24 @@
 				FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */,
 				FB910379284601C10000AD84 /* UStringStoreInfo.swift */,
 				FB91037B284674320000AD84 /* CFStringStoreInfo.swift */,
+				FB9CCF03285347CB00EE910F /* ClassRefsStoreInfo.swift */,
 			);
 			path = "StoreInfo(存储信息)";
+			sourceTree = "<group>";
+		};
+		FB8F488E285F059A005D0586 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FBB656A6284DB8860081C991 /* DyldInfoInterpreter */ = {
 			isa = PBXGroup;
 			children = (
 				FBB656A9284DDAE70081C991 /* DyldInterpreter.swift */,
+				FBB656AB284E0BF10081C991 /* BindOperationCode.swift */,
 			);
 			path = DyldInfoInterpreter;
 			sourceTree = "<group>";
@@ -175,6 +204,7 @@
 				2D0129E9283E939B00FF4186 /* Resoure */,
 				FBCEE975283290150090B4E6 /* MachoTool */,
 				FBCEE974283290150090B4E6 /* Products */,
+				FB8F488E285F059A005D0586 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,6 +267,7 @@
 				FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */,
 				FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */,
 				FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */,
+				FB8F483228571B0A005D0586 /* SwiftTypesInterpreter.swift */,
 			);
 			path = "Interpreter(解释器)";
 			sourceTree = "<group>";
@@ -279,6 +310,9 @@
 				2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */,
 				FBCEE9A0283290530090B4E6 /* Utils.swift */,
 				FBB6569F284BBCBC0081C991 /* DataTool.swift */,
+				FB8F483B285AD1C0005D0586 /* SwiftClassUtils.swift */,
+				FB8F4883285C22FD005D0586 /* Consts.swift */,
+				FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -300,6 +334,8 @@
 				FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */,
 				FB072E0E283E818E000B370B /* LazySymbolEntryModel.swift */,
 				FB8B11D028424CA200B53C61 /* ObjcPointer64EnterModel.swift */,
+				FBB656AD285073F80081C991 /* OperationCodeModel.swift */,
+				FB8F488A285DDCAE005D0586 /* SwiftNominalModel.swift */,
 			);
 			path = MachoBaseModel;
 			sourceTree = "<group>";
@@ -371,29 +407,37 @@
 				FB91037A284601C10000AD84 /* UStringStoreInfo.swift in Sources */,
 				FBCEE99E2832904D0090B4E6 /* DataExplanation.swift in Sources */,
 				FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */,
+				FB8F488D285F04A7005D0586 /* RuntimeBridge.swift in Sources */,
 				FBCEE9B52834D5A30090B4E6 /* StringInterpreter.swift in Sources */,
 				FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */,
 				FB9103762845013A0000AD84 /* ReferencesStoreInfo.swift in Sources */,
 				FB91037C284674320000AD84 /* CFStringStoreInfo.swift in Sources */,
 				FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */,
+				FB8F483328571B0A005D0586 /* SwiftTypesInterpreter.swift in Sources */,
 				FBCEE995283290400090B4E6 /* DynamicSymbolTableCompont.swift in Sources */,
 				FB63EC4A283F125E003CCCF7 /* StringTableStoreInfo.swift in Sources */,
 				FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */,
 				FBCEE98E283290400090B4E6 /* SymbolTableInterpreter.swift in Sources */,
 				FB072E03283A601B000B370B /* BaseStoreInfo.swift in Sources */,
+				FB8F483C285AD1C0005D0586 /* SwiftClassUtils.swift in Sources */,
 				FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */,
+				FB8F4884285C22FD005D0586 /* Consts.swift in Sources */,
 				FBCEE994283290400090B4E6 /* JYLoadCommand.swift in Sources */,
 				FBC3489F2848AF75009B4AAE /* ClassRefsInterpreter.swift in Sources */,
 				FBB6569E284BB8E60081C991 /* DataExpand.swift in Sources */,
 				FBCEE990283290400090B4E6 /* Macho.swift in Sources */,
 				FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */,
+				FBB656AC284E0BF10081C991 /* BindOperationCode.swift in Sources */,
 				FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */,
+				FB8F488B285DDCAE005D0586 /* SwiftNominalModel.swift in Sources */,
 				FBCEE992283290400090B4E6 /* JYSymbolTableCommand.swift in Sources */,
 				2D0129E0283E8A4A00FF4186 /* ShellUtils.swift in Sources */,
 				FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */,
 				FBCEE991283290400090B4E6 /* JYMainCommand.swift in Sources */,
+				FBB656AE285073F80081C991 /* OperationCodeModel.swift in Sources */,
 				FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */,
 				FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */,
+				FB9CCF04285347CB00EE910F /* ClassRefsStoreInfo.swift in Sources */,
 				FBB656A8284DC0830081C991 /* DyldInfoCommand.swift in Sources */,
 				FB63EC4C283F58C6003CCCF7 /* LazySymbolStoreInfo.swift in Sources */,
 				FBC3489C28489141009B4AAE /* UnusedScanManager.swift in Sources */,
@@ -532,6 +576,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G7ANJPJ6VB;
 				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -544,6 +592,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G7ANJPJ6VB;
 				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

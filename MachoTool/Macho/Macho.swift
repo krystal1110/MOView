@@ -92,6 +92,10 @@ class Macho: Equatable {
         // 加载对应的 section64
         let allBaseStoreInfoList = sectionHeaders.compactMap {self.machoComponent(from: $0)}
         self.allBaseStoreInfoList = allBaseStoreInfoList
+        
+        
+        UnusedScanManager.init(with: self)
+        
     }
     
     func translationLoadCommands(with loadCommandData: Data, loadCommandType: LoadCommandType) -> JYLoadCommand {
@@ -151,6 +155,10 @@ class Macho: Equatable {
         }
     }
     
+    
+    /*
+     *
+     */
     fileprivate func machoComponent(from sectionHeader: SectionHeader64) -> BaseStoreInfo? {
         let componentTitle = "Section"
         let componentSubTitle = sectionHeader.segment + "," + sectionHeader.section
@@ -185,23 +193,23 @@ class Macho: Equatable {
         case .S_LAZY_SYMBOL_POINTERS, .S_NON_LAZY_SYMBOL_POINTERS, .S_LAZY_DYLIB_SYMBOL_POINTERS:
             
             let dataSlice = DataTool.interception(with: data, from:  Int(sectionHeader.offset), length: Int(sectionHeader.size))
-            let symbolStoreInfo = LazySymbolInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr, sectionType: sectionHeader.sectionType, startIndexInIndirectSymbolTable: Int(sectionHeader.reserved1)).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+            let symbolStoreInfo = LazySymbolInterpreter(with: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr, sectionType: sectionHeader.sectionType, startIndexInIndirectSymbolTable: Int(sectionHeader.reserved1)).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
             return symbolStoreInfo
         case .S_REGULAR:
             /*
              _DATA_cfstring  -> objc CFStrings
              **/
             if (componentSubTitle == "__DATA,__cfstring"){
-                 
+                 // 存储 Objective C 字符串的元数据
                 let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 let cStringStoreInfo = CFStringInterpreter(wiht: dataSlice, is64Bit: is64bit, machoProtocol: self,sectionVirtualAddress: sectionHeader.addr).transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return cStringStoreInfo
             }else if (componentSubTitle == "__DATA,__objc_classrefs"){
-                #warning("TODO")
+                
                 let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 let referencesInterpreter = ClassRefsInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
-                return nil
+                return referencesStoreInfo
             }
             
             else if (componentSubTitle == "__DATA,__objc_classlist"){
@@ -226,9 +234,24 @@ class Macho: Equatable {
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
                 return referencesStoreInfo
             }
+            else if (componentSubTitle == "__DATA,__objc_nlcatlist"){
+                // __category_list +load 分类
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
+                let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                return referencesStoreInfo
+            }
             
             else if (componentSubTitle == "__DATA,__objc_protolist"){
                 // __protocol_list 协议
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
+                let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
+                return referencesStoreInfo
+            }
+            
+            else if (componentSubTitle == "__DATA,__objc_nlclslist"){
+                // +load 协议
                 let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 let referencesInterpreter = ReferencesInterpreter(wiht:dataSlice, is64Bit: self.is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr)
                 let referencesStoreInfo = referencesInterpreter.transitionStoreInfo(title: componentTitle, subTitle: componentSubTitle)
@@ -255,6 +278,19 @@ class Macho: Equatable {
                                                 stringTableList: cStringTableList)
                 return reflstrStoreInfo
             }
+            
+            else if (componentSubTitle == "__TEXT,__swift5_types"){
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                
+                let fileOffset: Int64 = Int64(sectionHeader.offset);
+                let swiftTypesInterpreter = SwiftTypesInterpreter(with: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr , machoData:self.data).loadData(fileOffset)
+                 
+            }else if (componentSubTitle == "__TEXT,__const"){
+                // 存储的是swift 类的结构描述  也就是ClassContextDescriptor
+//                print("----")
+//                Section64(__TEXT,__const)
+            }
+
             
             return nil
             
@@ -285,7 +321,7 @@ class Macho: Equatable {
         let rebaseInfoSize = Int(command.rebaseSize)
         if rebaseInfoStart.isNotZero && rebaseInfoSize.isNotZero { // 非空判断
             let rebaseInfoData = DataTool.interception(with: data, from: rebaseInfoStart, length: rebaseInfoSize)
-            
+//            DyldInterpreter.init(wiht: <#T##Data#>, is64Bit: <#T##Bool#>, machoProtocol: <#T##MachoProtocol#>, sectionVirtualAddress: <#T##UInt64#>)
         }
         
         
@@ -297,6 +333,7 @@ class Macho: Equatable {
         let bindInfoSize = Int(command.bindSize)
         if bindInfoStart.isNotZero && bindInfoSize.isNotZero { // 非空判断
             let bindInfoData = DataTool.interception(with: data, from: bindInfoStart, length: bindInfoSize)
+            let interpreter = DyldInterpreter.init(wiht: bindInfoData, is64Bit: is64bit, machoProtocol: self).operationCodes()
         }
         
         
