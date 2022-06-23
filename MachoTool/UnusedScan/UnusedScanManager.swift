@@ -68,14 +68,7 @@ class UnusedScanManager {
                      endValue = self.macho.symbolTableStoreInfo!.symbolTableList[i + 1].nValue
                 }
                 
-                if symObj.nValue == 4295100200 {
-//                    print("---")
                     findCallAccessFunc(nominalModel.typeName, accessFunc: nominalModel.accessorOffset, startVale: startValue, endValue: 4295100480)
-                }else if symObj.nValue == 4295100480 {
-//                    print("---")
-                }
-                
-//
             }
             
         }
@@ -137,11 +130,7 @@ class UnusedScanManager {
         while (strcmp("ret",asmStr) != 0 && (beginAddr < end)){
             
             let index = (beginAddr - textAddr) / 4
-            
-//            let str  =  self.macho.instructionPtr![Int(index)].op_str
-//            String(cString: str)
-//            print("----")
-            
+ 
             let dataStr = withUnsafePointer(to: &self.macho.instructionPtr![Int(index)].op_str) {
                 $0.withMemoryRebound(to: UInt8.self, capacity: MemoryLayout.size(ofValue: self.macho.instructionPtr![Int(index)].op_str)) {
                     String(cString: $0)
@@ -154,14 +143,13 @@ class UnusedScanManager {
                     String(cString: $0)
                 }
             }
-            
-              
                         if (strcmp(".byte", asmStr) == 0){
                             return false
                         }
             
                         if (strStr(dataStr, targetStr)){
                             // 直接命中
+                            print("我命中了 \(dataStr) 与 \(targetStr)  index = \(index)")
                             return true
                         }else if (strStr(dataStr, targetHighStr) && strStr(asmStr, "adrp")){
                             // 命中高位
@@ -173,9 +161,6 @@ class UnusedScanManager {
             
             beginAddr += 4
         }
-        
-        
-        print("我循环完了")
         return false
     }
     

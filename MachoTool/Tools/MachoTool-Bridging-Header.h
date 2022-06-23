@@ -9,7 +9,5 @@
 #define MachoTool_Bridging_Header_h
 
 
-
-#import "ParseInstruction.h"
 #import "CapStoneHelper.h"
 #endif /* MachoTool_Bridging_Header_h */

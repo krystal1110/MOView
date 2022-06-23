@@ -293,7 +293,7 @@ class Macho: Equatable {
                 
                 let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 
-                let instruction  = CapStoneHelper.instructions(data, from: sectionHeader.addr, length: sectionHeader.size)
+                let instruction  = CapStoneHelper.instructions(data, from: UInt64(sectionHeader.offset), length: sectionHeader.size)
  
                 self.instructionPtr = instruction
                 

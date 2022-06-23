@@ -27,7 +27,6 @@
 		FB8F488B285DDCAE005D0586 /* SwiftNominalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F488A285DDCAE005D0586 /* SwiftNominalModel.swift */; };
 		FB8F488D285F04A7005D0586 /* RuntimeBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */; };
 		FB8F4890285F059A005D0586 /* libswiftDemangle.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */; };
-		FB8F492E28605DD4005D0586 /* ParseInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8F492D28605DD3005D0586 /* ParseInstruction.m */; };
 		FB9103742844F8D50000AD84 /* ReferencesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */; };
 		FB9103762845013A0000AD84 /* ReferencesStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */; };
 		FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */; };
@@ -151,8 +150,6 @@
 		FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeBridge.swift; sourceTree = "<group>"; };
 		FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
 		FB8F492B286058D2005D0586 /* MachoTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MachoTool-Bridging-Header.h"; sourceTree = "<group>"; };
-		FB8F492C28605DD3005D0586 /* ParseInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseInstruction.h; sourceTree = "<group>"; };
-		FB8F492D28605DD3005D0586 /* ParseInstruction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParseInstruction.m; sourceTree = "<group>"; };
 		FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesInterpreter.swift; sourceTree = "<group>"; };
 		FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesStoreInfo.swift; sourceTree = "<group>"; };
 		FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringInterpreter.swift; sourceTree = "<group>"; };
@@ -633,8 +630,6 @@
 				FB8F4883285C22FD005D0586 /* Consts.swift */,
 				FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */,
 				FB8F492B286058D2005D0586 /* MachoTool-Bridging-Header.h */,
-				FB8F492C28605DD3005D0586 /* ParseInstruction.h */,
-				FB8F492D28605DD3005D0586 /* ParseInstruction.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -797,7 +792,6 @@
 				FBB656AE285073F80081C991 /* OperationCodeModel.swift in Sources */,
 				FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */,
 				FB9F09B32862B92200732AD0 /* X86ATTInstPrinter.c in Sources */,
-				FB8F492E28605DD4005D0586 /* ParseInstruction.m in Sources */,
 				FB9F09B92862B92200732AD0 /* X86GenAsmWriter1.inc in Sources */,
 				FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */,
 				FB9CCF04285347CB00EE910F /* ClassRefsStoreInfo.swift in Sources */,

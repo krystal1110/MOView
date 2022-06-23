@@ -17,8 +17,7 @@
 + (cs_insn *)instructions:(NSData *)fileData  from:(unsigned long long)begin length:(unsigned long long )size{
     
     
-    begin = 16384;
-    size =  125456;
+ 
     
     // Get compilation.
     csh cs_handle = 0;
