@@ -37,7 +37,7 @@ class Macho: Equatable {
     // 存放indirectSymbol的信息
     var indirectSymbolTableStoreInfo: IndirectSymbolTableStoreInfo?
     
-    
+    var instructionPtr: UnsafeMutablePointer<cs_insn>?
     
     var allBaseStoreInfoList: [BaseStoreInfo] = []
      
@@ -107,7 +107,7 @@ class Macho: Equatable {
             
             if segment.fileoff == 0, segment.filesize != 0 {
                 // __TEXT段
-//                print(segment.segname)
+                print(segment.segname)
             }
             return segment
             
@@ -283,12 +283,21 @@ class Macho: Equatable {
                 let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
                 
                 let fileOffset: Int64 = Int64(sectionHeader.offset);
-                let swiftTypesInterpreter = SwiftTypesInterpreter(with: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr , machoData:self.data).loadData(fileOffset)
-                 
+                let swiftTypesInterpreter = SwiftTypesInterpreter(with: dataSlice, is64Bit: is64bit, machoProtocol: self, sectionVirtualAddress: sectionHeader.addr , machoData:self.data)
+                  return swiftTypesInterpreter.transitionStoreInfo(fileOffset, title: componentTitle, subTitle: componentSubTitle)
             }else if (componentSubTitle == "__TEXT,__const"){
                 // 存储的是swift 类的结构描述  也就是ClassContextDescriptor
 //                print("----")
 //                Section64(__TEXT,__const)
+            }else if (componentSubTitle == "__TEXT,__text"){
+                
+                let dataSlice = DataTool.interception(with: data, from: Int(sectionHeader.offset), length: Int(sectionHeader.size))
+                
+                let instruction  = CapStoneHelper.instructions(data, from: sectionHeader.addr, length: sectionHeader.size)
+ 
+                self.instructionPtr = instruction
+                
+                print("-ttttt")
             }
 
             

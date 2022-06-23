@@ -62,9 +62,9 @@ class SwiftTypesInterpreter :BaseInterpreter{
         super.init(data, is64Bit: is64Bit, machoProtocol: machoProtocol, sectionVirtualAddress: sectionVirtualAddress)
     }
     
-    func loadData(_ fileOffset:Int64) {
+    func transitionStoreInfo(_ fileOffset:Int64, title:String , subTitle:String) -> SwiftTypesStoreInfo{
         
-          var nominalList:[SwiftNominalModel] = [];
+        var nominalList:[SwiftNominalModel] = [];
         
         let numberOfTypes = data.count / 4
         for i in 0..<numberOfTypes {
@@ -85,10 +85,9 @@ class SwiftTypesInterpreter :BaseInterpreter{
             
 //            namePtr    UInt64    4295111164 通过fix为 143868
             let namePtr = machoData.readMove(nominalPtr.add(8).toInt).fix()
-            
-            guard let nameStr: String = machoData.readCString(from: Int(namePtr))else{
-                return
-            }
+               
+            let nameStr: String = machoData.readCString(from: Int(namePtr)) ?? ""
+               
            
             //accessorPtr对应的是 metaData 访问函数将始终返回正确的元数据记录;
             let accessorPtr = machoData.readMove(nominalPtr.add(12).toInt).fix()
@@ -118,8 +117,18 @@ class SwiftTypesInterpreter :BaseInterpreter{
                 //Log("    mangledTypeName \(mangledTypeName) \(mangledTypeNamePtr.desc)")
                 obj.mangledTypeName = mangledTypeName;
             }
-            print("🔥🔥🔥 类名为 \(obj.typeName)   \n   我的父类为 \(obj.superClassName) \n 我拥有\(obj.fields.count)属性")
+            
+ 
+            
+          
+            
+            print("🔥🔥🔥🔥🔥🔥")
+            print("类名为 \(obj.typeName)   \n我的父类为 \(obj.superClassName) \n我拥有\(obj.fields.count)属性")
         }
+        
+        return SwiftTypesStoreInfo(with: self.data, is64Bit:is64Bit,title: title, subTitle: subTitle,sectionVirtualAddress: self.sectionVirtualAddress,swiftTypesObjList: nominalList)
+        
+        
     }
     
     

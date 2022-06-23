@@ -16,23 +16,75 @@
 		FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E0A283B8560000B370B /* MachoProtocol.swift */; };
 		FB072E0F283E818E000B370B /* LazySymbolEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E0E283E818E000B370B /* LazySymbolEntryModel.swift */; };
 		FB072E13283E8714000B370B /* LazySymbolInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E12283E8714000B370B /* LazySymbolInterpreter.swift */; };
+		FB1CE8582864690800C5CCC4 /* iOSToolsTest.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = FB8F48262854AA1C005D0586 /* iOSToolsTest.zip */; };
 		FB63EC4A283F125E003CCCF7 /* StringTableStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63EC49283F125E003CCCF7 /* StringTableStoreInfo.swift */; };
 		FB63EC4C283F58C6003CCCF7 /* LazySymbolStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63EC4B283F58C6003CCCF7 /* LazySymbolStoreInfo.swift */; };
 		FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */; };
 		FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B11D028424CA200B53C61 /* ObjcPointer64EnterModel.swift */; };
-		FB8F48272854AAF4005D0586 /* iOSToolsTest.zip in CopyFiles */ = {isa = PBXBuildFile; fileRef = FB8F48262854AA1C005D0586 /* iOSToolsTest.zip */; };
 		FB8F483328571B0A005D0586 /* SwiftTypesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F483228571B0A005D0586 /* SwiftTypesInterpreter.swift */; };
 		FB8F483C285AD1C0005D0586 /* SwiftClassUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F483B285AD1C0005D0586 /* SwiftClassUtils.swift */; };
 		FB8F4884285C22FD005D0586 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F4883285C22FD005D0586 /* Consts.swift */; };
 		FB8F488B285DDCAE005D0586 /* SwiftNominalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F488A285DDCAE005D0586 /* SwiftNominalModel.swift */; };
 		FB8F488D285F04A7005D0586 /* RuntimeBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */; };
 		FB8F4890285F059A005D0586 /* libswiftDemangle.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */; };
+		FB8F492E28605DD4005D0586 /* ParseInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = FB8F492D28605DD3005D0586 /* ParseInstruction.m */; };
 		FB9103742844F8D50000AD84 /* ReferencesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */; };
 		FB9103762845013A0000AD84 /* ReferencesStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */; };
 		FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */; };
 		FB91037A284601C10000AD84 /* UStringStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB910379284601C10000AD84 /* UStringStoreInfo.swift */; };
 		FB91037C284674320000AD84 /* CFStringStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB91037B284674320000AD84 /* CFStringStoreInfo.swift */; };
 		FB9CCF04285347CB00EE910F /* ClassRefsStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9CCF03285347CB00EE910F /* ClassRefsStoreInfo.swift */; };
+		FB9F09A52862B92200732AD0 /* cs.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F094B2862B92100732AD0 /* cs.c */; };
+		FB9F09A62862B92200732AD0 /* SStream.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F095A2862B92100732AD0 /* SStream.c */; };
+		FB9F09A72862B92200732AD0 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F095B2862B92100732AD0 /* utils.c */; };
+		FB9F09A82862B92200732AD0 /* PPCGenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09602862B92100732AD0 /* PPCGenDisassemblerTables.inc */; };
+		FB9F09A92862B92200732AD0 /* PPCGenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09612862B92200732AD0 /* PPCGenSubtargetInfo.inc */; };
+		FB9F09AA2862B92200732AD0 /* PPCGenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09622862B92200732AD0 /* PPCGenAsmWriter.inc */; };
+		FB9F09AB2862B92200732AD0 /* PPCDisassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09632862B92200732AD0 /* PPCDisassembler.c */; };
+		FB9F09AC2862B92200732AD0 /* PPCMapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09662862B92200732AD0 /* PPCMapping.c */; };
+		FB9F09AD2862B92200732AD0 /* PPCGenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09672862B92200732AD0 /* PPCGenRegisterInfo.inc */; };
+		FB9F09AE2862B92200732AD0 /* PPCModule.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09682862B92200732AD0 /* PPCModule.c */; };
+		FB9F09AF2862B92200732AD0 /* PPCInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09692862B92200732AD0 /* PPCInstPrinter.c */; };
+		FB9F09B02862B92200732AD0 /* PPCGenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F096A2862B92200732AD0 /* PPCGenInstrInfo.inc */; };
+		FB9F09B12862B92200732AD0 /* X86Disassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F096E2862B92200732AD0 /* X86Disassembler.c */; };
+		FB9F09B22862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F096F2862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc */; };
+		FB9F09B32862B92200732AD0 /* X86ATTInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09702862B92200732AD0 /* X86ATTInstPrinter.c */; };
+		FB9F09B42862B92200732AD0 /* X86GenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09712862B92200732AD0 /* X86GenRegisterInfo.inc */; };
+		FB9F09B52862B92200732AD0 /* X86GenAsmWriter_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09722862B92200732AD0 /* X86GenAsmWriter_reduce.inc */; };
+		FB9F09B62862B92200732AD0 /* X86GenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09732862B92200732AD0 /* X86GenInstrInfo.inc */; };
+		FB9F09B72862B92200732AD0 /* X86Module.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09742862B92200732AD0 /* X86Module.c */; };
+		FB9F09B82862B92200732AD0 /* X86DisassemblerDecoder.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09762862B92200732AD0 /* X86DisassemblerDecoder.c */; };
+		FB9F09B92862B92200732AD0 /* X86GenAsmWriter1.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09792862B92200732AD0 /* X86GenAsmWriter1.inc */; };
+		FB9F09BA2862B92200732AD0 /* X86GenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F097B2862B92200732AD0 /* X86GenDisassemblerTables.inc */; };
+		FB9F09BB2862B92200732AD0 /* X86IntelInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F097C2862B92200732AD0 /* X86IntelInstPrinter.c */; };
+		FB9F09BC2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F097D2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc */; };
+		FB9F09BD2862B92200732AD0 /* X86Mapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F097F2862B92200732AD0 /* X86Mapping.c */; };
+		FB9F09BE2862B92200732AD0 /* X86GenInstrInfo_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09802862B92200732AD0 /* X86GenInstrInfo_reduce.inc */; };
+		FB9F09BF2862B92200732AD0 /* X86GenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09812862B92200732AD0 /* X86GenAsmWriter.inc */; };
+		FB9F09C02862B92200732AD0 /* ARMInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09832862B92200732AD0 /* ARMInstPrinter.c */; };
+		FB9F09C12862B92200732AD0 /* ARMGenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09852862B92200732AD0 /* ARMGenAsmWriter.inc */; };
+		FB9F09C22862B92200732AD0 /* ARMModule.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09872862B92200732AD0 /* ARMModule.c */; };
+		FB9F09C32862B92200732AD0 /* ARMMapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098A2862B92200732AD0 /* ARMMapping.c */; };
+		FB9F09C42862B92200732AD0 /* ARMGenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098C2862B92200732AD0 /* ARMGenInstrInfo.inc */; };
+		FB9F09C52862B92200732AD0 /* ARMGenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098D2862B92200732AD0 /* ARMGenRegisterInfo.inc */; };
+		FB9F09C62862B92200732AD0 /* ARMGenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098E2862B92200732AD0 /* ARMGenDisassemblerTables.inc */; };
+		FB9F09C72862B92200732AD0 /* ARMGenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098F2862B92200732AD0 /* ARMGenSubtargetInfo.inc */; };
+		FB9F09C82862B92200732AD0 /* ARMDisassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09902862B92200732AD0 /* ARMDisassembler.c */; };
+		FB9F09C92862B92200732AD0 /* AArch64GenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09962862B92200732AD0 /* AArch64GenAsmWriter.inc */; };
+		FB9F09CA2862B92200732AD0 /* AArch64Mapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09972862B92200732AD0 /* AArch64Mapping.c */; };
+		FB9F09CB2862B92200732AD0 /* AArch64GenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09982862B92200732AD0 /* AArch64GenDisassemblerTables.inc */; };
+		FB9F09CC2862B92200732AD0 /* AArch64GenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09992862B92200732AD0 /* AArch64GenSubtargetInfo.inc */; };
+		FB9F09CD2862B92200732AD0 /* AArch64Disassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099A2862B92200732AD0 /* AArch64Disassembler.c */; };
+		FB9F09CE2862B92200732AD0 /* AArch64InstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099B2862B92200732AD0 /* AArch64InstPrinter.c */; };
+		FB9F09CF2862B92200732AD0 /* AArch64BaseInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099C2862B92200732AD0 /* AArch64BaseInfo.c */; };
+		FB9F09D02862B92200732AD0 /* AArch64GenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099D2862B92200732AD0 /* AArch64GenRegisterInfo.inc */; };
+		FB9F09D12862B92200732AD0 /* AArch64GenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099F2862B92200732AD0 /* AArch64GenInstrInfo.inc */; };
+		FB9F09D22862B92200732AD0 /* AArch64Module.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09A02862B92200732AD0 /* AArch64Module.c */; };
+		FB9F09D32862B92200732AD0 /* MCInstrDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09A12862B92200732AD0 /* MCInstrDesc.c */; };
+		FB9F09D42862B92200732AD0 /* MCInst.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09A32862B92200732AD0 /* MCInst.c */; };
+		FB9F09D52862B92200732AD0 /* MCRegisterInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09A42862B92200732AD0 /* MCRegisterInfo.c */; };
+		FB9F09E42863199B00732AD0 /* CapStoneHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09E32863199B00732AD0 /* CapStoneHelper.m */; };
+		FB9F09E628633EA800732AD0 /* SwiftTypesStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09E528633EA800732AD0 /* SwiftTypesStoreInfo.swift */; };
 		FBB6569E284BB8E60081C991 /* DataExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB6569D284BB8E60081C991 /* DataExpand.swift */; };
 		FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB6569F284BBCBC0081C991 /* DataTool.swift */; };
 		FBB656A8284DC0830081C991 /* DyldInfoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656A7284DC0830081C991 /* DyldInfoCommand.swift */; };
@@ -71,7 +123,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				FB8F48272854AAF4005D0586 /* iOSToolsTest.zip in CopyFiles */,
+				FB1CE8582864690800C5CCC4 /* iOSToolsTest.zip in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,12 +150,111 @@
 		FB8F488A285DDCAE005D0586 /* SwiftNominalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNominalModel.swift; sourceTree = "<group>"; };
 		FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeBridge.swift; sourceTree = "<group>"; };
 		FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
+		FB8F492B286058D2005D0586 /* MachoTool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MachoTool-Bridging-Header.h"; sourceTree = "<group>"; };
+		FB8F492C28605DD3005D0586 /* ParseInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseInstruction.h; sourceTree = "<group>"; };
+		FB8F492D28605DD3005D0586 /* ParseInstruction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParseInstruction.m; sourceTree = "<group>"; };
 		FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesInterpreter.swift; sourceTree = "<group>"; };
 		FB9103752845013A0000AD84 /* ReferencesStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferencesStoreInfo.swift; sourceTree = "<group>"; };
 		FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringInterpreter.swift; sourceTree = "<group>"; };
 		FB910379284601C10000AD84 /* UStringStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringStoreInfo.swift; sourceTree = "<group>"; };
 		FB91037B284674320000AD84 /* CFStringStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStringStoreInfo.swift; sourceTree = "<group>"; };
 		FB9CCF03285347CB00EE910F /* ClassRefsStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRefsStoreInfo.swift; sourceTree = "<group>"; };
+		FB9F09432862B92100732AD0 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		FB9F09442862B92100732AD0 /* inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
+		FB9F09452862B92100732AD0 /* SStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStream.h; sourceTree = "<group>"; };
+		FB9F09462862B92100732AD0 /* myinttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myinttypes.h; sourceTree = "<group>"; };
+		FB9F09472862B92100732AD0 /* MathExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathExtras.h; sourceTree = "<group>"; };
+		FB9F09482862B92100732AD0 /* LEB128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEB128.h; sourceTree = "<group>"; };
+		FB9F09492862B92100732AD0 /* MCFixedLenDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCFixedLenDisassembler.h; sourceTree = "<group>"; };
+		FB9F094A2862B92100732AD0 /* cs_priv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cs_priv.h; sourceTree = "<group>"; };
+		FB9F094B2862B92100732AD0 /* cs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cs.c; sourceTree = "<group>"; };
+		FB9F094D2862B92100732AD0 /* capstone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = capstone.h; sourceTree = "<group>"; };
+		FB9F094E2862B92100732AD0 /* mips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mips.h; sourceTree = "<group>"; };
+		FB9F094F2862B92100732AD0 /* sparc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sparc.h; sourceTree = "<group>"; };
+		FB9F09502862B92100732AD0 /* systemz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemz.h; sourceTree = "<group>"; };
+		FB9F09512862B92100732AD0 /* arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arm.h; sourceTree = "<group>"; };
+		FB9F09522862B92100732AD0 /* x86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86.h; sourceTree = "<group>"; };
+		FB9F09532862B92100732AD0 /* ppc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppc.h; sourceTree = "<group>"; };
+		FB9F09542862B92100732AD0 /* arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arm64.h; sourceTree = "<group>"; };
+		FB9F09552862B92100732AD0 /* xcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcore.h; sourceTree = "<group>"; };
+		FB9F09562862B92100732AD0 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		FB9F09572862B92100732AD0 /* MCInstrDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInstrDesc.h; sourceTree = "<group>"; };
+		FB9F09582862B92100732AD0 /* MCRegisterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRegisterInfo.h; sourceTree = "<group>"; };
+		FB9F09592862B92100732AD0 /* MCInst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInst.h; sourceTree = "<group>"; };
+		FB9F095A2862B92100732AD0 /* SStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SStream.c; sourceTree = "<group>"; };
+		FB9F095B2862B92100732AD0 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
+		FB9F095C2862B92100732AD0 /* MCDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDisassembler.h; sourceTree = "<group>"; };
+		FB9F095F2862B92100732AD0 /* PPCMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCMapping.h; sourceTree = "<group>"; };
+		FB9F09602862B92100732AD0 /* PPCGenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenDisassemblerTables.inc; sourceTree = "<group>"; };
+		FB9F09612862B92200732AD0 /* PPCGenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenSubtargetInfo.inc; sourceTree = "<group>"; };
+		FB9F09622862B92200732AD0 /* PPCGenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenAsmWriter.inc; sourceTree = "<group>"; };
+		FB9F09632862B92200732AD0 /* PPCDisassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCDisassembler.c; sourceTree = "<group>"; };
+		FB9F09642862B92200732AD0 /* PPCPredicates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCPredicates.h; sourceTree = "<group>"; };
+		FB9F09652862B92200732AD0 /* PPCInstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCInstPrinter.h; sourceTree = "<group>"; };
+		FB9F09662862B92200732AD0 /* PPCMapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCMapping.c; sourceTree = "<group>"; };
+		FB9F09672862B92200732AD0 /* PPCGenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenRegisterInfo.inc; sourceTree = "<group>"; };
+		FB9F09682862B92200732AD0 /* PPCModule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCModule.c; sourceTree = "<group>"; };
+		FB9F09692862B92200732AD0 /* PPCInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCInstPrinter.c; sourceTree = "<group>"; };
+		FB9F096A2862B92200732AD0 /* PPCGenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenInstrInfo.inc; sourceTree = "<group>"; };
+		FB9F096B2862B92200732AD0 /* PPCDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCDisassembler.h; sourceTree = "<group>"; };
+		FB9F096D2862B92200732AD0 /* X86InstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86InstPrinter.h; sourceTree = "<group>"; };
+		FB9F096E2862B92200732AD0 /* X86Disassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Disassembler.c; sourceTree = "<group>"; };
+		FB9F096F2862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenDisassemblerTables_reduce.inc; sourceTree = "<group>"; };
+		FB9F09702862B92200732AD0 /* X86ATTInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86ATTInstPrinter.c; sourceTree = "<group>"; };
+		FB9F09712862B92200732AD0 /* X86GenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenRegisterInfo.inc; sourceTree = "<group>"; };
+		FB9F09722862B92200732AD0 /* X86GenAsmWriter_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter_reduce.inc; sourceTree = "<group>"; };
+		FB9F09732862B92200732AD0 /* X86GenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenInstrInfo.inc; sourceTree = "<group>"; };
+		FB9F09742862B92200732AD0 /* X86Module.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Module.c; sourceTree = "<group>"; };
+		FB9F09752862B92200732AD0 /* X86Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86Mapping.h; sourceTree = "<group>"; };
+		FB9F09762862B92200732AD0 /* X86DisassemblerDecoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86DisassemblerDecoder.c; sourceTree = "<group>"; };
+		FB9F09772862B92200732AD0 /* X86Disassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86Disassembler.h; sourceTree = "<group>"; };
+		FB9F09782862B92200732AD0 /* X86BaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86BaseInfo.h; sourceTree = "<group>"; };
+		FB9F09792862B92200732AD0 /* X86GenAsmWriter1.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter1.inc; sourceTree = "<group>"; };
+		FB9F097A2862B92200732AD0 /* X86DisassemblerDecoderCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86DisassemblerDecoderCommon.h; sourceTree = "<group>"; };
+		FB9F097B2862B92200732AD0 /* X86GenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenDisassemblerTables.inc; sourceTree = "<group>"; };
+		FB9F097C2862B92200732AD0 /* X86IntelInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86IntelInstPrinter.c; sourceTree = "<group>"; };
+		FB9F097D2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter1_reduce.inc; sourceTree = "<group>"; };
+		FB9F097E2862B92200732AD0 /* X86DisassemblerDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86DisassemblerDecoder.h; sourceTree = "<group>"; };
+		FB9F097F2862B92200732AD0 /* X86Mapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Mapping.c; sourceTree = "<group>"; };
+		FB9F09802862B92200732AD0 /* X86GenInstrInfo_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenInstrInfo_reduce.inc; sourceTree = "<group>"; };
+		FB9F09812862B92200732AD0 /* X86GenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter.inc; sourceTree = "<group>"; };
+		FB9F09832862B92200732AD0 /* ARMInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMInstPrinter.c; sourceTree = "<group>"; };
+		FB9F09842862B92200732AD0 /* ARMMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMMapping.h; sourceTree = "<group>"; };
+		FB9F09852862B92200732AD0 /* ARMGenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenAsmWriter.inc; sourceTree = "<group>"; };
+		FB9F09862862B92200732AD0 /* ARMDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMDisassembler.h; sourceTree = "<group>"; };
+		FB9F09872862B92200732AD0 /* ARMModule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMModule.c; sourceTree = "<group>"; };
+		FB9F09882862B92200732AD0 /* ARMAddressingModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMAddressingModes.h; sourceTree = "<group>"; };
+		FB9F09892862B92200732AD0 /* ARMBaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMBaseInfo.h; sourceTree = "<group>"; };
+		FB9F098A2862B92200732AD0 /* ARMMapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMMapping.c; sourceTree = "<group>"; };
+		FB9F098B2862B92200732AD0 /* ARMInstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMInstPrinter.h; sourceTree = "<group>"; };
+		FB9F098C2862B92200732AD0 /* ARMGenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenInstrInfo.inc; sourceTree = "<group>"; };
+		FB9F098D2862B92200732AD0 /* ARMGenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenRegisterInfo.inc; sourceTree = "<group>"; };
+		FB9F098E2862B92200732AD0 /* ARMGenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenDisassemblerTables.inc; sourceTree = "<group>"; };
+		FB9F098F2862B92200732AD0 /* ARMGenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenSubtargetInfo.inc; sourceTree = "<group>"; };
+		FB9F09902862B92200732AD0 /* ARMDisassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMDisassembler.c; sourceTree = "<group>"; };
+		FB9F09922862B92200732AD0 /* AArch64Disassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64Disassembler.h; sourceTree = "<group>"; };
+		FB9F09932862B92200732AD0 /* AArch64BaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64BaseInfo.h; sourceTree = "<group>"; };
+		FB9F09942862B92200732AD0 /* AArch64AddressingModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64AddressingModes.h; sourceTree = "<group>"; };
+		FB9F09952862B92200732AD0 /* AArch64InstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64InstPrinter.h; sourceTree = "<group>"; };
+		FB9F09962862B92200732AD0 /* AArch64GenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenAsmWriter.inc; sourceTree = "<group>"; };
+		FB9F09972862B92200732AD0 /* AArch64Mapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Mapping.c; sourceTree = "<group>"; };
+		FB9F09982862B92200732AD0 /* AArch64GenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenDisassemblerTables.inc; sourceTree = "<group>"; };
+		FB9F09992862B92200732AD0 /* AArch64GenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenSubtargetInfo.inc; sourceTree = "<group>"; };
+		FB9F099A2862B92200732AD0 /* AArch64Disassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Disassembler.c; sourceTree = "<group>"; };
+		FB9F099B2862B92200732AD0 /* AArch64InstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64InstPrinter.c; sourceTree = "<group>"; };
+		FB9F099C2862B92200732AD0 /* AArch64BaseInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64BaseInfo.c; sourceTree = "<group>"; };
+		FB9F099D2862B92200732AD0 /* AArch64GenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenRegisterInfo.inc; sourceTree = "<group>"; };
+		FB9F099E2862B92200732AD0 /* AArch64Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64Mapping.h; sourceTree = "<group>"; };
+		FB9F099F2862B92200732AD0 /* AArch64GenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenInstrInfo.inc; sourceTree = "<group>"; };
+		FB9F09A02862B92200732AD0 /* AArch64Module.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Module.c; sourceTree = "<group>"; };
+		FB9F09A12862B92200732AD0 /* MCInstrDesc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCInstrDesc.c; sourceTree = "<group>"; };
+		FB9F09A22862B92200732AD0 /* osxkernel_inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osxkernel_inttypes.h; sourceTree = "<group>"; };
+		FB9F09A32862B92200732AD0 /* MCInst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCInst.c; sourceTree = "<group>"; };
+		FB9F09A42862B92200732AD0 /* MCRegisterInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCRegisterInfo.c; sourceTree = "<group>"; };
+		FB9F09D62862B96200732AD0 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		FB9F09E22863199B00732AD0 /* CapStoneHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapStoneHelper.h; sourceTree = "<group>"; };
+		FB9F09E32863199B00732AD0 /* CapStoneHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapStoneHelper.m; sourceTree = "<group>"; };
+		FB9F09E528633EA800732AD0 /* SwiftTypesStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTypesStoreInfo.swift; sourceTree = "<group>"; };
 		FBB6569D284BB8E60081C991 /* DataExpand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExpand.swift; sourceTree = "<group>"; };
 		FBB6569F284BBCBC0081C991 /* DataTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTool.swift; sourceTree = "<group>"; };
 		FBB656A7284DC0830081C991 /* DyldInfoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyldInfoCommand.swift; sourceTree = "<group>"; };
@@ -169,6 +320,7 @@
 				FB910379284601C10000AD84 /* UStringStoreInfo.swift */,
 				FB91037B284674320000AD84 /* CFStringStoreInfo.swift */,
 				FB9CCF03285347CB00EE910F /* ClassRefsStoreInfo.swift */,
+				FB9F09E528633EA800732AD0 /* SwiftTypesStoreInfo.swift */,
 			);
 			path = "StoreInfo(存储信息)";
 			sourceTree = "<group>";
@@ -176,9 +328,174 @@
 		FB8F488E285F059A005D0586 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FB9F09D62862B96200732AD0 /* libc++.tbd */,
 				FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB9F04382861C72D00732AD0 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				FB9F09422862B92100732AD0 /* capstone */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		FB9F09422862B92100732AD0 /* capstone */ = {
+			isa = PBXGroup;
+			children = (
+				FB9F09432862B92100732AD0 /* utils.h */,
+				FB9F09442862B92100732AD0 /* inttypes.h */,
+				FB9F09452862B92100732AD0 /* SStream.h */,
+				FB9F09462862B92100732AD0 /* myinttypes.h */,
+				FB9F09472862B92100732AD0 /* MathExtras.h */,
+				FB9F09482862B92100732AD0 /* LEB128.h */,
+				FB9F09492862B92100732AD0 /* MCFixedLenDisassembler.h */,
+				FB9F094A2862B92100732AD0 /* cs_priv.h */,
+				FB9F094B2862B92100732AD0 /* cs.c */,
+				FB9F094C2862B92100732AD0 /* include */,
+				FB9F09572862B92100732AD0 /* MCInstrDesc.h */,
+				FB9F09582862B92100732AD0 /* MCRegisterInfo.h */,
+				FB9F09592862B92100732AD0 /* MCInst.h */,
+				FB9F095A2862B92100732AD0 /* SStream.c */,
+				FB9F095B2862B92100732AD0 /* utils.c */,
+				FB9F095C2862B92100732AD0 /* MCDisassembler.h */,
+				FB9F095D2862B92100732AD0 /* arch */,
+				FB9F09A12862B92200732AD0 /* MCInstrDesc.c */,
+				FB9F09A22862B92200732AD0 /* osxkernel_inttypes.h */,
+				FB9F09A32862B92200732AD0 /* MCInst.c */,
+				FB9F09A42862B92200732AD0 /* MCRegisterInfo.c */,
+			);
+			path = capstone;
+			sourceTree = "<group>";
+		};
+		FB9F094C2862B92100732AD0 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				FB9F094D2862B92100732AD0 /* capstone.h */,
+				FB9F094E2862B92100732AD0 /* mips.h */,
+				FB9F094F2862B92100732AD0 /* sparc.h */,
+				FB9F09502862B92100732AD0 /* systemz.h */,
+				FB9F09512862B92100732AD0 /* arm.h */,
+				FB9F09522862B92100732AD0 /* x86.h */,
+				FB9F09532862B92100732AD0 /* ppc.h */,
+				FB9F09542862B92100732AD0 /* arm64.h */,
+				FB9F09552862B92100732AD0 /* xcore.h */,
+				FB9F09562862B92100732AD0 /* platform.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FB9F095D2862B92100732AD0 /* arch */ = {
+			isa = PBXGroup;
+			children = (
+				FB9F095E2862B92100732AD0 /* PowerPC */,
+				FB9F096C2862B92200732AD0 /* X86 */,
+				FB9F09822862B92200732AD0 /* ARM */,
+				FB9F09912862B92200732AD0 /* AArch64 */,
+			);
+			path = arch;
+			sourceTree = "<group>";
+		};
+		FB9F095E2862B92100732AD0 /* PowerPC */ = {
+			isa = PBXGroup;
+			children = (
+				FB9F095F2862B92100732AD0 /* PPCMapping.h */,
+				FB9F09602862B92100732AD0 /* PPCGenDisassemblerTables.inc */,
+				FB9F09612862B92200732AD0 /* PPCGenSubtargetInfo.inc */,
+				FB9F09622862B92200732AD0 /* PPCGenAsmWriter.inc */,
+				FB9F09632862B92200732AD0 /* PPCDisassembler.c */,
+				FB9F09642862B92200732AD0 /* PPCPredicates.h */,
+				FB9F09652862B92200732AD0 /* PPCInstPrinter.h */,
+				FB9F09662862B92200732AD0 /* PPCMapping.c */,
+				FB9F09672862B92200732AD0 /* PPCGenRegisterInfo.inc */,
+				FB9F09682862B92200732AD0 /* PPCModule.c */,
+				FB9F09692862B92200732AD0 /* PPCInstPrinter.c */,
+				FB9F096A2862B92200732AD0 /* PPCGenInstrInfo.inc */,
+				FB9F096B2862B92200732AD0 /* PPCDisassembler.h */,
+			);
+			path = PowerPC;
+			sourceTree = "<group>";
+		};
+		FB9F096C2862B92200732AD0 /* X86 */ = {
+			isa = PBXGroup;
+			children = (
+				FB9F096D2862B92200732AD0 /* X86InstPrinter.h */,
+				FB9F096E2862B92200732AD0 /* X86Disassembler.c */,
+				FB9F096F2862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc */,
+				FB9F09702862B92200732AD0 /* X86ATTInstPrinter.c */,
+				FB9F09712862B92200732AD0 /* X86GenRegisterInfo.inc */,
+				FB9F09722862B92200732AD0 /* X86GenAsmWriter_reduce.inc */,
+				FB9F09732862B92200732AD0 /* X86GenInstrInfo.inc */,
+				FB9F09742862B92200732AD0 /* X86Module.c */,
+				FB9F09752862B92200732AD0 /* X86Mapping.h */,
+				FB9F09762862B92200732AD0 /* X86DisassemblerDecoder.c */,
+				FB9F09772862B92200732AD0 /* X86Disassembler.h */,
+				FB9F09782862B92200732AD0 /* X86BaseInfo.h */,
+				FB9F09792862B92200732AD0 /* X86GenAsmWriter1.inc */,
+				FB9F097A2862B92200732AD0 /* X86DisassemblerDecoderCommon.h */,
+				FB9F097B2862B92200732AD0 /* X86GenDisassemblerTables.inc */,
+				FB9F097C2862B92200732AD0 /* X86IntelInstPrinter.c */,
+				FB9F097D2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc */,
+				FB9F097E2862B92200732AD0 /* X86DisassemblerDecoder.h */,
+				FB9F097F2862B92200732AD0 /* X86Mapping.c */,
+				FB9F09802862B92200732AD0 /* X86GenInstrInfo_reduce.inc */,
+				FB9F09812862B92200732AD0 /* X86GenAsmWriter.inc */,
+			);
+			path = X86;
+			sourceTree = "<group>";
+		};
+		FB9F09822862B92200732AD0 /* ARM */ = {
+			isa = PBXGroup;
+			children = (
+				FB9F09832862B92200732AD0 /* ARMInstPrinter.c */,
+				FB9F09842862B92200732AD0 /* ARMMapping.h */,
+				FB9F09852862B92200732AD0 /* ARMGenAsmWriter.inc */,
+				FB9F09862862B92200732AD0 /* ARMDisassembler.h */,
+				FB9F09872862B92200732AD0 /* ARMModule.c */,
+				FB9F09882862B92200732AD0 /* ARMAddressingModes.h */,
+				FB9F09892862B92200732AD0 /* ARMBaseInfo.h */,
+				FB9F098A2862B92200732AD0 /* ARMMapping.c */,
+				FB9F098B2862B92200732AD0 /* ARMInstPrinter.h */,
+				FB9F098C2862B92200732AD0 /* ARMGenInstrInfo.inc */,
+				FB9F098D2862B92200732AD0 /* ARMGenRegisterInfo.inc */,
+				FB9F098E2862B92200732AD0 /* ARMGenDisassemblerTables.inc */,
+				FB9F098F2862B92200732AD0 /* ARMGenSubtargetInfo.inc */,
+				FB9F09902862B92200732AD0 /* ARMDisassembler.c */,
+			);
+			path = ARM;
+			sourceTree = "<group>";
+		};
+		FB9F09912862B92200732AD0 /* AArch64 */ = {
+			isa = PBXGroup;
+			children = (
+				FB9F09922862B92200732AD0 /* AArch64Disassembler.h */,
+				FB9F09932862B92200732AD0 /* AArch64BaseInfo.h */,
+				FB9F09942862B92200732AD0 /* AArch64AddressingModes.h */,
+				FB9F09952862B92200732AD0 /* AArch64InstPrinter.h */,
+				FB9F09962862B92200732AD0 /* AArch64GenAsmWriter.inc */,
+				FB9F09972862B92200732AD0 /* AArch64Mapping.c */,
+				FB9F09982862B92200732AD0 /* AArch64GenDisassemblerTables.inc */,
+				FB9F09992862B92200732AD0 /* AArch64GenSubtargetInfo.inc */,
+				FB9F099A2862B92200732AD0 /* AArch64Disassembler.c */,
+				FB9F099B2862B92200732AD0 /* AArch64InstPrinter.c */,
+				FB9F099C2862B92200732AD0 /* AArch64BaseInfo.c */,
+				FB9F099D2862B92200732AD0 /* AArch64GenRegisterInfo.inc */,
+				FB9F099E2862B92200732AD0 /* AArch64Mapping.h */,
+				FB9F099F2862B92200732AD0 /* AArch64GenInstrInfo.inc */,
+				FB9F09A02862B92200732AD0 /* AArch64Module.c */,
+			);
+			path = AArch64;
+			sourceTree = "<group>";
+		};
+		FB9F09E12863198C00732AD0 /* CapStoneHelper */ = {
+			isa = PBXGroup;
+			children = (
+				FB9F09E22863199B00732AD0 /* CapStoneHelper.h */,
+				FB9F09E32863199B00732AD0 /* CapStoneHelper.m */,
+			);
+			path = CapStoneHelper;
 			sourceTree = "<group>";
 		};
 		FBB656A6284DB8860081C991 /* DyldInfoInterpreter */ = {
@@ -219,6 +536,7 @@
 		FBCEE975283290150090B4E6 /* MachoTool */ = {
 			isa = PBXGroup;
 			children = (
+				FB9F04382861C72D00732AD0 /* Libs */,
 				FBC3489A28489115009B4AAE /* UnusedScan */,
 				FBCEE99F283290530090B4E6 /* Tools */,
 				FBCEE9A2283290630090B4E6 /* FileManager */,
@@ -307,12 +625,16 @@
 		FBCEE99F283290530090B4E6 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				FB9F09E12863198C00732AD0 /* CapStoneHelper */,
 				2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */,
 				FBCEE9A0283290530090B4E6 /* Utils.swift */,
 				FBB6569F284BBCBC0081C991 /* DataTool.swift */,
 				FB8F483B285AD1C0005D0586 /* SwiftClassUtils.swift */,
 				FB8F4883285C22FD005D0586 /* Consts.swift */,
 				FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */,
+				FB8F492B286058D2005D0586 /* MachoTool-Bridging-Header.h */,
+				FB8F492C28605DD3005D0586 /* ParseInstruction.h */,
+				FB8F492D28605DD3005D0586 /* ParseInstruction.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -399,53 +721,105 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB072DFF2839231A000B370B /* SymbolTableStoreInfo.swift in Sources */,
+				FB9F09A62862B92200732AD0 /* SStream.c in Sources */,
+				FB9F09D52862B92200732AD0 /* MCRegisterInfo.c in Sources */,
 				FBCEE993283290400090B4E6 /* JYBuildVersionCommand.swift in Sources */,
 				FB072E09283B235F000B370B /* IndirectSymbolTableEntryModel.swift in Sources */,
+				FB9F09B12862B92200732AD0 /* X86Disassembler.c in Sources */,
+				FB9F09BE2862B92200732AD0 /* X86GenInstrInfo_reduce.inc in Sources */,
+				FB9F09CA2862B92200732AD0 /* AArch64Mapping.c in Sources */,
 				FBCEE99A283290470090B4E6 /* TranslationRead.swift in Sources */,
 				FBCEE996283290400090B4E6 /* SectionHeader.swift in Sources */,
 				FB072E0F283E818E000B370B /* LazySymbolEntryModel.swift in Sources */,
 				FB91037A284601C10000AD84 /* UStringStoreInfo.swift in Sources */,
 				FBCEE99E2832904D0090B4E6 /* DataExplanation.swift in Sources */,
 				FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */,
+				FB9F09C32862B92200732AD0 /* ARMMapping.c in Sources */,
+				FB9F09B82862B92200732AD0 /* X86DisassemblerDecoder.c in Sources */,
 				FB8F488D285F04A7005D0586 /* RuntimeBridge.swift in Sources */,
+				FB9F09CE2862B92200732AD0 /* AArch64InstPrinter.c in Sources */,
+				FB9F09C62862B92200732AD0 /* ARMGenDisassemblerTables.inc in Sources */,
 				FBCEE9B52834D5A30090B4E6 /* StringInterpreter.swift in Sources */,
+				FB9F09D22862B92200732AD0 /* AArch64Module.c in Sources */,
 				FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */,
+				FB9F09D12862B92200732AD0 /* AArch64GenInstrInfo.inc in Sources */,
 				FB9103762845013A0000AD84 /* ReferencesStoreInfo.swift in Sources */,
 				FB91037C284674320000AD84 /* CFStringStoreInfo.swift in Sources */,
+				FB9F09D02862B92200732AD0 /* AArch64GenRegisterInfo.inc in Sources */,
+				FB9F09C72862B92200732AD0 /* ARMGenSubtargetInfo.inc in Sources */,
 				FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */,
 				FB8F483328571B0A005D0586 /* SwiftTypesInterpreter.swift in Sources */,
+				FB9F09BF2862B92200732AD0 /* X86GenAsmWriter.inc in Sources */,
+				FB9F09C02862B92200732AD0 /* ARMInstPrinter.c in Sources */,
 				FBCEE995283290400090B4E6 /* DynamicSymbolTableCompont.swift in Sources */,
+				FB9F09E42863199B00732AD0 /* CapStoneHelper.m in Sources */,
+				FB9F09E628633EA800732AD0 /* SwiftTypesStoreInfo.swift in Sources */,
 				FB63EC4A283F125E003CCCF7 /* StringTableStoreInfo.swift in Sources */,
 				FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */,
 				FBCEE98E283290400090B4E6 /* SymbolTableInterpreter.swift in Sources */,
 				FB072E03283A601B000B370B /* BaseStoreInfo.swift in Sources */,
 				FB8F483C285AD1C0005D0586 /* SwiftClassUtils.swift in Sources */,
+				FB9F09CB2862B92200732AD0 /* AArch64GenDisassemblerTables.inc in Sources */,
+				FB9F09B52862B92200732AD0 /* X86GenAsmWriter_reduce.inc in Sources */,
+				FB9F09AB2862B92200732AD0 /* PPCDisassembler.c in Sources */,
+				FB9F09B72862B92200732AD0 /* X86Module.c in Sources */,
 				FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */,
 				FB8F4884285C22FD005D0586 /* Consts.swift in Sources */,
 				FBCEE994283290400090B4E6 /* JYLoadCommand.swift in Sources */,
 				FBC3489F2848AF75009B4AAE /* ClassRefsInterpreter.swift in Sources */,
 				FBB6569E284BB8E60081C991 /* DataExpand.swift in Sources */,
 				FBCEE990283290400090B4E6 /* Macho.swift in Sources */,
+				FB9F09B22862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc in Sources */,
+				FB9F09D42862B92200732AD0 /* MCInst.c in Sources */,
+				FB9F09C52862B92200732AD0 /* ARMGenRegisterInfo.inc in Sources */,
 				FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */,
+				FB9F09C92862B92200732AD0 /* AArch64GenAsmWriter.inc in Sources */,
+				FB9F09D32862B92200732AD0 /* MCInstrDesc.c in Sources */,
+				FB9F09AF2862B92200732AD0 /* PPCInstPrinter.c in Sources */,
+				FB9F09C42862B92200732AD0 /* ARMGenInstrInfo.inc in Sources */,
+				FB9F09A72862B92200732AD0 /* utils.c in Sources */,
 				FBB656AC284E0BF10081C991 /* BindOperationCode.swift in Sources */,
+				FB9F09BC2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc in Sources */,
+				FB9F09B02862B92200732AD0 /* PPCGenInstrInfo.inc in Sources */,
 				FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */,
+				FB9F09BB2862B92200732AD0 /* X86IntelInstPrinter.c in Sources */,
+				FB9F09CD2862B92200732AD0 /* AArch64Disassembler.c in Sources */,
+				FB9F09A52862B92200732AD0 /* cs.c in Sources */,
 				FB8F488B285DDCAE005D0586 /* SwiftNominalModel.swift in Sources */,
 				FBCEE992283290400090B4E6 /* JYSymbolTableCommand.swift in Sources */,
+				FB9F09AE2862B92200732AD0 /* PPCModule.c in Sources */,
+				FB9F09BA2862B92200732AD0 /* X86GenDisassemblerTables.inc in Sources */,
 				2D0129E0283E8A4A00FF4186 /* ShellUtils.swift in Sources */,
 				FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */,
 				FBCEE991283290400090B4E6 /* JYMainCommand.swift in Sources */,
+				FB9F09C22862B92200732AD0 /* ARMModule.c in Sources */,
+				FB9F09BD2862B92200732AD0 /* X86Mapping.c in Sources */,
 				FBB656AE285073F80081C991 /* OperationCodeModel.swift in Sources */,
 				FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */,
+				FB9F09B32862B92200732AD0 /* X86ATTInstPrinter.c in Sources */,
+				FB8F492E28605DD4005D0586 /* ParseInstruction.m in Sources */,
+				FB9F09B92862B92200732AD0 /* X86GenAsmWriter1.inc in Sources */,
 				FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */,
 				FB9CCF04285347CB00EE910F /* ClassRefsStoreInfo.swift in Sources */,
+				FB9F09B42862B92200732AD0 /* X86GenRegisterInfo.inc in Sources */,
 				FBB656A8284DC0830081C991 /* DyldInfoCommand.swift in Sources */,
 				FB63EC4C283F58C6003CCCF7 /* LazySymbolStoreInfo.swift in Sources */,
 				FBC3489C28489141009B4AAE /* UnusedScanManager.swift in Sources */,
 				FBCEE9AE2833800C0090B4E6 /* JYSymbolTableEntryModel.swift in Sources */,
+				FB9F09AD2862B92200732AD0 /* PPCGenRegisterInfo.inc in Sources */,
 				FB072E07283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift in Sources */,
 				FBB656AA284DDAE80081C991 /* DyldInterpreter.swift in Sources */,
+				FB9F09CF2862B92200732AD0 /* AArch64BaseInfo.c in Sources */,
+				FB9F09CC2862B92200732AD0 /* AArch64GenSubtargetInfo.inc in Sources */,
+				FB9F09A92862B92200732AD0 /* PPCGenSubtargetInfo.inc in Sources */,
+				FB9F09A82862B92200732AD0 /* PPCGenDisassemblerTables.inc in Sources */,
 				FBCEE9AC283370E80090B4E6 /* MachModel.swift in Sources */,
+				FB9F09C12862B92200732AD0 /* ARMGenAsmWriter.inc in Sources */,
+				FB9F09C82862B92200732AD0 /* ARMDisassembler.c in Sources */,
+				FB9F09B62862B92200732AD0 /* X86GenInstrInfo.inc in Sources */,
 				FBCEE977283290150090B4E6 /* main.swift in Sources */,
+				FB9F09AA2862B92200732AD0 /* PPCGenAsmWriter.inc in Sources */,
+				FB9F09AC2862B92200732AD0 /* PPCMapping.c in Sources */,
 				FB072E13283E8714000B370B /* LazySymbolInterpreter.swift in Sources */,
 				FB9103742844F8D50000AD84 /* ReferencesInterpreter.swift in Sources */,
 				FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */,
@@ -463,7 +837,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -507,7 +881,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -523,7 +897,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -561,7 +935,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -576,12 +950,27 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G7ANJPJ6VB;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(SRCROOT)/capstone/include",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/swift",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_CFLAGS = (
+					"-DCAPSTONE_HAS_X86",
+					"-DCAPSTONE_HAS_ARM",
+					"-DCAPSTONE_HAS_ARM64",
+					"-DCAPSTONE_HAS_POWERPC",
+					"-D__STDC_LIMIT_MACROS",
+					"-D__STDC_FORMAT_MACROS",
+					"-D__STDC_CONSTANT_MACROS",
+					"-DCAPSTONE_USE_SYS_DYN_MEM",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/karthrine/Documents/GitHub/machoTool/MachoTool/Tools/MachoTool-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -592,12 +981,27 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G7ANJPJ6VB;
 				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(SRCROOT)/capstone/include",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/swift",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				OTHER_CFLAGS = (
+					"-DCAPSTONE_HAS_X86",
+					"-DCAPSTONE_HAS_ARM",
+					"-DCAPSTONE_HAS_ARM64",
+					"-DCAPSTONE_HAS_POWERPC",
+					"-D__STDC_LIMIT_MACROS",
+					"-D__STDC_FORMAT_MACROS",
+					"-D__STDC_CONSTANT_MACROS",
+					"-DCAPSTONE_USE_SYS_DYN_MEM",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/karthrine/Documents/GitHub/machoTool/MachoTool/Tools/MachoTool-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
