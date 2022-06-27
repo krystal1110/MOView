@@ -12,10 +12,10 @@ class DyldInterpreter: BaseInterpreter {
     
     init(wiht data: Data,
          is64Bit: Bool,
-         machoProtocol: MachoProtocol) {
+         SearchProtocol: SearchProtocol) {
 //        self.pointerLength = is64Bit ? 8 : 4
    
-        super.init(data, is64Bit: is64Bit, machoProtocol: machoProtocol, sectionVirtualAddress: 0)
+        super.init(data, is64Bit: is64Bit, SearchProtocol: SearchProtocol, sectionVirtualAddress: 0)
     }
     
     

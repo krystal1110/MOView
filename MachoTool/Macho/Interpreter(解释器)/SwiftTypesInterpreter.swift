@@ -6,7 +6,7 @@
 //
 
 import Foundation
- 
+
 
 
 
@@ -46,51 +46,62 @@ struct SwiftOverrideMethod {
     let method:SwiftMethod
 };
 
+ 
 
 
-class SwiftTypesInterpreter :BaseInterpreter{
+
+struct SwiftTypesInterpreter: Interpreter {
     
-    let machoData:Data
+    var dataSlice: Data
     
-    init(with data: Data,
-         is64Bit: Bool,
-         machoProtocol: MachoProtocol,
-         sectionVirtualAddress: UInt64,
-         machoData: Data) {
-        
-        self.machoData = machoData
-        super.init(data, is64Bit: is64Bit, machoProtocol: machoProtocol, sectionVirtualAddress: sectionVirtualAddress)
+    var section: Section64?
+    
+    var searchProtocol: SearchProtocol
+    
+    let pointerLength: Int = 8
+    
+    let data: Data
+    
+    init(with data:Data , dataSlice: Data, section:Section64,  searchProtocol:SearchProtocol){
+        self.data = data
+        self.dataSlice = dataSlice
+        self.section = section
+        self.searchProtocol = searchProtocol
     }
     
-    func transitionStoreInfo(_ fileOffset:Int64, title:String , subTitle:String) -> SwiftTypesStoreInfo{
+    
+    // 转换为 stroeInfo 存储信息
+    func transitionData()  -> [SwiftNominalModel] {
+        
+        let fileOffset = Int64(section!.fileOffset)
         
         var nominalList:[SwiftNominalModel] = [];
         
-        let numberOfTypes = data.count / 4
+        let numberOfTypes = dataSlice.count / 4
         for i in 0..<numberOfTypes {
             let localOffset =  i * 4
             
             let tmpPtr = UInt64(fileOffset) + UInt64(localOffset)
-            let nominalLocalOffset:Int32 =  self.machoData.readI32(offset: Int(tmpPtr))  //-22140
+            let nominalLocalOffset:Int32 =  self.data.readI32(offset: Int(tmpPtr))  //-22140
             
              //地址偏移
             let nominalArchOffset:Int64 = Int64(fileOffset) + Int64(localOffset) + Int64(nominalLocalOffset);
             
             let nominalPtr:UInt64 =  UInt64(nominalArchOffset)
             
-            let flags:UInt32 = machoData.readU32(offset: Int(nominalPtr))
+            let flags:UInt32 = data.readU32(offset: Int(nominalPtr))
             
 //            parentVal    Int32    16777228
-//            let parentVal:Int32 = machoData.readI32(offset: nominalPtr.add(4).toInt)   // 可能是模块名
+//            let parentVal:Int32 = data.readI32(offset: nominalPtr.add(4).toInt)   // 可能是模块名
             
 //            namePtr    UInt64    4295111164 通过fix为 143868
-            let namePtr = machoData.readMove(nominalPtr.add(8).toInt).fix()
+            let namePtr = data.readMove(nominalPtr.add(8).toInt).fix()
                
-            let nameStr: String = machoData.readCString(from: Int(namePtr)) ?? ""
+            let nameStr: String = data.readCString(from: Int(namePtr)) ?? ""
                
            
             //accessorPtr对应的是 metaData 访问函数将始终返回正确的元数据记录;
-            let accessorPtr = machoData.readMove(nominalPtr.add(12).toInt).fix()
+            let accessorPtr = data.readMove(nominalPtr.add(12).toInt).fix()
         
             
             let obj: SwiftNominalModel = SwiftNominalModel()
@@ -109,11 +120,11 @@ class SwiftTypesInterpreter :BaseInterpreter{
                 // 结构体
             }
             // 拿到 fieldDescriptor
-            let fieldDescriptorPtr:UInt64 = machoData.readMove(nominalPtr.add(4 * 4).toInt).fix();
+            let fieldDescriptorPtr:UInt64 = data.readMove(nominalPtr.add(4 * 4).toInt).fix();
             dumpFieldDescriptor(fieldDescriptorPtr, to: obj)
             
-            let mangledTypeNamePtr = machoData.readMove(Int(fieldDescriptorPtr)).fix();
-            if let mangledTypeName = machoData.readCString(from: mangledTypeNamePtr.toInt) {
+            let mangledTypeNamePtr = data.readMove(Int(fieldDescriptorPtr)).fix();
+            if let mangledTypeName = data.readCString(from: mangledTypeNamePtr.toInt) {
                 //Log("    mangledTypeName \(mangledTypeName) \(mangledTypeNamePtr.desc)")
                 obj.mangledTypeName = mangledTypeName;
             }
@@ -122,13 +133,11 @@ class SwiftTypesInterpreter :BaseInterpreter{
             
           
             
-            print("🔥🔥🔥🔥🔥🔥")
-            print("类名为 \(obj.typeName)   \n我的父类为 \(obj.superClassName) \n我拥有\(obj.fields.count)属性")
+//            print("🔥🔥🔥🔥🔥🔥")
+//            print("类名为 \(obj.typeName)   \n我的父类为 \(obj.superClassName) \n我拥有\(obj.fields.count)属性")
         }
         
-        return SwiftTypesStoreInfo(with: self.data, is64Bit:is64Bit,title: title, subTitle: subTitle,sectionVirtualAddress: self.sectionVirtualAddress,swiftTypesObjList: nominalList)
-        
-        
+        return nominalList
     }
     
     
@@ -139,21 +148,21 @@ class SwiftTypesInterpreter :BaseInterpreter{
     private func resolveSuperClassName(_ nominalPtr: UInt64) -> String {
         //nominalPtr
         let ptr = nominalPtr.add(4 * 5)
-        let superClassTypeVal = self.machoData.readI32(offset: Int(ptr));
+        let superClassTypeVal = self.data.readI32(offset: Int(ptr));
         if (superClassTypeVal == 0) {
             return "";
         }
         var retName: String = "";
         let superClassRefPtr = ptr.add(Int(superClassTypeVal));
-        if let superRefStr = self.machoData.readCString(from:Int(superClassRefPtr)), !superRefStr.isEmpty {
+        if let superRefStr = self.data.readCString(from:Int(superClassRefPtr)), !superRefStr.isEmpty {
             retName = superRefStr; // resolve later
         }
         return retName;
     }
     
     private func dumpFieldDescriptor(_ fieldDescriptorPtr: UInt64, to: SwiftNominalModel ){
-        
-        let numFields = machoData.readU32(offset: fieldDescriptorPtr.add(4 + 4 + 2 + 2).toInt)
+        print("\(fieldDescriptorPtr.add(4 + 4 + 2 + 2).toInt)")
+        let numFields = data.readU32(offset: fieldDescriptorPtr.add(4 + 4 + 2 + 2).toInt)
         if (0 == numFields){
             return
         }
@@ -170,8 +179,8 @@ class SwiftTypesInterpreter :BaseInterpreter{
             /*
              获取是什么类型 例如 Int a ，这里获取的 type 就是 Int(Type得到的是 Si 需要转换成 Int)
              **/
-            let typeNamePtr = machoData.readMove(fieldAddress.add(4).toInt).fix()
-            let typeName = machoData.readCString(from: typeNamePtr.toInt)
+            let typeNamePtr = data.readMove(fieldAddress.add(4).toInt).fix()
+            let typeName = data.readCString(from: typeNamePtr.toInt)
             
             if let type = typeName, (type.count <= 0 || type.count > 100) {
                 print("---")
@@ -181,8 +190,8 @@ class SwiftTypesInterpreter :BaseInterpreter{
             /*
              获取属性名称 例如 Int a ，这里获取的 fieldName 就是 a
              **/
-            let fieldNamePtr = machoData.readMove(fieldAddress.add(8).toInt).fix();
-            let fieldName = machoData.readCString(from: fieldNamePtr.toInt);
+            let fieldNamePtr = data.readMove(fieldAddress.add(8).toInt).fix();
+            let fieldName = data.readCString(from: fieldNamePtr.toInt);
             
             if let field = fieldName, (field.count <= 0 || field.count > 100) {
                 continue

@@ -141,6 +141,47 @@ class Utils {
         guard length != 0 else { fatalError() }
         return range.upperBound + distance ..< range.upperBound + distance + length
     }
+    
+    static func readCharToString<T>(_ ptr: inout T) -> String {
+          let str = withUnsafePointer(to: ptr) {
+            $0.withMemoryRebound(to: UInt8.self, capacity: MemoryLayout.size(ofValue: ptr)) {
+                String(cString: $0)
+            }
+          }
+        return str
+    }
+    
+    
+    
+    
+    static func strStr(_ haystack: String, _ needle: String) -> Bool {
+        if  Utils.sunday(text: Array(haystack), pattern: Array(needle)) == -1 {
+            return false
+        }else{
+            return true
+        }
+    }
+    
+    private static func sunday(text: [Character], pattern: [Character]) -> Int {
+        let m = text.count, n = pattern.count
+        guard m >= n else { return -1 }
+        guard n > 0 else { return -1 }
+        
+        let shift = pattern.enumerated().reduce(into: [Character: Int]()) { (result, arg1) in
+            result[arg1.element] = n - arg1.offset
+        }
+        var i = 0
+        while i <= m - n {
+            var j = 0
+            while j < n && pattern[j] == text[i + j] { j += 1 }
+            if j >= n { return i }
+            if i + n >= m { break }
+            i += shift[text[i + n], default: n + 1]
+        }
+        
+        return -1
+    }
+    
 }
 
 extension String {
@@ -210,6 +251,15 @@ extension Data {
     func readMove(_ offset: Int) -> UInt64 {
         let val = readU32(offset: offset)
         return offset.add(Int64(val))
+    }
+    
+    
+    func extract<T>(_ type: T.Type, offset: Int = 0) -> T {
+        let data = self[offset..<offset + MemoryLayout<T>.size];
+        let ret = data.withUnsafeBytes { (ptr:UnsafeRawBufferPointer) -> T in
+            return ptr.load(as: T.self)
+        }
+        return ret;
     }
     
     

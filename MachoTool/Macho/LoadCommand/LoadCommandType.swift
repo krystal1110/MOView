@@ -1,11 +1,12 @@
 //
-//  JYLoadCommand.swift
-//  MachOTool
+//  LoadCommandType.swift
+//  MachoTool
 //
-//  Created by karthrine on 2022/5/10.
+//  Created by karthrine on 2022/6/24.
 //
 
 import Foundation
+
 
 enum LoadCommandType: UInt32 {
     // ref: <mach-o/loader.h>
@@ -183,38 +184,12 @@ enum LoadCommandType: UInt32 {
     }
 }
 
-class JYLoadCommand: MachoComponent {
-    let type: LoadCommandType
 
-    required init(with dataSlice: Data, commandType: LoadCommandType, translationStore: TranslationRead?) {
-        type = commandType
-        super.init(dataSlice)
-    }
 
-//    let type: LoadCommandType
-//    let translationStore: TranslationStore
-//
-//    override var componentTitle: String { "Load Command" }
-//    override var componentSubTitle: String { type.name }
-//
-//    override func numberOfTranslationSections() -> Int {
-//        return 1
-//    }
-//
-//    override func numberOfTranslationItems(at section: Int) -> Int {
-//        return translationStore.items.count
-//    }
-//
-//    override func translationItem(at indexPath: IndexPath) -> TranslationItem {
-//        return translationStore.items[indexPath.item]
-//    }
-//
-//    required init(with type: LoadCommandType, data: DataSlice, translationStore: TranslationStore? = nil) {
-//        self.type = type
-//        let translationStore = translationStore ?? TranslationStore(machoDataSlice: data.truncated(from: 0, length: 8))
-//        translationStore.insert(TranslationItemContent(description: "Load Command Size", explanation: data.count.hex), forRange: data.absoluteRange(4, 4), at: .zero)
-//        translationStore.insert(TranslationItemContent(description: "Load Command Type", explanation: type.name), forRange: data.absoluteRange(0, 4), at: .zero)
-//        self.translationStore = translationStore
-//        super.init(data)
-//    }
+enum SegmentType: String {
+    case TEXT = "__TEXT"
+    case DATA = "__DATA"
+    case PAGEZERO = "__PAGEZERO"
+    case LINKEDIT = "__LINKEDIT"
 }
+

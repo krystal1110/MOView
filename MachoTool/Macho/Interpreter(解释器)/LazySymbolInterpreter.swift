@@ -9,32 +9,37 @@ import Foundation
 
 struct SymbolPointer {}
 
-/*
-  LazySymobl 以及 No-LazySymbol 解析器
- **/
-class LazySymbolInterpreter :BaseInterpreter {
-    let numberOfPointers: Int
-    let pointerSize: Int
-    let startIndexInIndirectSymbolTable: Int
-    let sectionType: SectionType
+ 
 
-    init(with data: Data, is64Bit: Bool,
-         machoProtocol: MachoProtocol,
-         sectionVirtualAddress:UInt64,
-         sectionType: SectionType,
-         startIndexInIndirectSymbolTable: Int) {
-        let pointerSize = is64Bit ? 8 : 4
-        self.pointerSize = pointerSize
-        numberOfPointers = data.count / pointerSize
-        self.sectionType = sectionType
-        self.startIndexInIndirectSymbolTable = startIndexInIndirectSymbolTable
-        super.init(data, is64Bit: is64Bit, machoProtocol: machoProtocol, sectionVirtualAddress: sectionVirtualAddress)
+struct LazySymbolInterpreter: Interpreter {
+    
+    var dataSlice: Data
+    
+    var section: Section64?
+    
+    var searchProtocol: SearchProtocol
+    
+    let numberOfPointers: Int
+    let pointerSize: Int = 8
+    let startIndexInIndirectSymbolTable: Int
+    let sectionType: SectionType?
+    
+    init(with  dataSlice: Data, section:Section64,  searchProtocol:SearchProtocol){
+        self.dataSlice = dataSlice
+        self.section = section
+        self.searchProtocol = searchProtocol
+        numberOfPointers = dataSlice.count / pointerSize
+        startIndexInIndirectSymbolTable = Int(section.info.reserved1)
+        
+        let sectionTypeRawValue = section.info.flags & 0x000000FF
+        self.sectionType = SectionType(rawValue: sectionTypeRawValue)
     }
+ 
 
     // 转换为 stroeInfo 存储信息
-    func transitionStoreInfo(title:String , subTitle:String ) -> LazySymbolStoreInfo {
+    func transitionData() -> [LazySymbolEntryModel] {
         
-        var modelList = MachoModel<LazySymbolEntryModel>.init().generateVessel(data: self.data, is64Bit: is64Bit)
+        var modelList = MachoModel<LazySymbolEntryModel>.init().generateVessel(data: dataSlice, is64Bit: true)
         
         // 在外层转换 因为Model是固定生成的 外层转换后塞进去
         for index in 0..<modelList.count {
@@ -44,21 +49,21 @@ class LazySymbolInterpreter :BaseInterpreter {
             modelList[index] = model
         }
         
-        return LazySymbolStoreInfo(with: self.data, is64Bit:is64Bit, title: title, subTitle: subTitle, sectionVirtualAddress: sectionVirtualAddress,lazySymbolTableList: modelList)
+        return modelList
     }
     
     
     func translationItem(at index:Int) -> ExplanationItem {
-        let pointerRawData = DataTool.interception(with: data, from: index * pointerSize, length: pointerSize)
-        let pointerRawValue = self.is64Bit ? pointerRawData.UInt64 : UInt64(pointerRawData.UInt32)
+        let pointerRawData = DataTool.interception(with: dataSlice, from: index * pointerSize, length: pointerSize)
+        let pointerRawValue =   pointerRawData.UInt64
         let indirectSymbolTableIndex = index + startIndexInIndirectSymbolTable
         
         var symbolName: String?
         
-        if let indirectSymbolTableEntry = machoProtocol.indexInIndirectSymbolTable(at: indirectSymbolTableIndex),
+        if let indirectSymbolTableEntry = searchProtocol.indexInIndirectSymbolTable(at: indirectSymbolTableIndex),
            
-           let symbolTableEntry = machoProtocol.indexInSymbolTable(at: indirectSymbolTableEntry.symbolTableIndex),
-           let _symbolName = machoProtocol.stringInStringTable(at: Int(symbolTableEntry.indexInStringTable)) {
+           let symbolTableEntry = searchProtocol.indexInSymbolTable(at: indirectSymbolTableEntry.symbolTableIndex),
+           let _symbolName = searchProtocol.stringInStringTable(at: Int(symbolTableEntry.indexInStringTable)) {
            symbolName = _symbolName
         }
         
@@ -69,7 +74,7 @@ class LazySymbolInterpreter :BaseInterpreter {
             description += " (To be fixed by dyld)"
         }
          
-        return ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: data, start: index * pointerSize, pointerSize),
+        return ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: dataSlice, start: index * pointerSize, pointerSize),
                                model: ExplanationModel(description: description,
                                                        explanation: pointerRawValue.hex,
                                                        

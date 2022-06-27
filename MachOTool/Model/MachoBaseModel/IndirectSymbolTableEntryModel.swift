@@ -24,21 +24,21 @@ struct IndirectSymbolTableEntryModel: MachoExplainModel {
         symbolTableIndex = Int(data.UInt32)
     }
 
-    func translationItem(machoProtocol: MachoProtocol) -> ExplanationItem? {
-        var symbolName: String?
-        let symbolEntryModel = machoProtocol.indexInSymbolTable(at: symbolTableIndex)
-        guard let symbolEntryModel = symbolEntryModel?.indexInStringTable else {
-            return ExplanationItem(sourceDataRange: entryRange,
-                                   model: ExplanationModel(description: "Symbol Table Index",
-                                                           explanation: "\(symbolTableIndex)",
-                                                           extraDescription: "Referrenced Symbol",
-                                                           extraExplanation: "🔥🔥🔥 Unknown Symbol"))
-        }
-        symbolName = machoProtocol.stringInStringTable(at: Int(symbolEntryModel))
-        return ExplanationItem(sourceDataRange: entryRange,
-                               model: ExplanationModel(description: "Symbol Table Index",
-                                                       explanation: "\(symbolTableIndex)",
-                                                       extraDescription: "Referrenced Symbol",
-                                                       extraExplanation: symbolName))
-    }
+//    func translationItem(SearchProtocol: SearchProtocol) -> ExplanationItem? {
+//        var symbolName: String?
+//        let symbolEntryModel = SearchProtocol.indexInSymbolTable(at: symbolTableIndex)
+//        guard let symbolEntryModel = symbolEntryModel?.indexInStringTable else {
+//            return ExplanationItem(sourceDataRange: entryRange,
+//                                   model: ExplanationModel(description: "Symbol Table Index",
+//                                                           explanation: "\(symbolTableIndex)",
+//                                                           extraDescription: "Referrenced Symbol",
+//                                                           extraExplanation: "🔥🔥🔥 Unknown Symbol"))
+//        }
+//        symbolName = SearchProtocol.stringInStringTable(at: Int(symbolEntryModel))
+//        return ExplanationItem(sourceDataRange: entryRange,
+//                               model: ExplanationModel(description: "Symbol Table Index",
+//                                                       explanation: "\(symbolTableIndex)",
+//                                                       extraDescription: "Referrenced Symbol",
+//                                                       extraExplanation: symbolName))
+//    }
 }
