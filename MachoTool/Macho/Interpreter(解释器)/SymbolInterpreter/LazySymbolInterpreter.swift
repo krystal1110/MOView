@@ -1,4 +1,4 @@
-//
+
 //  LazySymbolInterpreter.swift
 //  MachoTool
 //
@@ -9,7 +9,9 @@ import Foundation
 
 struct SymbolPointer {}
 
- 
+/*
+   用于解析懒加载符号表 lazy-symbol / nolazy-symbol
+ **/
 
 struct LazySymbolInterpreter: Interpreter {
     
@@ -38,19 +40,19 @@ struct LazySymbolInterpreter: Interpreter {
 
     // 转换为 stroeInfo 存储信息
     func transitionData() -> [LazySymbolEntryModel] {
-        
-        var modelList = MachoModel<LazySymbolEntryModel>.init().generateVessel(data: dataSlice, is64Bit: true)
-        
-        // 在外层转换 因为Model是固定生成的 外层转换后塞进去
-        for index in 0..<modelList.count {
-            var model = modelList[index]
-            let item = translationItem(at: index)
-            model.explanationItem = item
-            modelList[index] = model
+        let modelSize = 8
+        let numberOfModels = dataSlice.count / modelSize
+        var models: [LazySymbolEntryModel] = []
+        for index in 0 ..< numberOfModels {
+            let startIndex = index * modelSize
+            let modelData = DataTool.interception(with: dataSlice, from: startIndex, length: modelSize)
+            var model = LazySymbolEntryModel(with: modelData)
+            model.explanationItem = translationItem(at: index)
+            models.append(model)
         }
-        
-        return modelList
+        return models
     }
+    
     
     
     func translationItem(at index:Int) -> ExplanationItem {
@@ -60,11 +62,8 @@ struct LazySymbolInterpreter: Interpreter {
         
         var symbolName: String?
         
-        if let indirectSymbolTableEntry = searchProtocol.indexInIndirectSymbolTable(at: indirectSymbolTableIndex),
-           
-           let symbolTableEntry = searchProtocol.indexInSymbolTable(at: indirectSymbolTableEntry.symbolTableIndex),
-           let _symbolName = searchProtocol.stringInStringTable(at: Int(symbolTableEntry.indexInStringTable)) {
-           symbolName = _symbolName
+        if let _symbolName = searchProtocol.searchInIndirectSymbolTableList(at: indirectSymbolTableIndex){
+            symbolName = _symbolName
         }
         
         var description = "Pointer Raw Value"
@@ -81,6 +80,8 @@ struct LazySymbolInterpreter: Interpreter {
                                                        extraDescription: "Symbol Name of the Corresponding Indirect Symbol Table Entry",
                                                        extraExplanation: symbolName))
     }
+    
+ 
     
  
 

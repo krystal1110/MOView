@@ -8,12 +8,8 @@
 import Foundation
 
 
-struct ObjcPointer64EnterModel: MachoExplainModel {
+struct ObjcPointer64EnterModel {
     
-    static func modelSize( ) -> Int {
-        return 8
-    }
-
     var explanationItem: ExplanationItem? = nil
     var data:Data
     init(with data: Data, is64Bit: Bool) {

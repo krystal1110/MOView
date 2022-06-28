@@ -9,6 +9,9 @@ import Foundation
 import MachO
 
 
+ 
+
+
 let byteSwappedOrder = NXByteOrder(rawValue: 0)
 
 protocol MachOLoadCommandType {

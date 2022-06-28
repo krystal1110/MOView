@@ -50,9 +50,11 @@ struct StringInterpreter: Interpreter {
                 continue
             }
             let nextCStringStartIndex = lastIndex + 1 // lastIdnex points to last null, ignore
+            
             let nextCStringDataLength = indexOfCurNull - nextCStringStartIndex
+            
             var cStringPosition = StringPosition(startOffset: nextCStringStartIndex,
-                                                 virtualAddress: Swift.UInt64(nextCStringStartIndex) + section!.info.addr,
+                                                 virtualAddress: Swift.UInt64(nextCStringStartIndex),
                                                  length: nextCStringDataLength)
             
             cStringPosition.explanationItem = translationItem(with: cStringPosition)
@@ -89,6 +91,9 @@ extension StringInterpreter {
     // 根据距离字符串表首地址 首地址 + 偏移地址 = offset 拿到字符串
     func findString(at offset: Int) -> String? {
         let rawData = self.dataSlice
+        if offset > rawData.count {
+            return nil
+        }
         for index in offset ..< rawData.count {
             let byte = rawData[rawData.startIndex + index]
             if byte != 0 { continue }

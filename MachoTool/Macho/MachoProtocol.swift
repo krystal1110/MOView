@@ -13,11 +13,13 @@ protocol SearchProtocol: AnyObject {
     // 根据offset -> 在stringSymbol查找 symbolName
     func stringInStringTable(at offset: Int) -> String?
 
-    // 根据index在SymbolTable中找到对应的SymbolTableEntryModel
-    func indexInSymbolTable(at index: Int) -> SymbolTableModel?
-
-    // 根据index在间接符号表（IndirectSymbolTable）找到对应的 IndirectSymbolTableEntryModel
-    func indexInIndirectSymbolTable(at index: Int) -> IndirectSymbolTableEntryModel?
+ 
+    // 查找字符串根据 SymbolTableList数组中的索引index查找符号
+    func searchStringInSymbolTableIndex(at index: Int)  -> String?
+    
+    
+    // 根据index在间接符号表（IndirectSymbolTable）找到对应的 String
+    func searchInIndirectSymbolTableList(at index: Int) -> String?
     
     func searchString(by virtualAddress: UInt64) -> String?
     

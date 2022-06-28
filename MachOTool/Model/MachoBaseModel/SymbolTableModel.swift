@@ -144,8 +144,6 @@ enum SymbolType {
 }
 
 struct SymbolTableModel {
-   
-
     
     let searchProtocol: SearchProtocol
     
@@ -171,7 +169,7 @@ struct SymbolTableModel {
         let indexInStringTable =  DataTool.interception(with: data, from: .zero, length: 4).UInt32
         self.indexInStringTable = indexInStringTable
         self.indexInStringTableRange = DataTool.absoluteRange(with: data, start: .zero, 4)
-    
+        
         
         /*
          * n_type
@@ -207,56 +205,7 @@ struct SymbolTableModel {
         self.nDesc = nDesc
         self.nValue = nValue
         
-        let symbolTypeDesp: String = "Symbol Type"
-        var symbolTypeExplanation: String = symbolType.readable
         
-        let nSectDesp: String = "Section Ordinal"
-        var nSectExplanation: String = "\(nSect)"
-        
-        let nDescDesp: String = "Descriptions"
-        let nDescExplanation: String = SymbolTableModel.flagsFrom(nDesc: nDesc, symbolType: symbolType).joined(separator: "\n")
-        
-        var nValueDesp: String = "Value"
-        var nValueExplanation: String = "\(nValue)"
-        var nValueExtraDesp: String?
-        var nValueExtraExplanation: String?
-        
-        switch symbolType {
-        case .undefined:
-            nSectExplanation = "0 (NO_SECT)"
-        case .absolute:
-            nSectExplanation = "0 (NO_SECT)"
-        case .section:
-            symbolTypeExplanation += (searchProtocol.sectionName(at: Int(nSect)) + " (N_SECT)")
-        case .indirect:
-            nValueDesp = "String table offset"
-            nValueExplanation = nValue.hex
-            nValueExtraDesp = "Referred string"
-            nValueExtraExplanation = searchProtocol.stringInStringTable(at: Int(nValue))
-        default:
-            break
-        }
-        
-//        translaitonItems.append(TranslationItem(sourceDataRange: nTypeByteRange,
-//                                                content: TranslationItemContent(description: symbolTypeDesp,
-//                                                                                explanation: symbolTypeExplanation)))
-//
-//        translaitonItems.append(TranslationItem(sourceDataRange: nTypeByteRange,
-//                                                content: TranslationItemContent(description: "Private External / External",
-//                                                                                explanation: "\(isPrivateExternalSymbol) / \(isExternalSymbol)")))
-//
-//        translaitonItems.append(TranslationItem(sourceDataRange: data.absoluteRange(5, 1),
-//                                                content: TranslationItemContent(description: nSectDesp,
-//                                                                                explanation: nSectExplanation)))
-//
-//        translaitonItems.append(TranslationItem(sourceDataRange: data.absoluteRange(6, 2),
-//                                                content: TranslationItemContent(description: nDescDesp,
-//                                                                                explanation: nDescExplanation)))
-//
-//        translaitonItems.append(TranslationItem(sourceDataRange: data.absoluteRange(8, is64Bit ? 8 : 4),
-//                                                content: TranslationItemContent(description: nValueDesp, explanation: nValueExplanation,
-//                                                                                extraDescription: nValueExtraDesp, extraExplanation: nValueExtraExplanation,
-//                                                                                hasDivider: true)))
         
         self.translaitonItems = translaitonItems
         
@@ -345,33 +294,39 @@ struct SymbolTableModel {
         return flags
     }
     
-    func translationItem(at index: Int) -> ExplanationItem {
-        
-        // string searching takes too much time. so make it lazy
-        if index == 0 {
-            let symbolName: String
-            if indexInStringTable == 0 {
-                symbolName = "" // if zero, means empty string
-            } else {
-                guard let symbolStringFromStringTable = searchProtocol.stringInStringTable(at: Int(indexInStringTable)) else {
-                    fatalError() /* didn't find symbol string. unexpected */
-                }
-                symbolName = symbolStringFromStringTable
+    
+    
+    // lazy find Symbol Name
+    func findSymbolName() -> ExplanationItem {
+        let symbolName: String
+        if indexInStringTable == 0 {
+            symbolName = "" // if zero, means empty string
+        } else {
+            guard let symbolStringFromStringTable = searchProtocol.stringInStringTable(at: Int(indexInStringTable)) else {
+                fatalError() /* didn't find symbol string. unexpected */
             }
-            
-            return ExplanationItem(sourceDataRange: indexInStringTableRange,
-                                   model:  ExplanationModel(description: "String table offset", explanation: indexInStringTable.hex,
-                                                                   extraDescription: "Symbol Name", extraExplanation: symbolName))
+            symbolName = symbolStringFromStringTable
         }
         
-        return translaitonItems[index - 1]
+        return ExplanationItem(sourceDataRange: indexInStringTableRange,
+                               model:  ExplanationModel(description: "String table offset", explanation: indexInStringTable.hex,
+                                                        extraDescription: "Symbol Name", extraExplanation: symbolName))
     }
     
-    static func modelSize(is64Bit: Bool) -> Int {
-        return is64Bit ? 16 : 12
+    
+    func findSymbolName() -> String? {
+        let symbolName: String
+        if indexInStringTable == 0 {
+            symbolName = "" // if zero, means empty string
+        } else {
+            guard let symbolStringFromStringTable = searchProtocol.stringInStringTable(at: Int(indexInStringTable)) else {
+                fatalError() /* didn't find symbol string. unexpected */
+            }
+            symbolName = symbolStringFromStringTable
+        }
+        
+        return  symbolName
     }
     
-    static func numberOfTranslationItems() -> Int {
-        return 6
-    }
+    
 }

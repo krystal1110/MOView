@@ -7,16 +7,14 @@
 
 import Foundation
 
-struct LazySymbolEntryModel: MachoExplainModel {
+struct LazySymbolEntryModel {
     
-    static func modelSize( ) -> Int {
-        return 8
-    }
+  
 
     let startOffset:Int
     var explanationItem: ExplanationItem? = nil
     
-    init(with data: Data, is64Bit: Bool) {
+    init(with data: Data) {
         self.startOffset = data.startIndex
     }
 

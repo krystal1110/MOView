@@ -104,7 +104,7 @@ struct SwiftTypesInterpreter: Interpreter {
             let accessorPtr = data.readMove(nominalPtr.add(12).toInt).fix()
         
             
-            let obj: SwiftNominalModel = SwiftNominalModel()
+            var obj: SwiftNominalModel = SwiftNominalModel()
             obj.typeName = nameStr
             obj.contextDescriptorFlag = SwiftContextDescriptorFlags(flags)
             obj.nominalOffset = nominalArchOffset
@@ -121,7 +121,7 @@ struct SwiftTypesInterpreter: Interpreter {
             }
             // 拿到 fieldDescriptor
             let fieldDescriptorPtr:UInt64 = data.readMove(nominalPtr.add(4 * 4).toInt).fix();
-            dumpFieldDescriptor(fieldDescriptorPtr, to: obj)
+            dumpFieldDescriptor(fieldDescriptorPtr, to: &obj)
             
             let mangledTypeNamePtr = data.readMove(Int(fieldDescriptorPtr)).fix();
             if let mangledTypeName = data.readCString(from: mangledTypeNamePtr.toInt) {
@@ -160,7 +160,7 @@ struct SwiftTypesInterpreter: Interpreter {
         return retName;
     }
     
-    private func dumpFieldDescriptor(_ fieldDescriptorPtr: UInt64, to: SwiftNominalModel ){
+    private func dumpFieldDescriptor(_ fieldDescriptorPtr: UInt64, to:inout SwiftNominalModel ){
         print("\(fieldDescriptorPtr.add(4 + 4 + 2 + 2).toInt)")
         let numFields = data.readU32(offset: fieldDescriptorPtr.add(4 + 4 + 2 + 2).toInt)
         if (0 == numFields){
@@ -202,7 +202,7 @@ struct SwiftTypesInterpreter: Interpreter {
             
                 // 通过Swift Runtime 恢复真实名字
                 let realType = getTypeFromMangledName(type)
-                let fieldObj = SwiftNominalObjField()
+                var fieldObj = SwiftNominalObjField()
                 fieldObj.name = field
                 fieldObj.type = realType
                 fieldObj.namePtr = fieldNamePtr

@@ -7,14 +7,14 @@
 
 import Foundation
 
-final class SwiftNominalObjField {
+struct SwiftNominalObjField {
     var name: String = ""
     var type: String = ""
     var namePtr: UInt64 = 0
     var typePtr: UInt64 = 0
 }
 
-final class SwiftNominalModel {
+struct SwiftNominalModel {
     
     var typeName: String = ""; // type name
     var contextDescriptorFlag: SwiftContextDescriptorFlags = SwiftContextDescriptorFlags(0); // default

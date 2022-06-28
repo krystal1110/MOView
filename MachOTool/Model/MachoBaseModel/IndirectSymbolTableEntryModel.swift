@@ -7,38 +7,32 @@
 
 import Foundation
 
-struct IndirectSymbolTableEntryModel: MachoExplainModel {
- 
+struct IndirectSymbolTableEntryModel {
     
     
-    static func modelSize() -> Int {
-        return 4
-    }
- 
+    
     let entryRange: Range<Int>
     let symbolTableIndex: Int
     var explanationItem: ExplanationItem?
-
-    init(with data: Data, is64Bit: Bool) {
+    
+    init(with data: Data) {
         entryRange = DataTool.absoluteRange(with: data, start: .zero, 4)
         symbolTableIndex = Int(data.UInt32)
     }
-
-//    func translationItem(SearchProtocol: SearchProtocol) -> ExplanationItem? {
-//        var symbolName: String?
-//        let symbolEntryModel = SearchProtocol.indexInSymbolTable(at: symbolTableIndex)
-//        guard let symbolEntryModel = symbolEntryModel?.indexInStringTable else {
-//            return ExplanationItem(sourceDataRange: entryRange,
-//                                   model: ExplanationModel(description: "Symbol Table Index",
-//                                                           explanation: "\(symbolTableIndex)",
-//                                                           extraDescription: "Referrenced Symbol",
-//                                                           extraExplanation: "🔥🔥🔥 Unknown Symbol"))
-//        }
-//        symbolName = SearchProtocol.stringInStringTable(at: Int(symbolEntryModel))
-//        return ExplanationItem(sourceDataRange: entryRange,
-//                               model: ExplanationModel(description: "Symbol Table Index",
-//                                                       explanation: "\(symbolTableIndex)",
-//                                                       extraDescription: "Referrenced Symbol",
-//                                                       extraExplanation: symbolName))
-//    }
+ 
+ 
+    
+    func findSymbolName(searchProtocol: SearchProtocol) -> ExplanationItem? {
+        // error symbolTableIndex  > .count
+        // 存在没有 Symbol Name的情况
+        let symbolName =  searchProtocol.searchStringInSymbolTableIndex(at: symbolTableIndex)
+ 
+        return ExplanationItem(sourceDataRange: entryRange,
+                               model: ExplanationModel(description: "Symbol Table Index",
+                                                       explanation: "\(symbolTableIndex)",
+                                                       extraDescription: "Referrenced Symbol",
+                                                       extraExplanation: symbolName))
+    }
+    
+    
 }

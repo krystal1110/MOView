@@ -10,8 +10,7 @@
 		2D0129E0283E8A4A00FF4186 /* ShellUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */; };
 		FB072DFF2839231A000B370B /* SymbolTableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072DFE2839231A000B370B /* SymbolTableComponent.swift */; };
 		FB072E03283A601B000B370B /* BaseComponentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E02283A601B000B370B /* BaseComponentInfo.swift */; };
-		FB072E05283B220E000B370B /* IndirectSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */; };
-		FB072E07283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E06283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift */; };
+		FB072E07283B22B3000B370B /* IndsymComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E06283B22B3000B370B /* IndsymComponent.swift */; };
 		FB072E09283B235F000B370B /* IndirectSymbolTableEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */; };
 		FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E0A283B8560000B370B /* MachoProtocol.swift */; };
 		FB072E0F283E818E000B370B /* LazySymbolEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB072E0E283E818E000B370B /* LazySymbolEntryModel.swift */; };
@@ -26,17 +25,18 @@
 		FB1CE86C2865FCF100C5CCC4 /* LoadCommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE86B2865FCF100C5CCC4 /* LoadCommandType.swift */; };
 		FB1CE871286624F600C5CCC4 /* ParseTextSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE870286624F600C5CCC4 /* ParseTextSection.swift */; };
 		FB1CE87328695C2F00C5CCC4 /* ParseDataSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE87228695C2F00C5CCC4 /* ParseDataSection.swift */; };
-		FB1CE87528698A2500C5CCC4 /* ParseSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE87428698A2500C5CCC4 /* ParseSymbol.swift */; };
+		FB1CE87528698A2500C5CCC4 /* ParseSymbolTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE87428698A2500C5CCC4 /* ParseSymbolTool.swift */; };
 		FB1CE87928699A4400C5CCC4 /* UnknownCmponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE87828699A4400C5CCC4 /* UnknownCmponent.swift */; };
 		FB1CE87B2869A5AE00C5CCC4 /* ParseCustomSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE87A2869A5AE00C5CCC4 /* ParseCustomSection.swift */; };
 		FB1CE87E2869B2F200C5CCC4 /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE87D2869B2F200C5CCC4 /* TextComponent.swift */; };
+		FB1CE883286AC40F00C5CCC4 /* StringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE881286AC40F00C5CCC4 /* StringInterpreter.swift */; };
+		FB1CE884286AC40F00C5CCC4 /* IndirectSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE882286AC40F00C5CCC4 /* IndirectSymbolTableInterpreter.swift */; };
 		FB63EC4A283F125E003CCCF7 /* StringComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63EC49283F125E003CCCF7 /* StringComponent.swift */; };
 		FB63EC4C283F58C6003CCCF7 /* LazySymbolComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63EC4B283F58C6003CCCF7 /* LazySymbolComponent.swift */; };
 		FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */; };
 		FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B11D028424CA200B53C61 /* ObjcPointer64EnterModel.swift */; };
 		FB8F483328571B0A005D0586 /* SwiftTypesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F483228571B0A005D0586 /* SwiftTypesInterpreter.swift */; };
 		FB8F483C285AD1C0005D0586 /* SwiftClassUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F483B285AD1C0005D0586 /* SwiftClassUtils.swift */; };
-		FB8F4884285C22FD005D0586 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F4883285C22FD005D0586 /* Consts.swift */; };
 		FB8F488B285DDCAE005D0586 /* SwiftNominalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F488A285DDCAE005D0586 /* SwiftNominalModel.swift */; };
 		FB8F488D285F04A7005D0586 /* RuntimeBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */; };
 		FB8F4890285F059A005D0586 /* libswiftDemangle.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */; };
@@ -45,7 +45,6 @@
 		FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */; };
 		FB91037A284601C10000AD84 /* UStringComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB910379284601C10000AD84 /* UStringComponent.swift */; };
 		FB91037C284674320000AD84 /* CFStringComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB91037B284674320000AD84 /* CFStringComponent.swift */; };
-		FB9CCF04285347CB00EE910F /* ClassRefsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9CCF03285347CB00EE910F /* ClassRefsComponent.swift */; };
 		FB9F09A52862B92200732AD0 /* cs.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F094B2862B92100732AD0 /* cs.c */; };
 		FB9F09A62862B92200732AD0 /* SStream.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F095A2862B92100732AD0 /* SStream.c */; };
 		FB9F09A72862B92200732AD0 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F095B2862B92100732AD0 /* utils.c */; };
@@ -97,7 +96,6 @@
 		FB9F09D52862B92200732AD0 /* MCRegisterInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09A42862B92200732AD0 /* MCRegisterInfo.c */; };
 		FB9F09E42863199B00732AD0 /* CapStoneHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09E32863199B00732AD0 /* CapStoneHelper.m */; };
 		FB9F09E628633EA800732AD0 /* SwiftTypesCmponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09E528633EA800732AD0 /* SwiftTypesCmponent.swift */; };
-		FBB6569E284BB8E60081C991 /* DataExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB6569D284BB8E60081C991 /* DataExpand.swift */; };
 		FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB6569F284BBCBC0081C991 /* DataTool.swift */; };
 		FBB656A8284DC0830081C991 /* LC_DyldInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656A7284DC0830081C991 /* LC_DyldInfo.swift */; };
 		FBB656AA284DDAE80081C991 /* DyldInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656A9284DDAE70081C991 /* DyldInterpreter.swift */; };
@@ -107,9 +105,6 @@
 		FBC3489F2848AF75009B4AAE /* ClassRefsInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */; };
 		FBCEE977283290150090B4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE976283290150090B4E6 /* main.swift */; };
 		FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE97F283290400090B4E6 /* MachoHeader.swift */; };
-		FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE980283290400090B4E6 /* JYMachoComponent.swift */; };
-		FBCEE98E283290400090B4E6 /* SymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE982283290400090B4E6 /* SymbolTableInterpreter.swift */; };
-		FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE983283290400090B4E6 /* JYSegment.swift */; };
 		FBCEE990283290400090B4E6 /* Macho.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE984283290400090B4E6 /* Macho.swift */; };
 		FBCEE991283290400090B4E6 /* LC_Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE986283290400090B4E6 /* LC_Main.swift */; };
 		FBCEE992283290400090B4E6 /* LC_SymbolTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE987283290400090B4E6 /* LC_SymbolTable.swift */; };
@@ -120,9 +115,7 @@
 		FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A0283290530090B4E6 /* Utils.swift */; };
 		FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A4283290630090B4E6 /* JYFile.swift */; };
 		FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */; };
-		FBCEE9AC283370E80090B4E6 /* MachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9AB283370E80090B4E6 /* MachModel.swift */; };
 		FBCEE9AE2833800C0090B4E6 /* SymbolTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9AD2833800C0090B4E6 /* SymbolTableModel.swift */; };
-		FBCEE9B52834D5A30090B4E6 /* StringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */; };
 		FBCEE9B72834D6710090B4E6 /* BaseInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */; };
 /* End PBXBuildFile section */
 
@@ -143,8 +136,7 @@
 		2D0129DF283E8A4A00FF4186 /* ShellUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShellUtils.swift; path = MachOTool/Tools/ShellUtils.swift; sourceTree = SOURCE_ROOT; };
 		FB072DFE2839231A000B370B /* SymbolTableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTableComponent.swift; sourceTree = "<group>"; };
 		FB072E02283A601B000B370B /* BaseComponentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentInfo.swift; sourceTree = "<group>"; };
-		FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreter.swift; sourceTree = "<group>"; };
-		FB072E06283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableStoreInfo.swift; sourceTree = "<group>"; };
+		FB072E06283B22B3000B370B /* IndsymComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndsymComponent.swift; sourceTree = "<group>"; };
 		FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableEntryModel.swift; sourceTree = "<group>"; };
 		FB072E0A283B8560000B370B /* MachoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoProtocol.swift; sourceTree = "<group>"; };
 		FB072E0E283E818E000B370B /* LazySymbolEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazySymbolEntryModel.swift; sourceTree = "<group>"; };
@@ -158,10 +150,12 @@
 		FB1CE86B2865FCF100C5CCC4 /* LoadCommandType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCommandType.swift; sourceTree = "<group>"; };
 		FB1CE870286624F600C5CCC4 /* ParseTextSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseTextSection.swift; sourceTree = "<group>"; };
 		FB1CE87228695C2F00C5CCC4 /* ParseDataSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseDataSection.swift; sourceTree = "<group>"; };
-		FB1CE87428698A2500C5CCC4 /* ParseSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseSymbol.swift; sourceTree = "<group>"; };
+		FB1CE87428698A2500C5CCC4 /* ParseSymbolTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseSymbolTool.swift; sourceTree = "<group>"; };
 		FB1CE87828699A4400C5CCC4 /* UnknownCmponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownCmponent.swift; sourceTree = "<group>"; };
 		FB1CE87A2869A5AE00C5CCC4 /* ParseCustomSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseCustomSection.swift; sourceTree = "<group>"; };
 		FB1CE87D2869B2F200C5CCC4 /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
+		FB1CE881286AC40F00C5CCC4 /* StringInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringInterpreter.swift; sourceTree = "<group>"; };
+		FB1CE882286AC40F00C5CCC4 /* IndirectSymbolTableInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreter.swift; sourceTree = "<group>"; };
 		FB63EC49283F125E003CCCF7 /* StringComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringComponent.swift; sourceTree = "<group>"; };
 		FB63EC4B283F58C6003CCCF7 /* LazySymbolComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazySymbolComponent.swift; sourceTree = "<group>"; };
 		FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStringInterpreter.swift; sourceTree = "<group>"; };
@@ -169,7 +163,6 @@
 		FB8F48262854AA1C005D0586 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = iOSToolsTest.zip; sourceTree = "<group>"; };
 		FB8F483228571B0A005D0586 /* SwiftTypesInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTypesInterpreter.swift; sourceTree = "<group>"; };
 		FB8F483B285AD1C0005D0586 /* SwiftClassUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftClassUtils.swift; sourceTree = "<group>"; };
-		FB8F4883285C22FD005D0586 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		FB8F488A285DDCAE005D0586 /* SwiftNominalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNominalModel.swift; sourceTree = "<group>"; };
 		FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeBridge.swift; sourceTree = "<group>"; };
 		FB8F488F285F059A005D0586 /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
@@ -179,7 +172,6 @@
 		FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringInterpreter.swift; sourceTree = "<group>"; };
 		FB910379284601C10000AD84 /* UStringComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringComponent.swift; sourceTree = "<group>"; };
 		FB91037B284674320000AD84 /* CFStringComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStringComponent.swift; sourceTree = "<group>"; };
-		FB9CCF03285347CB00EE910F /* ClassRefsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRefsComponent.swift; sourceTree = "<group>"; };
 		FB9F09432862B92100732AD0 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		FB9F09442862B92100732AD0 /* inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
 		FB9F09452862B92100732AD0 /* SStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStream.h; sourceTree = "<group>"; };
@@ -276,7 +268,6 @@
 		FB9F09E22863199B00732AD0 /* CapStoneHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapStoneHelper.h; sourceTree = "<group>"; };
 		FB9F09E32863199B00732AD0 /* CapStoneHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapStoneHelper.m; sourceTree = "<group>"; };
 		FB9F09E528633EA800732AD0 /* SwiftTypesCmponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTypesCmponent.swift; sourceTree = "<group>"; };
-		FBB6569D284BB8E60081C991 /* DataExpand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExpand.swift; sourceTree = "<group>"; };
 		FBB6569F284BBCBC0081C991 /* DataTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTool.swift; sourceTree = "<group>"; };
 		FBB656A7284DC0830081C991 /* LC_DyldInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LC_DyldInfo.swift; sourceTree = "<group>"; };
 		FBB656A9284DDAE70081C991 /* DyldInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyldInterpreter.swift; sourceTree = "<group>"; };
@@ -287,9 +278,6 @@
 		FBCEE973283290150090B4E6 /* MachoTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MachoTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBCEE976283290150090B4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FBCEE97F283290400090B4E6 /* MachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoHeader.swift; sourceTree = "<group>"; };
-		FBCEE980283290400090B4E6 /* JYMachoComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYMachoComponent.swift; sourceTree = "<group>"; };
-		FBCEE982283290400090B4E6 /* SymbolTableInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolTableInterpreter.swift; sourceTree = "<group>"; };
-		FBCEE983283290400090B4E6 /* JYSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYSegment.swift; sourceTree = "<group>"; };
 		FBCEE984283290400090B4E6 /* Macho.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macho.swift; sourceTree = "<group>"; };
 		FBCEE986283290400090B4E6 /* LC_Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_Main.swift; sourceTree = "<group>"; };
 		FBCEE987283290400090B4E6 /* LC_SymbolTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_SymbolTable.swift; sourceTree = "<group>"; };
@@ -301,9 +289,7 @@
 		FBCEE9A3283290630090B4E6 /* MachOTool-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachOTool-Bridging-Header.h"; sourceTree = "<group>"; };
 		FBCEE9A4283290630090B4E6 /* JYFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYFile.swift; sourceTree = "<group>"; };
 		FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineTool.swift; sourceTree = "<group>"; };
-		FBCEE9AB283370E80090B4E6 /* MachModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachModel.swift; sourceTree = "<group>"; };
 		FBCEE9AD2833800C0090B4E6 /* SymbolTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTableModel.swift; sourceTree = "<group>"; };
-		FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringInterpreter.swift; sourceTree = "<group>"; };
 		FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterpreter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -327,23 +313,22 @@
 			path = Resoure;
 			sourceTree = "<group>";
 		};
-		FB072DFD28392307000B370B /* StoreInfo(存储信息) */ = {
+		FB072DFD28392307000B370B /* ComponentInfo(存储信息) */ = {
 			isa = PBXGroup;
 			children = (
 				FB072E02283A601B000B370B /* BaseComponentInfo.swift */,
 				FB072DFE2839231A000B370B /* SymbolTableComponent.swift */,
-				FB072E06283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift */,
+				FB072E06283B22B3000B370B /* IndsymComponent.swift */,
 				FB63EC49283F125E003CCCF7 /* StringComponent.swift */,
 				FB63EC4B283F58C6003CCCF7 /* LazySymbolComponent.swift */,
 				FB9103752845013A0000AD84 /* ReferencesCmponent.swift */,
 				FB910379284601C10000AD84 /* UStringComponent.swift */,
 				FB91037B284674320000AD84 /* CFStringComponent.swift */,
-				FB9CCF03285347CB00EE910F /* ClassRefsComponent.swift */,
 				FB9F09E528633EA800732AD0 /* SwiftTypesCmponent.swift */,
 				FB1CE87828699A4400C5CCC4 /* UnknownCmponent.swift */,
 				FB1CE87D2869B2F200C5CCC4 /* TextComponent.swift */,
 			);
-			path = "StoreInfo(存储信息)";
+			path = "ComponentInfo(存储信息)";
 			sourceTree = "<group>";
 		};
 		FB1CE8602865BF7E00C5CCC4 /* Segment */ = {
@@ -359,10 +344,20 @@
 			children = (
 				FB1CE870286624F600C5CCC4 /* ParseTextSection.swift */,
 				FB1CE87228695C2F00C5CCC4 /* ParseDataSection.swift */,
-				FB1CE87428698A2500C5CCC4 /* ParseSymbol.swift */,
+				FB1CE87428698A2500C5CCC4 /* ParseSymbolTool.swift */,
 				FB1CE87A2869A5AE00C5CCC4 /* ParseCustomSection.swift */,
 			);
 			path = Parse;
+			sourceTree = "<group>";
+		};
+		FB1CE880286AC40F00C5CCC4 /* SymbolInterpreter */ = {
+			isa = PBXGroup;
+			children = (
+				FB072E12283E8714000B370B /* LazySymbolInterpreter.swift */,
+				FB1CE881286AC40F00C5CCC4 /* StringInterpreter.swift */,
+				FB1CE882286AC40F00C5CCC4 /* IndirectSymbolTableInterpreter.swift */,
+			);
+			path = SymbolInterpreter;
 			sourceTree = "<group>";
 		};
 		FB8F488E285F059A005D0586 /* Frameworks */ = {
@@ -594,13 +589,10 @@
 			children = (
 				FBCEE984283290400090B4E6 /* Macho.swift */,
 				FB1CE86F286624E500C5CCC4 /* Parse */,
-				FBCEE980283290400090B4E6 /* JYMachoComponent.swift */,
 				FBCEE97E283290400090B4E6 /* MachoHeader */,
 				FBCEE981283290400090B4E6 /* Interpreter(解释器) */,
-				FBCEE983283290400090B4E6 /* JYSegment.swift */,
 				FBCEE985283290400090B4E6 /* LoadCommand */,
 				FB072E0A283B8560000B370B /* MachoProtocol.swift */,
-				FB1CE85A2865A21A00C5CCC4 /* LoadCommand.swift */,
 			);
 			path = Macho;
 			sourceTree = "<group>";
@@ -616,12 +608,9 @@
 		FBCEE981283290400090B4E6 /* Interpreter(解释器) */ = {
 			isa = PBXGroup;
 			children = (
+				FB1CE880286AC40F00C5CCC4 /* SymbolInterpreter */,
 				FBB656A6284DB8860081C991 /* DyldInfoInterpreter */,
 				FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */,
-				FBCEE982283290400090B4E6 /* SymbolTableInterpreter.swift */,
-				FBCEE9B42834D5A30090B4E6 /* StringInterpreter.swift */,
-				FB072E04283B220E000B370B /* IndirectSymbolTableInterpreter.swift */,
-				FB072E12283E8714000B370B /* LazySymbolInterpreter.swift */,
 				FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */,
 				FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */,
 				FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */,
@@ -634,6 +623,7 @@
 		FBCEE985283290400090B4E6 /* LoadCommand */ = {
 			isa = PBXGroup;
 			children = (
+				FB1CE85A2865A21A00C5CCC4 /* LoadCommand.swift */,
 				FB1CE8602865BF7E00C5CCC4 /* Segment */,
 				FBCEE986283290400090B4E6 /* LC_Main.swift */,
 				FBB656A7284DC0830081C991 /* LC_DyldInfo.swift */,
@@ -653,7 +643,6 @@
 			isa = PBXGroup;
 			children = (
 				FBCEE998283290470090B4E6 /* TranslationRead.swift */,
-				FBB6569D284BB8E60081C991 /* DataExpand.swift */,
 			);
 			path = "ConversionTools(转换)";
 			sourceTree = "<group>";
@@ -661,7 +650,7 @@
 		FBCEE99C2832904D0090B4E6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FB072DFD28392307000B370B /* StoreInfo(存储信息) */,
+				FB072DFD28392307000B370B /* ComponentInfo(存储信息) */,
 				FBCEE9AA283370BA0090B4E6 /* MachoBaseModel */,
 				FBCEE99D2832904D0090B4E6 /* DataExplanation.swift */,
 			);
@@ -676,7 +665,6 @@
 				FBCEE9A0283290530090B4E6 /* Utils.swift */,
 				FBB6569F284BBCBC0081C991 /* DataTool.swift */,
 				FB8F483B285AD1C0005D0586 /* SwiftClassUtils.swift */,
-				FB8F4883285C22FD005D0586 /* Consts.swift */,
 				FB8F488C285F04A7005D0586 /* RuntimeBridge.swift */,
 				FB8F492B286058D2005D0586 /* MachoTool-Bridging-Header.h */,
 			);
@@ -695,7 +683,6 @@
 		FBCEE9AA283370BA0090B4E6 /* MachoBaseModel */ = {
 			isa = PBXGroup;
 			children = (
-				FBCEE9AB283370E80090B4E6 /* MachModel.swift */,
 				FBCEE9AD2833800C0090B4E6 /* SymbolTableModel.swift */,
 				FB072E08283B235F000B370B /* IndirectSymbolTableEntryModel.swift */,
 				FB072E0E283E818E000B370B /* LazySymbolEntryModel.swift */,
@@ -769,9 +756,10 @@
 				FB9F09D52862B92200732AD0 /* MCRegisterInfo.c in Sources */,
 				FBCEE993283290400090B4E6 /* LC_Version.swift in Sources */,
 				FB072E09283B235F000B370B /* IndirectSymbolTableEntryModel.swift in Sources */,
+				FB1CE883286AC40F00C5CCC4 /* StringInterpreter.swift in Sources */,
 				FB9F09B12862B92200732AD0 /* X86Disassembler.c in Sources */,
 				FB9F09BE2862B92200732AD0 /* X86GenInstrInfo_reduce.inc in Sources */,
-				FB1CE87528698A2500C5CCC4 /* ParseSymbol.swift in Sources */,
+				FB1CE87528698A2500C5CCC4 /* ParseSymbolTool.swift in Sources */,
 				FB9F09CA2862B92200732AD0 /* AArch64Mapping.c in Sources */,
 				FBCEE99A283290470090B4E6 /* TranslationRead.swift in Sources */,
 				FB072E0F283E818E000B370B /* LazySymbolEntryModel.swift in Sources */,
@@ -783,9 +771,7 @@
 				FB8F488D285F04A7005D0586 /* RuntimeBridge.swift in Sources */,
 				FB9F09CE2862B92200732AD0 /* AArch64InstPrinter.c in Sources */,
 				FB9F09C62862B92200732AD0 /* ARMGenDisassemblerTables.inc in Sources */,
-				FBCEE9B52834D5A30090B4E6 /* StringInterpreter.swift in Sources */,
 				FB9F09D22862B92200732AD0 /* AArch64Module.c in Sources */,
-				FBCEE98D283290400090B4E6 /* JYMachoComponent.swift in Sources */,
 				FB9F09D12862B92200732AD0 /* AArch64GenInstrInfo.inc in Sources */,
 				FB9103762845013A0000AD84 /* ReferencesCmponent.swift in Sources */,
 				FB91037C284674320000AD84 /* CFStringComponent.swift in Sources */,
@@ -800,7 +786,6 @@
 				FB9F09E628633EA800732AD0 /* SwiftTypesCmponent.swift in Sources */,
 				FB63EC4A283F125E003CCCF7 /* StringComponent.swift in Sources */,
 				FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */,
-				FBCEE98E283290400090B4E6 /* SymbolTableInterpreter.swift in Sources */,
 				FB072E03283A601B000B370B /* BaseComponentInfo.swift in Sources */,
 				FB1CE87B2869A5AE00C5CCC4 /* ParseCustomSection.swift in Sources */,
 				FB8F483C285AD1C0005D0586 /* SwiftClassUtils.swift in Sources */,
@@ -809,15 +794,12 @@
 				FB9F09AB2862B92200732AD0 /* PPCDisassembler.c in Sources */,
 				FB9F09B72862B92200732AD0 /* X86Module.c in Sources */,
 				FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */,
-				FB8F4884285C22FD005D0586 /* Consts.swift in Sources */,
 				FBC3489F2848AF75009B4AAE /* ClassRefsInterpreter.swift in Sources */,
 				FB1CE85B2865A21A00C5CCC4 /* LoadCommand.swift in Sources */,
-				FBB6569E284BB8E60081C991 /* DataExpand.swift in Sources */,
 				FBCEE990283290400090B4E6 /* Macho.swift in Sources */,
 				FB9F09B22862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc in Sources */,
 				FB9F09D42862B92200732AD0 /* MCInst.c in Sources */,
 				FB9F09C52862B92200732AD0 /* ARMGenRegisterInfo.inc in Sources */,
-				FBCEE98F283290400090B4E6 /* JYSegment.swift in Sources */,
 				FB1CE8622865BF7E00C5CCC4 /* Segment.swift in Sources */,
 				FB9F09C92862B92200732AD0 /* AArch64GenAsmWriter.inc in Sources */,
 				FB9F09D32862B92200732AD0 /* MCInstrDesc.c in Sources */,
@@ -849,7 +831,6 @@
 				FB9F09B32862B92200732AD0 /* X86ATTInstPrinter.c in Sources */,
 				FB9F09B92862B92200732AD0 /* X86GenAsmWriter1.inc in Sources */,
 				FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */,
-				FB9CCF04285347CB00EE910F /* ClassRefsComponent.swift in Sources */,
 				FB1CE87E2869B2F200C5CCC4 /* TextComponent.swift in Sources */,
 				FB9F09B42862B92200732AD0 /* X86GenRegisterInfo.inc in Sources */,
 				FBB656A8284DC0830081C991 /* LC_DyldInfo.swift in Sources */,
@@ -859,17 +840,17 @@
 				FB1CE871286624F600C5CCC4 /* ParseTextSection.swift in Sources */,
 				FBCEE9AE2833800C0090B4E6 /* SymbolTableModel.swift in Sources */,
 				FB9F09AD2862B92200732AD0 /* PPCGenRegisterInfo.inc in Sources */,
-				FB072E07283B22B3000B370B /* IndirectSymbolTableStoreInfo.swift in Sources */,
+				FB072E07283B22B3000B370B /* IndsymComponent.swift in Sources */,
 				FBB656AA284DDAE80081C991 /* DyldInterpreter.swift in Sources */,
 				FB9F09CF2862B92200732AD0 /* AArch64BaseInfo.c in Sources */,
 				FB9F09CC2862B92200732AD0 /* AArch64GenSubtargetInfo.inc in Sources */,
 				FB1CE86A2865CFA500C5CCC4 /* LC_Unknown.swift in Sources */,
 				FB9F09A92862B92200732AD0 /* PPCGenSubtargetInfo.inc in Sources */,
 				FB9F09A82862B92200732AD0 /* PPCGenDisassemblerTables.inc in Sources */,
-				FBCEE9AC283370E80090B4E6 /* MachModel.swift in Sources */,
 				FB9F09C12862B92200732AD0 /* ARMGenAsmWriter.inc in Sources */,
 				FB9F09C82862B92200732AD0 /* ARMDisassembler.c in Sources */,
 				FB9F09B62862B92200732AD0 /* X86GenInstrInfo.inc in Sources */,
+				FB1CE884286AC40F00C5CCC4 /* IndirectSymbolTableInterpreter.swift in Sources */,
 				FBCEE977283290150090B4E6 /* main.swift in Sources */,
 				FB9F09AA2862B92200732AD0 /* PPCGenAsmWriter.inc in Sources */,
 				FB9F09AC2862B92200732AD0 /* PPCMapping.c in Sources */,
@@ -878,7 +859,6 @@
 				FB9103742844F8D50000AD84 /* ReferencesInterpreter.swift in Sources */,
 				FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */,
 				FBCEE9B72834D6710090B4E6 /* BaseInterpreter.swift in Sources */,
-				FB072E05283B220E000B370B /* IndirectSymbolTableInterpreter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

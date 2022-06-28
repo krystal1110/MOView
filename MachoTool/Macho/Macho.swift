@@ -26,11 +26,7 @@ class Macho: Equatable {
     
     let header: MachOHeader
     
-    
-  
-    
-    // 存放indirectSymbol的信息
-    var indirectSymbolTableStoreInfo: IndirectSymbolTableStoreInfo?
+    var parseSymbolTool: ParseSymbolTool
     
     var allBaseStoreInfoList: [BaseStoreInfo] = []
     
@@ -40,10 +36,13 @@ class Macho: Equatable {
     
     var componts: [ComponentInfo] = []
     
+     
+    
+    
     init(machoDataRaw: Data, machoFileName: String) {
         data = machoDataRaw
         self.machoFileName = machoFileName
-        
+       
         //        var loadCommands: [MachoComponent] = []
         
         guard let magicType = MagicType(data) else { fatalError() }
@@ -57,9 +56,9 @@ class Macho: Equatable {
         
         self.commands = Macho.loadCommands(from: data, header: header, attributes: Macho.machAttributes(from: data))
         
-        
-        
-         
+        // parse LC_SYMTAB    // parse LC_DYSYMTAB
+        self.parseSymbolTool = ParseSymbolTool()
+        self.parseSymbolTool.parseSymbol(data, commonds: self.commands, searchProtocol: self)
         
         
         // parse LC_DYSYMTAB
@@ -79,82 +78,17 @@ class Macho: Equatable {
         parseCustomSection.parseCustomSections(data, commonds: self.commands, searchProtocol: self)
         self.componts.append(contentsOf: parseCustomSection.componts)
         
-        // parse LC_SYMTAB
-        ParseSymbol().parseSymbol(data, commonds: self.commands, searchProtocol: self)
+  
+ 
         
         
-        
-        print("---")
-        
-        // 加载对应的 section64
-        //        let allBaseStoreInfoList = sectionHeaders.compactMap {self.machoComponent(from: $0)}
-        //        self.allBaseStoreInfoList = allBaseStoreInfoList
-        
-        
-        //        UnusedScanManager.init(with: self)
+//      UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool)
         
     }
-    
-    //    func translationLoadCommands(with loadCommandData: Data, loadCommandType: LoadCommandType) -> JYLoadCommand {
-    //        switch loadCommandType {
-    //        case .segment, .segment64: // __PAGEZERO  __Text  __DATA  __LINKEDIT
-    //            let segment = JYSegment(with: loadCommandData, commandType: loadCommandType)
-    //            let segmentHeaders = segment.sectionHeaders
-    //            sectionHeaders.append(contentsOf: segmentHeaders)
-    //
-    //            if segment.fileoff == 0, segment.filesize != 0 {
-    //                // __TEXT段
-    //                print(segment.segname)
-    //            }
-    //            return segment
-    
-    //        case .main: // LC_Main
-    //            let segment = JYMainCommand(with: loadCommandData, commandType: loadCommandType)
-    //            return segment
-    
-    //        case .symbolTable: // LC_SYMTAB
-    //            let segment = JYSymbolTableCommand(with: loadCommandData, commandType: loadCommandType)
-    //            let interpreter = SymbolTableInterpreter()
-    //
-    //            // 用于存放符号表数据 [JYSymbolTableEntryModel]
-    //            // 但是缺少symbolName,因为SymbolName存放在stringTable,
-    //            // n_strx + 字符串表的起始位置 =  符号名称
-    //            let symbolTableStoreInfo = interpreter.symbolTableInterpreter(with: data, is64Bit: is64bit, symbolTableCommand: segment)
-    //            self.symbolTableStoreInfo = symbolTableStoreInfo
-    //
-    //
-    //            let stringTableStoreInfo = interpreter.stringTableInterpreter(with: data, is64Bit: is64bit, SearchProtocol: self, symbolTableCommand: segment)
-    //            self.stringTableStoreInfo = stringTableStoreInfo
-    //            allCstringInterpretInfo.append(stringTableStoreInfo)
-    //            return segment
-    
-    //        case .dynamicSymbolTable: // LC_DYSYMTAB
-    //            /* symtab_command must be present when this load command is present */
-    //            /* also we assume symtab_command locates before dysymtab_command */
-    //            let segment = DynamicSymbolTableCompont(with: loadCommandData, commandType: loadCommandType)
-    //            let interpreter = IndirectSymbolTableInterpreter(with: data, is64Bit: is64bit, SearchProtocol: self)
-    //            indirectSymbolTableStoreInfo = interpreter.indirectSymbolTableInterpreter(from: segment)
-    //            return segment
-    //
-    //
-    //        case .dyldInfo, .dyldInfoOnly:
-    //            let dyldInfo = DyldInfoCommand(with: loadCommandData, commandType: loadCommandType)
-    ////            let dyldInfoComponents =
-    //            let dyldInfoCompoents = dyldInfoComponts(wiht: dyldInfo)
-    //            #warning("TODO")
-    //            return JYLoadCommand(with: data, commandType: loadCommandType, translationStore: nil)
-    //
-    //        case .buildVersion:
-    //            let segment = JYBuildVersionCommand(with: loadCommandData, commandType: loadCommandType)
-    //            return segment
-    //        default:
-    //            return JYLoadCommand(with: data, commandType: loadCommandType, translationStore: nil)
-    //        }
-    //    }
-    
+
     
    
-    
+    #warning("TODO  待迁移 dyldInfo段")
     //    func dyldInfoComponts(wiht command:DyldInfoCommand){
     //
     //        /*
@@ -192,6 +126,8 @@ class Macho: Equatable {
 
 extension Macho: SearchProtocol {
     
+    
+    
     func sectionName(at ordinal: Int) -> String {
         if ordinal > self.componts.count {
             fatalError()
@@ -202,40 +138,31 @@ extension Macho: SearchProtocol {
     }
     
     
-    func indexInIndirectSymbolTable(at index: Int) -> IndirectSymbolTableEntryModel? {
-        if let indirectInterpreInfo = indirectSymbolTableStoreInfo {
-            let indirectEntryModel = indirectInterpreInfo.indirectSymbolTableList[index]
-            return indirectEntryModel
-        }
-        return nil
+    func searchInIndirectSymbolTableList(at index: Int) -> String? {
+
+        return self.parseSymbolTool.findStringInIndirectSymbolList(at: index)
     }
     
-    func indexInSymbolTable(at index: Int)  -> SymbolTableModel? {
-//        if let SymbolTableStoreInfo = self.symbolTableStoreInfo {
-//            if(index > SymbolTableStoreInfo.symbolTableList.count){return nil}
-//            let symbolTableEntryModel = SymbolTableStoreInfo.symbolTableList[index]
-//            return symbolTableEntryModel
-//        }
-         return nil
+    
+    // 查找字符串根据 SymbolTableList数组中的索引index查找符号
+    func searchStringInSymbolTableIndex(at index: Int)  -> String? {
+         return  self.parseSymbolTool.findStringWithIndex(at: index)
     }
     
-    // 查找字符串
+    // 查找字符串  offset 为 indexInStringTable
     func stringInStringTable(at offset: Int) -> String? {
-//        let value = stringTableStoreInfo?.interpreter.findString(at: offset)
-//        return value
-        return nil
+        return self.parseSymbolTool.findStringWithIndex(at: offset)
     }
     
+    
+    // 根据symbolTable 的nvalue 查找 string
     func searchStringInSymbolTable(by nValue:UInt64) -> String?{
-//        guard let symbolTableList = self.symbolTableStoreInfo?.symbolTableList else{return nil}
-//        for model in symbolTableList {
-//            if (nValue == model.nValue){
-//                return self.stringInStringTable(at: Int(model.indexInStringTable))
-//            }
-//        }
-        return nil
+       return self.parseSymbolTool.findStringInSymbolTable(by: nValue)
     }
     
+    
+    
+#warning("TODO  待修复 寻找Cstring")
     func searchString(by virtualAddress: UInt64) -> String? {
         
 //        if (self.uStringStoreInfo != nil){

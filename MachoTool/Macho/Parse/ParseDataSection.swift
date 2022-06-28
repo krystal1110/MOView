@@ -76,7 +76,7 @@ class ParseDataSection {
             
             let interpreter = ClassRefsInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let classRefList  = interpreter.transitionData()
-            let compont = ClassRefsComponent(dataSlice, section: section, classRefsPtrList: classRefList)
+            let compont = ReferencesCmponent(dataSlice, section: section, referencesPtrList: classRefList)
             componts.append(compont)
             
         }else {
