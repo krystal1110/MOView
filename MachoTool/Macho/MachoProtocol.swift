@@ -10,6 +10,11 @@ import Foundation
  
 
 protocol SearchProtocol: AnyObject {
+    
+    func getMachoData() -> Data
+    
+    func getOffsetFromVmAddress(_ address: UInt64) -> UInt64
+    
     // 根据offset -> 在stringSymbol查找 symbolName
     func stringInStringTable(at offset: Int) -> String?
 

@@ -36,13 +36,13 @@ class Macho: Equatable {
     
     var componts: [ComponentInfo] = []
     
-     
+    
     
     
     init(machoDataRaw: Data, machoFileName: String) {
         data = machoDataRaw
         self.machoFileName = machoFileName
-       
+        
         //        var loadCommands: [MachoComponent] = []
         
         guard let magicType = MagicType(data) else { fatalError() }
@@ -78,17 +78,17 @@ class Macho: Equatable {
         parseCustomSection.parseCustomSections(data, commonds: self.commands, searchProtocol: self)
         self.componts.append(contentsOf: parseCustomSection.componts)
         
-  
- 
         
         
-//      UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool)
+        
+        
+        UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool)
         
     }
-
     
-   
-    #warning("TODO  待迁移 dyldInfo段")
+    
+    
+#warning("TODO  待迁移 dyldInfo段")
     //    func dyldInfoComponts(wiht command:DyldInfoCommand){
     //
     //        /*
@@ -118,15 +118,37 @@ class Macho: Equatable {
     
     
     
-
     
-
+    
+    
     
 }
 
 extension Macho: SearchProtocol {
     
+    func getOffsetFromVmAddress(_ address: UInt64) -> UInt64 {
+        for i in self.commands {
+            
+             
+            let type  = type(of: i)
+            
+            if (type == MachOLoadCommand.Segment.self){
+                
+                if  let segmentCommand =  (i as! MachOLoadCommand.Segment).command64 {
+                    if (address >= segmentCommand.vmaddr && address <= segmentCommand.vmaddr + segmentCommand.vmsize){
+                        return address - (segmentCommand.vmaddr - segmentCommand.fileoff)
+                    }
+                }
+            }
+        }
+        return  0
+    }
     
+    
+    
+    func getMachoData() -> Data {
+        return self.data
+    }
     
     func sectionName(at ordinal: Int) -> String {
         if ordinal > self.componts.count {
@@ -139,14 +161,14 @@ extension Macho: SearchProtocol {
     
     
     func searchInIndirectSymbolTableList(at index: Int) -> String? {
-
+        
         return self.parseSymbolTool.findStringInIndirectSymbolList(at: index)
     }
     
     
     // 查找字符串根据 SymbolTableList数组中的索引index查找符号
     func searchStringInSymbolTableIndex(at index: Int)  -> String? {
-         return  self.parseSymbolTool.findStringWithIndex(at: index)
+        return  self.parseSymbolTool.findStringWithIndex(at: index)
     }
     
     // 查找字符串  offset 为 indexInStringTable
@@ -157,7 +179,7 @@ extension Macho: SearchProtocol {
     
     // 根据symbolTable 的nvalue 查找 string
     func searchStringInSymbolTable(by nValue:UInt64) -> String?{
-       return self.parseSymbolTool.findStringInSymbolTable(by: nValue)
+        return self.parseSymbolTool.findStringInSymbolTable(by: nValue)
     }
     
     
@@ -165,21 +187,21 @@ extension Macho: SearchProtocol {
 #warning("TODO  待修复 寻找Cstring")
     func searchString(by virtualAddress: UInt64) -> String? {
         
-//        if (self.uStringStoreInfo != nil){
-//            for item in self.uStringStoreInfo!.uStringPositionList {
-//                let itemVirtualAddress =  Int(self.uStringStoreInfo!.interpreter.sectionVirtualAddress) + item.relativeStartOffset
-//                if (itemVirtualAddress == virtualAddress){
-//                    return item.explanationItem?.model.explanation
-//                }
-//            }
-//        }
-//        for stringTableStoreInfo in self.allCstringInterpretInfo {
-//            // 判断区间范围
-//            if virtualAddress >= stringTableStoreInfo.interpreter.sectionVirtualAddress
-//                && virtualAddress < (stringTableStoreInfo.interpreter.sectionVirtualAddress + UInt64(stringTableStoreInfo.interpreter.data.count)) {
-//                return stringTableStoreInfo.interpreter.findString(with: virtualAddress, stringPositionList: stringTableStoreInfo.stringTableList)
-//            }
-//        }
+        //        if (self.uStringStoreInfo != nil){
+        //            for item in self.uStringStoreInfo!.uStringPositionList {
+        //                let itemVirtualAddress =  Int(self.uStringStoreInfo!.interpreter.sectionVirtualAddress) + item.relativeStartOffset
+        //                if (itemVirtualAddress == virtualAddress){
+        //                    return item.explanationItem?.model.explanation
+        //                }
+        //            }
+        //        }
+        //        for stringTableStoreInfo in self.allCstringInterpretInfo {
+        //            // 判断区间范围
+        //            if virtualAddress >= stringTableStoreInfo.interpreter.sectionVirtualAddress
+        //                && virtualAddress < (stringTableStoreInfo.interpreter.sectionVirtualAddress + UInt64(stringTableStoreInfo.interpreter.data.count)) {
+        //                return stringTableStoreInfo.interpreter.findString(with: virtualAddress, stringPositionList: stringTableStoreInfo.stringTableList)
+        //            }
+        //        }
         return nil
     }
 }
@@ -237,4 +259,4 @@ extension Macho {
 }
 
 
- 
+

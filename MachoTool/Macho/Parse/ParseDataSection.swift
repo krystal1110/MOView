@@ -38,13 +38,30 @@ class ParseDataSection {
         let dataSlice = DataTool.interception(with: data, from: Int(section.info.offset), length: Int(section.info.size))
         
         
-        if (section.sectname == DataSection.objc_classlist.rawValue ||  section.sectname == DataSection.objc_superrefs.rawValue || section.sectname == DataSection.objc_catlist.rawValue || section.sectname == DataSection.objc_nlcatlist.rawValue || section.sectname == DataSection.objc_protolist.rawValue || section.sectname == DataSection.objc_nlclslist.rawValue){
+        if (section.sectname == DataSection.objc_superrefs.rawValue   || section.sectname == DataSection.objc_protolist.rawValue || section.sectname == DataSection.objc_nlclslist.rawValue){
             
             let interpreter = ReferencesInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
-            let stringTableList = interpreter.transitionData()
-            let compont = ReferencesCmponent(dataSlice, section: section, referencesPtrList: stringTableList)
+            let ptrList = interpreter.transitionData()
+            let compont = ReferencesCmponent(dataSlice, section: section, referencesPtrList: ptrList)
             componts.append(compont)
         }
+        
+        else if  (section.sectname == DataSection.objc_classlist.rawValue || section.sectname == DataSection.objc_classrefs.rawValue ){
+            // __DATA_objc_classlist  objc_classrefs 存储类的相关信息
+            let interpreter = ClassListInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
+            let classInfoList = interpreter.transitionData()
+            let compont = ClassListCmponent(dataSlice, section: section, classInfoList: classInfoList)
+            componts.append(compont)
+        }
+        
+        else if  (section.sectname == DataSection.objc_catlist.rawValue  || section.sectname == DataSection.objc_nlcatlist.rawValue  ){
+            //  __DATA_objc_catlist  __DATA_objc_nlcatlist  存储使用到 category的类
+            let interpreter = CategoryInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
+            let classInfoList = interpreter.transitionData()
+            let compont = ClassListCmponent(dataSlice, section: section, classInfoList: classInfoList)
+            componts.append(compont)
+        }
+        
         
         else if (section.sectname == DataSection.la_symbol_ptr.rawValue || section.sectname == DataSection.got.rawValue){
             /*
@@ -70,13 +87,6 @@ class ParseDataSection {
             let interpreter = CFStringInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let objcCFStringList = interpreter.transitionData()
             let compont = CFStringComponent(dataSlice, section: section, objcCFStringList: objcCFStringList)
-            componts.append(compont)
-            
-        }else if (section.sectname == DataSection.objc_classrefs.rawValue){
-            
-            let interpreter = ClassRefsInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
-            let classRefList  = interpreter.transitionData()
-            let compont = ReferencesCmponent(dataSlice, section: section, referencesPtrList: classRefList)
             componts.append(compont)
             
         }else {

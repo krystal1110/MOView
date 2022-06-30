@@ -78,8 +78,14 @@ struct StringInterpreter: Interpreter {
             return ExplanationItem(sourceDataRange: cStringAbsoluteRange, model: ExplanationModel(description: "Unable to decode", explanation: "🔥Invalid UTF8 String"))
         }
         
-        let explanation: String = string.replacingOccurrences(of: "\n", with: "\\n")
+        var explanation: String = string.replacingOccurrences(of: "\n", with: "\\n")
         
+        // 过滤特殊字符串
+        if explanation.contains("_OBJC_CLASS_$_") ||  explanation.contains("_OBJC_METACLASS_$_") {
+            explanation = explanation.replacingOccurrences(of: "_OBJC_CLASS_$_", with: "")
+            explanation = explanation.replacingOccurrences(of: "_OBJC_METACLASS_$_", with: "")
+        }
+
         return ExplanationItem(sourceDataRange: cStringAbsoluteRange,
                                model: ExplanationModel(description: "UTF8-String", explanation: explanation, extraExplanation: explanation))
     }
@@ -99,7 +105,18 @@ extension StringInterpreter {
             if byte != 0 { continue }
             let length = index - offset + 1
             let value = DataTool.interception(with: dataSlice, from: offset, length: length).utf8String
-            return value?.spaceRemoved
+            
+            guard var valuex = value?.spaceRemoved else{
+                return nil
+            }
+            
+            // 需要过滤特殊字符串
+            if valuex.contains("_OBJC_CLASS_$_") ||  valuex.contains("_OBJC_METACLASS_$_") {
+                valuex = valuex.replacingOccurrences(of: "_OBJC_CLASS_$_", with: "")
+                valuex = valuex.replacingOccurrences(of: "_OBJC_METACLASS_$_", with: "")
+            }
+            
+            return valuex
         }
         return nil
     }

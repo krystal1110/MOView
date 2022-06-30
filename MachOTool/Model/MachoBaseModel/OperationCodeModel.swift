@@ -42,7 +42,6 @@ class OperationCodeModel {
         }
         
         let value = translationValue()
-        print(value ?? "")
         return translationItems
     }()
     

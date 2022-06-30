@@ -91,10 +91,9 @@ struct SwiftTypesInterpreter: Interpreter {
             
             let flags:UInt32 = data.readU32(offset: Int(nominalPtr))
             
-//            parentVal    Int32    16777228
+
 //            let parentVal:Int32 = data.readI32(offset: nominalPtr.add(4).toInt)   // 可能是模块名
-            
-//            namePtr    UInt64    4295111164 通过fix为 143868
+ 
             let namePtr = data.readMove(nominalPtr.add(8).toInt).fix()
                
             let nameStr: String = data.readCString(from: Int(namePtr)) ?? ""
@@ -183,7 +182,7 @@ struct SwiftTypesInterpreter: Interpreter {
             let typeName = data.readCString(from: typeNamePtr.toInt)
             
             if let type = typeName, (type.count <= 0 || type.count > 100) {
-                print("---")
+                
                 continue
             }
             
