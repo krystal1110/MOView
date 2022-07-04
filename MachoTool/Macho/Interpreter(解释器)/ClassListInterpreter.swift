@@ -59,8 +59,8 @@ struct Class64Info
     let baseProperties: UInt64
 };
 
- 
- 
+
+
 
 
 struct ClassListInterpreter: Interpreter {
@@ -73,6 +73,14 @@ struct ClassListInterpreter: Interpreter {
     
     let pointerLength: Int = 8
     
+    var xxxxArray:[String] = []
+    
+    var classRefSet: Set<String> = []
+    
+    var classNameSet: Set<String> = []
+    
+    var inde111x:Int = 0
+    
     init(with  dataSlice: Data, section:Section64,  searchProtocol:SearchProtocol){
         self.dataSlice = dataSlice
         self.section = section
@@ -80,35 +88,34 @@ struct ClassListInterpreter: Interpreter {
     }
     
     
-    
-    
-    
-    func transitionData() -> [ClassInfo]  {
-         
+    mutating func transitionData() -> [ClassInfo]  {
         let rawData = self.dataSlice
+        
         guard rawData.count % pointerLength == 0 else { fatalError() /* section of type S_LITERAL_POINTERS should be in align of 8 (bytes) */  }
+        
         var classInfoList: [ClassInfo] = []
+        
         let numberOfPointers = rawData.count / 8
         
-        
         for index in 0..<numberOfPointers {
-            
             let relativeDataOffset = index * pointerLength
             if  let classInfo = loadClassList(relativeDataOffset){
                 classInfoList.append(classInfo)
             }
         }
-        return classInfoList
+         return classInfoList
     }
     
     
     func translationItem(with pointer:ReferencesPointer) -> ExplanationItem {
         
-        var symbolName = self.searchProtocol.searchString(by: pointer.pointerValue)
+#warning("TODO")
+        var symbolName =  ""
+        //        var symbolName = self.searchProtocol.searchString(by: pointer.pointerValue)
         
-        if (symbolName == nil){
-            symbolName = self.searchProtocol.searchStringInSymbolTable(by: pointer.pointerValue)
-        }
+        //        if (symbolName == nil){
+        //            symbolName = self.searchProtocol.searchStringInSymbolTable(by: pointer.pointerValue)
+        //        }
         
         return ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: dataSlice, start: pointer.relativeDataOffset, self.pointerLength),
                                model: ExplanationModel(description: "Pointer Value (Virtual Address)",
@@ -120,51 +127,108 @@ struct ClassListInterpreter: Interpreter {
     
     
     
-    func loadClassList(_ relativeDataOffset:Int) -> ClassInfo?{
-       
+    mutating func loadClassList(_ relativeDataOffset:Int) -> ClassInfo?{
+        
+         
         
         var supclassNameStr: String?
         var classNameStr: String?
         
         let data =  dataSlice.select(from: relativeDataOffset, length: pointerLength)
         
-        if data.UInt64 == 0 {return nil}
+        //        if data.UInt64 == 0 {return nil}
         
         let machoData = searchProtocol.getMachoData()
         
         let classOffset =  searchProtocol.getOffsetFromVmAddress(data.UInt64)
-       
-        let targetClass =  machoData.extract(Class64.self, offset: classOffset.toInt)
         
-        var targetClassInfoOffset =  searchProtocol.getOffsetFromVmAddress(targetClass.data)
-        
-        // Remove the decimal
-        targetClassInfoOffset = (targetClassInfoOffset / 8) * 8
-        
-        let targetClassInfo =  machoData.extract(Class64Info.self, offset: targetClassInfoOffset.toInt)
-        
-        let classNameOffset =  searchProtocol.getOffsetFromVmAddress(targetClassInfo.name)
-        
-        
-        // load super class
-        if targetClass.superClass != 0 {
-            let data = searchProtocol.getOffsetFromVmAddress(targetClass.superClass)
-            let superClass = machoData.extract(Class64.self, offset: data.toInt)
-            let superClassOffset =  searchProtocol.getOffsetFromVmAddress(superClass.data)
-            let superClassInfo =  machoData.extract(Class64Info.self, offset: superClassOffset.toInt)
-            var superClassNameOffset = searchProtocol.getOffsetFromVmAddress(superClassInfo.name)
-            superClassNameOffset = (superClassNameOffset / 8) * 8
-            if let superClassName = machoData.readCString(from: superClassInfo.name.toInt) {
-                supclassNameStr = superClassName
+        if classOffset > 0 &&  classOffset < searchProtocol.getMachoData().count {
+            
+            let targetClass =  machoData.extract(Class64.self, offset: classOffset.toInt)
+            
+            var targetClassInfoOffset =  searchProtocol.getOffsetFromVmAddress(targetClass.data)
+            
+            // Remove the decimal
+            targetClassInfoOffset = (targetClassInfoOffset / 8) * 8
+            
+            let targetClassInfo =  machoData.extract(Class64Info.self, offset: targetClassInfoOffset.toInt)
+            
+            let classNameOffset =  searchProtocol.getOffsetFromVmAddress(targetClassInfo.name)
+            
+      
+            
+            // load super class
+            if targetClass.superClass != 0 {
+                let data = searchProtocol.getOffsetFromVmAddress(targetClass.superClass)
+                let superClass = machoData.extract(Class64.self, offset: data.toInt)
+                var superClassOffset =  searchProtocol.getOffsetFromVmAddress(superClass.data)
+                superClassOffset = (superClassOffset / 8) * 8;
                 
+                
+                let superClassInfo =  machoData.extract(Class64Info.self, offset: superClassOffset.toInt)
+                let superClassNameOffset = searchProtocol.getOffsetFromVmAddress(superClassInfo.name)
+                if let superClassName = machoData.readClassString(from: superClassNameOffset.toInt) {
+                    classRefSet.insert(superClassName)
+                }
             }
-        }
+            
+            
+            if let className =  machoData.readCString(from: classNameOffset.toInt){
+                if className.contains("_Tt"){
+                    classNameStr = getTypeFromMangledName(className)
+                    classNameSet.insert(classNameStr!)
+                }else{
+                    classNameStr = className
+                    classNameSet.insert(classNameStr!)
+                }
+                 
+            }
+            
+            //enumerate member variables 枚举成员变量
+            let varListOffset = searchProtocol.getOffsetFromVmAddress(targetClassInfo.instanceVariables)
+            if (varListOffset > 0 && varListOffset < searchProtocol.getMax()){
         
-        
-        if let className =  machoData.readCString(from: classNameOffset.toInt){
-            classNameStr = className
+                let offset = varListOffset + 4
+                let data =  machoData.select(from: offset.toInt , length: 4)
+                let varCount = data.Int32
+                for i in 0..<varCount{
+                    let offset =  varListOffset.toInt + MemoryLayout<Ivar64_list_t>.size + Int(i) * MemoryLayout<Ivar64_t>.size
+                    let varInfo:Ivar64_t =   machoData.extract(Ivar64_t.self, offset: offset)
+                    var methodNameOffset = varInfo.type
+                    methodNameOffset = Int64(searchProtocol.getOffsetFromVmAddress(UInt64(methodNameOffset)))
+                    
+                    if (methodNameOffset > 0 && methodNameOffset < searchProtocol.getMax()){
+                        if var typeName = searchProtocol.getMachoData().readClassString(from: Int(methodNameOffset)){
+                            print("typeName === \(typeName)")
+                           typeName = typeName.replacingOccurrences(of: "@\"", with: "")
+                           typeName = typeName.replacingOccurrences(of:"\"", with: "")
+                            supclassNameStr = typeName
+                           classRefSet.insert(typeName)
+                        }
+                    }
+                }
+            }
+            
+            return ClassInfo(relativeDataOffset, pointerValue: data.UInt64,class64: targetClass, class64Info: targetClassInfo, className: classNameStr, supclassName: supclassNameStr)
+        }else{
+            return nil
         }
-           
-        return ClassInfo(relativeDataOffset, pointerValue: data.UInt64,class64: targetClass, class64Info: targetClassInfo, className: classNameStr, supclassName: supclassNameStr)
     }
 }
+
+
+
+struct Ivar64_list_t
+{
+    let entsize: Int32
+    let count: Int32
+};
+
+struct Ivar64_t
+{
+    let offset: Int64
+    let name: Int64
+    let type: Int64
+    let alignment: Int32
+    let size: Int32
+};

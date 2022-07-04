@@ -38,17 +38,24 @@ class ParseDataSection {
         let dataSlice = DataTool.interception(with: data, from: Int(section.info.offset), length: Int(section.info.size))
         
         
-        if (section.sectname == DataSection.objc_superrefs.rawValue   || section.sectname == DataSection.objc_protolist.rawValue || section.sectname == DataSection.objc_nlclslist.rawValue){
+        if (section.sectname == DataSection.objc_protolist.rawValue  ){
             
             let interpreter = ReferencesInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let ptrList = interpreter.transitionData()
             let compont = ReferencesCmponent(dataSlice, section: section, referencesPtrList: ptrList)
             componts.append(compont)
         }
+        else if  (section.sectname == DataSection.objc_classlist.rawValue){
+            // __DATA_objc_classlist  objc_classrefs  objc_supperrefs 存储类的相关信息
+            var interpreter = ClassListInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
+            let classInfoList = interpreter.transitionData()
+            let compont = ClassListCmponent(dataSlice, section: section, classInfoList: classInfoList, classRefSet: interpreter.classRefSet,classNameSet: interpreter.classNameSet)
+            componts.append(compont)
+        }
         
-        else if  (section.sectname == DataSection.objc_classlist.rawValue || section.sectname == DataSection.objc_classrefs.rawValue ){
-            // __DATA_objc_classlist  objc_classrefs 存储类的相关信息
-            let interpreter = ClassListInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
+        else if  (section.sectname == DataSection.objc_classlist.rawValue || section.sectname == DataSection.objc_classrefs.rawValue || section.sectname == DataSection.objc_superrefs.rawValue  || section.sectname == DataSection.objc_nlclslist.rawValue ){
+            // __DATA_objc_classlist  objc_classrefs  objc_supperrefs 存储类的相关信息
+            var interpreter = ClassListInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let classInfoList = interpreter.transitionData()
             let compont = ClassListCmponent(dataSlice, section: section, classInfoList: classInfoList)
             componts.append(compont)

@@ -15,8 +15,15 @@ struct SwiftNominalObjField {
 }
 
 struct SwiftNominalModel {
-    
+    var parentName: String? 
     var typeName: String = ""; // type name
+    var className: String {
+        if let _ = parentName {
+            return parentName! + "." + typeName
+        }
+         return typeName
+    }
+    
     var contextDescriptorFlag: SwiftContextDescriptorFlags = SwiftContextDescriptorFlags(0); // default
     var fields: [SwiftNominalObjField] = [];
     

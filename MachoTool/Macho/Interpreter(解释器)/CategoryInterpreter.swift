@@ -58,12 +58,13 @@ struct CategoryInterpreter: Interpreter {
     
     
     func translationItem(with pointer:ReferencesPointer) -> ExplanationItem {
+        #warning("TODO")
+        var symbolName = ""
+//        self.searchProtocol.searchString(by: pointer.pointerValue)
         
-        var symbolName = self.searchProtocol.searchString(by: pointer.pointerValue)
-        
-        if (symbolName == nil){
-            symbolName = self.searchProtocol.searchStringInSymbolTable(by: pointer.pointerValue)
-        }
+//        if (symbolName == nil){
+//            symbolName = self.searchProtocol.searchStringInSymbolTable(by: pointer.pointerValue)
+//        }
         
         return ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: dataSlice, start: pointer.relativeDataOffset, self.pointerLength),
                                model: ExplanationModel(description: "Pointer Value (Virtual Address)",

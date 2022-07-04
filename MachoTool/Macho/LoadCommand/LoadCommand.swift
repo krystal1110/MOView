@@ -28,7 +28,7 @@ struct MachOLoadCommand {
     let size: Int
     let offset: Int
     let byteSwapped: Bool
-    
+     
     
     init(data: Data, offset: Int, byteSwapped: Bool) {
         var loadCommand = data.extract(load_command.self, offset: offset)

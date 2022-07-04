@@ -80,6 +80,11 @@ enum SectionType: UInt32 {
     case S_THREAD_LOCAL_INIT_FUNCTION_POINTERS
     case S_INIT_FUNC_OFFSETS
 
+    
+    case S_ATTRIBUTES_USR = 0xff000000  /* User setable attributes */
+    case S_ATTR_PURE_INSTRUCTIONS = 0x80000000  /* section contains only true machine instructions */
+
+    
     var hasIndirectSymbolTableEntries: Bool {
         switch self {
         case .S_NON_LAZY_SYMBOL_POINTERS, .S_LAZY_SYMBOL_POINTERS, .S_LAZY_DYLIB_SYMBOL_POINTERS, .S_SYMBOL_STUBS:

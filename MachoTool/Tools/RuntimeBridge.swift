@@ -27,7 +27,7 @@ func canDemangleFromRuntime(_ instr: String) -> Bool {
 }
 func runtimeGetDemangledName(_ instr: String) -> String {
     var str: String = instr;
-    if (instr.hasPrefix("$s")) {
+    if (instr.hasPrefix("_$s") || instr.hasPrefix("$s")  ) {
         str = instr;
     } else if (instr.hasPrefix("So")) {
         str = "$s" + instr;
@@ -36,7 +36,7 @@ func runtimeGetDemangledName(_ instr: String) -> String {
     } else {
         return instr;
     }
-    
+     
     let strPtr:UnsafePointer<Int8> = str.withCString { (ptr:UnsafePointer<Int8>) -> UnsafePointer<Int8> in
         return ptr;
     }

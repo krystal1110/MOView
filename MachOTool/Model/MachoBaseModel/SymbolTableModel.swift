@@ -143,10 +143,17 @@ enum SymbolType {
     }
 }
 
+
+struct SymbolRange {
+    let nValue: UInt64
+    var symbolName: String = ""
+}
+
+
 struct SymbolTableModel {
     
     let searchProtocol: SearchProtocol
-    
+    var symbolName: String = ""
     let indexInStringTableRange: Range<Int>
     let indexInStringTable: UInt32
     let symbolType: SymbolType
@@ -314,7 +321,7 @@ struct SymbolTableModel {
     }
     
     
-    func findSymbolName() -> String? {
+     func findSymbolName() -> String? {
         let symbolName: String
         if indexInStringTable == 0 {
             symbolName = "" // if zero, means empty string
@@ -324,8 +331,9 @@ struct SymbolTableModel {
             }
             symbolName = symbolStringFromStringTable
         }
+         let str =  runtimeGetDemangledName(symbolName)
         
-        return  symbolName
+        return  str
     }
     
     

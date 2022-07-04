@@ -11,6 +11,8 @@ import Foundation
 
 protocol SearchProtocol: AnyObject {
     
+    func getMax() -> Int
+    
     func getMachoData() -> Data
     
     func getOffsetFromVmAddress(_ address: UInt64) -> UInt64
@@ -26,7 +28,7 @@ protocol SearchProtocol: AnyObject {
     // 根据index在间接符号表（IndirectSymbolTable）找到对应的 String
     func searchInIndirectSymbolTableList(at index: Int) -> String?
     
-    func searchString(by virtualAddress: UInt64) -> String?
+    
     
     func searchStringInSymbolTable(by nValue:UInt64) -> String?
     

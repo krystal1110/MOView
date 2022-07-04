@@ -17,7 +17,7 @@ extension Data {
     var UInt16: Swift.UInt16 { cast(to: Swift.UInt16.self) }
     var UInt32: Swift.UInt32 { cast(to: Swift.UInt32.self) }
     var UInt64: Swift.UInt64 { cast(to: Swift.UInt64.self) }
-
+//    var Int: Swift.Int { cast(to: Swift.Int.self) }
     var Int32: Swift.Int32 { cast(to: Swift.Int32.self)}
     
     func select(from: Data.Index, length: Data.Index) -> Self {
@@ -63,7 +63,37 @@ extension Data {
         return tmp;
     }
     
-    
+    func readClassString(from: Int) -> String? {
+        if (from >= self.count) {
+            return nil;
+        }
+        var address: Int = (from);
+        var result:[UInt8] = [];
+        while true {
+            let val: UInt8 = self[address];
+            if (val == 0) {
+                break;
+            }
+            address += 1;
+            result.append(val);
+        }
+        
+        if let str = String(bytes: result, encoding: String.Encoding.ascii) {
+            if (str.isAsciiStr()) {
+                return str;
+            }
+        }
+        
+        if (result.count > 10000) {
+            return nil
+        }
+        
+        if let cstring = String(bytes: result, encoding:String.defaultCStringEncoding) {
+            return cstring
+        }
+        
+        return nil;
+    }
  
 }
 
@@ -227,6 +257,10 @@ extension String {
 extension Data {
  
     func readI32(offset: Int) -> Int32 {
+        return readValue(offset) ?? 0
+    }
+    
+    func readI8(offset: Int) -> Int8 {
         return readValue(offset) ?? 0
     }
     

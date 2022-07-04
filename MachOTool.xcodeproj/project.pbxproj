@@ -105,7 +105,6 @@
 		FBB656AC284E0BF10081C991 /* BindOperationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656AB284E0BF10081C991 /* BindOperationCode.swift */; };
 		FBB656AE285073F80081C991 /* OperationCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656AD285073F80081C991 /* OperationCodeModel.swift */; };
 		FBC3489C28489141009B4AAE /* UnusedScanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3489B28489141009B4AAE /* UnusedScanManager.swift */; };
-		FBC3489F2848AF75009B4AAE /* ClassRefsInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */; };
 		FBCEE977283290150090B4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE976283290150090B4E6 /* main.swift */; };
 		FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE97F283290400090B4E6 /* MachoHeader.swift */; };
 		FBCEE990283290400090B4E6 /* Macho.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE984283290400090B4E6 /* Macho.swift */; };
@@ -280,7 +279,6 @@
 		FBB656AB284E0BF10081C991 /* BindOperationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindOperationCode.swift; sourceTree = "<group>"; };
 		FBB656AD285073F80081C991 /* OperationCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationCodeModel.swift; sourceTree = "<group>"; };
 		FBC3489B28489141009B4AAE /* UnusedScanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnusedScanManager.swift; sourceTree = "<group>"; };
-		FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRefsInterpreter.swift; sourceTree = "<group>"; };
 		FBCEE973283290150090B4E6 /* MachoTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MachoTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBCEE976283290150090B4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FBCEE97F283290400090B4E6 /* MachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoHeader.swift; sourceTree = "<group>"; };
@@ -621,7 +619,6 @@
 				FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */,
 				FB9103732844F8D50000AD84 /* ReferencesInterpreter.swift */,
 				FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */,
-				FBC3489E2848AF75009B4AAE /* ClassRefsInterpreter.swift */,
 				FB8F483228571B0A005D0586 /* SwiftTypesInterpreter.swift */,
 				FB1375B0286D8EE700B2C7EC /* ClassListInterpreter.swift */,
 				FB1375B4286D9A3700B2C7EC /* CategoryInterpreter.swift */,
@@ -803,7 +800,6 @@
 				FB9F09AB2862B92200732AD0 /* PPCDisassembler.c in Sources */,
 				FB9F09B72862B92200732AD0 /* X86Module.c in Sources */,
 				FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */,
-				FBC3489F2848AF75009B4AAE /* ClassRefsInterpreter.swift in Sources */,
 				FB1CE85B2865A21A00C5CCC4 /* LoadCommand.swift in Sources */,
 				FBCEE990283290400090B4E6 /* Macho.swift in Sources */,
 				FB9F09B22862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc in Sources */,

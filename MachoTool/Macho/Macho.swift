@@ -43,7 +43,7 @@ class Macho: Equatable {
         data = machoDataRaw
         self.machoFileName = machoFileName
         
-        //        var loadCommands: [MachoComponent] = []
+        
         
         guard let magicType = MagicType(data) else { fatalError() }
         
@@ -55,6 +55,10 @@ class Macho: Equatable {
         
         
         self.commands = Macho.loadCommands(from: data, header: header, attributes: Macho.machAttributes(from: data))
+        
+        let sectionFlagsDic = Macho.loadSectionFlags(from: data, header: header, attributes: Macho.machAttributes(from: data))
+ 
+        
         
         // parse LC_SYMTAB    // parse LC_DYSYMTAB
         self.parseSymbolTool = ParseSymbolTool()
@@ -79,10 +83,12 @@ class Macho: Equatable {
         self.componts.append(contentsOf: parseCustomSection.componts)
         
         
+         
         
         
         
-        UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool)
+//        sectionFlagsDic
+        UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic)
         
     }
     
@@ -125,6 +131,12 @@ class Macho: Equatable {
 }
 
 extension Macho: SearchProtocol {
+    func getMax() -> Int {
+        return self.data.count
+    }
+    
+ 
+    
     
     func getOffsetFromVmAddress(_ address: UInt64) -> UInt64 {
         for i in self.commands {
@@ -183,27 +195,7 @@ extension Macho: SearchProtocol {
     }
     
     
-    
-#warning("TODO  待修复 寻找Cstring")
-    func searchString(by virtualAddress: UInt64) -> String? {
-        
-        //        if (self.uStringStoreInfo != nil){
-        //            for item in self.uStringStoreInfo!.uStringPositionList {
-        //                let itemVirtualAddress =  Int(self.uStringStoreInfo!.interpreter.sectionVirtualAddress) + item.relativeStartOffset
-        //                if (itemVirtualAddress == virtualAddress){
-        //                    return item.explanationItem?.model.explanation
-        //                }
-        //            }
-        //        }
-        //        for stringTableStoreInfo in self.allCstringInterpretInfo {
-        //            // 判断区间范围
-        //            if virtualAddress >= stringTableStoreInfo.interpreter.sectionVirtualAddress
-        //                && virtualAddress < (stringTableStoreInfo.interpreter.sectionVirtualAddress + UInt64(stringTableStoreInfo.interpreter.data.count)) {
-        //                return stringTableStoreInfo.interpreter.findString(with: virtualAddress, stringPositionList: stringTableStoreInfo.stringTableList)
-        //            }
-        //        }
-        return nil
-    }
+ 
 }
 
 
@@ -256,6 +248,36 @@ extension Macho {
         }
         return segmentCommands
     }
+    
+    
+    private static func loadSectionFlags(from data: Data, header: MachOHeader, attributes: MachAttributes) -> Dictionary<Int,Int> {
+         
+        var sectionDic :Dictionary<Int,Int> = [:]
+        var sectionNum = 1
+        var offset = header.size
+        for _ in 0..<header.loadCommandCount {
+            let loadCommand = MachOLoadCommand(data: data, offset: offset, byteSwapped: attributes.isByteSwapped)
+            
+            let type =   LoadCommandType(rawValue: loadCommand.command)
+            if type == .segment || type == .segment64 {
+                var segmentCommand64:segment_command_64 = loadCommand.data.extract(segment_command_64.self, offset: loadCommand.offset)
+
+                
+                let sectionOffset = loadCommand.offset + 0x48;
+
+                for i in 0..<segmentCommand64.nsects {
+                    let offset = sectionOffset + 0x50 * Int(i);
+                    let sectionHeader:section_64 = loadCommand.data.extract(section_64.self, offset: offset)
+                    sectionDic.updateValue(Int(sectionHeader.flags), forKey:sectionNum)
+                    sectionNum += 1
+                }
+            }
+            offset += Int(loadCommand.size)
+        }
+        return sectionDic
+    }
+    
+    
 }
 
 

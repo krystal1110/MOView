@@ -7,14 +7,22 @@
 
 import Foundation
 
-
+struct CFString64
+{
+    let ptr: UInt64
+    let unknown: UInt64
+    let stringAddress: UInt64
+    let size: UInt64
+}
 
 struct ObjcCFString {
-    let ptr: UInt64
-    let data: UInt64
-    let cstrPointer: UInt64
-    let cstrValue: String?
-    let size: UInt64
+    let cfString64:CFString64
+    let stringName:String
+//    let ptr: UInt64
+//    let data: UInt64
+//    let cstrPointer: UInt64
+//    let cstrValue: String?
+//    let size: UInt64
 }
 
 /*
@@ -47,28 +55,33 @@ struct CFStringInterpreter: Interpreter {
         guard rawData.count % pointerLength == 0 else { fatalError() /* section of type S_LITERAL_POINTERS should be in align of 8 (bytes) */  }
         var pointers: [ObjcCFString] = []
         let numberOfPointers = rawData.count / 32
+        
+        var count = 0
+        
         for index in 0..<numberOfPointers {
+           
             let relativeDataOffset = index * pointerLength
             let pointerRawData = rawData.select(from: relativeDataOffset, length: pointerLength)
             
-            var ptr:UInt64 = 0 ,data:UInt64 = 0,cstr:UInt64 = 0,size:UInt64 = 0
-            var str: String? = ""
-            for index in 0..<4 {
-                let pointer = pointerRawData.select(from: (index * 8) , length: 8)
+            let ptr = pointerRawData.select(from: 0 , length: 8).UInt64
+            let unknown = pointerRawData.select(from: 8 , length: 8).UInt64
+            let stringAddress = pointerRawData.select(from: 16 , length: 8).UInt64
+            let size = pointerRawData.select(from: 24 , length: 8).UInt64
+           
+            let cfstring =  CFString64(ptr: ptr, unknown: unknown, stringAddress: stringAddress, size: size)
+            let stringOff = searchProtocol.getOffsetFromVmAddress(cfstring.stringAddress)
+            if (stringOff > 0 && stringOff < searchProtocol.getMachoData().count) {
                 
-                if (index == 0) {
-                    ptr = pointer.UInt64
-                }else if (index == 1){
-                    data = pointer.UInt64
-                }else if (index == 2){
-                    cstr = pointer.UInt64
-                    str =  self.searchProtocol.searchString(by: pointer.UInt64)
+                if let string =  searchProtocol.getMachoData().readClassString(from: Int(stringOff)){
+                    count = count + 1
+                    let objcCFString = ObjcCFString(cfString64: cfstring, stringName: string)
+                    pointers.append(objcCFString)
                 }else{
-                    size = pointer.UInt64
+                    print("index  ====  \(index)")
+                   
                 }
             }
-            let objcCFString = ObjcCFString(ptr: ptr, data: data, cstrPointer: cstr, cstrValue: str, size: size)
-            pointers.append(objcCFString)
+            
         }
         return pointers
     }

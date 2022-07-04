@@ -46,7 +46,7 @@ struct SwiftOverrideMethod {
     let method:SwiftMethod
 };
 
- 
+
 
 
 
@@ -79,35 +79,42 @@ struct SwiftTypesInterpreter: Interpreter {
         
         let numberOfTypes = dataSlice.count / 4
         for i in 0..<numberOfTypes {
+            
+            
+            
+            
+            
+            
             let localOffset =  i * 4
-            
             let tmpPtr = UInt64(fileOffset) + UInt64(localOffset)
-            let nominalLocalOffset:Int32 =  self.data.readI32(offset: Int(tmpPtr))  //-22140
+            let nominalLocalOffset:Int32 =  self.data.readI32(offset: Int(tmpPtr))  //  -22328
             
-             //地址偏移
+            //地址偏移
             let nominalArchOffset:Int64 = Int64(fileOffset) + Int64(localOffset) + Int64(nominalLocalOffset);
             
             let nominalPtr:UInt64 =  UInt64(nominalArchOffset)
             
             let flags:UInt32 = data.readU32(offset: Int(nominalPtr))
             
-
-//            let parentVal:Int32 = data.readI32(offset: nominalPtr.add(4).toInt)   // 可能是模块名
- 
+            
+            
+            
+            
             let namePtr = data.readMove(nominalPtr.add(8).toInt).fix()
-               
             let nameStr: String = data.readCString(from: Int(namePtr)) ?? ""
-               
-           
+            
             //accessorPtr对应的是 metaData 访问函数将始终返回正确的元数据记录;
             let accessorPtr = data.readMove(nominalPtr.add(12).toInt).fix()
-        
+            
             
             var obj: SwiftNominalModel = SwiftNominalModel()
             obj.typeName = nameStr
             obj.contextDescriptorFlag = SwiftContextDescriptorFlags(flags)
             obj.nominalOffset = nominalArchOffset
             obj.accessorOffset = UInt64((accessorPtr))
+            
+            obj.parentName =  calculateParentName(nominalPtr, kind: obj.contextDescriptorFlag.kind)
+            
             nominalList.append(obj);
             
             if obj.contextDescriptorFlag.kind == .Class {
@@ -128,12 +135,9 @@ struct SwiftTypesInterpreter: Interpreter {
                 obj.mangledTypeName = mangledTypeName;
             }
             
- 
             
-          
             
-//            print("🔥🔥🔥🔥🔥🔥")
-//            print("类名为 \(obj.typeName)   \n我的父类为 \(obj.superClassName) \n我拥有\(obj.fields.count)属性")
+            print("类名为 \(obj.typeName)   \n我的父类为 \(obj.superClassName) \n我拥有\(obj.fields.count)属性")
         }
         
         return nominalList
@@ -142,7 +146,7 @@ struct SwiftTypesInterpreter: Interpreter {
     
     
     /*
-         解析 superClass
+     解析 superClass
      **/
     private func resolveSuperClassName(_ nominalPtr: UInt64) -> String {
         //nominalPtr
@@ -156,18 +160,22 @@ struct SwiftTypesInterpreter: Interpreter {
         if let superRefStr = self.data.readCString(from:Int(superClassRefPtr)), !superRefStr.isEmpty {
             retName = superRefStr; // resolve later
         }
+        
         return retName;
     }
     
     private func dumpFieldDescriptor(_ fieldDescriptorPtr: UInt64, to:inout SwiftNominalModel ){
-        print("\(fieldDescriptorPtr.add(4 + 4 + 2 + 2).toInt)")
+        
+        
         let numFields = data.readU32(offset: fieldDescriptorPtr.add(4 + 4 + 2 + 2).toInt)
+        
         if (0 == numFields){
             return
         }
         if (numFields >= 1000) {
             //TODO: sometimes it may be a invalid value
-            fatalError("[dumpFieldDescriptor] \(numFields) too many fields of \(to.typeName), ignore format")
+            return
+//            fatalError("[dumpFieldDescriptor] \(numFields) too many fields of \(to.typeName), ignore format")
         }
         
         let fieldStart:UInt64 = fieldDescriptorPtr.add(4 + 4 + 2 + 2 + 4)
@@ -179,10 +187,10 @@ struct SwiftTypesInterpreter: Interpreter {
              获取是什么类型 例如 Int a ，这里获取的 type 就是 Int(Type得到的是 Si 需要转换成 Int)
              **/
             let typeNamePtr = data.readMove(fieldAddress.add(4).toInt).fix()
+            
             let typeName = data.readCString(from: typeNamePtr.toInt)
             
             if let type = typeName, (type.count <= 0 || type.count > 100) {
-                
                 continue
             }
             
@@ -195,10 +203,10 @@ struct SwiftTypesInterpreter: Interpreter {
             if let field = fieldName, (field.count <= 0 || field.count > 100) {
                 continue
             }
-           
+            
             // 存储
             if let type = typeName, let field = fieldName {
-            
+                
                 // 通过Swift Runtime 恢复真实名字
                 let realType = getTypeFromMangledName(type)
                 var fieldObj = SwiftNominalObjField()
@@ -211,10 +219,98 @@ struct SwiftTypesInterpreter: Interpreter {
         }
     }
     
+    
+    func calculateParentName(_ nominalPtr: UInt64, kind: SwiftContextDescriptorKind) -> String? {
+        let parent:UInt32 = data.readU32(offset:  Int(nominalPtr + 4))
+        var parentOffset = nominalPtr + 4 + UInt64(parent)
+        let vm = section!.info.addr - UInt64(section!.info.offset)
+        if parentOffset > vm { parentOffset = parentOffset - vm }
+        
+        while (kind != .Module) {
+            let type:UInt32 = data.readU32(offset: Int(parentOffset))
+            let flags = SwiftContextDescriptorFlags(type)
+            let kind = flags.kind
+            
+            if kind == .Unknow {
+                // 类似这样的代码（Type的Parent可能不属于Type）
+                // func extensions(of value: Any) {
+                //     struct Extensions : AnyExtensions {}
+                //      return
+                // }
+                return nil
+            }
+            
+//             let  isGenericType = flags.isGeneric
+            
+            //Anonymous 匿名 二进制布局如下：Flag(4B)+Parent(4B)+泛型签名（不定长）+mangleName(4B)
+            var genericPlaceholder:Int8 = 0
+            if kind == .Anonymous {
+                genericPlaceholder = addPlaceholderWithGeneric(nominalPtr)
+            }
+            
+            //如果Anonymous 没有mangleName，则放弃
+            if (kind == .Anonymous && !((type & 0xFFFF) == 0x01) ) {
+                 return nil
+            }
+            
+            let offset = Int(parentOffset) + 2 * 4 + Int(genericPlaceholder)
+            let parentNameContent: UInt32 = data.readU32(offset:offset)
+            var parentNameOffset = Int(parentOffset) + 2 * 4 + Int(parentNameContent) + Int(genericPlaceholder)
+            if (parentNameOffset > vm) {parentNameOffset = parentNameOffset - Int(vm)}
+            let parentName = data.readCString(from:  parentNameOffset) ?? ""
+            
+            return parentName
+        }
+        return nil
+    }
+    
+    
+    func addPlaceholderWithGeneric(_ typeOffset:UInt64) -> Int8{
+        let type = data.readU32(offset: Int(typeOffset))
+        let flags = SwiftContextDescriptorFlags(type)
+        
+        // 除去通用
+        if (!flags.isGeneric) {
+            return 0
+        }
+        
+        //非class | Anonymous不处理
+        var front = 0
+        
+        //Anonymous的header为8字节
+        var header = 8
+        
+        if flags.kind == .Class {
+            //class的11个（4B） + addMetadataInstantiationCache （4B） + addMetadataInstantiationPattern（4B）
+            front = (11 + 2) * 4
+            //class的header为16字节
+            header = 16
+        }else if (flags.kind == .Anonymous){
+            front = 2 * 4
+        }else{
+            return 0
+        }
+        
+        
+       let paramsCount = data.readI8(offset: Int(typeOffset) + front)
+       let requeireCount = data.readI8(offset: Int(typeOffset) + front + 2)
+        
+        //4字节对齐
+        let pandding:Int8 =  -paramsCount & 3
+        
+        return (Int8(header)  + paramsCount + pandding + 3 * 4 * (requeireCount));
+    }
+    
+  
+    
+ 
+    
+     
+    
 }
 
 
- 
 
 
- 
+
+
