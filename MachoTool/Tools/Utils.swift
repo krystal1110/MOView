@@ -63,7 +63,7 @@ extension Data {
         return tmp;
     }
     
-    func readClassString(from: Int) -> String? {
+    func readCStringName(from: Int) -> String? {
         if (from >= self.count) {
             return nil;
         }
@@ -94,6 +94,48 @@ extension Data {
         
         return nil;
     }
+    
+    
+    
+    
+    func readCstring(at start: UInt64) -> String {
+        
+        if (Int(start) >= self.count) {
+            return ""
+        }
+        var address: Int = (Int(start));
+        var result:[UInt8] = [];
+        while true {
+            let val: UInt8 = self[address];
+            if (val == 0) {
+                break
+            }
+            address += 1;
+            result.append(val)
+        }
+        
+        if (result.count > 10000) {
+            return ""
+        }
+        
+        if let str = String(bytes: result, encoding: String.Encoding.ascii) {
+            if (str.isAsciiStr()) {
+                return str
+            }
+        }
+        
+ 
+        
+        if let str = String(bytes: result, encoding:String.defaultCStringEncoding) {
+            return str
+        }
+        
+        return ""
+    }
+    
+    
+    
+    
  
 }
 
@@ -299,3 +341,28 @@ extension Data {
     
    
 }
+
+
+extension DispatchQueue {
+
+    private static var _onceTracker = [String]()
+
+    /**
+     Executes a block of code, associated with a unique token, only once.  The code is thread safe and will
+     only execute the code once even in the presence of multithreaded calls.
+
+     - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
+     - parameter block: Block to execute once
+     */
+    class func once(token: String, block:()->Void) {
+        objc_sync_enter(self); defer { objc_sync_exit(self) }
+
+        if _onceTracker.contains(token) {
+            return
+        }
+
+        _onceTracker.append(token)
+        block()
+    }
+}
+

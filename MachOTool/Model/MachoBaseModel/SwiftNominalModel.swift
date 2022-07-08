@@ -16,7 +16,9 @@ struct SwiftNominalObjField {
 
 struct SwiftNominalModel {
     var parentName: String? 
+    
     var typeName: String = ""; // type name
+    
     var className: String {
         if let _ = parentName {
             return parentName! + "." + typeName
@@ -25,7 +27,8 @@ struct SwiftNominalModel {
     }
     
     var contextDescriptorFlag: SwiftContextDescriptorFlags = SwiftContextDescriptorFlags(0); // default
-    var fields: [SwiftNominalObjField] = [];
+    
+    var fields: [SwiftNominalObjField] = []; // 属性
     
     var mangledTypeName: String = ""; // 如果其他人将此类型定义为属性，则可以使用此来检索名称
     var nominalOffset: Int64 = 0; // Context Descriptor offset

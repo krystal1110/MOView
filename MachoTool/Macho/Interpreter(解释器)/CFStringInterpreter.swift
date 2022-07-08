@@ -55,9 +55,6 @@ struct CFStringInterpreter: Interpreter {
         guard rawData.count % pointerLength == 0 else { fatalError() /* section of type S_LITERAL_POINTERS should be in align of 8 (bytes) */  }
         var pointers: [ObjcCFString] = []
         let numberOfPointers = rawData.count / 32
-        
-        var count = 0
-        
         for index in 0..<numberOfPointers {
            
             let relativeDataOffset = index * pointerLength
@@ -70,15 +67,12 @@ struct CFStringInterpreter: Interpreter {
            
             let cfstring =  CFString64(ptr: ptr, unknown: unknown, stringAddress: stringAddress, size: size)
             let stringOff = searchProtocol.getOffsetFromVmAddress(cfstring.stringAddress)
+          
             if (stringOff > 0 && stringOff < searchProtocol.getMachoData().count) {
-                
-                if let string =  searchProtocol.getMachoData().readClassString(from: Int(stringOff)){
-                    count = count + 1
+                if let string =  searchProtocol.getMachoData().readCStringName(from: Int(stringOff)){
+                    
                     let objcCFString = ObjcCFString(cfString64: cfstring, stringName: string)
                     pointers.append(objcCFString)
-                }else{
-                    print("index  ====  \(index)")
-                   
                 }
             }
             

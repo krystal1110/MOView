@@ -88,7 +88,7 @@ class Macho: Equatable {
         
         
 //        sectionFlagsDic
-        UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic)
+        UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic).scanUselessClasses()
         
     }
     
@@ -137,11 +137,32 @@ extension Macho: SearchProtocol {
     
  
     
+    func getTEXTConst(_ address: UInt64) -> section_64? {
+        
+        for i in self.commands {
+            let type  = type(of: i)
+            
+            if (type == MachOLoadCommand.Segment.self){
+                let segment = i as! MachOLoadCommand.Segment
+                if  let segmentCommand =  (i as! MachOLoadCommand.Segment).command64 {
+                    if (address >= segmentCommand.vmaddr && address <= segmentCommand.vmaddr + segmentCommand.vmsize){
+                        for j in segment.sections {
+                            
+                            if (address >= j.info.addr && address < j.info.addr + j.info.size){
+                                return j.info
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
+    
     
     func getOffsetFromVmAddress(_ address: UInt64) -> UInt64 {
         for i in self.commands {
-            
-             
             let type  = type(of: i)
             
             if (type == MachOLoadCommand.Segment.self){

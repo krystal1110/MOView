@@ -82,9 +82,9 @@ class ParseTextSection {
              当前文件偏移 + 随后4字节中存储的 value 即可得到 class 地址
              **/
             
-            let interpreter  = SwiftTypesInterpreter(with: data, dataSlice: dataSlice, section: section, searchProtocol: searchProtocol)
+            var interpreter  = SwiftTypesInterpreter(with: data, dataSlice: dataSlice, section: section, searchProtocol: searchProtocol)
             let swiftTypesList  =  interpreter.transitionData()
-            let compont = SwiftTypesCmponent(dataSlice, section: section, swiftTypesList: swiftTypesList)
+            let compont = SwiftTypesCmponent(dataSlice, section: section, swiftTypesList: swiftTypesList, swiftRefsSet: interpreter.swiftRefsSet)
             componts.append(compont)
             
         }else if (section.sectname == TextSection.swift5reflstr.rawValue){

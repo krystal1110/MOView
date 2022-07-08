@@ -11,6 +11,8 @@ import Foundation
 
 protocol SearchProtocol: AnyObject {
     
+    func getTEXTConst(_ address: UInt64) -> section_64?
+    
     func getMax() -> Int
     
     func getMachoData() -> Data

@@ -8,6 +8,34 @@
 import Foundation
 
 
+struct SwiftTypeModel{
+    var name: String = ""
+    var superClass: String? = ""
+    var accessOffset: UInt64 = 0
+    var fields: [SwiftTypeField]  = []// 存着变量名
+}
+
+
+struct SwiftTypeField {
+    var varName: String // 变量
+    var module: String  // 模块名
+}
+
+
+
+struct FieldRecord{
+    let flags: UInt32
+    let mangledTypeName: UInt32
+    let fieldName: UInt32
+};
+
+struct FieldDescriptor{
+    let mangledTypeName: Int32
+    let superclass: Int32
+    let kind: UInt16
+    let fieldRecordSize: UInt16
+    let numFields: UInt32
+};
 
 
 struct SwiftType {
@@ -20,30 +48,12 @@ struct SwiftMethod {
     let offset : UInt32
 }
 
-
-//没有Vtable 的话使用此结构体会错误
-struct SwiftClassType {
+struct SwiftBaseType {
     let flag: UInt32
     let parent: UInt32
-    let name : Int32
-    let accessFunction:Int32
+    let name: Int32
+    let accessFunction: Int32
     let fieldDescriptor: Int32
-    let superclassType: Int32
-    let metadataNegativeSizeInWords: UInt32
-    let metadataPositiveSizeInWords: UInt32
-    let numImmediateMembers: UInt32
-    let numFields: UInt32
-    let unknow1: UInt32
-    let offset: UInt32
-    let numMethods: UInt32
-};
-
-// 这是类重写的函数
-//OverrideTable结构如下，紧随VTable后4字节为OverrideTable数量，再其后为此结构数组
-struct SwiftOverrideMethod {
-    let overrideClass:SwiftClassType
-    let overrideMethod:SwiftMethod
-    let method:SwiftMethod
 };
 
 
@@ -60,163 +70,265 @@ struct SwiftTypesInterpreter: Interpreter {
     
     let pointerLength: Int = 8
     
+    var vm: UInt64 = 0
+    
     let data: Data
+    
+    var swiftRefsSet: Set<String> = []
+   
+    var textConst:section_64?
     
     init(with data:Data , dataSlice: Data, section:Section64,  searchProtocol:SearchProtocol){
         self.data = data
         self.dataSlice = dataSlice
         self.section = section
         self.searchProtocol = searchProtocol
+        
+        self.vm = section.info.addr - UInt64(section.info.offset)
+        
     }
     
     
     // 转换为 stroeInfo 存储信息
-    func transitionData()  -> [SwiftNominalModel] {
+    mutating func transitionData()  -> [SwiftTypeModel] {
         
-        let fileOffset = Int64(section!.fileOffset)
-        
-        var nominalList:[SwiftNominalModel] = [];
+        var nominalList:[SwiftTypeModel] = [];
         
         let numberOfTypes = dataSlice.count / 4
+        
         for i in 0..<numberOfTypes {
             
+            let typeAddress = section!.info.addr +  UInt64(i * 4)
+            let offset = searchProtocol.getOffsetFromVmAddress(typeAddress)
+            let content = DataTool.interception(with: data, from: offset.toInt, length: 4).UInt32
+            var vmAddress =  UInt64(content) + typeAddress
+            correctAddress(&vmAddress)
             
-            
-            
-            
-            
-            let localOffset =  i * 4
-            let tmpPtr = UInt64(fileOffset) + UInt64(localOffset)
-            let nominalLocalOffset:Int32 =  self.data.readI32(offset: Int(tmpPtr))  //  -22328
-            
-            //地址偏移
-            let nominalArchOffset:Int64 = Int64(fileOffset) + Int64(localOffset) + Int64(nominalLocalOffset);
-            
-            let nominalPtr:UInt64 =  UInt64(nominalArchOffset)
-            
-            let flags:UInt32 = data.readU32(offset: Int(nominalPtr))
-            
-            
-            
-            
-            
-            let namePtr = data.readMove(nominalPtr.add(8).toInt).fix()
-            let nameStr: String = data.readCString(from: Int(namePtr)) ?? ""
-            
-            //accessorPtr对应的是 metaData 访问函数将始终返回正确的元数据记录;
-            let accessorPtr = data.readMove(nominalPtr.add(12).toInt).fix()
-            
-            
-            var obj: SwiftNominalModel = SwiftNominalModel()
-            obj.typeName = nameStr
-            obj.contextDescriptorFlag = SwiftContextDescriptorFlags(flags)
-            obj.nominalOffset = nominalArchOffset
-            obj.accessorOffset = UInt64((accessorPtr))
-            
-            obj.parentName =  calculateParentName(nominalPtr, kind: obj.contextDescriptorFlag.kind)
-            
-            nominalList.append(obj);
-            
-            if obj.contextDescriptorFlag.kind == .Class {
-                // 类
-                obj.superClassName = resolveSuperClassName(nominalPtr)
-            }else if obj.contextDescriptorFlag.kind == .Enum {
-                // 枚举
-            }else if obj.contextDescriptorFlag.kind == .Struct {
-                // 结构体
-            }
-            // 拿到 fieldDescriptor
-            let fieldDescriptorPtr:UInt64 = data.readMove(nominalPtr.add(4 * 4).toInt).fix();
-            dumpFieldDescriptor(fieldDescriptorPtr, to: &obj)
-            
-            let mangledTypeNamePtr = data.readMove(Int(fieldDescriptorPtr)).fix();
-            if let mangledTypeName = data.readCString(from: mangledTypeNamePtr.toInt) {
-                //Log("    mangledTypeName \(mangledTypeName) \(mangledTypeNamePtr.desc)")
-                obj.mangledTypeName = mangledTypeName;
+           // 获取对应的 TEXT - Section64
+            DispatchQueue.once(token: "getTEXTConst") {
+                if let x =  searchProtocol.getTEXTConst(vmAddress){
+                    textConst = x
+                }
             }
             
             
+            let typeOffset = searchProtocol.getOffsetFromVmAddress(vmAddress)
             
-            print("类名为 \(obj.typeName)   \n我的父类为 \(obj.superClassName) \n我拥有\(obj.fields.count)属性")
+            let swiftType = data.extract(SwiftBaseType.self, offset: typeOffset.toInt)
+            
+            
+            let nameOffsetContent = DataTool.interception(with: data, from: Int(typeOffset) + 2 * 4, length: 4).UInt32
+            var nameOffset = typeOffset + 2 * 4 + UInt64(nameOffsetContent)
+            
+            if nameOffset > vm {nameOffset -= vm}
+            
+            /// 拿到类名
+            var name = data.readCstring(at: nameOffset)
+            
+            var parentOffset = typeOffset + 1 * 4 + UInt64(swiftType.parent)
+            if parentOffset > vm { parentOffset = parentOffset - vm}
+            if invalidParent(parentOffset){continue}
+            
+            
+            /// 拿到类型
+            var kind = SwiftContextDescriptorFlags(swiftType.flag).kind
+            if kind == .OpaqueType  {
+                /// 屏蔽 swiftUI 的some
+                continue
+            }
+            
+            /// 获取 ParentName
+            while (kind != .Module) {
+                /// 获取Parent的类型
+                let swiftParentType = data.extract(SwiftBaseType.self, offset: parentOffset.toInt)
+                 kind = SwiftContextDescriptorFlags(swiftParentType.flag).kind
+                if kind == .Unknow {
+                    break
+                }
+                
+                // 匿名 二进制布局如下：Flag(4B)+Parent(4B)+泛型签名（不定长）+mangleName(4B)
+                var genericPlaceholder:Int8 = 0
+                if kind == .Anonymous {
+                    genericPlaceholder = addPlaceholderWithGeneric(parentOffset)
+                }
+                
+                //匿名 没有mangleName，则放弃
+                if (kind == .Anonymous && !((swiftParentType.flag & 0xFFFF) == 0x01) ) {
+                    break
+                }
+                
+                let offset = Int(parentOffset) + 2 * 4 + Int(genericPlaceholder)
+                let parentNameContent: UInt32 = data.readU32(offset:offset)
+                var parentNameOffset = UInt64(Int(parentOffset) + 2 * 4 + Int(parentNameContent) + Int(genericPlaceholder))
+                if (parentNameOffset > vm) {parentNameOffset = parentNameOffset - UInt64(vm)}
+                let parentName = data.readCstring(at: parentNameOffset)
+                
+                // 匿名
+                if kind == .Anonymous {
+                    name  = getTypeFromMangledName(parentName)
+                    break
+                }
+                
+                name = parentName + "." + name
+                 
+                let parentOffsetContent = DataTool.interception(with: data, from: Int(parentOffset) + 1 * 4, length: 4).UInt32
+                parentOffset = parentOffset + 1 * 4 + UInt64(parentOffsetContent)
+                if parentOffset > vm {parentOffset = parentOffset - vm}
+                if invalidParent(parentOffset) {break}
+                
+            }
+            
+            
+            
+            
+            let accessFuncContent = DataTool.interception(with: data, from: Int(typeOffset) + 3 * 4, length: 4).UInt32
+            var accessFuncAddr = vmAddress + 3 * 4 + UInt64(accessFuncContent)
+            correctAddress(&accessFuncAddr)
+            let accessOffset = searchProtocol.getOffsetFromVmAddress(accessFuncAddr)
+            
+            
+            
+            
+            
+            /// 查找属性
+            let  fieldDescriptorContent = swiftType.fieldDescriptor
+            if fieldDescriptorContent == 0 {continue}
+            var  fieldDescriptorAddress =  UInt64(fieldDescriptorContent) + UInt64(vmAddress) + 4 * 4
+            correctAddress(&fieldDescriptorAddress)
+            let fieldDescriptorOffset = searchProtocol.getOffsetFromVmAddress(UInt64(fieldDescriptorAddress))
+            let fieldDescriptor = data.extract(FieldDescriptor.self, offset: Int(fieldDescriptorOffset))
+
+            
+            var superClassName = ""
+            if fieldDescriptor.superclass != 0 {
+                let superclassAddr = Int(fieldDescriptorAddress) + 4 * 1 + Int(fieldDescriptor.superclass)
+                if let x =  parseSuperClass(UInt64(superclassAddr)){
+                    superClassName = x
+                }
+            }
+
+            var model = SwiftTypeModel()
+            model.fields  =  dumpFieldDescriptor(fieldDescriptor, fieldDescriptorAddress: fieldDescriptorAddress)
+            model.name = name
+            model.superClass = superClassName
+            model.accessOffset = accessOffset
+            nominalList.append(model)
+            
         }
-        
         return nominalList
     }
     
     
-    
-    /*
-     解析 superClass
-     **/
-    private func resolveSuperClassName(_ nominalPtr: UInt64) -> String {
-        //nominalPtr
-        let ptr = nominalPtr.add(4 * 5)
-        let superClassTypeVal = self.data.readI32(offset: Int(ptr));
-        if (superClassTypeVal == 0) {
-            return "";
-        }
-        var retName: String = "";
-        let superClassRefPtr = ptr.add(Int(superClassTypeVal));
-        if let superRefStr = self.data.readCString(from:Int(superClassRefPtr)), !superRefStr.isEmpty {
-            retName = superRefStr; // resolve later
+    /// 解析 SuperClass
+    private mutating func parseSuperClass(_ superclassAddr:UInt64 ) -> String?{
+        
+        let superClassOffset = searchProtocol.getOffsetFromVmAddress(superclassAddr)
+        
+        guard let firstStr =   data.readCString(from: Int(superClassOffset)) else{
+             return nil
         }
         
-        return retName;
+        var superClassModule = ""
+
+        if firstStr.hasPrefix("0x01"){
+            superClassModule = findMangleTypeName0x1(UInt64(superClassOffset))
+            swiftRefsSet.insert(superClassModule)
+            return superClassModule
+        }else if firstStr.hasPrefix("0x02"){
+            superClassModule = findMangleTypeName0x2(UInt64(superClassOffset))
+            swiftRefsSet.insert(superClassModule)
+            return superClassModule
+        }else{
+            superClassModule = getTypeFromMangledName(firstStr)
+             
+            // 过滤掉 So9NSObject 等类型
+            if superClassModule.hasPrefix("So") && superClassModule.count <= 13  && superClassModule.count >= 5{
+                let index2 = superClassModule.index(superClassModule.startIndex, offsetBy: 3)
+                let index3 = superClassModule.index(superClassModule.endIndex, offsetBy: -2)
+                let sub4 = superClassModule[index2...index3]
+                swiftRefsSet.insert(String(sub4))
+                return String(sub4)
+            }else{
+                swiftRefsSet.insert(superClassModule)
+                return superClassModule
+            }
+        }
+        
     }
+ 
     
-    private func dumpFieldDescriptor(_ fieldDescriptorPtr: UInt64, to:inout SwiftNominalModel ){
+    
+    /// dump 属性
+    private mutating func dumpFieldDescriptor(_ fieldDescriptor: FieldDescriptor, fieldDescriptorAddress:UInt64 ) ->  [SwiftTypeField]{
         
+        var fieldObjList: [SwiftTypeField] = []
         
-        let numFields = data.readU32(offset: fieldDescriptorPtr.add(4 + 4 + 2 + 2).toInt)
+        let numFields = fieldDescriptor.numFields
         
         if (0 == numFields){
-            return
+            return fieldObjList
         }
         if (numFields >= 1000) {
             //TODO: sometimes it may be a invalid value
-            return
-//            fatalError("[dumpFieldDescriptor] \(numFields) too many fields of \(to.typeName), ignore format")
+             return fieldObjList
         }
         
-        let fieldStart:UInt64 = fieldDescriptorPtr.add(4 + 4 + 2 + 2 + 4)
-        for i in 0..<Int(numFields) {
-            let fieldAddress = fieldStart.add(i * (4 * 3))
+        let fieldDescriptorOffset = searchProtocol.getOffsetFromVmAddress(UInt64(fieldDescriptorAddress))
+        var fieldRecordAddr = Int(fieldDescriptorAddress) +  MemoryLayout<FieldDescriptor>.size
+        var fieldRecordOff =  Int(fieldDescriptorOffset) +  MemoryLayout<FieldDescriptor>.size
+        let fieldStart = UInt64(fieldDescriptorOffset) + UInt64(4 + 4 + 2 + 2 + 4)
+    
+         for i in 0..<Int(numFields) {
+            ///  解析 属性
+            
+            let fieldAddr = UInt64(fieldStart) + UInt64( i * (4 * 3))
+            let fieldNamePtr = data.readMove(Int(fieldAddr.add(8))).fix();
+            
+            let  fieldName = data.readCstring(at: fieldNamePtr)
             
             
-            /*
-             获取是什么类型 例如 Int a ，这里获取的 type 就是 Int(Type得到的是 Si 需要转换成 Int)
-             **/
-            let typeNamePtr = data.readMove(fieldAddress.add(4).toInt).fix()
-            
-            let typeName = data.readCString(from: typeNamePtr.toInt)
-            
-            if let type = typeName, (type.count <= 0 || type.count > 100) {
+             
+            let record =   data.extract(FieldRecord.self, offset: fieldRecordOff)
+             
+            // 0x0 泛型属性 例如：let name: ClassA<String>? = nil
+            if (record.flags != 0x2 && record.flags != 0x0){
                 continue
             }
             
-            /*
-             获取属性名称 例如 Int a ，这里获取的 fieldName 就是 a
-             **/
-            let fieldNamePtr = data.readMove(fieldAddress.add(8).toInt).fix();
-            let fieldName = data.readCString(from: fieldNamePtr.toInt);
+            var mangleNameAddr = UInt64(fieldRecordAddr) + UInt64(record.mangledTypeName) + 4
+            correctAddress(&mangleNameAddr)
+         
             
-            if let field = fieldName, (field.count <= 0 || field.count > 100) {
+            let mangleNameOffset = searchProtocol.getOffsetFromVmAddress(UInt64(mangleNameAddr))
+            
+             
+            fieldRecordAddr = fieldRecordAddr +  MemoryLayout<FieldRecord>.size
+            fieldRecordOff  =  fieldRecordOff + MemoryLayout<FieldRecord>.size
+            
+            
+            
+            
+            guard let firstStr =   data.readCString(from: Int(mangleNameOffset)) else{
                 continue
             }
             
-            // 存储
-            if let type = typeName, let field = fieldName {
-                
-                // 通过Swift Runtime 恢复真实名字
-                let realType = getTypeFromMangledName(type)
-                var fieldObj = SwiftNominalObjField()
-                fieldObj.name = field
-                fieldObj.type = realType
-                fieldObj.namePtr = fieldNamePtr
-                fieldObj.typePtr = typeNamePtr
-                to.fields.append(fieldObj)
+            var module = ""
+            
+            if firstStr.hasPrefix("0x01"){
+                module = findMangleTypeName0x1(UInt64(mangleNameAddr))
+                swiftRefsSet.insert(module)
+            }else if firstStr.hasPrefix("0x02"){
+                module = findMangleTypeName0x2(UInt64(mangleNameAddr))
+                swiftRefsSet.insert(module)
+            }else{
+                module = getTypeFromMangledName(firstStr)
+                 
             }
+            
+            let fieldObj =  SwiftTypeField(varName: fieldName, module: module)
+            fieldObjList.append(fieldObj)
         }
+        return fieldObjList
     }
     
     
@@ -224,6 +336,9 @@ struct SwiftTypesInterpreter: Interpreter {
         let parent:UInt32 = data.readU32(offset:  Int(nominalPtr + 4))
         var parentOffset = nominalPtr + 4 + UInt64(parent)
         let vm = section!.info.addr - UInt64(section!.info.offset)
+        
+        
+        
         if parentOffset > vm { parentOffset = parentOffset - vm }
         
         while (kind != .Module) {
@@ -240,8 +355,6 @@ struct SwiftTypesInterpreter: Interpreter {
                 return nil
             }
             
-//             let  isGenericType = flags.isGeneric
-            
             //Anonymous 匿名 二进制布局如下：Flag(4B)+Parent(4B)+泛型签名（不定长）+mangleName(4B)
             var genericPlaceholder:Int8 = 0
             if kind == .Anonymous {
@@ -250,7 +363,7 @@ struct SwiftTypesInterpreter: Interpreter {
             
             //如果Anonymous 没有mangleName，则放弃
             if (kind == .Anonymous && !((type & 0xFFFF) == 0x01) ) {
-                 return nil
+                return nil
             }
             
             let offset = Int(parentOffset) + 2 * 4 + Int(genericPlaceholder)
@@ -292,8 +405,8 @@ struct SwiftTypesInterpreter: Interpreter {
         }
         
         
-       let paramsCount = data.readI8(offset: Int(typeOffset) + front)
-       let requeireCount = data.readI8(offset: Int(typeOffset) + front + 2)
+        let paramsCount = data.readI8(offset: Int(typeOffset) + front)
+        let requeireCount = data.readI8(offset: Int(typeOffset) + front + 2)
         
         //4字节对齐
         let pandding:Int8 =  -paramsCount & 3
@@ -301,11 +414,216 @@ struct SwiftTypesInterpreter: Interpreter {
         return (Int8(header)  + paramsCount + pandding + 3 * 4 * (requeireCount));
     }
     
-  
+    
+    
+    
+    /// 解析属性
+    mutating func findMangleTypeName0x1(_ mangleNameAddr: UInt64) -> String {
+        
+        let mangleNameOffset = searchProtocol.getOffsetFromVmAddress(mangleNameAddr)
+        
+        let content =  DataTool.interception(with: data, from: mangleNameOffset.toInt + 1, length: 4).UInt32
+        
+        var contextAddr: UInt64 = mangleNameAddr + 1 + UInt64(content)
+        /// 防止跨段
+        correctAddress(&contextAddr)
+        let contextOffset = searchProtocol.getOffsetFromVmAddress(contextAddr)
+        
+        let typeContext:SwiftBaseType = data.extract(SwiftBaseType.self, offset: contextOffset.toInt)
+        
+        
+        var nameAddr =  UInt64(Int(contextAddr) + 2 * 4  +  Int(typeContext.name))
+        /// 防止跨段
+        correctAddress(&nameAddr)
+        let nameOffset = searchProtocol.getOffsetFromVmAddress(UInt64(nameAddr))
+        
+        var mangleTypeName =  data.readCstring(at:nameOffset)
+        
+        
+        
+        var parentAddr = contextAddr + 1 * 4 + UInt64(typeContext.parent)
+        /// 防止跨段
+        correctAddress(&parentAddr)
+        
+        var parentOffset = searchProtocol.getOffsetFromVmAddress(parentAddr)
+        
+        /// 这里需要while循环是因为 如果有这样的    @objc public var hudStyle: ZLProgressHUD.HUDStyle = .lightBlur
+        /// 嵌套几层的 则需要while将其遍历出来
+        var kind:SwiftContextDescriptorKind = SwiftContextDescriptorKind.Unknow
+
+        while kind != .Module && !invalidParent(parentOffset){
+            let type:UInt32 = data.readU32(offset: Int(parentOffset))
+            
+            let flags = SwiftContextDescriptorFlags(type)
+            
+            kind = flags.kind
+            
+            if kind == .Unknow {
+                break
+            }
+            
+            var  genericPlaceholder: Int8 = 0;
+            if (kind == .Anonymous) {
+                genericPlaceholder =  addPlaceholderWithGeneric(parentOffset)
+            }
+            
+            ///如果匿名的Anonymous 没有parentName，则放弃
+            ///例如 private enum AutoScrollDirection  这种就是 没有 parentName
+            if (kind == .Anonymous && !((type & 0xFFFF) == 0x01) ) {
+                swiftRefsSet.insert(mangleTypeName)
+                break
+            }
+            
+            let offset = Int(parentOffset) + 2 * 4 + Int(genericPlaceholder)
+            let parentNameContent: UInt32 = data.readU32(offset:offset)
+            var parentNameOffset =  UInt64(parentOffset) + 2 * 4 + UInt64(parentNameContent) + UInt64(genericPlaceholder)
+            if (parentNameOffset > vm) {parentNameOffset = parentNameOffset - vm}
+            let parentName = data.readCstring(at: parentNameOffset)
+            
+            
+            //例如匿名的 存储的事完整的名称 SwiftKindAnonymous
+            if (kind == .Anonymous) {
+                mangleTypeName = getTypeFromMangledName(parentName)
+                break
+            }
+            
+            mangleTypeName = parentName + "." + mangleTypeName
+            
+            let parentOffsetContent = DataTool.interception(with: data, from: Int(parentOffset) + 1 * 4, length: 4).UInt32
+            
+            parentAddr = parentAddr + 1 * 4 + UInt64(parentOffsetContent)
+            /// 防止跨段
+            correctAddress(&parentAddr)
+            
+            parentOffset = searchProtocol.getOffsetFromVmAddress(parentAddr)
+        }
+        return mangleTypeName
+    }
+    
+    
+    
+    
+    mutating func findMangleTypeName0x2(_ mangleNameAddr: UInt64) -> String {
+        
+        let mangleNameOffset = searchProtocol.getOffsetFromVmAddress(mangleNameAddr)
+        
+        let content =  DataTool.interception(with: data, from: mangleNameOffset.toInt + 1, length: 4).UInt32
+        
+        var indirectContextAddr = mangleNameAddr + 1 + UInt64(content)
+        /// 防止跨段
+        correctAddress(&indirectContextAddr)
+        
+        let indirectContextOffset = searchProtocol.getOffsetFromVmAddress(indirectContextAddr)
+        var contextAddr =  DataTool.interception(with: data, from:indirectContextOffset.toInt , length: 8).UInt64
+        if contextAddr == 0 {return ""}
+        /// 防止跨段
+        correctAddress(&contextAddr)
+        
+        let  contextOffset  = searchProtocol.getOffsetFromVmAddress(contextAddr)
+        
+        let typeContext:SwiftBaseType = data.extract(SwiftBaseType.self, offset: contextOffset.toInt)
+        
+        
+        var nameAddr =  UInt64(Int(contextAddr) + 2 * 4  +  Int(typeContext.name))
+        /// 防止跨段
+        correctAddress(&nameAddr)
+        let nameOffset = searchProtocol.getOffsetFromVmAddress(UInt64(nameAddr))
+        
+        var mangleTypeName =  data.readCstring(at:nameOffset)
+        
+        
+        
+        var parentAddr = contextAddr + 1 * 4 + UInt64(typeContext.parent)
+        /// 防止跨段
+        correctAddress(&parentAddr)
+        
+        var parentOffset = searchProtocol.getOffsetFromVmAddress(parentAddr)
+        
+        /// 这里需要while循环是因为 如果有这样的    @objc public var hudStyle: ZLProgressHUD.HUDStyle = .lightBlur
+        /// 嵌套几层的 则需要while将其遍历出来
+        var kind:SwiftContextDescriptorKind = SwiftContextDescriptorKind.Unknow
+
+        while kind != .Module && !invalidParent(parentOffset){
+            let type:UInt32 = data.readU32(offset: Int(parentOffset))
+            
+            let flags = SwiftContextDescriptorFlags(type)
+            
+            kind = flags.kind
+            
+            if kind == .Unknow {
+                // 停止
+                break
+            }
+            
+            var  genericPlaceholder: Int8 = 0;
+            if (kind == .Anonymous) {
+                genericPlaceholder =  addPlaceholderWithGeneric(parentOffset)
+            }
+            
+            ///如果匿名的Anonymous 没有parentName，则放弃
+            ///例如 private enum AutoScrollDirection  这种就是 没有 parentName
+            if (kind == .Anonymous && !((type & 0xFFFF) == 0x01) ) {
+                swiftRefsSet.insert(mangleTypeName)
+                break
+            }
+            
+            let offset = Int(parentOffset) + 2 * 4 + Int(genericPlaceholder)
+            let parentNameContent: UInt32 = data.readU32(offset:offset)
+            var parentNameOffset =  UInt64(parentOffset) + 2 * 4 + UInt64(parentNameContent) + UInt64(genericPlaceholder)
+            if (parentNameOffset > vm) {parentNameOffset = parentNameOffset - vm}
+            let parentName = data.readCstring(at: parentNameOffset)
+            
+            
+            
+            //例如匿名的 存储的事完整的名称 SwiftKindAnonymous
+            if (kind == .Anonymous) {
+                mangleTypeName = getTypeFromMangledName(parentName)
+                break
+            }
+            
+            mangleTypeName = parentName + "." + mangleTypeName
+            
+            let parentOffsetContent = DataTool.interception(with: data, from: Int(parentOffset) + 1 * 4, length: 4).UInt32
+            
+            parentAddr = parentAddr + 1 * 4 + UInt64(parentOffsetContent)
+            /// 防止跨段
+            correctAddress(&parentAddr)
+            
+            parentOffset = searchProtocol.getOffsetFromVmAddress(parentAddr)
+        }
+        return mangleTypeName
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // 出现跨段地址需要纠错，比如通过__TEXT端计算访问到__RODATA段，需要进行纠错
+    func correctAddress(_ address:inout UInt64){
+        address =  (address>(2*vm)) ? (address - UInt64(vm) ) : address
+    }
+    
+    // 判断address 是否在对应的text当中
+    func invalidParent(_ address:UInt64) -> Bool {
+        guard let text = textConst else{
+            return true
+        }
+        if (address >=  text.offset &&  address < UInt64(text.offset) + text.size ){
+            return false
+        }
+        return true
+    }
     
  
-    
-     
+
     
 }
 

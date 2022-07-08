@@ -167,7 +167,7 @@ struct ClassListInterpreter: Interpreter {
                 
                 let superClassInfo =  machoData.extract(Class64Info.self, offset: superClassOffset.toInt)
                 let superClassNameOffset = searchProtocol.getOffsetFromVmAddress(superClassInfo.name)
-                if let superClassName = machoData.readClassString(from: superClassNameOffset.toInt) {
+                if let superClassName = machoData.readCStringName(from: superClassNameOffset.toInt) {
                     classRefSet.insert(superClassName)
                 }
             }
@@ -177,7 +177,10 @@ struct ClassListInterpreter: Interpreter {
                 if className.contains("_Tt"){
                     classNameStr = getTypeFromMangledName(className)
                     classNameSet.insert(classNameStr!)
-                }else{
+                }else if className.hasPrefix("PodsDummy_"){
+                    
+                }
+                else{
                     classNameStr = className
                     classNameSet.insert(classNameStr!)
                 }
@@ -198,8 +201,8 @@ struct ClassListInterpreter: Interpreter {
                     methodNameOffset = Int64(searchProtocol.getOffsetFromVmAddress(UInt64(methodNameOffset)))
                     
                     if (methodNameOffset > 0 && methodNameOffset < searchProtocol.getMax()){
-                        if var typeName = searchProtocol.getMachoData().readClassString(from: Int(methodNameOffset)){
-                            print("typeName === \(typeName)")
+                        if var typeName = searchProtocol.getMachoData().readCStringName(from: Int(methodNameOffset)){
+                            
                            typeName = typeName.replacingOccurrences(of: "@\"", with: "")
                            typeName = typeName.replacingOccurrences(of:"\"", with: "")
                             supclassNameStr = typeName
