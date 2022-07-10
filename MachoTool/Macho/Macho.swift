@@ -39,7 +39,7 @@ class Macho: Equatable {
     
     
     
-    init(machoDataRaw: Data, machoFileName: String) {
+    init(machoDataRaw: Data, machoFileName: String)  {
         data = machoDataRaw
         self.machoFileName = machoFileName
         
@@ -88,7 +88,7 @@ class Macho: Equatable {
         
         
 //        sectionFlagsDic
-        UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic).scanUselessClasses()
+          UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic).scanUselessClasses()
         
     }
     

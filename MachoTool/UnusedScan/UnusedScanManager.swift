@@ -35,6 +35,8 @@ class UnusedScanManager {
     
     var refsClassSet:Set<String> = []
     
+    var texssss = 0
+    
     
     func elapsedTime(){
         
@@ -60,29 +62,17 @@ class UnusedScanManager {
         
         if textCompontList.count == 1{
             
-            textCompont = textCompontList[0] as! TextComponent
-            print("---")
+            textCompont = textCompontList[0] as TextComponent
+        
         }
         
         
     }
     
     /// 扫描无用类
-    func scanUselessClasses(){
+    func scanUselessClasses() {
         obtainRefsClassSet()
-        
         let allClassSet = obtainAllClassSet()
-        
-        for name in refsClassSet {
-            if name.hasPrefix("_Tt"){
-                let className = getTypeFromMangledName(name)
-                refsClassSet.remove(name)
-                refsClassSet.insert(className)
-            }
-        }
-        
-//        let uselessClassList = allClassSet.filter {!refsClassSet.compactMap{$0}.contains($0)}
-//        let uselessClassList =  refsClassSet.subtracting(allClassSet)
         let uselessClassList =  allClassSet.subtracting(refsClassSet)
         print("----")
         
@@ -111,61 +101,54 @@ class UnusedScanManager {
     
     
     /// 获取所有引用到的类
-    private func obtainRefsClassSet() {
+    private func obtainRefsClassSet()  {
         //        var refsClassSet = Set<String>()
         /* 获取 OC 相关的 直接可以从 __DATA,objc_classrefs 中获取  还需要获取Category中获取  已经load调用的函数 */
         
-        // 获取 nlclslist当中的类 16
-//        let nlclslist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlclslist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
-//
-//        for i in nlclslist {
-//            if let className = i.className {
-//                refsClassSet.insert(className)
-//            }
-//        }
-//
-//        // 获取 objc_classrefs当中的类   1302
-//        let classRefsList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_classrefs.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
-//
-//        for i in classRefsList {
-//            if let className = i.className {
-//                if className.count != 0 {
-//                    refsClassSet.insert(className)
-//                }
-//            }
-//        }
-//
+                // 获取 nlclslist当中的类 16
+                let nlclslist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlclslist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
         
+                for i in nlclslist {
+                    if let className = i.className {
+                        refsClassSet.insert(className)
+                    }
+                }
         
-        //        // 获取非懒加载的cateory
-//        let classCategoryList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlcatlist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
-//
-//        for i in classCategoryList {
-//            if let className = i.className {
-//                refsClassSet.insert(className)
-//            }
-//        }
+                // 获取 objc_classrefs当中的类   1302
+                let classRefsList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_classrefs.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
+        
+                for i in classRefsList {
+                    if let className = i.className {
+                        if className.count != 0 {
+                            refsClassSet.insert(className)
+                        }
+                    }
+                }
         
         
         
-       
+                // 获取非懒加载的cateory
+                let classCategoryList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlcatlist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
+        
+                for i in classCategoryList {
+                    if let className = i.className {
+                        refsClassSet.insert(className)
+                    }
+                }
         
         
         
-        // 获取__DATA,Cstring -> 解决 NSClassFromString 的导入
-//        let cStringlist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.cfstring.rawValue} as! [CFStringComponent]).flatMap{$0.objcCFStringList}
-//
-//        for i in cStringlist {
-//            refsClassSet.insert(i.stringName)
-//
-//        }
+               // 获取__DATA,Cstring -> 解决 NSClassFromString 的导入
+                let cStringlist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.cfstring.rawValue} as! [CFStringComponent]).flatMap{$0.objcCFStringList}
         
-       
+                for i in cStringlist {
+                    refsClassSet.insert(i.stringName)
+        
+                }
+        
+        
         
         // 获取 Swift 相关的  通过 __DATA_Swif5types 中获取 Swift类的信息， 然后通过遍历__Text,text段的函数指令来 判断 是否调用 AccessFunc 函数
-        
-        // 获取swift类的信息
-        let swiftTypesList = (componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.swift5types.rawValue} as! [SwiftTypesCmponent]).flatMap{$0.swiftTypesList}
         
         let swiftRefsSet = (componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.swift5types.rawValue} as! [SwiftTypesCmponent]).flatMap{$0.swiftRefsSet}
         
@@ -173,78 +156,71 @@ class UnusedScanManager {
             refsClassSet.insert(i)
         }
         
+        let accessFuncList  = (componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.swift5types.rawValue} as! [SwiftTypesCmponent]).flatMap{$0.accessFuncDic}
+        
+        
         let symbolTableList  =  sortedSymbolList()
-        for i in swiftTypesList {
-            //
-            var accessFunc = i.accessOffset
-//            print("accessFunc = \(accessFunc)")
-            /// 直接调用metaData的传入metaData地址
-//            if let cache = cacheMetaDic[i.name]{
-//                accessFunc = cache
-//            }
-            calculateFuncRangeCallAccessFunc(symbolTableList: symbolTableList,accessFunc: accessFunc, symbolName: i.name)
-        }
-    }
-    
- 
-    
-    
-    // 计算 函数中是否有 AccessFunc地址
-    private func calculateFuncRangeCallAccessFunc(symbolTableList: [SymbolRange], accessFunc:UInt64, symbolName:String){
-        
-        var refsList:Set<String> = []
-        
-        let queue = DispatchQueue.global(qos: .default)
         
         let lock:NSLock = NSLock.init()
-        
-        queue.async {
-            
-            DispatchQueue.concurrentPerform(iterations: symbolTableList.count) {(i) -> Void in
-                
-                let item = symbolTableList[i]
-                var startValue: UInt64 = 0
-                var endValue: UInt64 = 0
-                if i == symbolTableList.count - 1 {
-                    startValue = symbolTableList[i].nValue
-                    endValue = 0
-                }else{
-                    startValue = symbolTableList[i].nValue
-                    endValue = symbolTableList[i + 1].nValue
-                }
-                
-                if symbolName == "" || item.symbolName.hasPrefix(symbolName)  {
-                    // 过滤掉  symbol当中调用自己的类
-                }else{
-                    let find = self.findCallAccessFunc(symbolName, accessFunc: accessFunc, startVale: startValue, endValue: endValue)
-                    if  find{
-                        print("我命中的 symbolName = \(symbolName)")
+        print("Begin to start a DispatchApply")
+//        DispatchQueue.global(qos: .userInteractive).async {
+//            DispatchQueue.concurrentPerform(iterations: accessFuncList.count) { (index) in
+        for  index in 0..<accessFuncList.count {
+                autoreleasepool {
+                    let i = accessFuncList[index]
+                    let accessFunc = i.value
+                    if self.calculateFuncRangeCallAccessFunc(symbolTableList: symbolTableList, accessFunc: accessFunc, symbolName: i.key){
                         lock.lock()
-                        refsList.insert(symbolName)
+                        self.refsClassSet.insert(i.key)
                         lock.unlock()
                     }
                 }
+            
+                
+            }
+        print("Iteration have completed.")
+    }
+    
+    
+    
+    
+    // 计算 函数中是否有 AccessFunc地址
+    private func calculateFuncRangeCallAccessFunc(symbolTableList: [SymbolRange], accessFunc:UInt64, symbolName:String) -> Bool {
+        
+        
+        for j in 0..<symbolTableList.count {
+            let item = symbolTableList[j]
+            var startValue: UInt64 = 0
+            var endValue: UInt64 = 0
+            if j == symbolTableList.count - 1 {
+                startValue = symbolTableList[j].nValue
+                endValue = 0
+            }else{
+                startValue = symbolTableList[j].nValue
+                endValue = symbolTableList[j + 1].nValue
+            }
+            
+            if symbolName == "" || item.symbolName.hasPrefix(symbolName)  {
+                // 过滤掉  symbol当中调用自己的类
+                continue;
+            }
+            
+            let targetStr = String(format: "0x%llX",  accessFunc).lowercased()
+            let targetHighStr = String(format: "0x%llX",  accessFunc & 0xFFFFFFFFFFFFF000).lowercased()
+            let targetLowStr = String(format: "0x%llX",  accessFunc & 0x0000000000000fff).lowercased()
+            
+            texssss = texssss + 1
+            
+            print("我来寻找的次数为 === \(texssss)")
+            
+            let find =  scanSELCallerWithAddress(targetStr: targetStr, targetHighStr: targetHighStr, targetLowStr: targetLowStr, begin: startValue, end: endValue)
+            if find {
+                return true
             }
         }
-        
-        if refsList.count>0{
-            let _ = refsList.compactMap{ refsClassSet.insert($0)}
-        }
-        
-        
+        return false
     }
-    
-    private func findCallAccessFunc(_ className: String, accessFunc: UInt64 , startVale: UInt64, endValue: UInt64) -> Bool{
-        print("--- \(accessFunc)")
-        let targetStr = String(format: "0x%llX",  accessFunc).localizedLowercase
-        print("codestar")
-        
-        let targetHighStr = String(format: "0x%llX",  accessFunc & 0xFFFFFFFFFFFFF000).localizedLowercase
-        let targetLowStr = String(format: "0x%llX",  accessFunc & 0x0000000000000fff).localizedLowercase
-        return  scanSELCallerWithAddress(targetStr: targetStr, targetHighStr: targetHighStr, targetLowStr: targetLowStr, begin: startVale, end: endValue)
-         
-    }
-    
+ 
     
     /*
      扫描函数代码中是否包含有 AccessFunc 的地址，如果有则代表有用到这个类，如果没有则代表没有用到
@@ -254,29 +230,39 @@ class UnusedScanManager {
      **/
     private func scanSELCallerWithAddress(targetStr: String, targetHighStr: String, targetLowStr: String, begin: UInt64, end: UInt64) -> Bool {
         
+        guard let  section =  textCompont?.section else{
+            return false
+        }
         
-        let textAddr:UInt64 = textCompont?.section?.info.addr ?? 0
+        
+        let textAddr:UInt64 = section.info.addr
         
         var endAddr:UInt64 = end
         
         var asmStr:String = ""
         var high = false
+        
+        
         if (begin <  textAddr ){
             return false
         }
         
-        let maxText = textAddr + (textCompont?.section?.info.size ?? 0)
+        let maxText = textAddr + (section.info.size)
         
         endAddr = min(maxText, end)
         
         var beginAddr = begin
         
-        while (strcmp("ret",asmStr) != 0 && (beginAddr < endAddr)){
-            
+        
+        guard let textInstructionPtr = textCompont?.textInstructionPtr else{
+            return false
+        }
+        
+        repeat {
             let index = (beginAddr - textAddr) / 4
             
-            var op_str = textCompont?.textInstructionPtr?[Int(index)].op_str
-            var mnemonic = textCompont?.textInstructionPtr?[Int(index)].mnemonic
+            var op_str   = textInstructionPtr[Int(index)].op_str
+            var mnemonic = textInstructionPtr[Int(index)].mnemonic
             
             let dataStr =  Utils.readCharToString(&op_str)
             
@@ -288,7 +274,7 @@ class UnusedScanManager {
             
             if (Utils.strStr(dataStr, targetStr)){
                 // 直接命中
-                 
+                
                 return true
             }else if (Utils.strStr(dataStr, targetHighStr) && Utils.strStr(asmStr, "adrp")){
                 // 命中高位
@@ -296,14 +282,13 @@ class UnusedScanManager {
             }else if (Utils.strStr(dataStr, targetLowStr)) {
                 // 命中低12位
                 if high {
-                    
                     return true
-                    
                 }
             }
             // 4个字节4个字节读取
             beginAddr += 4
-        }
+        }while (strcmp("ret",asmStr) != 0 && (beginAddr < endAddr))
+        
         return false
     }
     
@@ -326,9 +311,6 @@ class UnusedScanManager {
             if ((flags & 0x80000000 | 0x00000400) == (0x80000000 | 0x00000400)) {
                 if let symbolName =  item.findSymbolName() {
                     
-                    
-                    
-                    
                     item.symbolName = symbolName
                     if symbolName == "__mh_execute_header"{
                         continue
@@ -337,7 +319,6 @@ class UnusedScanManager {
                     if   (symbolName.hasPrefix("-") || symbolName.hasPrefix("+") ){
                         continue
                     }
-                    //                    symbolList.append(item)
                     symbolDic.updateValue(item.nValue, forKey: item.symbolName)
                 }
             }else{

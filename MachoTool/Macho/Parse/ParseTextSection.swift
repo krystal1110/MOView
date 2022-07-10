@@ -84,7 +84,7 @@ class ParseTextSection {
             
             var interpreter  = SwiftTypesInterpreter(with: data, dataSlice: dataSlice, section: section, searchProtocol: searchProtocol)
             let swiftTypesList  =  interpreter.transitionData()
-            let compont = SwiftTypesCmponent(dataSlice, section: section, swiftTypesList: swiftTypesList, swiftRefsSet: interpreter.swiftRefsSet)
+            let compont = SwiftTypesCmponent(dataSlice, section: section, swiftTypesList: swiftTypesList, swiftRefsSet: interpreter.swiftRefsSet, accessFuncDic: interpreter.accessFuncDic)
             componts.append(compont)
             
         }else if (section.sectname == TextSection.swift5reflstr.rawValue){

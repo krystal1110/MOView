@@ -75,8 +75,10 @@ struct SwiftTypesInterpreter: Interpreter {
     let data: Data
     
     var swiftRefsSet: Set<String> = []
-   
+    
     var textConst:section_64?
+    
+    var accessFuncDic: Dictionary<String,UInt64> = [:]
     
     init(with data:Data , dataSlice: Data, section:Section64,  searchProtocol:SearchProtocol){
         self.data = data
@@ -104,7 +106,7 @@ struct SwiftTypesInterpreter: Interpreter {
             var vmAddress =  UInt64(content) + typeAddress
             correctAddress(&vmAddress)
             
-           // 获取对应的 TEXT - Section64
+            // 获取对应的 TEXT - Section64
             DispatchQueue.once(token: "getTEXTConst") {
                 if let x =  searchProtocol.getTEXTConst(vmAddress){
                     textConst = x
@@ -141,7 +143,7 @@ struct SwiftTypesInterpreter: Interpreter {
             while (kind != .Module) {
                 /// 获取Parent的类型
                 let swiftParentType = data.extract(SwiftBaseType.self, offset: parentOffset.toInt)
-                 kind = SwiftContextDescriptorFlags(swiftParentType.flag).kind
+                kind = SwiftContextDescriptorFlags(swiftParentType.flag).kind
                 if kind == .Unknow {
                     break
                 }
@@ -170,7 +172,7 @@ struct SwiftTypesInterpreter: Interpreter {
                 }
                 
                 name = parentName + "." + name
-                 
+                
                 let parentOffsetContent = DataTool.interception(with: data, from: Int(parentOffset) + 1 * 4, length: 4).UInt32
                 parentOffset = parentOffset + 1 * 4 + UInt64(parentOffsetContent)
                 if parentOffset > vm {parentOffset = parentOffset - vm}
@@ -179,42 +181,47 @@ struct SwiftTypesInterpreter: Interpreter {
             }
             
             
-            
+            var model = SwiftTypeModel()
+            var superClassName = ""
             
             let accessFuncContent = DataTool.interception(with: data, from: Int(typeOffset) + 3 * 4, length: 4).UInt32
             var accessFuncAddr = vmAddress + 3 * 4 + UInt64(accessFuncContent)
             correctAddress(&accessFuncAddr)
             let accessOffset = searchProtocol.getOffsetFromVmAddress(accessFuncAddr)
             
-            
-            
-            
+            accessFuncDic.updateValue(accessOffset, forKey: name)
             
             /// 查找属性
             let  fieldDescriptorContent = swiftType.fieldDescriptor
-            if fieldDescriptorContent == 0 {continue}
-            var  fieldDescriptorAddress =  UInt64(fieldDescriptorContent) + UInt64(vmAddress) + 4 * 4
-            correctAddress(&fieldDescriptorAddress)
-            let fieldDescriptorOffset = searchProtocol.getOffsetFromVmAddress(UInt64(fieldDescriptorAddress))
-            let fieldDescriptor = data.extract(FieldDescriptor.self, offset: Int(fieldDescriptorOffset))
-
-            
-            var superClassName = ""
-            if fieldDescriptor.superclass != 0 {
-                let superclassAddr = Int(fieldDescriptorAddress) + 4 * 1 + Int(fieldDescriptor.superclass)
-                if let x =  parseSuperClass(UInt64(superclassAddr)){
-                    superClassName = x
+            if fieldDescriptorContent != 0 {
+                var  fieldDescriptorAddress =  UInt64(fieldDescriptorContent) + UInt64(vmAddress) + 4 * 4
+                correctAddress(&fieldDescriptorAddress)
+                let fieldDescriptorOffset = searchProtocol.getOffsetFromVmAddress(UInt64(fieldDescriptorAddress))
+                let fieldDescriptor = data.extract(FieldDescriptor.self, offset: Int(fieldDescriptorOffset))
+                
+                
+                
+                if fieldDescriptor.superclass != 0 {
+                    let superclassAddr = Int(fieldDescriptorAddress) + 4 * 1 + Int(fieldDescriptor.superclass)
+                    if let x =  parseSuperClass(UInt64(superclassAddr)){
+                        superClassName = x
+                        
+                    }
                 }
+                
+                model.fields  =  dumpFieldDescriptor(fieldDescriptor, fieldDescriptorAddress: fieldDescriptorAddress)
+                
             }
-
-            var model = SwiftTypeModel()
-            model.fields  =  dumpFieldDescriptor(fieldDescriptor, fieldDescriptorAddress: fieldDescriptorAddress)
+            
+            
+            model.accessOffset = accessOffset
             model.name = name
             model.superClass = superClassName
-            model.accessOffset = accessOffset
             nominalList.append(model)
             
+            
         }
+        
         return nominalList
     }
     
@@ -225,11 +232,11 @@ struct SwiftTypesInterpreter: Interpreter {
         let superClassOffset = searchProtocol.getOffsetFromVmAddress(superclassAddr)
         
         guard let firstStr =   data.readCString(from: Int(superClassOffset)) else{
-             return nil
+            return nil
         }
         
         var superClassModule = ""
-
+        
         if firstStr.hasPrefix("0x01"){
             superClassModule = findMangleTypeName0x1(UInt64(superClassOffset))
             swiftRefsSet.insert(superClassModule)
@@ -240,7 +247,7 @@ struct SwiftTypesInterpreter: Interpreter {
             return superClassModule
         }else{
             superClassModule = getTypeFromMangledName(firstStr)
-             
+            
             // 过滤掉 So9NSObject 等类型
             if superClassModule.hasPrefix("So") && superClassModule.count <= 13  && superClassModule.count >= 5{
                 let index2 = superClassModule.index(superClassModule.startIndex, offsetBy: 3)
@@ -255,7 +262,7 @@ struct SwiftTypesInterpreter: Interpreter {
         }
         
     }
- 
+    
     
     
     /// dump 属性
@@ -270,15 +277,15 @@ struct SwiftTypesInterpreter: Interpreter {
         }
         if (numFields >= 1000) {
             //TODO: sometimes it may be a invalid value
-             return fieldObjList
+            return fieldObjList
         }
         
         let fieldDescriptorOffset = searchProtocol.getOffsetFromVmAddress(UInt64(fieldDescriptorAddress))
         var fieldRecordAddr = Int(fieldDescriptorAddress) +  MemoryLayout<FieldDescriptor>.size
         var fieldRecordOff =  Int(fieldDescriptorOffset) +  MemoryLayout<FieldDescriptor>.size
         let fieldStart = UInt64(fieldDescriptorOffset) + UInt64(4 + 4 + 2 + 2 + 4)
-    
-         for i in 0..<Int(numFields) {
+        
+        for i in 0..<Int(numFields) {
             ///  解析 属性
             
             let fieldAddr = UInt64(fieldStart) + UInt64( i * (4 * 3))
@@ -287,9 +294,9 @@ struct SwiftTypesInterpreter: Interpreter {
             let  fieldName = data.readCstring(at: fieldNamePtr)
             
             
-             
+            
             let record =   data.extract(FieldRecord.self, offset: fieldRecordOff)
-             
+            
             // 0x0 泛型属性 例如：let name: ClassA<String>? = nil
             if (record.flags != 0x2 && record.flags != 0x0){
                 continue
@@ -297,11 +304,11 @@ struct SwiftTypesInterpreter: Interpreter {
             
             var mangleNameAddr = UInt64(fieldRecordAddr) + UInt64(record.mangledTypeName) + 4
             correctAddress(&mangleNameAddr)
-         
+            
             
             let mangleNameOffset = searchProtocol.getOffsetFromVmAddress(UInt64(mangleNameAddr))
             
-             
+            
             fieldRecordAddr = fieldRecordAddr +  MemoryLayout<FieldRecord>.size
             fieldRecordOff  =  fieldRecordOff + MemoryLayout<FieldRecord>.size
             
@@ -322,7 +329,7 @@ struct SwiftTypesInterpreter: Interpreter {
                 swiftRefsSet.insert(module)
             }else{
                 module = getTypeFromMangledName(firstStr)
-                 
+                
             }
             
             let fieldObj =  SwiftTypeField(varName: fieldName, module: module)
@@ -450,7 +457,7 @@ struct SwiftTypesInterpreter: Interpreter {
         /// 这里需要while循环是因为 如果有这样的    @objc public var hudStyle: ZLProgressHUD.HUDStyle = .lightBlur
         /// 嵌套几层的 则需要while将其遍历出来
         var kind:SwiftContextDescriptorKind = SwiftContextDescriptorKind.Unknow
-
+        
         while kind != .Module && !invalidParent(parentOffset){
             let type:UInt32 = data.readU32(offset: Int(parentOffset))
             
@@ -542,7 +549,7 @@ struct SwiftTypesInterpreter: Interpreter {
         /// 这里需要while循环是因为 如果有这样的    @objc public var hudStyle: ZLProgressHUD.HUDStyle = .lightBlur
         /// 嵌套几层的 则需要while将其遍历出来
         var kind:SwiftContextDescriptorKind = SwiftContextDescriptorKind.Unknow
-
+        
         while kind != .Module && !invalidParent(parentOffset){
             let type:UInt32 = data.readU32(offset: Int(parentOffset))
             
@@ -622,8 +629,8 @@ struct SwiftTypesInterpreter: Interpreter {
         return true
     }
     
- 
-
+    
+    
     
 }
 
