@@ -1012,7 +1012,7 @@
 					"-DCAPSTONE_USE_SYS_DYN_MEM",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/karthrine/Documents/GitHub/machoTool/MachoTool/Tools/MachoTool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/machoTool/MachoTool/Tools/MachoTool-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -1043,7 +1043,7 @@
 					"-DCAPSTONE_USE_SYS_DYN_MEM",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/karthrine/Documents/GitHub/machoTool/MachoTool/Tools/MachoTool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/machoTool/MachoTool/Tools/MachoTool-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

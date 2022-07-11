@@ -154,11 +154,12 @@ class UnusedScanManager {
         
         let lock:NSLock = NSLock.init()
         print("Begin to start a DispatchApply")
-        DispatchQueue.global(qos: .userInteractive).async {
+//        DispatchQueue.global(qos: .userInteractive).async {
             DispatchQueue.concurrentPerform(iterations: accessFuncList.count) { (index) in
                     autoreleasepool {
                         let i = accessFuncList[index]
                         let accessFunc = i.value
+                        print("我正在执行 == \(index) thread == \(Thread.current)")
                         if self.calculateFuncRangeCallAccessFunc(symbolTableList: symbolTableList, accessFunc: accessFunc, symbolName: i.key){
                             lock.lock()
                             self.refsClassSet.insert(i.key)
@@ -166,7 +167,7 @@ class UnusedScanManager {
                         }
                     }
             }
-        }
+//        }
         print("Iteration have completed.")
     }
     
@@ -218,8 +219,6 @@ class UnusedScanManager {
         guard let  section =  textCompont?.section else{
             return false
         }
-        
-        
         let textAddr:UInt64 = section.info.addr
         
         var endAddr:UInt64 = end
@@ -245,10 +244,8 @@ class UnusedScanManager {
         
         repeat {
             let index = (beginAddr - textAddr) / 4
-            
             var op_str   = textInstructionPtr[Int(index)].op_str
             var mnemonic = textInstructionPtr[Int(index)].mnemonic
-            
             let dataStr =  Utils.readCharToString(&op_str)
             
             asmStr =  Utils.readCharToString(&mnemonic)
@@ -259,7 +256,6 @@ class UnusedScanManager {
             
             if (Utils.strStr(dataStr, targetStr)){
                 // 直接命中
-                
                 return true
             }else if (Utils.strStr(dataStr, targetHighStr) && Utils.strStr(asmStr, "adrp")){
                 // 命中高位
