@@ -734,7 +734,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachoTool" */;
+			buildConfigurationList = FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachOTool" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -990,7 +990,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G7ANJPJ6VB;
+				DEVELOPMENT_TEAM = SJ7JKKYH4C;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)",
@@ -1012,7 +1012,7 @@
 					"-DCAPSTONE_USE_SYS_DYN_MEM",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/machoTool/MachoTool/Tools/MachoTool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MachoTool/Tools/MachoTool-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -1021,7 +1021,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G7ANJPJ6VB;
+				DEVELOPMENT_TEAM = SJ7JKKYH4C;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)",
@@ -1043,7 +1043,7 @@
 					"-DCAPSTONE_USE_SYS_DYN_MEM",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/machoTool/MachoTool/Tools/MachoTool-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MachoTool/Tools/MachoTool-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -1051,7 +1051,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachoTool" */ = {
+		FBCEE96E283290150090B4E6 /* Build configuration list for PBXProject "MachOTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FBCEE978283290150090B4E6 /* Debug */,
