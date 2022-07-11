@@ -34,13 +34,7 @@ class UnusedScanManager {
     var cacheMetaDic:Dictionary<String,UInt64> = [:]
     
     var refsClassSet:Set<String> = []
-    
-    var texssss = 0
-    
-    
-    func elapsedTime(){
-        
-    }
+ 
     
     
     init (with componts: [ComponentInfo] , parseSymbolTool: ParseSymbolTool , sectionFlagsDic: Dictionary<Int,Int> ){
@@ -208,11 +202,7 @@ class UnusedScanManager {
             let targetStr = String(format: "0x%llX",  accessFunc).lowercased()
             let targetHighStr = String(format: "0x%llX",  accessFunc & 0xFFFFFFFFFFFFF000).lowercased()
             let targetLowStr = String(format: "0x%llX",  accessFunc & 0x0000000000000fff).lowercased()
-            
-            texssss = texssss + 1
-            
-            print("我来寻找的次数为 === \(texssss)")
-            
+
             let find =  scanSELCallerWithAddress(targetStr: targetStr, targetHighStr: targetHighStr, targetLowStr: targetLowStr, begin: startValue, end: endValue)
             if find {
                 return true
