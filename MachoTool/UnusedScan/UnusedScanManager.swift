@@ -150,15 +150,12 @@ class UnusedScanManager {
         }
         
         let accessFuncList  = (componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.swift5types.rawValue} as! [SwiftTypesCmponent]).flatMap{$0.accessFuncDic}
-        
-        
         let symbolTableList  =  sortedSymbolList()
         
         let lock:NSLock = NSLock.init()
         print("Begin to start a DispatchApply")
         DispatchQueue.global(qos: .userInteractive).async {
             DispatchQueue.concurrentPerform(iterations: accessFuncList.count) { (index) in
-                for  index in 0..<accessFuncList.count {
                     autoreleasepool {
                         let i = accessFuncList[index]
                         let accessFunc = i.value
@@ -168,9 +165,6 @@ class UnusedScanManager {
                             lock.unlock()
                         }
                     }
-                    
-                    
-                }
             }
         }
         print("Iteration have completed.")
