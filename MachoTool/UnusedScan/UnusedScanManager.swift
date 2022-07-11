@@ -65,6 +65,7 @@ class UnusedScanManager {
     func scanUselessClasses() {
         obtainRefsClassSet()
         let allClassSet = obtainAllClassSet()
+        
         let uselessClassList =  allClassSet.subtracting(refsClassSet)
         print("检测无用类 共有 \(uselessClassList.count)")
         
@@ -94,7 +95,7 @@ class UnusedScanManager {
     
     /// 获取所有引用到的类
     private func obtainRefsClassSet()  {
-        //        var refsClassSet = Set<String>()
+         
         /* 获取 OC 相关的 直接可以从 __DATA,objc_classrefs 中获取  还需要获取Category中获取  已经load调用的函数 */
         
         // 获取 nlclslist当中的类 16
