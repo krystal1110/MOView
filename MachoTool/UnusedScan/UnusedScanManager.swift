@@ -61,9 +61,7 @@ class UnusedScanManager {
         let textCompontList = componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.text.rawValue}
         
         if textCompontList.count == 1{
-            
-            textCompont = textCompontList[0] as TextComponent
-        
+            textCompont = textCompontList[0] as! TextComponent
         }
         
         
@@ -74,7 +72,7 @@ class UnusedScanManager {
         obtainRefsClassSet()
         let allClassSet = obtainAllClassSet()
         let uselessClassList =  allClassSet.subtracting(refsClassSet)
-        print("----")
+        print("检测无用类 共有 \(uselessClassList.count)")
         
     }
     
@@ -105,46 +103,46 @@ class UnusedScanManager {
         //        var refsClassSet = Set<String>()
         /* 获取 OC 相关的 直接可以从 __DATA,objc_classrefs 中获取  还需要获取Category中获取  已经load调用的函数 */
         
-                // 获取 nlclslist当中的类 16
-                let nlclslist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlclslist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
+        // 获取 nlclslist当中的类 16
+        let nlclslist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlclslist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
         
-                for i in nlclslist {
-                    if let className = i.className {
-                        refsClassSet.insert(className)
-                    }
+        for i in nlclslist {
+            if let className = i.className {
+                refsClassSet.insert(className)
+            }
+        }
+        
+        // 获取 objc_classrefs当中的类   1302
+        let classRefsList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_classrefs.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
+        
+        for i in classRefsList {
+            if let className = i.className {
+                if className.count != 0 {
+                    refsClassSet.insert(className)
                 }
-        
-                // 获取 objc_classrefs当中的类   1302
-                let classRefsList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_classrefs.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
-        
-                for i in classRefsList {
-                    if let className = i.className {
-                        if className.count != 0 {
-                            refsClassSet.insert(className)
-                        }
-                    }
-                }
+            }
+        }
         
         
         
-                // 获取非懒加载的cateory
-                let classCategoryList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlcatlist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
+        // 获取非懒加载的cateory
+        let classCategoryList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlcatlist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
         
-                for i in classCategoryList {
-                    if let className = i.className {
-                        refsClassSet.insert(className)
-                    }
-                }
+        for i in classCategoryList {
+            if let className = i.className {
+                refsClassSet.insert(className)
+            }
+        }
         
         
         
-               // 获取__DATA,Cstring -> 解决 NSClassFromString 的导入
-                let cStringlist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.cfstring.rawValue} as! [CFStringComponent]).flatMap{$0.objcCFStringList}
+        // 获取__DATA,Cstring -> 解决 NSClassFromString 的导入
+        let cStringlist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.cfstring.rawValue} as! [CFStringComponent]).flatMap{$0.objcCFStringList}
         
-                for i in cStringlist {
-                    refsClassSet.insert(i.stringName)
-        
-                }
+        for i in cStringlist {
+            refsClassSet.insert(i.stringName)
+            
+        }
         
         
         
@@ -163,21 +161,23 @@ class UnusedScanManager {
         
         let lock:NSLock = NSLock.init()
         print("Begin to start a DispatchApply")
-//        DispatchQueue.global(qos: .userInteractive).async {
-//            DispatchQueue.concurrentPerform(iterations: accessFuncList.count) { (index) in
-        for  index in 0..<accessFuncList.count {
-                autoreleasepool {
-                    let i = accessFuncList[index]
-                    let accessFunc = i.value
-                    if self.calculateFuncRangeCallAccessFunc(symbolTableList: symbolTableList, accessFunc: accessFunc, symbolName: i.key){
-                        lock.lock()
-                        self.refsClassSet.insert(i.key)
-                        lock.unlock()
+        DispatchQueue.global(qos: .userInteractive).async {
+            DispatchQueue.concurrentPerform(iterations: accessFuncList.count) { (index) in
+                for  index in 0..<accessFuncList.count {
+                    autoreleasepool {
+                        let i = accessFuncList[index]
+                        let accessFunc = i.value
+                        if self.calculateFuncRangeCallAccessFunc(symbolTableList: symbolTableList, accessFunc: accessFunc, symbolName: i.key){
+                            lock.lock()
+                            self.refsClassSet.insert(i.key)
+                            lock.unlock()
+                        }
                     }
+                    
+                    
                 }
-            
-                
             }
+        }
         print("Iteration have completed.")
     }
     
@@ -220,7 +220,7 @@ class UnusedScanManager {
         }
         return false
     }
- 
+    
     
     /*
      扫描函数代码中是否包含有 AccessFunc 的地址，如果有则代表有用到这个类，如果没有则代表没有用到
