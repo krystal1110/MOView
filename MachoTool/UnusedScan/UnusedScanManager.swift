@@ -156,6 +156,7 @@ class UnusedScanManager {
         print("Begin to start a DispatchApply")
 //        DispatchQueue.global(qos: .userInteractive).async {
             DispatchQueue.concurrentPerform(iterations: accessFuncList.count) { (index) in
+//        for index in 0..<accessFuncList.count {
                     autoreleasepool {
                         let i = accessFuncList[index]
                         let accessFunc = i.value
@@ -166,8 +167,8 @@ class UnusedScanManager {
                             lock.unlock()
                         }
                     }
-            }
-//        }
+//            }
+        }
         print("Iteration have completed.")
     }
     
@@ -215,7 +216,7 @@ class UnusedScanManager {
      end   代表符号地址结束
      **/
     private func scanSELCallerWithAddress(targetStr: String, targetHighStr: String, targetLowStr: String, begin: UInt64, end: UInt64) -> Bool {
-        
+         
         guard let  section =  textCompont?.section else{
             return false
         }
@@ -253,14 +254,16 @@ class UnusedScanManager {
             if (strcmp(".byte", asmStr) == 0){
                 return false
             }
-            
-            if (Utils.strStr(dataStr, targetStr)){
+           
+             
+            if (dataStr.contains(targetStr)){
                 // 直接命中
                 return true
-            }else if (Utils.strStr(dataStr, targetHighStr) && Utils.strStr(asmStr, "adrp")){
+            }else if (dataStr.contains(targetHighStr) && asmStr.contains("adrp")){
                 // 命中高位
                 high = true
-            }else if (Utils.strStr(dataStr, targetLowStr)) {
+                 
+            }else if (dataStr.contains(targetLowStr)) {
                 // 命中低12位
                 if high {
                     return true

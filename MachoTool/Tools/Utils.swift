@@ -222,38 +222,6 @@ class Utils {
           }
         return str
     }
-    
-    
-    
-    
-    static func strStr(_ haystack: String, _ needle: String) -> Bool {
-        if  Utils.sunday(text: Array(haystack), pattern: Array(needle)) == -1 {
-            return false
-        }else{
-            return true
-        }
-    }
-    
-    private static func sunday(text: [Character], pattern: [Character]) -> Int {
-        let m = text.count, n = pattern.count
-        guard m >= n else { return -1 }
-        guard n > 0 else { return -1 }
-        
-        let shift = pattern.enumerated().reduce(into: [Character: Int]()) { (result, arg1) in
-            result[arg1.element] = n - arg1.offset
-        }
-        var i = 0
-        while i <= m - n {
-            var j = 0
-            while j < n && pattern[j] == text[i + j] { j += 1 }
-            if j >= n { return i }
-            if i + n >= m { break }
-            i += shift[text[i + n], default: n + 1]
-        }
-        
-        return -1
-    }
-    
 }
 
 extension String {
