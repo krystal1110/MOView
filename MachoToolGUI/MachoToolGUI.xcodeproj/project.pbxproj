@@ -11,17 +11,17 @@
 		2D8B7212287FBAD200700929 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8B7211287FBAD200700929 /* ContentView.swift */; };
 		2D8B7214287FBAD300700929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D8B7213287FBAD300700929 /* Assets.xcassets */; };
 		2D8B7217287FBAD300700929 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D8B7216287FBAD300700929 /* Preview Assets.xcassets */; };
-		567496AC9819620952D3161F /* Pods_MachoToolGUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EFAE7678D33A5381FB59F5 /* Pods_MachoToolGUI.framework */; };
+		FCC4F6F7DC6184EC2890C881 /* libPods-MachoToolGUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B80092392AC7973032C9E20 /* libPods-MachoToolGUI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B80092392AC7973032C9E20 /* libPods-MachoToolGUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MachoToolGUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D8B720C287FBAD200700929 /* MachoToolGUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MachoToolGUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D8B720F287FBAD200700929 /* MachoToolGUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoToolGUIApp.swift; sourceTree = "<group>"; };
 		2D8B7211287FBAD200700929 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2D8B7213287FBAD300700929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D8B7216287FBAD300700929 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2D8B7218287FBAD300700929 /* MachoToolGUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MachoToolGUI.entitlements; sourceTree = "<group>"; };
-		48EFAE7678D33A5381FB59F5 /* Pods_MachoToolGUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MachoToolGUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A2B14DE29A9FE8E2D7BD34B /* Pods-MachoToolGUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MachoToolGUI.debug.xcconfig"; path = "Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI.debug.xcconfig"; sourceTree = "<group>"; };
 		9A4EECBD937CA736DA65B1F5 /* Pods-MachoToolGUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MachoToolGUI.release.xcconfig"; path = "Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -31,7 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				567496AC9819620952D3161F /* Pods_MachoToolGUI.framework in Frameworks */,
+				FCC4F6F7DC6184EC2890C881 /* libPods-MachoToolGUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,7 +79,7 @@
 		2FDE8457D6EDFDADFAC2A070 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				48EFAE7678D33A5381FB59F5 /* Pods_MachoToolGUI.framework */,
+				0B80092392AC7973032C9E20 /* libPods-MachoToolGUI.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -90,7 +90,6 @@
 				5A2B14DE29A9FE8E2D7BD34B /* Pods-MachoToolGUI.debug.xcconfig */,
 				9A4EECBD937CA736DA65B1F5 /* Pods-MachoToolGUI.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -105,7 +104,7 @@
 				2D8B7208287FBAD200700929 /* Sources */,
 				2D8B7209287FBAD200700929 /* Frameworks */,
 				2D8B720A287FBAD200700929 /* Resources */,
-				56A6F29B73BF1DB850B2A91F /* [CP] Embed Pods Frameworks */,
+				293F6CD5AF12974431AF7682 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -162,21 +161,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		56A6F29B73BF1DB850B2A91F /* [CP] Embed Pods Frameworks */ = {
+		293F6CD5AF12974431AF7682 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A636B93E547A25040FF464AE /* [CP] Check Pods Manifest.lock */ = {
@@ -342,7 +341,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MachoToolGUI/Preview Content\"";
-				DEVELOPMENT_TEAM = SJ7JKKYH4C;
+				DEVELOPMENT_TEAM = G7ANJPJ6VB;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -370,7 +369,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MachoToolGUI/Preview Content\"";
-				DEVELOPMENT_TEAM = SJ7JKKYH4C;
+				DEVELOPMENT_TEAM = G7ANJPJ6VB;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

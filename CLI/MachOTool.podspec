@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                        DESC
             
   s.homepage         = 'http'
-  s.platform            = :macos, "10.15"
+  s.platform            = :macos, "12.1"
   s.requires_arc        = true
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'CoderStar' => '1340529758@qq.com' }
