@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MachOTool
 
 struct ContentView: View {
     var body: some View {
