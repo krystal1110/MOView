@@ -1,5 +1,7 @@
 PODS:
-  - MachOTool (1.0.0)
+  - MachOTool (1.0.0):
+    - MachOTool/Capstone (= 1.0.0)
+  - MachOTool/Capstone (1.0.0)
 
 DEPENDENCIES:
   - MachOTool (from `../CLI`)
@@ -9,7 +11,7 @@ EXTERNAL SOURCES:
     :path: "../CLI"
 
 SPEC CHECKSUMS:
-  MachOTool: 44038a12123a97ad1d2f5d67cf56d7c0cb8cfbdb
+  MachOTool: 6582d31590dd353de9f7120fa3740ea155edc623
 
 PODFILE CHECKSUM: aeec6caa23244696d46002cb652793b0ca269a2b
 

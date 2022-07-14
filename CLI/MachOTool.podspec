@@ -14,9 +14,15 @@ Pod::Spec.new do |s|
   s.author           = { 'CoderStar' => '1340529758@qq.com' }
   s.source           = { :git => 'http://github.com/krystal1110/machoTool.git', :tag => s.version.to_s }
 
-  
+  s.subspec 'Capstone' do |capstone|
+  capstone.source_files       = 'Capstone/**/*.{h,m,mm,swift,c,cc,cpp}'
+  capstone.private_header_files ='Capstone/**/*.{h}'
+  capstone.xcconfig = {'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) CAPSTONE_HAS_ARM64=1'}
+  capstone.requires_arc = true
+  end
    
   s.source_files = 'MachOTool/**/*'
   s.public_header_files = 'MachOTool/**/*.h'
+  s.private_header_files = "MachOTool/Tools/CapStoneHelper/CapStoneHelper.h"
   s.resources = ['Resoure/**/*']  
 end
