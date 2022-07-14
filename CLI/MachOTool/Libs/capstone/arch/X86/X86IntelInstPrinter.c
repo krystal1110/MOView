@@ -20,7 +20,7 @@
 #if !defined(CAPSTONE_HAS_OSXKERNEL)
 #include <ctype.h>
 #endif
-#include "../../myinttypes.h"
+#include "myinttypes.h"
 #if defined(CAPSTONE_HAS_OSXKERNEL)
 #include <libkern/libkern.h>
 #else
@@ -29,10 +29,10 @@
 #endif
 #include <string.h>
 
-#include "../../utils.h"
-#include "../../MCInst.h"
-#include "../../SStream.h"
-#include "../../MCRegisterInfo.h"
+#include "utils.h"
+#include "MCInst.h"
+#include "SStream.h"
+#include "MCRegisterInfo.h"
 
 #include "X86Mapping.h"
 

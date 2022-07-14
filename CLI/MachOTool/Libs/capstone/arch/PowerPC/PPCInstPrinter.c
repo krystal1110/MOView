@@ -22,11 +22,11 @@
 
 #include "PPCInstPrinter.h"
 #include "PPCPredicates.h"
-#include "../../MCInst.h"
-#include "../../utils.h"
-#include "../../SStream.h"
-#include "../../MCRegisterInfo.h"
-#include "../../MathExtras.h"
+#include "MCInst.h"
+#include "utils.h"
+#include "SStream.h"
+#include "MCRegisterInfo.h"
+#include "MathExtras.h"
 #include "PPCMapping.h"
 
 #ifndef CAPSTONE_DIET

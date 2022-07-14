@@ -4,8 +4,8 @@
 #ifndef CS_ARMDISASSEMBLER_H
 #define CS_ARMDISASSEMBLER_H
 
-#include "../../include/capstone.h"
-#include "../../MCRegisterInfo.h"
+#include "capstone.h"
+#include "MCRegisterInfo.h"
 
 void ARM_init(MCRegisterInfo *MRI);
 

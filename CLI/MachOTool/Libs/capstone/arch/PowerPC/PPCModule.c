@@ -3,8 +3,8 @@
 
 #ifdef CAPSTONE_HAS_POWERPC
 
-#include "../../utils.h"
-#include "../../MCRegisterInfo.h"
+#include "utils.h"
+#include "MCRegisterInfo.h"
 #include "PPCDisassembler.h"
 #include "PPCInstPrinter.h"
 #include "PPCMapping.h"

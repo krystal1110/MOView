@@ -8,7 +8,7 @@
 #include "X86Mapping.h"
 #include "X86DisassemblerDecoder.h"
 
-#include "../../utils.h"
+#include "utils.h"
 
 
 uint64_t arch_masks[9] = {

@@ -9,8 +9,8 @@
 /* Capstone Disassembly Engine */
 /* By Nguyen Anh Quynh <aquynh@gmail.com>, 2013-2014 */
 
-#include "../../MCInst.h"
-#include "../../LEB128.h"
+#include "MCInst.h"
+#include "LEB128.h"
 
 // Helper function for extracting fields from encoded instructions.
 #define FieldFromInstruction(fname, InsnType) \

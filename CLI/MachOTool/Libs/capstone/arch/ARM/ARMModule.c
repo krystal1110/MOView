@@ -3,8 +3,8 @@
 
 #ifdef CAPSTONE_HAS_ARM
 
-#include "../../cs_priv.h"
-#include "../../MCRegisterInfo.h"
+#include "cs_priv.h"
+#include "MCRegisterInfo.h"
 #include "ARMDisassembler.h"
 #include "ARMInstPrinter.h"
 #include "ARMMapping.h"

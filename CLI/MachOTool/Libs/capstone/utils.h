@@ -5,7 +5,7 @@
 #define CS_UTILS_H
 
 #include <stddef.h>
-#include "include/capstone.h"
+#include "capstone.h"
 #include "cs_priv.h"
 
 // threshold number, so above this number will be printed in hexa mode

@@ -16,15 +16,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../../cs_priv.h"
-#include "../../utils.h"
+#include "cs_priv.h"
+#include "utils.h"
 
-#include "../../MCInst.h"
-#include "../../MCInstrDesc.h"
-#include "../../MCFixedLenDisassembler.h"
-#include "../../MCRegisterInfo.h"
-#include "../../MCDisassembler.h"
-#include "../../MathExtras.h"
+#include "MCInst.h"
+#include "MCInstrDesc.h"
+#include "MCFixedLenDisassembler.h"
+#include "MCRegisterInfo.h"
+#include "MCDisassembler.h"
+#include "MathExtras.h"
 
 #define GET_REGINFO_ENUM
 #include "PPCGenRegisterInfo.inc"

@@ -4,8 +4,8 @@
 #ifndef CS_X86_MAP_H
 #define CS_X86_MAP_H
 
-#include "../../include/capstone.h"
-#include "../../cs_priv.h"
+#include "capstone.h"
+#include "cs_priv.h"
 
 // map sib_base to x86_reg
 x86_reg x86_map_sib_base(int r);

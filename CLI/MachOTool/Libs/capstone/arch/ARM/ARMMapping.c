@@ -6,7 +6,7 @@
 #include <stdio.h>	// debug
 #include <string.h>
 
-#include "../../cs_priv.h"
+#include "cs_priv.h"
 
 #include "ARMMapping.h"
 

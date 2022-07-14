@@ -6,9 +6,9 @@
 
 #include <stdint.h>
 
-#include "../../include/capstone.h"
-#include "../../MCRegisterInfo.h"
-#include "../../MCInst.h"
+#include "capstone.h"
+#include "MCRegisterInfo.h"
+#include "MCInst.h"
 
 void AArch64_init(MCRegisterInfo *MRI);
 

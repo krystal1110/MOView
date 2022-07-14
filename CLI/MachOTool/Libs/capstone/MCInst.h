@@ -21,7 +21,7 @@
 
 #include <stdint.h>
 
-#include "include/capstone.h"
+#include "capstone.h"
 
 typedef struct MCInst MCInst;
 typedef struct cs_struct cs_struct;
@@ -33,7 +33,7 @@ struct MCOperand {
 	enum {
 		kInvalid = 0,                 ///< Uninitialized.
 		kRegister,                ///< Register operand.
-		kImmediate,               ///< Immediate operand.
+		kImmediate1,               ///< Immediate operand.
 		kFPImmediate,             ///< Floating-point immediate operand.
 	} MachineOperandType;
 	unsigned char Kind;

@@ -4,8 +4,8 @@
 #ifndef CS_ARM_MAP_H
 #define CS_ARM_MAP_H
 
-#include "../../include/capstone.h"
-#include "../../utils.h"
+#include "capstone.h"
+#include "utils.h"
 
 // return name of regiser in friendly string
 const char *ARM_reg_name(csh handle, unsigned int reg);

@@ -4,9 +4,9 @@
 #ifndef CS_PPCINSTPRINTER_H
 #define CS_PPCINSTPRINTER_H
 
-#include "../../MCInst.h"
-#include "../../MCRegisterInfo.h"
-#include "../../SStream.h"
+#include "MCInst.h"
+#include "MCRegisterInfo.h"
+#include "SStream.h"
 
 void PPC_printInst(MCInst *MI, SStream *O, void *Info);
 

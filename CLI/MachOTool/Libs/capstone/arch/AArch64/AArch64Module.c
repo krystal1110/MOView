@@ -3,8 +3,8 @@
 
 #ifdef CAPSTONE_HAS_ARM64
 
-#include "../../utils.h"
-#include "../../MCRegisterInfo.h"
+#include "utils.h"
+#include "MCRegisterInfo.h"
 #include "AArch64Disassembler.h"
 #include "AArch64InstPrinter.h"
 #include "AArch64Mapping.h"

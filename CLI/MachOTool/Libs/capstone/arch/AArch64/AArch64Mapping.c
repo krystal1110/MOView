@@ -6,7 +6,7 @@
 #include <stdio.h>	// debug
 #include <string.h>
 
-#include "../../utils.h"
+#include "utils.h"
 
 #include "AArch64Mapping.h"
 

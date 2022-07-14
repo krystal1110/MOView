@@ -21,14 +21,14 @@
 #include <stdio.h>	// DEBUG
 #include <stdlib.h>
 
-#include "../../cs_priv.h"
-#include "../../utils.h"
+#include "cs_priv.h"
+#include "utils.h"
 
-#include "../../MCInst.h"
-#include "../../MCInstrDesc.h"
-#include "../../MCFixedLenDisassembler.h"
-#include "../../MCRegisterInfo.h"
-#include "../../MCDisassembler.h"
+#include "MCInst.h"
+#include "MCInstrDesc.h"
+#include "MCFixedLenDisassembler.h"
+#include "MCRegisterInfo.h"
+#include "MCDisassembler.h"
 
 #include "AArch64BaseInfo.h"
 #include "AArch64AddressingModes.h"

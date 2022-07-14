@@ -3,8 +3,8 @@
 
 #ifdef CAPSTONE_HAS_X86
 
-#include "../../cs_priv.h"
-#include "../../MCRegisterInfo.h"
+#include "cs_priv.h"
+#include "MCRegisterInfo.h"
 #include "X86Disassembler.h"
 #include "X86InstPrinter.h"
 #include "X86Mapping.h"

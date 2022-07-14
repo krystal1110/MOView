@@ -15,18 +15,18 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../../myinttypes.h"
+#include "myinttypes.h"
 
 #include "ARMAddressingModes.h"
 #include "ARMBaseInfo.h"
-#include "../../MCFixedLenDisassembler.h"
-#include "../../MCInst.h"
-#include "../../MCInstrDesc.h"
-#include "../../MCRegisterInfo.h"
-#include "../../LEB128.h"
-#include "../../MCDisassembler.h"
-#include "../../cs_priv.h"
-#include "../../utils.h"
+#include "MCFixedLenDisassembler.h"
+#include "MCInst.h"
+#include "MCInstrDesc.h"
+#include "MCRegisterInfo.h"
+#include "LEB128.h"
+#include "MCDisassembler.h"
+#include "cs_priv.h"
+#include "utils.h"
 
 #include "ARMDisassembler.h"
 

@@ -19,7 +19,7 @@
 #define CS_LLVM_MC_MCINSTRDESC_H
 
 #include <stdint.h>
-#include "include/platform.h"
+#include "platform.h"
 
 //===----------------------------------------------------------------------===//
 // Machine Operand Flags and Description

@@ -17,8 +17,8 @@
 #ifndef CS_LLVM_TARGET_ARM_ARMADDRESSINGMODES_H
 #define CS_LLVM_TARGET_ARM_ARMADDRESSINGMODES_H
 
-#include "../../include/platform.h"
-#include "../../MathExtras.h"
+#include "platform.h"
+#include "MathExtras.h"
 
 /// ARM_AM - ARM Addressing Mode Stuff
 typedef enum ARM_AM_ShiftOpc {

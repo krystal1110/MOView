@@ -79,11 +79,11 @@
 
 #include <stdint.h>
 
-#include "../../include/capstone.h"
+#include "capstone.h"
 
-#include "../../MCInst.h"
+#include "MCInst.h"
 
-#include "../../MCRegisterInfo.h"
+#include "MCRegisterInfo.h"
 #include "X86DisassemblerDecoderCommon.h"
 
 bool X86_getInstruction(csh handle, const uint8_t *code, size_t code_len,

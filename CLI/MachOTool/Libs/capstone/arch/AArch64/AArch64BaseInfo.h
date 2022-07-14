@@ -23,6 +23,7 @@
 #include <ctype.h>
 #include <stdint.h>
 #include <string.h>
+#include "arm64.h"
 
 #ifndef __cplusplus
 #if defined (WIN32) || defined (WIN64) || defined (_WIN32) || defined (_WIN64)

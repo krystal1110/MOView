@@ -19,16 +19,16 @@
 #include <stdio.h>	// DEBUG
 #include <stdlib.h>
 #include <string.h>
-#include "../../myinttypes.h"
+#include "myinttypes.h"
 
 #include "ARMInstPrinter.h"
 #include "ARMAddressingModes.h"
 #include "ARMBaseInfo.h"
 #include "ARMDisassembler.h"
-#include "../../MCInst.h"
-#include "../../SStream.h"
-#include "../../MCRegisterInfo.h"
-#include "../../utils.h"
+#include "MCInst.h"
+#include "SStream.h"
+#include "MCRegisterInfo.h"
+#include "utils.h"
 #include "ARMMapping.h"
 
 #define GET_SUBTARGETINFO_ENUM

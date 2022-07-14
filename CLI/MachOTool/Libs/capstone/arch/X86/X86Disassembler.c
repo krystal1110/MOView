@@ -19,16 +19,16 @@
 
 #ifdef CAPSTONE_HAS_X86
 
-#include "../../myinttypes.h"	// debug
+#include "myinttypes.h"	// debug
 #include <string.h>
 
-#include "../../cs_priv.h"
+#include "cs_priv.h"
 
 #include "X86Disassembler.h"
 #include "X86DisassemblerDecoderCommon.h"
 #include "X86DisassemblerDecoder.h"
-#include "../../MCInst.h"
-#include "../../utils.h"
+#include "MCInst.h"
+#include "utils.h"
 #include "X86Mapping.h"
 
 #define GET_REGINFO_ENUM

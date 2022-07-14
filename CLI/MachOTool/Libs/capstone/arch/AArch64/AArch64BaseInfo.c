@@ -20,7 +20,7 @@
 #pragma warning(disable:4996)
 #endif
 
-#include "../../utils.h"
+#include "utils.h"
 
 #include <stdio.h>
 #include <stdlib.h>

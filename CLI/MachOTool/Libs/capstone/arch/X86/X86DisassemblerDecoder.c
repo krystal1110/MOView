@@ -25,8 +25,8 @@
 #include <stdlib.h>   /* for exit()       */
 #endif
 
-#include "../../cs_priv.h"
-#include "../../utils.h"
+#include "cs_priv.h"
+#include "utils.h"
 
 #include "X86DisassemblerDecoder.h"
 

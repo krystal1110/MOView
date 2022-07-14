@@ -16,17 +16,17 @@
 
 #ifdef CAPSTONE_HAS_ARM64
 
-#include "../../myinttypes.h"
+#include "myinttypes.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "AArch64InstPrinter.h"
 #include "AArch64BaseInfo.h"
-#include "../../utils.h"
-#include "../../MCInst.h"
-#include "../../SStream.h"
-#include "../../MCRegisterInfo.h"
-#include "../../MathExtras.h"
+#include "utils.h"
+#include "MCInst.h"
+#include "SStream.h"
+#include "MCRegisterInfo.h"
+#include "MathExtras.h"
 
 #include "AArch64Mapping.h"
 #include "AArch64AddressingModes.h"

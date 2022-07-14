@@ -97,7 +97,7 @@ bool MCOperand_isReg(const MCOperand *op)
 
 bool MCOperand_isImm(const MCOperand *op)
 {
-	return op->Kind == kImmediate;
+	return op->Kind == kImmediate1;
 }
 
 bool MCOperand_isFPImm(const MCOperand *op)
@@ -160,7 +160,7 @@ MCOperand *MCOperand_CreateImm1(MCInst *mcInst, int64_t Val)
 {
 	MCOperand *op = &(mcInst->Operands[MCINST_CACHE]);
 
-	op->Kind = kImmediate;
+	op->Kind = kImmediate1;
 	op->ImmVal = Val;
 
 	return op;
@@ -171,6 +171,6 @@ void MCOperand_CreateImm0(MCInst *mcInst, int64_t Val)
 	MCOperand *op = &(mcInst->Operands[mcInst->size]);
 	mcInst->size++;
 
-	op->Kind = kImmediate;
+	op->Kind = kImmediate1;
 	op->ImmVal = Val;
 }
