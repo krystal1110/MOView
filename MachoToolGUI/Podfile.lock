@@ -1,0 +1,16 @@
+PODS:
+  - MachOTool (1.0.0)
+
+DEPENDENCIES:
+  - MachOTool (from `../CLI`)
+
+EXTERNAL SOURCES:
+  MachOTool:
+    :path: "../CLI"
+
+SPEC CHECKSUMS:
+  MachOTool: 82142371e0cb7a73dbbf23204b96d4924df9371b
+
+PODFILE CHECKSUM: 2902f1ad7f10bb3ab9c0f190854251d6a113db41
+
+COCOAPODS: 1.11.3

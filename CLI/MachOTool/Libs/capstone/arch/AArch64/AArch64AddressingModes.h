@@ -17,7 +17,7 @@
 /* Capstone Disassembly Engine */
 /* By Nguyen Anh Quynh <aquynh@gmail.com>, 2014 */
 
-#include "../../MathExtras.h"
+#include "MathExtras.h"
 
 /// AArch64_AM - AArch64 Addressing Mode Stuff
 
