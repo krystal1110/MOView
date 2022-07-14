@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                        DESC
             
   s.homepage         = 'http'
-  s.platform            = :macos, "12.1"
+  s.platform            = :macos, "10.15"
   s.requires_arc        = true
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'CoderStar' => '1340529758@qq.com' }
@@ -16,13 +16,16 @@ Pod::Spec.new do |s|
 
   s.subspec 'Capstone' do |capstone|
   capstone.source_files       = 'Capstone/**/*.{h,m,mm,swift,c,cc,cpp}'
-  capstone.private_header_files ='Capstone/**/*.{h}'
+  # capstone.source_files       = 'Capstone/**/*'
+  # capstone.private_header_files ='Capstone/**/*.{h}'
+  capstone.public_header_files = 'Capstone/include/**/*'
   capstone.xcconfig = {'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) CAPSTONE_HAS_ARM64=1'}
   capstone.requires_arc = true
   end
-   
-  s.source_files = 'MachOTool/**/*'
+  
+  # s.subspec 'MachOTool' do |x| 
+  s.source_files = 'MachOTool/**/*.{h,m,mm,swift,c,cc,cpp}'
   s.public_header_files = 'MachOTool/**/*.h'
-  s.private_header_files = "MachOTool/Tools/CapStoneHelper/CapStoneHelper.h"
+  # s.private_header_files = "MachOTool/Tools/CapStoneHelper/CapStoneHelper.h"
   s.resources = ['Resoure/**/*']  
-end
+  end

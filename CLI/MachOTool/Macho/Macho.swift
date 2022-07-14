@@ -12,8 +12,8 @@ fileprivate struct MachAttributes {
     let isByteSwapped: Bool
 }
 
-class Macho: Equatable {
-    static func == (lhs: Macho, rhs: Macho) -> Bool {
+public class Macho: Equatable {
+    public static func == (lhs: Macho, rhs: Macho) -> Bool {
         return lhs.id == rhs.id
     }
     
