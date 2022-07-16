@@ -11,7 +11,7 @@ import Foundation
 extension MachOLoadCommand {
     public struct LC_Unknown: MachOLoadCommandType {
         
-        var name: String
+        public var name: String
         private(set) var data: Data? = nil;
         
         init(loadCommand: MachOLoadCommand) {

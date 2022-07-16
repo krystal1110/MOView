@@ -11,7 +11,7 @@ import Foundation
 extension MachOLoadCommand {
     public struct LC_Rpath: MachOLoadCommandType {
         
-        var name: String
+        public var name: String
         private(set) var command: rpath_command? = nil;
         
         init(command: rpath_command) {

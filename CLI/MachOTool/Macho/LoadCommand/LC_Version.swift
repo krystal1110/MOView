@@ -11,7 +11,7 @@ import Foundation
 extension MachOLoadCommand {
     public struct LC_Version: MachOLoadCommandType {
         
-        var name: String
+        public var name: String
         private(set) var command: build_version_command? = nil;
         
         init(command: build_version_command) {

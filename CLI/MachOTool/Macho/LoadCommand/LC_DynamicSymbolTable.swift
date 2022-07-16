@@ -14,7 +14,7 @@ import Foundation
 extension MachOLoadCommand {
     public struct LC_DynamicSymbolTable: MachOLoadCommandType {
         
-        var name: String
+        public var name: String
         private(set) var command: dysymtab_command? = nil;
         
         init(command: dysymtab_command) {

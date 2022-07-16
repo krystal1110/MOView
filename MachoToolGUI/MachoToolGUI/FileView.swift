@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MachOTool
+import Cocoa
 
 
 
@@ -24,7 +25,7 @@ struct FileViewCell: View {
                     .lineLimit(1)
                     .font(.system(size: 14))
                     .foregroundColor(isSelected ? .white : .black)
-                Text("Arch: \(arch)")
+                Text("\(arch)")
                     .lineLimit(1)
                     .font(.system(size: 12))
                     .foregroundColor(isSelected ? .white : .secondary)
@@ -42,44 +43,57 @@ struct FileViewCell: View {
         .contentShape(Rectangle())
     }
 
-    init(_ macho: Macho, isSelected: Bool) {
+    init(_ loadCommand: MachOLoadCommandType, isSelected: Bool) {
 
-        self.fileName = "macho.machoFileName"
+        print("---")
+        self.fileName = "Load Command"
         self.fileSize = 1000
-        self.arch = "macho.header.cpuType.name"
+        self.arch = loadCommand.name
         self.isSelected = isSelected
     }
 }
 
 struct FileView: View {
 
-//    let file: File
+    let fileUrl: URL
     @State var selectedIndex: Int
-
+    var macho:Macho? = nil
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 4) {
-//                    ForEach(0..<file.machos.count) { index in
+                    
+                    
+                    ForEach(0..<self.macho!.commands.count){ index in
+                        FileViewCell(self.macho!.commands[index], isSelected: index == self.selectedIndex) .onTapGesture {
+                                self.selectedIndex = index
+                        }
+                    }
+                    
+                    
+//                    ForEach(0..<10) { index in
 //                        FileViewCell(file.machos[index], isSelected: index == self.selectedIndex) .onTapGesture {
 //                            self.selectedIndex = index
-//
 //                        }
-//                    }
+                    }
                 }
             }
-            .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
+            .padding(EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10))
             .fixedSize(horizontal: true, vertical: false)
+            .frame(width: 100, height: 300, alignment: .leading)
             Divider()
-
+            
         }
-    }
+//    }
 
-    init() {
-         
-//        self.file = file
+    init(fileUrl:URL) {
+        self.fileUrl = fileUrl
         _selectedIndex = State(initialValue: 0)
+        if let macho = MachoTool.parseMacho(fileURL: fileUrl){
+            self.macho = macho
+        }
+        
     }
 }
 

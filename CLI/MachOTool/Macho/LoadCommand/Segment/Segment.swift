@@ -25,7 +25,7 @@ extension MachOLoadCommand {
         //    public var initprot: vm_prot_t /* initial VM protection */
         //    public var nsects: UInt32 /* number of sections in segment */
         //    public var flags: UInt32 /* flags */
-        var name: String
+        public var name: String
         
         private(set) var command64: segment_command_64? = nil; // neilwu added
         private(set) var sections:[Section64] = []

@@ -14,6 +14,7 @@
 		5945684E2A42EBF7B6853A0B /* Pods_MachoToolGUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF47A9898CD90CFF85129443 /* Pods_MachoToolGUI.framework */; };
 		FB595A6928805AA8005F9FA0 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB595A6828805AA8005F9FA0 /* FileView.swift */; };
 		FB595A6B28806E56005F9FA0 /* libswiftDemangle.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB595A6128802F37005F9FA0 /* libswiftDemangle.tbd */; };
+		FB595A75288114D7005F9FA0 /* iOSToolsTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = FB595A73288114B2005F9FA0 /* iOSToolsTest.zip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		DF47A9898CD90CFF85129443 /* Pods_MachoToolGUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MachoToolGUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB595A6128802F37005F9FA0 /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
 		FB595A6828805AA8005F9FA0 /* FileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
+		FB595A73288114B2005F9FA0 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = iOSToolsTest.zip; path = Resoure/iOSToolsTest.zip; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 		2D8B7203287FBAD200700929 = {
 			isa = PBXGroup;
 			children = (
+				FB595A73288114B2005F9FA0 /* iOSToolsTest.zip */,
 				2D8B720E287FBAD200700929 /* MachoToolGUI */,
 				2D8B720D287FBAD200700929 /* Products */,
 				564DE583D3A517FDFCA1CC4E /* Pods */,
@@ -160,6 +163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB595A75288114D7005F9FA0 /* iOSToolsTest.zip in Resources */,
 				2D8B7217287FBAD300700929 /* Preview Assets.xcassets in Resources */,
 				2D8B7214287FBAD300700929 /* Assets.xcassets in Resources */,
 			);

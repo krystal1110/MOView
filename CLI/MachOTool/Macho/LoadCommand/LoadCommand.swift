@@ -14,7 +14,7 @@ import MachO
 
 let byteSwappedOrder = NXByteOrder(rawValue: 0)
 
-protocol MachOLoadCommandType {
+public protocol MachOLoadCommandType {
     
     var name: String { get }
     
@@ -22,7 +22,7 @@ protocol MachOLoadCommandType {
 
 
 
-struct MachOLoadCommand {
+public struct MachOLoadCommand {
     let data: Data
     let command: UInt32
     let size: Int

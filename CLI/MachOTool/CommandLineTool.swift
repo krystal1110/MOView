@@ -21,7 +21,7 @@ public final class CommandLineTool {
             let unzipResult = ShellUtils.runShell("unzip -o \(path)/iOSToolsTest.zip")
             if unzipResult {
                 path = "\(path)/iOSToolsTest"
-                _ = File(fileURL: URL(fileURLWithPath: path))
+                _ = try File(fileURL: URL(fileURLWithPath: path))
             } else {
                 fatalError("unzip error")
             }

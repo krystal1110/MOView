@@ -11,7 +11,7 @@ import Foundation
 extension MachOLoadCommand {
     public struct LC_DyldInfo: MachOLoadCommandType {
         
-        var name: String
+        public var name: String
         private(set) var command: dyld_info_command? = nil;
         
         init(command: dyld_info_command) {

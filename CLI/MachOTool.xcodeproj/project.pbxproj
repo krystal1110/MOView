@@ -36,6 +36,57 @@
 		FB1CE884286AC40F00C5CCC4 /* IndirectSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE882286AC40F00C5CCC4 /* IndirectSymbolTableInterpreter.swift */; };
 		FB63EC4A283F125E003CCCF7 /* StringComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63EC49283F125E003CCCF7 /* StringComponent.swift */; };
 		FB63EC4C283F58C6003CCCF7 /* LazySymbolComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63EC4B283F58C6003CCCF7 /* LazySymbolComponent.swift */; };
+		FB6BF4132881514B00741677 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4122881514B00741677 /* main.swift */; };
+		FB6BF4782881517300741677 /* cs.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF41D2881517300741677 /* cs.c */; };
+		FB6BF4792881517300741677 /* SStream.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF42D2881517300741677 /* SStream.c */; };
+		FB6BF47A2881517300741677 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF42E2881517300741677 /* utils.c */; };
+		FB6BF47B2881517300741677 /* PPCGenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4332881517300741677 /* PPCGenDisassemblerTables.inc */; };
+		FB6BF47C2881517300741677 /* PPCGenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4342881517300741677 /* PPCGenSubtargetInfo.inc */; };
+		FB6BF47D2881517300741677 /* PPCGenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4352881517300741677 /* PPCGenAsmWriter.inc */; };
+		FB6BF47E2881517300741677 /* PPCDisassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4362881517300741677 /* PPCDisassembler.c */; };
+		FB6BF47F2881517300741677 /* PPCMapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4392881517300741677 /* PPCMapping.c */; };
+		FB6BF4802881517300741677 /* PPCGenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF43A2881517300741677 /* PPCGenRegisterInfo.inc */; };
+		FB6BF4812881517300741677 /* PPCModule.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF43B2881517300741677 /* PPCModule.c */; };
+		FB6BF4822881517300741677 /* PPCInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF43C2881517300741677 /* PPCInstPrinter.c */; };
+		FB6BF4832881517300741677 /* PPCGenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF43D2881517300741677 /* PPCGenInstrInfo.inc */; };
+		FB6BF4842881517300741677 /* X86Disassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4412881517300741677 /* X86Disassembler.c */; };
+		FB6BF4852881517300741677 /* X86GenDisassemblerTables_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4422881517300741677 /* X86GenDisassemblerTables_reduce.inc */; };
+		FB6BF4862881517300741677 /* X86ATTInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4432881517300741677 /* X86ATTInstPrinter.c */; };
+		FB6BF4872881517300741677 /* X86GenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4442881517300741677 /* X86GenRegisterInfo.inc */; };
+		FB6BF4882881517300741677 /* X86GenAsmWriter_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4452881517300741677 /* X86GenAsmWriter_reduce.inc */; };
+		FB6BF4892881517300741677 /* X86GenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4462881517300741677 /* X86GenInstrInfo.inc */; };
+		FB6BF48A2881517300741677 /* X86Module.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4472881517300741677 /* X86Module.c */; };
+		FB6BF48B2881517300741677 /* X86DisassemblerDecoder.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4492881517300741677 /* X86DisassemblerDecoder.c */; };
+		FB6BF48C2881517300741677 /* X86GenAsmWriter1.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF44C2881517300741677 /* X86GenAsmWriter1.inc */; };
+		FB6BF48D2881517300741677 /* X86GenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF44E2881517300741677 /* X86GenDisassemblerTables.inc */; };
+		FB6BF48E2881517300741677 /* X86IntelInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF44F2881517300741677 /* X86IntelInstPrinter.c */; };
+		FB6BF48F2881517300741677 /* X86GenAsmWriter1_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4502881517300741677 /* X86GenAsmWriter1_reduce.inc */; };
+		FB6BF4902881517300741677 /* X86Mapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4522881517300741677 /* X86Mapping.c */; };
+		FB6BF4912881517300741677 /* X86GenInstrInfo_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4532881517300741677 /* X86GenInstrInfo_reduce.inc */; };
+		FB6BF4922881517300741677 /* X86GenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4542881517300741677 /* X86GenAsmWriter.inc */; };
+		FB6BF4932881517300741677 /* ARMInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4562881517300741677 /* ARMInstPrinter.c */; };
+		FB6BF4942881517300741677 /* ARMGenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4582881517300741677 /* ARMGenAsmWriter.inc */; };
+		FB6BF4952881517300741677 /* ARMModule.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF45A2881517300741677 /* ARMModule.c */; };
+		FB6BF4962881517300741677 /* ARMMapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF45D2881517300741677 /* ARMMapping.c */; };
+		FB6BF4972881517300741677 /* ARMGenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF45F2881517300741677 /* ARMGenInstrInfo.inc */; };
+		FB6BF4982881517300741677 /* ARMGenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4602881517300741677 /* ARMGenRegisterInfo.inc */; };
+		FB6BF4992881517300741677 /* ARMGenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4612881517300741677 /* ARMGenDisassemblerTables.inc */; };
+		FB6BF49A2881517300741677 /* ARMGenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4622881517300741677 /* ARMGenSubtargetInfo.inc */; };
+		FB6BF49B2881517300741677 /* ARMDisassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4632881517300741677 /* ARMDisassembler.c */; };
+		FB6BF49C2881517300741677 /* AArch64GenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4692881517300741677 /* AArch64GenAsmWriter.inc */; };
+		FB6BF49D2881517300741677 /* AArch64Mapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF46A2881517300741677 /* AArch64Mapping.c */; };
+		FB6BF49E2881517300741677 /* AArch64GenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF46B2881517300741677 /* AArch64GenDisassemblerTables.inc */; };
+		FB6BF49F2881517300741677 /* AArch64GenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF46C2881517300741677 /* AArch64GenSubtargetInfo.inc */; };
+		FB6BF4A02881517300741677 /* AArch64Disassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF46D2881517300741677 /* AArch64Disassembler.c */; };
+		FB6BF4A12881517300741677 /* AArch64InstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF46E2881517300741677 /* AArch64InstPrinter.c */; };
+		FB6BF4A22881517300741677 /* AArch64BaseInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF46F2881517300741677 /* AArch64BaseInfo.c */; };
+		FB6BF4A32881517300741677 /* AArch64GenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4702881517300741677 /* AArch64GenRegisterInfo.inc */; };
+		FB6BF4A42881517300741677 /* AArch64GenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4722881517300741677 /* AArch64GenInstrInfo.inc */; };
+		FB6BF4A52881517300741677 /* AArch64Module.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4732881517300741677 /* AArch64Module.c */; };
+		FB6BF4A62881517300741677 /* MCInstrDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4742881517300741677 /* MCInstrDesc.c */; };
+		FB6BF4A72881517300741677 /* MCInst.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4762881517300741677 /* MCInst.c */; };
+		FB6BF4A82881517300741677 /* MCRegisterInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4772881517300741677 /* MCRegisterInfo.c */; };
+		FB6BF4AC2881526300741677 /* MachoTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6BF4AB2881526300741677 /* MachoTool.swift */; };
 		FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */; };
 		FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B11D028424CA200B53C61 /* ObjcPointer64EnterModel.swift */; };
 		FB8F483328571B0A005D0586 /* SwiftTypesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8F483228571B0A005D0586 /* SwiftTypesInterpreter.swift */; };
@@ -48,55 +99,6 @@
 		FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */; };
 		FB91037A284601C10000AD84 /* UStringComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB910379284601C10000AD84 /* UStringComponent.swift */; };
 		FB91037C284674320000AD84 /* CFStringComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB91037B284674320000AD84 /* CFStringComponent.swift */; };
-		FB9F09A52862B92200732AD0 /* cs.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F094B2862B92100732AD0 /* cs.c */; };
-		FB9F09A62862B92200732AD0 /* SStream.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F095A2862B92100732AD0 /* SStream.c */; };
-		FB9F09A72862B92200732AD0 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F095B2862B92100732AD0 /* utils.c */; };
-		FB9F09A82862B92200732AD0 /* PPCGenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09602862B92100732AD0 /* PPCGenDisassemblerTables.inc */; };
-		FB9F09A92862B92200732AD0 /* PPCGenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09612862B92200732AD0 /* PPCGenSubtargetInfo.inc */; };
-		FB9F09AA2862B92200732AD0 /* PPCGenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09622862B92200732AD0 /* PPCGenAsmWriter.inc */; };
-		FB9F09AB2862B92200732AD0 /* PPCDisassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09632862B92200732AD0 /* PPCDisassembler.c */; };
-		FB9F09AC2862B92200732AD0 /* PPCMapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09662862B92200732AD0 /* PPCMapping.c */; };
-		FB9F09AD2862B92200732AD0 /* PPCGenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09672862B92200732AD0 /* PPCGenRegisterInfo.inc */; };
-		FB9F09AE2862B92200732AD0 /* PPCModule.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09682862B92200732AD0 /* PPCModule.c */; };
-		FB9F09AF2862B92200732AD0 /* PPCInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09692862B92200732AD0 /* PPCInstPrinter.c */; };
-		FB9F09B02862B92200732AD0 /* PPCGenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F096A2862B92200732AD0 /* PPCGenInstrInfo.inc */; };
-		FB9F09B12862B92200732AD0 /* X86Disassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F096E2862B92200732AD0 /* X86Disassembler.c */; };
-		FB9F09B22862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F096F2862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc */; };
-		FB9F09B32862B92200732AD0 /* X86ATTInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09702862B92200732AD0 /* X86ATTInstPrinter.c */; };
-		FB9F09B42862B92200732AD0 /* X86GenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09712862B92200732AD0 /* X86GenRegisterInfo.inc */; };
-		FB9F09B52862B92200732AD0 /* X86GenAsmWriter_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09722862B92200732AD0 /* X86GenAsmWriter_reduce.inc */; };
-		FB9F09B62862B92200732AD0 /* X86GenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09732862B92200732AD0 /* X86GenInstrInfo.inc */; };
-		FB9F09B72862B92200732AD0 /* X86Module.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09742862B92200732AD0 /* X86Module.c */; };
-		FB9F09B82862B92200732AD0 /* X86DisassemblerDecoder.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09762862B92200732AD0 /* X86DisassemblerDecoder.c */; };
-		FB9F09B92862B92200732AD0 /* X86GenAsmWriter1.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09792862B92200732AD0 /* X86GenAsmWriter1.inc */; };
-		FB9F09BA2862B92200732AD0 /* X86GenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F097B2862B92200732AD0 /* X86GenDisassemblerTables.inc */; };
-		FB9F09BB2862B92200732AD0 /* X86IntelInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F097C2862B92200732AD0 /* X86IntelInstPrinter.c */; };
-		FB9F09BC2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F097D2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc */; };
-		FB9F09BD2862B92200732AD0 /* X86Mapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F097F2862B92200732AD0 /* X86Mapping.c */; };
-		FB9F09BE2862B92200732AD0 /* X86GenInstrInfo_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09802862B92200732AD0 /* X86GenInstrInfo_reduce.inc */; };
-		FB9F09BF2862B92200732AD0 /* X86GenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09812862B92200732AD0 /* X86GenAsmWriter.inc */; };
-		FB9F09C02862B92200732AD0 /* ARMInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09832862B92200732AD0 /* ARMInstPrinter.c */; };
-		FB9F09C12862B92200732AD0 /* ARMGenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09852862B92200732AD0 /* ARMGenAsmWriter.inc */; };
-		FB9F09C22862B92200732AD0 /* ARMModule.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09872862B92200732AD0 /* ARMModule.c */; };
-		FB9F09C32862B92200732AD0 /* ARMMapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098A2862B92200732AD0 /* ARMMapping.c */; };
-		FB9F09C42862B92200732AD0 /* ARMGenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098C2862B92200732AD0 /* ARMGenInstrInfo.inc */; };
-		FB9F09C52862B92200732AD0 /* ARMGenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098D2862B92200732AD0 /* ARMGenRegisterInfo.inc */; };
-		FB9F09C62862B92200732AD0 /* ARMGenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098E2862B92200732AD0 /* ARMGenDisassemblerTables.inc */; };
-		FB9F09C72862B92200732AD0 /* ARMGenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F098F2862B92200732AD0 /* ARMGenSubtargetInfo.inc */; };
-		FB9F09C82862B92200732AD0 /* ARMDisassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09902862B92200732AD0 /* ARMDisassembler.c */; };
-		FB9F09C92862B92200732AD0 /* AArch64GenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09962862B92200732AD0 /* AArch64GenAsmWriter.inc */; };
-		FB9F09CA2862B92200732AD0 /* AArch64Mapping.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09972862B92200732AD0 /* AArch64Mapping.c */; };
-		FB9F09CB2862B92200732AD0 /* AArch64GenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09982862B92200732AD0 /* AArch64GenDisassemblerTables.inc */; };
-		FB9F09CC2862B92200732AD0 /* AArch64GenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09992862B92200732AD0 /* AArch64GenSubtargetInfo.inc */; };
-		FB9F09CD2862B92200732AD0 /* AArch64Disassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099A2862B92200732AD0 /* AArch64Disassembler.c */; };
-		FB9F09CE2862B92200732AD0 /* AArch64InstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099B2862B92200732AD0 /* AArch64InstPrinter.c */; };
-		FB9F09CF2862B92200732AD0 /* AArch64BaseInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099C2862B92200732AD0 /* AArch64BaseInfo.c */; };
-		FB9F09D02862B92200732AD0 /* AArch64GenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099D2862B92200732AD0 /* AArch64GenRegisterInfo.inc */; };
-		FB9F09D12862B92200732AD0 /* AArch64GenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = FB9F099F2862B92200732AD0 /* AArch64GenInstrInfo.inc */; };
-		FB9F09D22862B92200732AD0 /* AArch64Module.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09A02862B92200732AD0 /* AArch64Module.c */; };
-		FB9F09D32862B92200732AD0 /* MCInstrDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09A12862B92200732AD0 /* MCInstrDesc.c */; };
-		FB9F09D42862B92200732AD0 /* MCInst.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09A32862B92200732AD0 /* MCInst.c */; };
-		FB9F09D52862B92200732AD0 /* MCRegisterInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09A42862B92200732AD0 /* MCRegisterInfo.c */; };
 		FB9F09E42863199B00732AD0 /* CapStoneHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09E32863199B00732AD0 /* CapStoneHelper.m */; };
 		FB9F09E628633EA800732AD0 /* SwiftTypesCmponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F09E528633EA800732AD0 /* SwiftTypesCmponent.swift */; };
 		FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB6569F284BBCBC0081C991 /* DataTool.swift */; };
@@ -105,7 +107,6 @@
 		FBB656AC284E0BF10081C991 /* BindOperationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656AB284E0BF10081C991 /* BindOperationCode.swift */; };
 		FBB656AE285073F80081C991 /* OperationCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB656AD285073F80081C991 /* OperationCodeModel.swift */; };
 		FBC3489C28489141009B4AAE /* UnusedScanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3489B28489141009B4AAE /* UnusedScanManager.swift */; };
-		FBCEE977283290150090B4E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE976283290150090B4E6 /* main.swift */; };
 		FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE97F283290400090B4E6 /* MachoHeader.swift */; };
 		FBCEE990283290400090B4E6 /* Macho.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE984283290400090B4E6 /* Macho.swift */; };
 		FBCEE991283290400090B4E6 /* LC_Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE986283290400090B4E6 /* LC_Main.swift */; };
@@ -115,7 +116,7 @@
 		FBCEE99A283290470090B4E6 /* TranslationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE998283290470090B4E6 /* TranslationRead.swift */; };
 		FBCEE99E2832904D0090B4E6 /* DataExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE99D2832904D0090B4E6 /* DataExplanation.swift */; };
 		FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A0283290530090B4E6 /* Utils.swift */; };
-		FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A4283290630090B4E6 /* JYFile.swift */; };
+		FBCEE9A5283290630090B4E6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A4283290630090B4E6 /* File.swift */; };
 		FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */; };
 		FBCEE9AE2833800C0090B4E6 /* SymbolTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9AD2833800C0090B4E6 /* SymbolTableModel.swift */; };
 		FBCEE9B72834D6710090B4E6 /* BaseInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */; };
@@ -163,6 +164,101 @@
 		FB1CE882286AC40F00C5CCC4 /* IndirectSymbolTableInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreter.swift; sourceTree = "<group>"; };
 		FB63EC49283F125E003CCCF7 /* StringComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringComponent.swift; sourceTree = "<group>"; };
 		FB63EC4B283F58C6003CCCF7 /* LazySymbolComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazySymbolComponent.swift; sourceTree = "<group>"; };
+		FB6BF4122881514B00741677 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = SOURCE_ROOT; };
+		FB6BF4152881517300741677 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		FB6BF4162881517300741677 /* inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
+		FB6BF4172881517300741677 /* SStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStream.h; sourceTree = "<group>"; };
+		FB6BF4182881517300741677 /* myinttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myinttypes.h; sourceTree = "<group>"; };
+		FB6BF4192881517300741677 /* MathExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathExtras.h; sourceTree = "<group>"; };
+		FB6BF41A2881517300741677 /* LEB128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEB128.h; sourceTree = "<group>"; };
+		FB6BF41B2881517300741677 /* MCFixedLenDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCFixedLenDisassembler.h; sourceTree = "<group>"; };
+		FB6BF41C2881517300741677 /* cs_priv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cs_priv.h; sourceTree = "<group>"; };
+		FB6BF41D2881517300741677 /* cs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cs.c; sourceTree = "<group>"; };
+		FB6BF41F2881517300741677 /* capstone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = capstone.h; sourceTree = "<group>"; };
+		FB6BF4202881517300741677 /* mips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mips.h; sourceTree = "<group>"; };
+		FB6BF4212881517300741677 /* sparc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sparc.h; sourceTree = "<group>"; };
+		FB6BF4222881517300741677 /* systemz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemz.h; sourceTree = "<group>"; };
+		FB6BF4232881517300741677 /* arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arm.h; sourceTree = "<group>"; };
+		FB6BF4242881517300741677 /* x86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86.h; sourceTree = "<group>"; };
+		FB6BF4252881517300741677 /* ppc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppc.h; sourceTree = "<group>"; };
+		FB6BF4262881517300741677 /* arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arm64.h; sourceTree = "<group>"; };
+		FB6BF4272881517300741677 /* xcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcore.h; sourceTree = "<group>"; };
+		FB6BF4282881517300741677 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		FB6BF4292881517300741677 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		FB6BF42A2881517300741677 /* MCInstrDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInstrDesc.h; sourceTree = "<group>"; };
+		FB6BF42B2881517300741677 /* MCRegisterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRegisterInfo.h; sourceTree = "<group>"; };
+		FB6BF42C2881517300741677 /* MCInst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInst.h; sourceTree = "<group>"; };
+		FB6BF42D2881517300741677 /* SStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SStream.c; sourceTree = "<group>"; };
+		FB6BF42E2881517300741677 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
+		FB6BF42F2881517300741677 /* MCDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDisassembler.h; sourceTree = "<group>"; };
+		FB6BF4322881517300741677 /* PPCMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCMapping.h; sourceTree = "<group>"; };
+		FB6BF4332881517300741677 /* PPCGenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenDisassemblerTables.inc; sourceTree = "<group>"; };
+		FB6BF4342881517300741677 /* PPCGenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenSubtargetInfo.inc; sourceTree = "<group>"; };
+		FB6BF4352881517300741677 /* PPCGenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenAsmWriter.inc; sourceTree = "<group>"; };
+		FB6BF4362881517300741677 /* PPCDisassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCDisassembler.c; sourceTree = "<group>"; };
+		FB6BF4372881517300741677 /* PPCPredicates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCPredicates.h; sourceTree = "<group>"; };
+		FB6BF4382881517300741677 /* PPCInstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCInstPrinter.h; sourceTree = "<group>"; };
+		FB6BF4392881517300741677 /* PPCMapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCMapping.c; sourceTree = "<group>"; };
+		FB6BF43A2881517300741677 /* PPCGenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenRegisterInfo.inc; sourceTree = "<group>"; };
+		FB6BF43B2881517300741677 /* PPCModule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCModule.c; sourceTree = "<group>"; };
+		FB6BF43C2881517300741677 /* PPCInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCInstPrinter.c; sourceTree = "<group>"; };
+		FB6BF43D2881517300741677 /* PPCGenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenInstrInfo.inc; sourceTree = "<group>"; };
+		FB6BF43E2881517300741677 /* PPCDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCDisassembler.h; sourceTree = "<group>"; };
+		FB6BF4402881517300741677 /* X86InstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86InstPrinter.h; sourceTree = "<group>"; };
+		FB6BF4412881517300741677 /* X86Disassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Disassembler.c; sourceTree = "<group>"; };
+		FB6BF4422881517300741677 /* X86GenDisassemblerTables_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenDisassemblerTables_reduce.inc; sourceTree = "<group>"; };
+		FB6BF4432881517300741677 /* X86ATTInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86ATTInstPrinter.c; sourceTree = "<group>"; };
+		FB6BF4442881517300741677 /* X86GenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenRegisterInfo.inc; sourceTree = "<group>"; };
+		FB6BF4452881517300741677 /* X86GenAsmWriter_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter_reduce.inc; sourceTree = "<group>"; };
+		FB6BF4462881517300741677 /* X86GenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenInstrInfo.inc; sourceTree = "<group>"; };
+		FB6BF4472881517300741677 /* X86Module.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Module.c; sourceTree = "<group>"; };
+		FB6BF4482881517300741677 /* X86Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86Mapping.h; sourceTree = "<group>"; };
+		FB6BF4492881517300741677 /* X86DisassemblerDecoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86DisassemblerDecoder.c; sourceTree = "<group>"; };
+		FB6BF44A2881517300741677 /* X86Disassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86Disassembler.h; sourceTree = "<group>"; };
+		FB6BF44B2881517300741677 /* X86BaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86BaseInfo.h; sourceTree = "<group>"; };
+		FB6BF44C2881517300741677 /* X86GenAsmWriter1.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter1.inc; sourceTree = "<group>"; };
+		FB6BF44D2881517300741677 /* X86DisassemblerDecoderCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86DisassemblerDecoderCommon.h; sourceTree = "<group>"; };
+		FB6BF44E2881517300741677 /* X86GenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenDisassemblerTables.inc; sourceTree = "<group>"; };
+		FB6BF44F2881517300741677 /* X86IntelInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86IntelInstPrinter.c; sourceTree = "<group>"; };
+		FB6BF4502881517300741677 /* X86GenAsmWriter1_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter1_reduce.inc; sourceTree = "<group>"; };
+		FB6BF4512881517300741677 /* X86DisassemblerDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86DisassemblerDecoder.h; sourceTree = "<group>"; };
+		FB6BF4522881517300741677 /* X86Mapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Mapping.c; sourceTree = "<group>"; };
+		FB6BF4532881517300741677 /* X86GenInstrInfo_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenInstrInfo_reduce.inc; sourceTree = "<group>"; };
+		FB6BF4542881517300741677 /* X86GenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter.inc; sourceTree = "<group>"; };
+		FB6BF4562881517300741677 /* ARMInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMInstPrinter.c; sourceTree = "<group>"; };
+		FB6BF4572881517300741677 /* ARMMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMMapping.h; sourceTree = "<group>"; };
+		FB6BF4582881517300741677 /* ARMGenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenAsmWriter.inc; sourceTree = "<group>"; };
+		FB6BF4592881517300741677 /* ARMDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMDisassembler.h; sourceTree = "<group>"; };
+		FB6BF45A2881517300741677 /* ARMModule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMModule.c; sourceTree = "<group>"; };
+		FB6BF45B2881517300741677 /* ARMAddressingModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMAddressingModes.h; sourceTree = "<group>"; };
+		FB6BF45C2881517300741677 /* ARMBaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMBaseInfo.h; sourceTree = "<group>"; };
+		FB6BF45D2881517300741677 /* ARMMapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMMapping.c; sourceTree = "<group>"; };
+		FB6BF45E2881517300741677 /* ARMInstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMInstPrinter.h; sourceTree = "<group>"; };
+		FB6BF45F2881517300741677 /* ARMGenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenInstrInfo.inc; sourceTree = "<group>"; };
+		FB6BF4602881517300741677 /* ARMGenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenRegisterInfo.inc; sourceTree = "<group>"; };
+		FB6BF4612881517300741677 /* ARMGenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenDisassemblerTables.inc; sourceTree = "<group>"; };
+		FB6BF4622881517300741677 /* ARMGenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenSubtargetInfo.inc; sourceTree = "<group>"; };
+		FB6BF4632881517300741677 /* ARMDisassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMDisassembler.c; sourceTree = "<group>"; };
+		FB6BF4652881517300741677 /* AArch64Disassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64Disassembler.h; sourceTree = "<group>"; };
+		FB6BF4662881517300741677 /* AArch64BaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64BaseInfo.h; sourceTree = "<group>"; };
+		FB6BF4672881517300741677 /* AArch64AddressingModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64AddressingModes.h; sourceTree = "<group>"; };
+		FB6BF4682881517300741677 /* AArch64InstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64InstPrinter.h; sourceTree = "<group>"; };
+		FB6BF4692881517300741677 /* AArch64GenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenAsmWriter.inc; sourceTree = "<group>"; };
+		FB6BF46A2881517300741677 /* AArch64Mapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Mapping.c; sourceTree = "<group>"; };
+		FB6BF46B2881517300741677 /* AArch64GenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenDisassemblerTables.inc; sourceTree = "<group>"; };
+		FB6BF46C2881517300741677 /* AArch64GenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenSubtargetInfo.inc; sourceTree = "<group>"; };
+		FB6BF46D2881517300741677 /* AArch64Disassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Disassembler.c; sourceTree = "<group>"; };
+		FB6BF46E2881517300741677 /* AArch64InstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64InstPrinter.c; sourceTree = "<group>"; };
+		FB6BF46F2881517300741677 /* AArch64BaseInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64BaseInfo.c; sourceTree = "<group>"; };
+		FB6BF4702881517300741677 /* AArch64GenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenRegisterInfo.inc; sourceTree = "<group>"; };
+		FB6BF4712881517300741677 /* AArch64Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64Mapping.h; sourceTree = "<group>"; };
+		FB6BF4722881517300741677 /* AArch64GenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenInstrInfo.inc; sourceTree = "<group>"; };
+		FB6BF4732881517300741677 /* AArch64Module.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Module.c; sourceTree = "<group>"; };
+		FB6BF4742881517300741677 /* MCInstrDesc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCInstrDesc.c; sourceTree = "<group>"; };
+		FB6BF4752881517300741677 /* osxkernel_inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osxkernel_inttypes.h; sourceTree = "<group>"; };
+		FB6BF4762881517300741677 /* MCInst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCInst.c; sourceTree = "<group>"; };
+		FB6BF4772881517300741677 /* MCRegisterInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCRegisterInfo.c; sourceTree = "<group>"; };
+		FB6BF4AB2881526300741677 /* MachoTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MachoTool.swift; path = MachOTool/MachoTool.swift; sourceTree = SOURCE_ROOT; };
 		FB8B11C92840AA9000B53C61 /* CFStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStringInterpreter.swift; sourceTree = "<group>"; };
 		FB8B11D028424CA200B53C61 /* ObjcPointer64EnterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjcPointer64EnterModel.swift; sourceTree = "<group>"; };
 		FB8F48262854AA1C005D0586 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = iOSToolsTest.zip; sourceTree = "<group>"; };
@@ -177,98 +273,6 @@
 		FB9103772845FE9B0000AD84 /* UStringInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringInterpreter.swift; sourceTree = "<group>"; };
 		FB910379284601C10000AD84 /* UStringComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UStringComponent.swift; sourceTree = "<group>"; };
 		FB91037B284674320000AD84 /* CFStringComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFStringComponent.swift; sourceTree = "<group>"; };
-		FB9F09432862B92100732AD0 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
-		FB9F09442862B92100732AD0 /* inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
-		FB9F09452862B92100732AD0 /* SStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStream.h; sourceTree = "<group>"; };
-		FB9F09462862B92100732AD0 /* myinttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myinttypes.h; sourceTree = "<group>"; };
-		FB9F09472862B92100732AD0 /* MathExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathExtras.h; sourceTree = "<group>"; };
-		FB9F09482862B92100732AD0 /* LEB128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEB128.h; sourceTree = "<group>"; };
-		FB9F09492862B92100732AD0 /* MCFixedLenDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCFixedLenDisassembler.h; sourceTree = "<group>"; };
-		FB9F094A2862B92100732AD0 /* cs_priv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cs_priv.h; sourceTree = "<group>"; };
-		FB9F094B2862B92100732AD0 /* cs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cs.c; sourceTree = "<group>"; };
-		FB9F094D2862B92100732AD0 /* capstone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = capstone.h; sourceTree = "<group>"; };
-		FB9F094E2862B92100732AD0 /* mips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mips.h; sourceTree = "<group>"; };
-		FB9F094F2862B92100732AD0 /* sparc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sparc.h; sourceTree = "<group>"; };
-		FB9F09502862B92100732AD0 /* systemz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemz.h; sourceTree = "<group>"; };
-		FB9F09512862B92100732AD0 /* arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arm.h; sourceTree = "<group>"; };
-		FB9F09522862B92100732AD0 /* x86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86.h; sourceTree = "<group>"; };
-		FB9F09532862B92100732AD0 /* ppc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppc.h; sourceTree = "<group>"; };
-		FB9F09542862B92100732AD0 /* arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arm64.h; sourceTree = "<group>"; };
-		FB9F09552862B92100732AD0 /* xcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcore.h; sourceTree = "<group>"; };
-		FB9F09562862B92100732AD0 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
-		FB9F09572862B92100732AD0 /* MCInstrDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInstrDesc.h; sourceTree = "<group>"; };
-		FB9F09582862B92100732AD0 /* MCRegisterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRegisterInfo.h; sourceTree = "<group>"; };
-		FB9F09592862B92100732AD0 /* MCInst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInst.h; sourceTree = "<group>"; };
-		FB9F095A2862B92100732AD0 /* SStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SStream.c; sourceTree = "<group>"; };
-		FB9F095B2862B92100732AD0 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
-		FB9F095C2862B92100732AD0 /* MCDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDisassembler.h; sourceTree = "<group>"; };
-		FB9F095F2862B92100732AD0 /* PPCMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCMapping.h; sourceTree = "<group>"; };
-		FB9F09602862B92100732AD0 /* PPCGenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenDisassemblerTables.inc; sourceTree = "<group>"; };
-		FB9F09612862B92200732AD0 /* PPCGenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenSubtargetInfo.inc; sourceTree = "<group>"; };
-		FB9F09622862B92200732AD0 /* PPCGenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenAsmWriter.inc; sourceTree = "<group>"; };
-		FB9F09632862B92200732AD0 /* PPCDisassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCDisassembler.c; sourceTree = "<group>"; };
-		FB9F09642862B92200732AD0 /* PPCPredicates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCPredicates.h; sourceTree = "<group>"; };
-		FB9F09652862B92200732AD0 /* PPCInstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCInstPrinter.h; sourceTree = "<group>"; };
-		FB9F09662862B92200732AD0 /* PPCMapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCMapping.c; sourceTree = "<group>"; };
-		FB9F09672862B92200732AD0 /* PPCGenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenRegisterInfo.inc; sourceTree = "<group>"; };
-		FB9F09682862B92200732AD0 /* PPCModule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCModule.c; sourceTree = "<group>"; };
-		FB9F09692862B92200732AD0 /* PPCInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCInstPrinter.c; sourceTree = "<group>"; };
-		FB9F096A2862B92200732AD0 /* PPCGenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenInstrInfo.inc; sourceTree = "<group>"; };
-		FB9F096B2862B92200732AD0 /* PPCDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCDisassembler.h; sourceTree = "<group>"; };
-		FB9F096D2862B92200732AD0 /* X86InstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86InstPrinter.h; sourceTree = "<group>"; };
-		FB9F096E2862B92200732AD0 /* X86Disassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Disassembler.c; sourceTree = "<group>"; };
-		FB9F096F2862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenDisassemblerTables_reduce.inc; sourceTree = "<group>"; };
-		FB9F09702862B92200732AD0 /* X86ATTInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86ATTInstPrinter.c; sourceTree = "<group>"; };
-		FB9F09712862B92200732AD0 /* X86GenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenRegisterInfo.inc; sourceTree = "<group>"; };
-		FB9F09722862B92200732AD0 /* X86GenAsmWriter_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter_reduce.inc; sourceTree = "<group>"; };
-		FB9F09732862B92200732AD0 /* X86GenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenInstrInfo.inc; sourceTree = "<group>"; };
-		FB9F09742862B92200732AD0 /* X86Module.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Module.c; sourceTree = "<group>"; };
-		FB9F09752862B92200732AD0 /* X86Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86Mapping.h; sourceTree = "<group>"; };
-		FB9F09762862B92200732AD0 /* X86DisassemblerDecoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86DisassemblerDecoder.c; sourceTree = "<group>"; };
-		FB9F09772862B92200732AD0 /* X86Disassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86Disassembler.h; sourceTree = "<group>"; };
-		FB9F09782862B92200732AD0 /* X86BaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86BaseInfo.h; sourceTree = "<group>"; };
-		FB9F09792862B92200732AD0 /* X86GenAsmWriter1.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter1.inc; sourceTree = "<group>"; };
-		FB9F097A2862B92200732AD0 /* X86DisassemblerDecoderCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86DisassemblerDecoderCommon.h; sourceTree = "<group>"; };
-		FB9F097B2862B92200732AD0 /* X86GenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenDisassemblerTables.inc; sourceTree = "<group>"; };
-		FB9F097C2862B92200732AD0 /* X86IntelInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86IntelInstPrinter.c; sourceTree = "<group>"; };
-		FB9F097D2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter1_reduce.inc; sourceTree = "<group>"; };
-		FB9F097E2862B92200732AD0 /* X86DisassemblerDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86DisassemblerDecoder.h; sourceTree = "<group>"; };
-		FB9F097F2862B92200732AD0 /* X86Mapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Mapping.c; sourceTree = "<group>"; };
-		FB9F09802862B92200732AD0 /* X86GenInstrInfo_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenInstrInfo_reduce.inc; sourceTree = "<group>"; };
-		FB9F09812862B92200732AD0 /* X86GenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter.inc; sourceTree = "<group>"; };
-		FB9F09832862B92200732AD0 /* ARMInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMInstPrinter.c; sourceTree = "<group>"; };
-		FB9F09842862B92200732AD0 /* ARMMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMMapping.h; sourceTree = "<group>"; };
-		FB9F09852862B92200732AD0 /* ARMGenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenAsmWriter.inc; sourceTree = "<group>"; };
-		FB9F09862862B92200732AD0 /* ARMDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMDisassembler.h; sourceTree = "<group>"; };
-		FB9F09872862B92200732AD0 /* ARMModule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMModule.c; sourceTree = "<group>"; };
-		FB9F09882862B92200732AD0 /* ARMAddressingModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMAddressingModes.h; sourceTree = "<group>"; };
-		FB9F09892862B92200732AD0 /* ARMBaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMBaseInfo.h; sourceTree = "<group>"; };
-		FB9F098A2862B92200732AD0 /* ARMMapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMMapping.c; sourceTree = "<group>"; };
-		FB9F098B2862B92200732AD0 /* ARMInstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMInstPrinter.h; sourceTree = "<group>"; };
-		FB9F098C2862B92200732AD0 /* ARMGenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenInstrInfo.inc; sourceTree = "<group>"; };
-		FB9F098D2862B92200732AD0 /* ARMGenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenRegisterInfo.inc; sourceTree = "<group>"; };
-		FB9F098E2862B92200732AD0 /* ARMGenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenDisassemblerTables.inc; sourceTree = "<group>"; };
-		FB9F098F2862B92200732AD0 /* ARMGenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenSubtargetInfo.inc; sourceTree = "<group>"; };
-		FB9F09902862B92200732AD0 /* ARMDisassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMDisassembler.c; sourceTree = "<group>"; };
-		FB9F09922862B92200732AD0 /* AArch64Disassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64Disassembler.h; sourceTree = "<group>"; };
-		FB9F09932862B92200732AD0 /* AArch64BaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64BaseInfo.h; sourceTree = "<group>"; };
-		FB9F09942862B92200732AD0 /* AArch64AddressingModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64AddressingModes.h; sourceTree = "<group>"; };
-		FB9F09952862B92200732AD0 /* AArch64InstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64InstPrinter.h; sourceTree = "<group>"; };
-		FB9F09962862B92200732AD0 /* AArch64GenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenAsmWriter.inc; sourceTree = "<group>"; };
-		FB9F09972862B92200732AD0 /* AArch64Mapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Mapping.c; sourceTree = "<group>"; };
-		FB9F09982862B92200732AD0 /* AArch64GenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenDisassemblerTables.inc; sourceTree = "<group>"; };
-		FB9F09992862B92200732AD0 /* AArch64GenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenSubtargetInfo.inc; sourceTree = "<group>"; };
-		FB9F099A2862B92200732AD0 /* AArch64Disassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Disassembler.c; sourceTree = "<group>"; };
-		FB9F099B2862B92200732AD0 /* AArch64InstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64InstPrinter.c; sourceTree = "<group>"; };
-		FB9F099C2862B92200732AD0 /* AArch64BaseInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64BaseInfo.c; sourceTree = "<group>"; };
-		FB9F099D2862B92200732AD0 /* AArch64GenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenRegisterInfo.inc; sourceTree = "<group>"; };
-		FB9F099E2862B92200732AD0 /* AArch64Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64Mapping.h; sourceTree = "<group>"; };
-		FB9F099F2862B92200732AD0 /* AArch64GenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenInstrInfo.inc; sourceTree = "<group>"; };
-		FB9F09A02862B92200732AD0 /* AArch64Module.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Module.c; sourceTree = "<group>"; };
-		FB9F09A12862B92200732AD0 /* MCInstrDesc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCInstrDesc.c; sourceTree = "<group>"; };
-		FB9F09A22862B92200732AD0 /* osxkernel_inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osxkernel_inttypes.h; sourceTree = "<group>"; };
-		FB9F09A32862B92200732AD0 /* MCInst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCInst.c; sourceTree = "<group>"; };
-		FB9F09A42862B92200732AD0 /* MCRegisterInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCRegisterInfo.c; sourceTree = "<group>"; };
 		FB9F09D62862B96200732AD0 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		FB9F09E22863199B00732AD0 /* CapStoneHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapStoneHelper.h; sourceTree = "<group>"; };
 		FB9F09E32863199B00732AD0 /* CapStoneHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapStoneHelper.m; sourceTree = "<group>"; };
@@ -280,7 +284,6 @@
 		FBB656AD285073F80081C991 /* OperationCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationCodeModel.swift; sourceTree = "<group>"; };
 		FBC3489B28489141009B4AAE /* UnusedScanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnusedScanManager.swift; sourceTree = "<group>"; };
 		FBCEE973283290150090B4E6 /* MachoTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MachoTool; sourceTree = BUILT_PRODUCTS_DIR; };
-		FBCEE976283290150090B4E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FBCEE97F283290400090B4E6 /* MachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoHeader.swift; sourceTree = "<group>"; };
 		FBCEE984283290400090B4E6 /* Macho.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macho.swift; sourceTree = "<group>"; };
 		FBCEE986283290400090B4E6 /* LC_Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_Main.swift; sourceTree = "<group>"; };
@@ -290,8 +293,7 @@
 		FBCEE998283290470090B4E6 /* TranslationRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationRead.swift; sourceTree = "<group>"; };
 		FBCEE99D2832904D0090B4E6 /* DataExplanation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExplanation.swift; sourceTree = "<group>"; };
 		FBCEE9A0283290530090B4E6 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		FBCEE9A3283290630090B4E6 /* MachOTool-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachOTool-Bridging-Header.h"; sourceTree = "<group>"; };
-		FBCEE9A4283290630090B4E6 /* JYFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JYFile.swift; sourceTree = "<group>"; };
+		FBCEE9A4283290630090B4E6 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineTool.swift; sourceTree = "<group>"; };
 		FBCEE9AD2833800C0090B4E6 /* SymbolTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTableModel.swift; sourceTree = "<group>"; };
 		FBCEE9B62834D6710090B4E6 /* BaseInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterpreter.swift; sourceTree = "<group>"; };
@@ -365,6 +367,154 @@
 			path = SymbolInterpreter;
 			sourceTree = "<group>";
 		};
+		FB6BF4142881517300741677 /* Capstone */ = {
+			isa = PBXGroup;
+			children = (
+				FB6BF4152881517300741677 /* utils.h */,
+				FB6BF4162881517300741677 /* inttypes.h */,
+				FB6BF4172881517300741677 /* SStream.h */,
+				FB6BF4182881517300741677 /* myinttypes.h */,
+				FB6BF4192881517300741677 /* MathExtras.h */,
+				FB6BF41A2881517300741677 /* LEB128.h */,
+				FB6BF41B2881517300741677 /* MCFixedLenDisassembler.h */,
+				FB6BF41C2881517300741677 /* cs_priv.h */,
+				FB6BF41D2881517300741677 /* cs.c */,
+				FB6BF41E2881517300741677 /* include */,
+				FB6BF42A2881517300741677 /* MCInstrDesc.h */,
+				FB6BF42B2881517300741677 /* MCRegisterInfo.h */,
+				FB6BF42C2881517300741677 /* MCInst.h */,
+				FB6BF42D2881517300741677 /* SStream.c */,
+				FB6BF42E2881517300741677 /* utils.c */,
+				FB6BF42F2881517300741677 /* MCDisassembler.h */,
+				FB6BF4302881517300741677 /* arch */,
+				FB6BF4742881517300741677 /* MCInstrDesc.c */,
+				FB6BF4752881517300741677 /* osxkernel_inttypes.h */,
+				FB6BF4762881517300741677 /* MCInst.c */,
+				FB6BF4772881517300741677 /* MCRegisterInfo.c */,
+			);
+			path = Capstone;
+			sourceTree = SOURCE_ROOT;
+		};
+		FB6BF41E2881517300741677 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				FB6BF41F2881517300741677 /* capstone.h */,
+				FB6BF4202881517300741677 /* mips.h */,
+				FB6BF4212881517300741677 /* sparc.h */,
+				FB6BF4222881517300741677 /* systemz.h */,
+				FB6BF4232881517300741677 /* arm.h */,
+				FB6BF4242881517300741677 /* x86.h */,
+				FB6BF4252881517300741677 /* ppc.h */,
+				FB6BF4262881517300741677 /* arm64.h */,
+				FB6BF4272881517300741677 /* xcore.h */,
+				FB6BF4282881517300741677 /* module.modulemap */,
+				FB6BF4292881517300741677 /* platform.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FB6BF4302881517300741677 /* arch */ = {
+			isa = PBXGroup;
+			children = (
+				FB6BF4312881517300741677 /* PowerPC */,
+				FB6BF43F2881517300741677 /* X86 */,
+				FB6BF4552881517300741677 /* ARM */,
+				FB6BF4642881517300741677 /* AArch64 */,
+			);
+			path = arch;
+			sourceTree = "<group>";
+		};
+		FB6BF4312881517300741677 /* PowerPC */ = {
+			isa = PBXGroup;
+			children = (
+				FB6BF4322881517300741677 /* PPCMapping.h */,
+				FB6BF4332881517300741677 /* PPCGenDisassemblerTables.inc */,
+				FB6BF4342881517300741677 /* PPCGenSubtargetInfo.inc */,
+				FB6BF4352881517300741677 /* PPCGenAsmWriter.inc */,
+				FB6BF4362881517300741677 /* PPCDisassembler.c */,
+				FB6BF4372881517300741677 /* PPCPredicates.h */,
+				FB6BF4382881517300741677 /* PPCInstPrinter.h */,
+				FB6BF4392881517300741677 /* PPCMapping.c */,
+				FB6BF43A2881517300741677 /* PPCGenRegisterInfo.inc */,
+				FB6BF43B2881517300741677 /* PPCModule.c */,
+				FB6BF43C2881517300741677 /* PPCInstPrinter.c */,
+				FB6BF43D2881517300741677 /* PPCGenInstrInfo.inc */,
+				FB6BF43E2881517300741677 /* PPCDisassembler.h */,
+			);
+			path = PowerPC;
+			sourceTree = "<group>";
+		};
+		FB6BF43F2881517300741677 /* X86 */ = {
+			isa = PBXGroup;
+			children = (
+				FB6BF4402881517300741677 /* X86InstPrinter.h */,
+				FB6BF4412881517300741677 /* X86Disassembler.c */,
+				FB6BF4422881517300741677 /* X86GenDisassemblerTables_reduce.inc */,
+				FB6BF4432881517300741677 /* X86ATTInstPrinter.c */,
+				FB6BF4442881517300741677 /* X86GenRegisterInfo.inc */,
+				FB6BF4452881517300741677 /* X86GenAsmWriter_reduce.inc */,
+				FB6BF4462881517300741677 /* X86GenInstrInfo.inc */,
+				FB6BF4472881517300741677 /* X86Module.c */,
+				FB6BF4482881517300741677 /* X86Mapping.h */,
+				FB6BF4492881517300741677 /* X86DisassemblerDecoder.c */,
+				FB6BF44A2881517300741677 /* X86Disassembler.h */,
+				FB6BF44B2881517300741677 /* X86BaseInfo.h */,
+				FB6BF44C2881517300741677 /* X86GenAsmWriter1.inc */,
+				FB6BF44D2881517300741677 /* X86DisassemblerDecoderCommon.h */,
+				FB6BF44E2881517300741677 /* X86GenDisassemblerTables.inc */,
+				FB6BF44F2881517300741677 /* X86IntelInstPrinter.c */,
+				FB6BF4502881517300741677 /* X86GenAsmWriter1_reduce.inc */,
+				FB6BF4512881517300741677 /* X86DisassemblerDecoder.h */,
+				FB6BF4522881517300741677 /* X86Mapping.c */,
+				FB6BF4532881517300741677 /* X86GenInstrInfo_reduce.inc */,
+				FB6BF4542881517300741677 /* X86GenAsmWriter.inc */,
+			);
+			path = X86;
+			sourceTree = "<group>";
+		};
+		FB6BF4552881517300741677 /* ARM */ = {
+			isa = PBXGroup;
+			children = (
+				FB6BF4562881517300741677 /* ARMInstPrinter.c */,
+				FB6BF4572881517300741677 /* ARMMapping.h */,
+				FB6BF4582881517300741677 /* ARMGenAsmWriter.inc */,
+				FB6BF4592881517300741677 /* ARMDisassembler.h */,
+				FB6BF45A2881517300741677 /* ARMModule.c */,
+				FB6BF45B2881517300741677 /* ARMAddressingModes.h */,
+				FB6BF45C2881517300741677 /* ARMBaseInfo.h */,
+				FB6BF45D2881517300741677 /* ARMMapping.c */,
+				FB6BF45E2881517300741677 /* ARMInstPrinter.h */,
+				FB6BF45F2881517300741677 /* ARMGenInstrInfo.inc */,
+				FB6BF4602881517300741677 /* ARMGenRegisterInfo.inc */,
+				FB6BF4612881517300741677 /* ARMGenDisassemblerTables.inc */,
+				FB6BF4622881517300741677 /* ARMGenSubtargetInfo.inc */,
+				FB6BF4632881517300741677 /* ARMDisassembler.c */,
+			);
+			path = ARM;
+			sourceTree = "<group>";
+		};
+		FB6BF4642881517300741677 /* AArch64 */ = {
+			isa = PBXGroup;
+			children = (
+				FB6BF4652881517300741677 /* AArch64Disassembler.h */,
+				FB6BF4662881517300741677 /* AArch64BaseInfo.h */,
+				FB6BF4672881517300741677 /* AArch64AddressingModes.h */,
+				FB6BF4682881517300741677 /* AArch64InstPrinter.h */,
+				FB6BF4692881517300741677 /* AArch64GenAsmWriter.inc */,
+				FB6BF46A2881517300741677 /* AArch64Mapping.c */,
+				FB6BF46B2881517300741677 /* AArch64GenDisassemblerTables.inc */,
+				FB6BF46C2881517300741677 /* AArch64GenSubtargetInfo.inc */,
+				FB6BF46D2881517300741677 /* AArch64Disassembler.c */,
+				FB6BF46E2881517300741677 /* AArch64InstPrinter.c */,
+				FB6BF46F2881517300741677 /* AArch64BaseInfo.c */,
+				FB6BF4702881517300741677 /* AArch64GenRegisterInfo.inc */,
+				FB6BF4712881517300741677 /* AArch64Mapping.h */,
+				FB6BF4722881517300741677 /* AArch64GenInstrInfo.inc */,
+				FB6BF4732881517300741677 /* AArch64Module.c */,
+			);
+			path = AArch64;
+			sourceTree = "<group>";
+		};
 		FB8F488E285F059A005D0586 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,156 +527,9 @@
 		FB9F04382861C72D00732AD0 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				FB9F09422862B92100732AD0 /* capstone */,
+				FB6BF4142881517300741677 /* Capstone */,
 			);
 			path = Libs;
-			sourceTree = "<group>";
-		};
-		FB9F09422862B92100732AD0 /* capstone */ = {
-			isa = PBXGroup;
-			children = (
-				FB9F09432862B92100732AD0 /* utils.h */,
-				FB9F09442862B92100732AD0 /* inttypes.h */,
-				FB9F09452862B92100732AD0 /* SStream.h */,
-				FB9F09462862B92100732AD0 /* myinttypes.h */,
-				FB9F09472862B92100732AD0 /* MathExtras.h */,
-				FB9F09482862B92100732AD0 /* LEB128.h */,
-				FB9F09492862B92100732AD0 /* MCFixedLenDisassembler.h */,
-				FB9F094A2862B92100732AD0 /* cs_priv.h */,
-				FB9F094B2862B92100732AD0 /* cs.c */,
-				FB9F094C2862B92100732AD0 /* include */,
-				FB9F09572862B92100732AD0 /* MCInstrDesc.h */,
-				FB9F09582862B92100732AD0 /* MCRegisterInfo.h */,
-				FB9F09592862B92100732AD0 /* MCInst.h */,
-				FB9F095A2862B92100732AD0 /* SStream.c */,
-				FB9F095B2862B92100732AD0 /* utils.c */,
-				FB9F095C2862B92100732AD0 /* MCDisassembler.h */,
-				FB9F095D2862B92100732AD0 /* arch */,
-				FB9F09A12862B92200732AD0 /* MCInstrDesc.c */,
-				FB9F09A22862B92200732AD0 /* osxkernel_inttypes.h */,
-				FB9F09A32862B92200732AD0 /* MCInst.c */,
-				FB9F09A42862B92200732AD0 /* MCRegisterInfo.c */,
-			);
-			path = capstone;
-			sourceTree = "<group>";
-		};
-		FB9F094C2862B92100732AD0 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				FB9F094D2862B92100732AD0 /* capstone.h */,
-				FB9F094E2862B92100732AD0 /* mips.h */,
-				FB9F094F2862B92100732AD0 /* sparc.h */,
-				FB9F09502862B92100732AD0 /* systemz.h */,
-				FB9F09512862B92100732AD0 /* arm.h */,
-				FB9F09522862B92100732AD0 /* x86.h */,
-				FB9F09532862B92100732AD0 /* ppc.h */,
-				FB9F09542862B92100732AD0 /* arm64.h */,
-				FB9F09552862B92100732AD0 /* xcore.h */,
-				FB9F09562862B92100732AD0 /* platform.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		FB9F095D2862B92100732AD0 /* arch */ = {
-			isa = PBXGroup;
-			children = (
-				FB9F095E2862B92100732AD0 /* PowerPC */,
-				FB9F096C2862B92200732AD0 /* X86 */,
-				FB9F09822862B92200732AD0 /* ARM */,
-				FB9F09912862B92200732AD0 /* AArch64 */,
-			);
-			path = arch;
-			sourceTree = "<group>";
-		};
-		FB9F095E2862B92100732AD0 /* PowerPC */ = {
-			isa = PBXGroup;
-			children = (
-				FB9F095F2862B92100732AD0 /* PPCMapping.h */,
-				FB9F09602862B92100732AD0 /* PPCGenDisassemblerTables.inc */,
-				FB9F09612862B92200732AD0 /* PPCGenSubtargetInfo.inc */,
-				FB9F09622862B92200732AD0 /* PPCGenAsmWriter.inc */,
-				FB9F09632862B92200732AD0 /* PPCDisassembler.c */,
-				FB9F09642862B92200732AD0 /* PPCPredicates.h */,
-				FB9F09652862B92200732AD0 /* PPCInstPrinter.h */,
-				FB9F09662862B92200732AD0 /* PPCMapping.c */,
-				FB9F09672862B92200732AD0 /* PPCGenRegisterInfo.inc */,
-				FB9F09682862B92200732AD0 /* PPCModule.c */,
-				FB9F09692862B92200732AD0 /* PPCInstPrinter.c */,
-				FB9F096A2862B92200732AD0 /* PPCGenInstrInfo.inc */,
-				FB9F096B2862B92200732AD0 /* PPCDisassembler.h */,
-			);
-			path = PowerPC;
-			sourceTree = "<group>";
-		};
-		FB9F096C2862B92200732AD0 /* X86 */ = {
-			isa = PBXGroup;
-			children = (
-				FB9F096D2862B92200732AD0 /* X86InstPrinter.h */,
-				FB9F096E2862B92200732AD0 /* X86Disassembler.c */,
-				FB9F096F2862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc */,
-				FB9F09702862B92200732AD0 /* X86ATTInstPrinter.c */,
-				FB9F09712862B92200732AD0 /* X86GenRegisterInfo.inc */,
-				FB9F09722862B92200732AD0 /* X86GenAsmWriter_reduce.inc */,
-				FB9F09732862B92200732AD0 /* X86GenInstrInfo.inc */,
-				FB9F09742862B92200732AD0 /* X86Module.c */,
-				FB9F09752862B92200732AD0 /* X86Mapping.h */,
-				FB9F09762862B92200732AD0 /* X86DisassemblerDecoder.c */,
-				FB9F09772862B92200732AD0 /* X86Disassembler.h */,
-				FB9F09782862B92200732AD0 /* X86BaseInfo.h */,
-				FB9F09792862B92200732AD0 /* X86GenAsmWriter1.inc */,
-				FB9F097A2862B92200732AD0 /* X86DisassemblerDecoderCommon.h */,
-				FB9F097B2862B92200732AD0 /* X86GenDisassemblerTables.inc */,
-				FB9F097C2862B92200732AD0 /* X86IntelInstPrinter.c */,
-				FB9F097D2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc */,
-				FB9F097E2862B92200732AD0 /* X86DisassemblerDecoder.h */,
-				FB9F097F2862B92200732AD0 /* X86Mapping.c */,
-				FB9F09802862B92200732AD0 /* X86GenInstrInfo_reduce.inc */,
-				FB9F09812862B92200732AD0 /* X86GenAsmWriter.inc */,
-			);
-			path = X86;
-			sourceTree = "<group>";
-		};
-		FB9F09822862B92200732AD0 /* ARM */ = {
-			isa = PBXGroup;
-			children = (
-				FB9F09832862B92200732AD0 /* ARMInstPrinter.c */,
-				FB9F09842862B92200732AD0 /* ARMMapping.h */,
-				FB9F09852862B92200732AD0 /* ARMGenAsmWriter.inc */,
-				FB9F09862862B92200732AD0 /* ARMDisassembler.h */,
-				FB9F09872862B92200732AD0 /* ARMModule.c */,
-				FB9F09882862B92200732AD0 /* ARMAddressingModes.h */,
-				FB9F09892862B92200732AD0 /* ARMBaseInfo.h */,
-				FB9F098A2862B92200732AD0 /* ARMMapping.c */,
-				FB9F098B2862B92200732AD0 /* ARMInstPrinter.h */,
-				FB9F098C2862B92200732AD0 /* ARMGenInstrInfo.inc */,
-				FB9F098D2862B92200732AD0 /* ARMGenRegisterInfo.inc */,
-				FB9F098E2862B92200732AD0 /* ARMGenDisassemblerTables.inc */,
-				FB9F098F2862B92200732AD0 /* ARMGenSubtargetInfo.inc */,
-				FB9F09902862B92200732AD0 /* ARMDisassembler.c */,
-			);
-			path = ARM;
-			sourceTree = "<group>";
-		};
-		FB9F09912862B92200732AD0 /* AArch64 */ = {
-			isa = PBXGroup;
-			children = (
-				FB9F09922862B92200732AD0 /* AArch64Disassembler.h */,
-				FB9F09932862B92200732AD0 /* AArch64BaseInfo.h */,
-				FB9F09942862B92200732AD0 /* AArch64AddressingModes.h */,
-				FB9F09952862B92200732AD0 /* AArch64InstPrinter.h */,
-				FB9F09962862B92200732AD0 /* AArch64GenAsmWriter.inc */,
-				FB9F09972862B92200732AD0 /* AArch64Mapping.c */,
-				FB9F09982862B92200732AD0 /* AArch64GenDisassemblerTables.inc */,
-				FB9F09992862B92200732AD0 /* AArch64GenSubtargetInfo.inc */,
-				FB9F099A2862B92200732AD0 /* AArch64Disassembler.c */,
-				FB9F099B2862B92200732AD0 /* AArch64InstPrinter.c */,
-				FB9F099C2862B92200732AD0 /* AArch64BaseInfo.c */,
-				FB9F099D2862B92200732AD0 /* AArch64GenRegisterInfo.inc */,
-				FB9F099E2862B92200732AD0 /* AArch64Mapping.h */,
-				FB9F099F2862B92200732AD0 /* AArch64GenInstrInfo.inc */,
-				FB9F09A02862B92200732AD0 /* AArch64Module.c */,
-			);
-			path = AArch64;
 			sourceTree = "<group>";
 		};
 		FB9F09E12863198C00732AD0 /* CapStoneHelper */ = {
@@ -576,6 +579,7 @@
 		FBCEE975283290150090B4E6 /* MachoTool */ = {
 			isa = PBXGroup;
 			children = (
+				FB6BF4122881514B00741677 /* main.swift */,
 				FB9F04382861C72D00732AD0 /* Libs */,
 				FBC3489A28489115009B4AAE /* UnusedScan */,
 				FBCEE99F283290530090B4E6 /* Tools */,
@@ -583,8 +587,8 @@
 				FBCEE99C2832904D0090B4E6 /* Model */,
 				FBCEE997283290470090B4E6 /* ConversionTools(转换) */,
 				FBCEE97D283290400090B4E6 /* Macho */,
-				FBCEE976283290150090B4E6 /* main.swift */,
 				FBCEE9A6283293BC0090B4E6 /* CommandLineTool.swift */,
+				FB6BF4AB2881526300741677 /* MachoTool.swift */,
 			);
 			path = MachoTool;
 			sourceTree = "<group>";
@@ -680,8 +684,7 @@
 		FBCEE9A2283290630090B4E6 /* FileManager */ = {
 			isa = PBXGroup;
 			children = (
-				FBCEE9A3283290630090B4E6 /* MachOTool-Bridging-Header.h */,
-				FBCEE9A4283290630090B4E6 /* JYFile.swift */,
+				FBCEE9A4283290630090B4E6 /* File.swift */,
 			);
 			path = FileManager;
 			sourceTree = "<group>";
@@ -758,114 +761,115 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB072DFF2839231A000B370B /* SymbolTableComponent.swift in Sources */,
-				FB9F09A62862B92200732AD0 /* SStream.c in Sources */,
-				FB9F09D52862B92200732AD0 /* MCRegisterInfo.c in Sources */,
+				FB6BF4932881517300741677 /* ARMInstPrinter.c in Sources */,
+				FB6BF4A22881517300741677 /* AArch64BaseInfo.c in Sources */,
 				FBCEE993283290400090B4E6 /* LC_Version.swift in Sources */,
 				FB072E09283B235F000B370B /* IndirectSymbolTableEntryModel.swift in Sources */,
 				FB1CE883286AC40F00C5CCC4 /* StringInterpreter.swift in Sources */,
-				FB9F09B12862B92200732AD0 /* X86Disassembler.c in Sources */,
-				FB9F09BE2862B92200732AD0 /* X86GenInstrInfo_reduce.inc in Sources */,
 				FB1CE87528698A2500C5CCC4 /* ParseSymbolTool.swift in Sources */,
-				FB9F09CA2862B92200732AD0 /* AArch64Mapping.c in Sources */,
 				FBCEE99A283290470090B4E6 /* TranslationRead.swift in Sources */,
 				FB072E0F283E818E000B370B /* LazySymbolEntryModel.swift in Sources */,
+				FB6BF49C2881517300741677 /* AArch64GenAsmWriter.inc in Sources */,
 				FB91037A284601C10000AD84 /* UStringComponent.swift in Sources */,
+				FB6BF47D2881517300741677 /* PPCGenAsmWriter.inc in Sources */,
+				FB6BF4A42881517300741677 /* AArch64GenInstrInfo.inc in Sources */,
 				FBCEE99E2832904D0090B4E6 /* DataExplanation.swift in Sources */,
-				FBCEE9A5283290630090B4E6 /* JYFile.swift in Sources */,
-				FB9F09C32862B92200732AD0 /* ARMMapping.c in Sources */,
-				FB9F09B82862B92200732AD0 /* X86DisassemblerDecoder.c in Sources */,
+				FB6BF47A2881517300741677 /* utils.c in Sources */,
+				FB6BF4A52881517300741677 /* AArch64Module.c in Sources */,
+				FB6BF4782881517300741677 /* cs.c in Sources */,
+				FB6BF4A72881517300741677 /* MCInst.c in Sources */,
+				FBCEE9A5283290630090B4E6 /* File.swift in Sources */,
 				FB8F488D285F04A7005D0586 /* RuntimeBridge.swift in Sources */,
-				FB9F09CE2862B92200732AD0 /* AArch64InstPrinter.c in Sources */,
-				FB9F09C62862B92200732AD0 /* ARMGenDisassemblerTables.inc in Sources */,
-				FB9F09D22862B92200732AD0 /* AArch64Module.c in Sources */,
-				FB9F09D12862B92200732AD0 /* AArch64GenInstrInfo.inc in Sources */,
+				FB6BF4AC2881526300741677 /* MachoTool.swift in Sources */,
 				FB9103762845013A0000AD84 /* ReferencesCmponent.swift in Sources */,
 				FB91037C284674320000AD84 /* CFStringComponent.swift in Sources */,
-				FB9F09D02862B92200732AD0 /* AArch64GenRegisterInfo.inc in Sources */,
-				FB9F09C72862B92200732AD0 /* ARMGenSubtargetInfo.inc in Sources */,
+				FB6BF4872881517300741677 /* X86GenRegisterInfo.inc in Sources */,
+				FB6BF48D2881517300741677 /* X86GenDisassemblerTables.inc in Sources */,
 				FBCEE98C283290400090B4E6 /* MachoHeader.swift in Sources */,
+				FB6BF4A02881517300741677 /* AArch64Disassembler.c in Sources */,
+				FB6BF4792881517300741677 /* SStream.c in Sources */,
 				FB8F483328571B0A005D0586 /* SwiftTypesInterpreter.swift in Sources */,
-				FB9F09BF2862B92200732AD0 /* X86GenAsmWriter.inc in Sources */,
-				FB9F09C02862B92200732AD0 /* ARMInstPrinter.c in Sources */,
+				FB6BF49A2881517300741677 /* ARMGenSubtargetInfo.inc in Sources */,
 				FBCEE995283290400090B4E6 /* LC_DynamicSymbolTable.swift in Sources */,
 				FB9F09E42863199B00732AD0 /* CapStoneHelper.m in Sources */,
 				FB9F09E628633EA800732AD0 /* SwiftTypesCmponent.swift in Sources */,
+				FB6BF4822881517300741677 /* PPCInstPrinter.c in Sources */,
+				FB6BF4902881517300741677 /* X86Mapping.c in Sources */,
 				FB63EC4A283F125E003CCCF7 /* StringComponent.swift in Sources */,
 				FBB656A0284BBCBC0081C991 /* DataTool.swift in Sources */,
+				FB6BF4892881517300741677 /* X86GenInstrInfo.inc in Sources */,
+				FB6BF4862881517300741677 /* X86ATTInstPrinter.c in Sources */,
 				FB072E03283A601B000B370B /* BaseComponentInfo.swift in Sources */,
+				FB6BF4A32881517300741677 /* AArch64GenRegisterInfo.inc in Sources */,
+				FB6BF4A82881517300741677 /* MCRegisterInfo.c in Sources */,
 				FB1CE87B2869A5AE00C5CCC4 /* ParseCustomSection.swift in Sources */,
+				FB6BF4952881517300741677 /* ARMModule.c in Sources */,
 				FB8F483C285AD1C0005D0586 /* SwiftClassUtils.swift in Sources */,
-				FB9F09CB2862B92200732AD0 /* AArch64GenDisassemblerTables.inc in Sources */,
-				FB9F09B52862B92200732AD0 /* X86GenAsmWriter_reduce.inc in Sources */,
-				FB9F09AB2862B92200732AD0 /* PPCDisassembler.c in Sources */,
-				FB9F09B72862B92200732AD0 /* X86Module.c in Sources */,
 				FB8B11D128424CA200B53C61 /* ObjcPointer64EnterModel.swift in Sources */,
+				FB6BF4802881517300741677 /* PPCGenRegisterInfo.inc in Sources */,
 				FB1CE85B2865A21A00C5CCC4 /* LoadCommand.swift in Sources */,
+				FB6BF4912881517300741677 /* X86GenInstrInfo_reduce.inc in Sources */,
 				FBCEE990283290400090B4E6 /* Macho.swift in Sources */,
-				FB9F09B22862B92200732AD0 /* X86GenDisassemblerTables_reduce.inc in Sources */,
-				FB9F09D42862B92200732AD0 /* MCInst.c in Sources */,
-				FB9F09C52862B92200732AD0 /* ARMGenRegisterInfo.inc in Sources */,
 				FB1CE8622865BF7E00C5CCC4 /* Segment.swift in Sources */,
-				FB9F09C92862B92200732AD0 /* AArch64GenAsmWriter.inc in Sources */,
-				FB9F09D32862B92200732AD0 /* MCInstrDesc.c in Sources */,
-				FB9F09AF2862B92200732AD0 /* PPCInstPrinter.c in Sources */,
 				FB1CE8682865CF1800C5CCC4 /* LC_Uuid.swift in Sources */,
-				FB9F09C42862B92200732AD0 /* ARMGenInstrInfo.inc in Sources */,
-				FB9F09A72862B92200732AD0 /* utils.c in Sources */,
+				FB6BF49B2881517300741677 /* ARMDisassembler.c in Sources */,
+				FB6BF4942881517300741677 /* ARMGenAsmWriter.inc in Sources */,
 				FBB656AC284E0BF10081C991 /* BindOperationCode.swift in Sources */,
-				FB9F09BC2862B92200732AD0 /* X86GenAsmWriter1_reduce.inc in Sources */,
-				FB9F09B02862B92200732AD0 /* PPCGenInstrInfo.inc in Sources */,
 				FBCEE9A1283290530090B4E6 /* Utils.swift in Sources */,
-				FB9F09BB2862B92200732AD0 /* X86IntelInstPrinter.c in Sources */,
-				FB9F09CD2862B92200732AD0 /* AArch64Disassembler.c in Sources */,
-				FB9F09A52862B92200732AD0 /* cs.c in Sources */,
+				FB6BF47B2881517300741677 /* PPCGenDisassemblerTables.inc in Sources */,
+				FB6BF48A2881517300741677 /* X86Module.c in Sources */,
 				FB8F488B285DDCAE005D0586 /* SwiftNominalModel.swift in Sources */,
+				FB6BF4972881517300741677 /* ARMGenInstrInfo.inc in Sources */,
+				FB6BF4992881517300741677 /* ARMGenDisassemblerTables.inc in Sources */,
+				FB6BF4852881517300741677 /* X86GenDisassemblerTables_reduce.inc in Sources */,
 				FBCEE992283290400090B4E6 /* LC_SymbolTable.swift in Sources */,
-				FB9F09AE2862B92200732AD0 /* PPCModule.c in Sources */,
 				FB1CE8662865CE6600C5CCC4 /* LC_Rpatch.swift in Sources */,
-				FB9F09BA2862B92200732AD0 /* X86GenDisassemblerTables.inc in Sources */,
 				2D0129E0283E8A4A00FF4186 /* ShellUtils.swift in Sources */,
+				FB6BF49D2881517300741677 /* AArch64Mapping.c in Sources */,
+				FB6BF47E2881517300741677 /* PPCDisassembler.c in Sources */,
+				FB6BF4962881517300741677 /* ARMMapping.c in Sources */,
 				FB072E0B283B8560000B370B /* MachoProtocol.swift in Sources */,
+				FB6BF47C2881517300741677 /* PPCGenSubtargetInfo.inc in Sources */,
 				FB1CE85F2865A71700C5CCC4 /* Section64.swift in Sources */,
 				FB1CE87928699A4400C5CCC4 /* UnknownCmponent.swift in Sources */,
 				FBCEE991283290400090B4E6 /* LC_Main.swift in Sources */,
-				FB9F09C22862B92200732AD0 /* ARMModule.c in Sources */,
-				FB9F09BD2862B92200732AD0 /* X86Mapping.c in Sources */,
 				FBB656AE285073F80081C991 /* OperationCodeModel.swift in Sources */,
 				FB9103782845FE9B0000AD84 /* UStringInterpreter.swift in Sources */,
-				FB9F09B32862B92200732AD0 /* X86ATTInstPrinter.c in Sources */,
-				FB9F09B92862B92200732AD0 /* X86GenAsmWriter1.inc in Sources */,
 				FB8B11CA2840AA9000B53C61 /* CFStringInterpreter.swift in Sources */,
+				FB6BF48C2881517300741677 /* X86GenAsmWriter1.inc in Sources */,
 				FB1375B3286D918A00B2C7EC /* ClassListComponent.swift in Sources */,
 				FB1CE87E2869B2F200C5CCC4 /* TextComponent.swift in Sources */,
-				FB9F09B42862B92200732AD0 /* X86GenRegisterInfo.inc in Sources */,
 				FBB656A8284DC0830081C991 /* LC_DyldInfo.swift in Sources */,
+				FB6BF4812881517300741677 /* PPCModule.c in Sources */,
+				FB6BF4842881517300741677 /* X86Disassembler.c in Sources */,
+				FB6BF48E2881517300741677 /* X86IntelInstPrinter.c in Sources */,
 				FB63EC4C283F58C6003CCCF7 /* LazySymbolComponent.swift in Sources */,
+				FB6BF4832881517300741677 /* PPCGenInstrInfo.inc in Sources */,
 				FB1CE86C2865FCF100C5CCC4 /* LoadCommandType.swift in Sources */,
+				FB6BF4982881517300741677 /* ARMGenRegisterInfo.inc in Sources */,
 				FBC3489C28489141009B4AAE /* UnusedScanManager.swift in Sources */,
+				FB6BF4A62881517300741677 /* MCInstrDesc.c in Sources */,
 				FB1CE871286624F600C5CCC4 /* ParseTextSection.swift in Sources */,
 				FBCEE9AE2833800C0090B4E6 /* SymbolTableModel.swift in Sources */,
-				FB9F09AD2862B92200732AD0 /* PPCGenRegisterInfo.inc in Sources */,
+				FB6BF48B2881517300741677 /* X86DisassemblerDecoder.c in Sources */,
 				FB072E07283B22B3000B370B /* IndsymComponent.swift in Sources */,
+				FB6BF4922881517300741677 /* X86GenAsmWriter.inc in Sources */,
 				FBB656AA284DDAE80081C991 /* DyldInterpreter.swift in Sources */,
-				FB9F09CF2862B92200732AD0 /* AArch64BaseInfo.c in Sources */,
-				FB9F09CC2862B92200732AD0 /* AArch64GenSubtargetInfo.inc in Sources */,
 				FB1CE86A2865CFA500C5CCC4 /* LC_Unknown.swift in Sources */,
-				FB9F09A92862B92200732AD0 /* PPCGenSubtargetInfo.inc in Sources */,
-				FB9F09A82862B92200732AD0 /* PPCGenDisassemblerTables.inc in Sources */,
-				FB9F09C12862B92200732AD0 /* ARMGenAsmWriter.inc in Sources */,
-				FB9F09C82862B92200732AD0 /* ARMDisassembler.c in Sources */,
 				FB1375B5286D9A3700B2C7EC /* CategoryInterpreter.swift in Sources */,
-				FB9F09B62862B92200732AD0 /* X86GenInstrInfo.inc in Sources */,
+				FB6BF49E2881517300741677 /* AArch64GenDisassemblerTables.inc in Sources */,
 				FB1CE884286AC40F00C5CCC4 /* IndirectSymbolTableInterpreter.swift in Sources */,
 				FB1375B1286D8EE700B2C7EC /* ClassListInterpreter.swift in Sources */,
-				FBCEE977283290150090B4E6 /* main.swift in Sources */,
-				FB9F09AA2862B92200732AD0 /* PPCGenAsmWriter.inc in Sources */,
-				FB9F09AC2862B92200732AD0 /* PPCMapping.c in Sources */,
+				FB6BF48F2881517300741677 /* X86GenAsmWriter1_reduce.inc in Sources */,
+				FB6BF47F2881517300741677 /* PPCMapping.c in Sources */,
 				FB072E13283E8714000B370B /* LazySymbolInterpreter.swift in Sources */,
 				FB1CE87328695C2F00C5CCC4 /* ParseDataSection.swift in Sources */,
+				FB6BF4132881514B00741677 /* main.swift in Sources */,
+				FB6BF4A12881517300741677 /* AArch64InstPrinter.c in Sources */,
 				FB9103742844F8D50000AD84 /* ReferencesInterpreter.swift in Sources */,
+				FB6BF4882881517300741677 /* X86GenAsmWriter_reduce.inc in Sources */,
 				FBCEE9A7283293BC0090B4E6 /* CommandLineTool.swift in Sources */,
+				FB6BF49F2881517300741677 /* AArch64GenSubtargetInfo.inc in Sources */,
 				FBCEE9B72834D6710090B4E6 /* BaseInterpreter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,7 @@ import Foundation
 extension MachOLoadCommand {
     public struct LC_Uuid: MachOLoadCommandType {
         
-        var name: String
+        public var name: String
         private(set) var command: uuid_command? = nil;
         
         init(command: uuid_command) {

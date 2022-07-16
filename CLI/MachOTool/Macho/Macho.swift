@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 fileprivate struct MachAttributes {
     let is64Bit: Bool
     let isByteSwapped: Bool
@@ -18,7 +19,7 @@ public class Macho: Equatable {
     }
     
     
-    var is64bit = false
+    public var is64bit = false
     let id = UUID()
     let data:Data
     var fileSize: Int { data.count }
@@ -32,7 +33,7 @@ public class Macho: Equatable {
     
     
     // loadCommands
-    let commands: [MachOLoadCommandType]
+    public let commands: [MachOLoadCommandType]
     
     var componts: [ComponentInfo] = []
     
@@ -88,9 +89,15 @@ public class Macho: Equatable {
         
         
 //        sectionFlagsDic
-          UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic).scanUselessClasses()
+//          UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic).scanUselessClasses()
         
     }
+    
+    
+    func parseMacho() -> Macho{
+        return self
+    }
+    
     
     
     

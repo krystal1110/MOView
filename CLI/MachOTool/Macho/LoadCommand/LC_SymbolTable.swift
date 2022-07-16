@@ -11,7 +11,7 @@ import Foundation
 extension MachOLoadCommand {
     public struct LC_SymbolTable: MachOLoadCommandType {
         
-        var name: String
+        public var name: String
         private(set) var command: symtab_command? = nil;
         
         init(command: symtab_command) {

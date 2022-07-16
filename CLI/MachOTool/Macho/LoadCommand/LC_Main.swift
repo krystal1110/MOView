@@ -19,7 +19,7 @@ import Foundation
 extension MachOLoadCommand {
     public struct LC_Main: MachOLoadCommandType {
         
-        var name: String
+        public var name: String
         private(set) var command: entry_point_command? = nil;
         
         init(command: entry_point_command) {
