@@ -15,7 +15,7 @@ extension MachOLoadCommand {
     public struct LC_DynamicSymbolTable: MachOLoadCommandType {
         
         public var name: String
-        private(set) var command: dysymtab_command? = nil;
+        public var command: dysymtab_command? = nil;
         
         init(command: dysymtab_command) {
             let types =   LoadCommandType(rawValue: command.cmd)

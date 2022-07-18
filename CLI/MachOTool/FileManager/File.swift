@@ -31,7 +31,7 @@ public enum MagicType {
     }
 
     // 对应的架构类型
-    var readable: String {
+    var name: String {
         switch self {
         case .ar:
             return ""

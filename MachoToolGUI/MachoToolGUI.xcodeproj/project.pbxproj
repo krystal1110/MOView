@@ -12,6 +12,8 @@
 		2D8B7214287FBAD300700929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D8B7213287FBAD300700929 /* Assets.xcassets */; };
 		2D8B7217287FBAD300700929 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D8B7216287FBAD300700929 /* Preview Assets.xcassets */; };
 		5945684E2A42EBF7B6853A0B /* Pods_MachoToolGUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF47A9898CD90CFF85129443 /* Pods_MachoToolGUI.framework */; };
+		FB554E9B2885481A00DEE366 /* LoadCommandsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB554E9A2885481A00DEE366 /* LoadCommandsView.swift */; };
+		FB554E9E28854DD000DEE366 /* GeneralModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB554E9D28854DD000DEE366 /* GeneralModel.swift */; };
 		FB595A6928805AA8005F9FA0 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB595A6828805AA8005F9FA0 /* FileView.swift */; };
 		FB595A6B28806E56005F9FA0 /* libswiftDemangle.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB595A6128802F37005F9FA0 /* libswiftDemangle.tbd */; };
 		FB595A75288114D7005F9FA0 /* iOSToolsTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = FB595A73288114B2005F9FA0 /* iOSToolsTest.zip */; };
@@ -27,6 +29,8 @@
 		5A2B14DE29A9FE8E2D7BD34B /* Pods-MachoToolGUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MachoToolGUI.debug.xcconfig"; path = "Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI.debug.xcconfig"; sourceTree = "<group>"; };
 		9A4EECBD937CA736DA65B1F5 /* Pods-MachoToolGUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MachoToolGUI.release.xcconfig"; path = "Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI.release.xcconfig"; sourceTree = "<group>"; };
 		DF47A9898CD90CFF85129443 /* Pods_MachoToolGUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MachoToolGUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB554E9A2885481A00DEE366 /* LoadCommandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCommandsView.swift; sourceTree = "<group>"; };
+		FB554E9D28854DD000DEE366 /* GeneralModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralModel.swift; sourceTree = "<group>"; };
 		FB595A6128802F37005F9FA0 /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
 		FB595A6828805AA8005F9FA0 /* FileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
 		FB595A73288114B2005F9FA0 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = iOSToolsTest.zip; path = Resoure/iOSToolsTest.zip; sourceTree = "<group>"; };
@@ -67,9 +71,11 @@
 		2D8B720E287FBAD200700929 /* MachoToolGUI */ = {
 			isa = PBXGroup;
 			children = (
+				FB554E9C28854D8900DEE366 /* Model */,
 				2D8B720F287FBAD200700929 /* MachoToolGUIApp.swift */,
 				2D8B7211287FBAD200700929 /* ContentView.swift */,
 				FB595A6828805AA8005F9FA0 /* FileView.swift */,
+				FB554E9A2885481A00DEE366 /* LoadCommandsView.swift */,
 				2D8B7213287FBAD300700929 /* Assets.xcassets */,
 				2D8B7218287FBAD300700929 /* MachoToolGUI.entitlements */,
 				2D8B7215287FBAD300700929 /* Preview Content */,
@@ -101,6 +107,14 @@
 				9A4EECBD937CA736DA65B1F5 /* Pods-MachoToolGUI.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FB554E9C28854D8900DEE366 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FB554E9D28854DD000DEE366 /* GeneralModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,8 +232,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB554E9E28854DD000DEE366 /* GeneralModel.swift in Sources */,
 				FB595A6928805AA8005F9FA0 /* FileView.swift in Sources */,
 				2D8B7212287FBAD200700929 /* ContentView.swift in Sources */,
+				FB554E9B2885481A00DEE366 /* LoadCommandsView.swift in Sources */,
 				2D8B7210287FBAD200700929 /* MachoToolGUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,7 +12,7 @@ extension MachOLoadCommand {
     public struct LC_SymbolTable: MachOLoadCommandType {
         
         public var name: String
-        private(set) var command: symtab_command? = nil;
+        public var command: symtab_command? = nil;
         
         init(command: symtab_command) {
             let types =   LoadCommandType(rawValue: command.cmd)

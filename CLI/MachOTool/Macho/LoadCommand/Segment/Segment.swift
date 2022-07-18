@@ -8,7 +8,7 @@
 import Foundation
 import MachO
 
-
+ 
 extension MachOLoadCommand {
     public struct Segment: MachOLoadCommandType {
         
@@ -27,8 +27,8 @@ extension MachOLoadCommand {
         //    public var flags: UInt32 /* flags */
         public var name: String
         
-        private(set) var command64: segment_command_64? = nil; // neilwu added
-        private(set) var sections:[Section64] = []
+        public var command64: segment_command_64? = nil; // neilwu added
+        public var sections:[Section64] = []
         
         init(command: segment_command_64) {
             var segname = command.segname
