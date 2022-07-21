@@ -247,13 +247,9 @@ extension Macho {
     }
     
     private static func header(from data: Data, attributes: MachAttributes) -> MachOHeader {
-//        if attributes.is64Bit {
             let header =  data.extract(mach_header_64.self)
-            return MachOHeader(header: header)
-//        } else {
-//            let header = data.extract(mach_header.self)
-//            return MachOHeader(header: header)
-//        }
+            let dataSlice = data.cutoutData(mach_header_64.self)
+            return MachOHeader(header: header, dataSlice: dataSlice)
     }
 }
 

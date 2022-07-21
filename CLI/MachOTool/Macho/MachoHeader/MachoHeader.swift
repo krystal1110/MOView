@@ -32,15 +32,17 @@ public struct MachOHeader {
     public var flags: UInt32 /* flags */
     public let loadCommandCount: UInt32
     public let loadCommandSize: UInt32
+    public let size: Int
     
     public let cpuType:String
     public let magicType:String
     public let cpuSubtype:String
     public let machoType:String
     
-    public let size: Int
+    public let dataSlice:Data
+//    public let displayStore:[]
     
-    public init(header: mach_header_64) {
+    public init(header: mach_header_64, dataSlice:Data) {
         self.magic = header.magic
         self.cputype = header.cputype
         self.filetype = header.filetype
@@ -49,22 +51,28 @@ public struct MachOHeader {
         self.size = MemoryLayout.size(ofValue: header)
         self.cpusubtype = header.cpusubtype
         self.flags = header.flags
+        self.dataSlice = dataSlice
         
         let cpuType  =  CPUType(UInt32(header.cputype))
         self.cpuType = cpuType.name
         self.magicType = MagicType.macho64.name
         self.cpuSubtype = CPUSubtype(UInt32(header.cpusubtype), cpuType: cpuType).name
         self.machoType = MachoType(with: header.filetype).name
+        
+
+      
+        
+ 
+//        let uStringRelativeRange = uStringPosition.relativeStartOffset..<uStringPosition.relativeStartOffset+uStringPosition.length
+//        let uStringAbsoluteRange =  DataTool.absoluteRange(with: self.dataSlice, relativeRange: uStringRelativeRange)
+//        let uStringRaw = DataTool.interception(with: self.dataSlice, from: uStringPosition.relativeStartOffset, length: uStringPosition.length)
+//
+//        if let string = String(data: uStringRaw, encoding: .utf16LittleEndian) {
+//            return ExplanationItem(sourceDataRange: uStringAbsoluteRange,
+//                                   model: ExplanationModel(description: "UTF16-String", explanation: string))
+        
     }
-    
-//    public init(header: mach_header) {
-//        self.magic = header.magic
-//        self.cputype = header.cputype
-//        self.filetype = header.filetype
-//        self.loadCommandCount = header.ncmds
-//        self.loadCommandSize = header.sizeofcmds
-//        self.size = MemoryLayout.size(ofValue: header)
-//    }
+ 
 }
 
  

@@ -8,10 +8,10 @@
 import Foundation
 
 
-class DataTool{
+public class DataTool{
     
     // 截取Data
-    class func interception(with data: Data, from: Int, length: Int? = nil) -> Data {
+   public class func interception(with data: Data, from: Int, length: Int? = nil) -> Data {
         if let length = length {
             // 截取的是 from + length
             if length == .zero { print("error") }
@@ -27,11 +27,11 @@ class DataTool{
     }
     
     
-   class func absoluteRange(with data: Data, start: Int, _ length: Int) -> Range<Int> {
+ public class func absoluteRange(with data: Data, start: Int, _ length: Int) -> Range<Int> {
         return data.startIndex + start ..< data.startIndex + start + length
     }
 
-   class func absoluteRange(with data: Data, relativeRange: Range<Int>) -> Range<Int> {
+    public  class func absoluteRange(with data: Data, relativeRange: Range<Int>) -> Range<Int> {
         return data.startIndex  + relativeRange.lowerBound ..< data.startIndex  + relativeRange.upperBound
     }
 }

@@ -12,11 +12,11 @@ import MachO
 /// 通用配置model 用于显示
 /// 暂时记录的 后面会慢慢修改
 
-struct GeneralModel {
-    var name:String
-    var value:String
-    var offset:String? = nil
-    var data:String? = nil
+public struct GeneralModel {
+    public var name:String
+    public var value:String
+    public var offset:String? = nil
+    public var data:String? = nil
     
     init(name :String, value:String, offset:String? = nil, data:String? = nil){
         self.name = name
@@ -26,19 +26,63 @@ struct GeneralModel {
     }
 }
 
+public struct ExtraData{
+    
+}
+
+
+public struct DisplayModel{
+    var sourceDataRange: Range<Int>
+    var explanationItem: ExplanationItem
+    var extraList:ExtraData? = nil
+}
+
+struct ExplanationItem {
+    let description: String // 描述
+    let explanation: String // 解释
+    let extDescription: String?
+    let extExplanation: String?
+
+    init(description: String,
+         explanation: String,
+         extraDescription: String? = nil,
+         extraExplanation: String? = nil) {
+        self.description = description
+        self.explanation = explanation
+        self.extDescription = extraDescription
+        self.extExplanation = extraExplanation
+    }
+}
+
 
 
 /// header 需要显示的
-struct MachoHeaderDisplay {
+public struct MachoHeaderDisplay {
     
-    func exportMachoHeaderList(_ machoHeader:MachOHeader) -> [GeneralModel] {
-        var headerList:[GeneralModel] = []
-        headerList.append(GeneralModel(name: "File Magic", value: machoHeader.magicType, data: "\(machoHeader.magic)"))
-        headerList.append(GeneralModel(name: "CPU Type", value: machoHeader.cpuType, data: "\(machoHeader.cputype)"))
-        headerList.append(GeneralModel(name: "CPU SubType", value: machoHeader.cpuSubtype, data: "\(machoHeader.cpusubtype)"))
-        headerList.append(GeneralModel(name: "Number of Load Commands", value: "\(machoHeader.loadCommandCount)"))
-        headerList.append(GeneralModel(name: "Size of Load Commands", value: "\(machoHeader.loadCommandSize)"))
-        headerList.append(GeneralModel(name: "Flag", value: "\(machoHeader.flags)"))
+    public static func exportMachoHeaderList(_ machoHeader:MachOHeader) -> [DisplayModel] {
+        var headerList:[DisplayModel] = []
+        
+        let magicTypeRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:0, MemoryLayout<UInt32>.size)
+        headerList.append(DisplayModel(sourceDataRange: magicTypeRange, explanationItem: ExplanationItem(description: "File Magic", explanation: "\(machoHeader.magic)",extraDescription: "Data HEX",extraExplanation: machoHeader.magic.hex)))
+        
+        let cpuTypeRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:4, MemoryLayout<UInt32>.size)
+        headerList.append(DisplayModel(sourceDataRange: cpuTypeRange, explanationItem: ExplanationItem(description: "CPU Type", explanation: "\(machoHeader.cpuType)",extraDescription: "Data HEX",extraExplanation: UInt64(machoHeader.cputype).hex)))
+        
+         
+        let cpuSubTypeRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:8, MemoryLayout<UInt32>.size)
+        headerList.append(DisplayModel(sourceDataRange: cpuSubTypeRange, explanationItem: ExplanationItem(description: "CPU SubType", explanation: "\(machoHeader.cpuSubtype)",extraDescription: "Data HEX",extraExplanation: UInt64(machoHeader.cpusubtype).hex)))
+        
+        
+        let nlcRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:16, MemoryLayout<UInt32>.size)
+        headerList.append(DisplayModel(sourceDataRange: nlcRange, explanationItem: ExplanationItem(description: "Number of Load Commands", explanation: "\(machoHeader.loadCommandCount)",extraDescription: "Data HEX",extraExplanation: machoHeader.loadCommandCount.hex)))
+ 
+        let slcRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:20, MemoryLayout<UInt32>.size)
+        headerList.append(DisplayModel(sourceDataRange: slcRange, explanationItem: ExplanationItem(description: "Size of Load Commands", explanation: "\(machoHeader.loadCommandSize)",extraDescription: "Data HEX",extraExplanation: machoHeader.loadCommandSize.hex)))
+        
+        
+        let flagRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:24, MemoryLayout<UInt32>.size)
+        headerList.append(DisplayModel(sourceDataRange: flagRange, explanationItem: ExplanationItem(description: "Flag", explanation: "\(machoHeader.flags)",extraDescription: "Data HEX",extraExplanation: machoHeader.flags.hex)))
+
         return headerList
     }
     

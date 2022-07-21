@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Data {
+public extension Data {
     private func cast<T>(to type: T.Type) -> T {
         guard count == MemoryLayout<T>.size else { fatalError() }
         return withUnsafeBytes { $0.bindMemory(to: type).baseAddress!.pointee }
@@ -98,7 +98,7 @@ extension Data {
     
     
     
-    func readCstring(at start: UInt64) -> String {
+   public func readCstring(at start: UInt64) -> String {
         
         if (Int(start) >= self.count) {
             return ""
@@ -139,7 +139,7 @@ extension Data {
  
 }
 
-extension String {
+public extension String {
     var spaceRemoved: String {
         return trimmingCharacters(in: .whitespaces).replacingOccurrences(of: "\0", with: "")
     }
@@ -149,7 +149,7 @@ extension String {
     }
 }
 
-extension Int {
+public extension Int {
     var hex: String { String(format: "0x%0X", self) }
     var isNotZero: Bool { self != .zero }
     func bitAnd(_ v: Self) -> Bool { self & v != 0 }
@@ -169,19 +169,19 @@ extension Int {
     }
 }
 
-extension UInt16 {
+public extension UInt16 {
     var hex: String { String(format: "0x%0X", self) }
     var isNotZero: Bool { self != .zero }
     func bitAnd(_ v: Self) -> Bool { self & v != 0 }
 }
 
-extension UInt32 {
-    var hex: String { String(format: "0x%0X", self) }
+public extension UInt32 {
+     var hex: String { String(format: "0x%0X", self) }
     var isNotZero: Bool { self != .zero }
     func bitAnd(_ v: Self) -> Bool { self & v != 0 }
 }
 
-extension UInt64 {
+public extension UInt64 {
     var hex: String { String(format: "0x%llX", self) }
     var isNotZero: Bool { self != .zero }
     func bitAnd(_ v: Self) -> Bool { self & v != 0 }
@@ -264,7 +264,7 @@ extension String {
  
 
  
-extension Data {
+public extension Data {
  
     func readI32(offset: Int) -> Int32 {
         return readValue(offset) ?? 0
@@ -306,6 +306,10 @@ extension Data {
         return ret;
     }
     
+    func cutoutData<T>(_ type:T.Type, offset: Int = 0) -> Data{
+        let data = self[offset..<offset + MemoryLayout<T>.size];
+        return data
+    }
     
    
 }

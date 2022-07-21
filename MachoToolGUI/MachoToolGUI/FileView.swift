@@ -9,6 +9,7 @@ import SwiftUI
 import MachOTool
 import Cocoa
 import MachO
+import Combine
 
 
 
@@ -112,21 +113,20 @@ struct FileView: View {
                     }
                 }
             }
+            MachoHexView(MachoHeaderDisplay.exportMachoHeaderList(macho!.header))
         }
         .padding(EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10))
         .fixedSize(horizontal: true, vertical: false)
-        .frame(width: 100, height: 300, alignment: .leading)
         Divider()
-        
+         
     }
     
     init(fileUrl:URL) {
         self.fileUrl = fileUrl
-        _selectedIndex = State(initialValue: 0)
+        _selectedIndex = State(initialValue: -1)
         if let macho = MachoTool.parseMacho(fileURL: fileUrl){
             self.macho = macho
         }
-        
     }
 }
 
