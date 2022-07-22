@@ -15,9 +15,12 @@ struct MachoHexView: View {
             ScrollViewReader { scrollProxy in
                 ScrollView(.vertical, showsIndicators: true)  {
                     LazyVStack(alignment: .leading, spacing: 0) {
-                        
-                        ForEach(0..<modelList.count) { index in
-                            HexLineView(model: modelList[index])
+                        if modelList.count != 0 {
+                            ForEach(0..<modelList.count) { index in
+                                if index < modelList.count{
+                                    HexLineView(model: modelList[index])
+                                }
+                            }
                         }
                         VStack(){
                             Divider().background(Color.gray)

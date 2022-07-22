@@ -26,24 +26,28 @@ extension MachOLoadCommand {
         //    public var nsects: UInt32 /* number of sections in segment */
         //    public var flags: UInt32 /* flags */
         public var name: String
-        
         public var command64: segment_command_64? = nil; // neilwu added
         public var sections:[Section64] = []
+        public var dataSlice:Data
         
-        init(command: segment_command_64) {
+        init(command: segment_command_64, dataSlice:Data) {
             var segname = command.segname
             self.name =  Utils.readCharToString(&segname)
             self.command64 = command
-          
+            self.dataSlice = dataSlice
+            
         }
  
         init(loadCommand: MachOLoadCommand) {
             
                 var segmentCommand64:segment_command_64 = loadCommand.data.extract(segment_command_64.self, offset: loadCommand.offset)
+            
+                let data = loadCommand.data.cutoutData(segment_command_64.self, offset: loadCommand.offset)
+            
                 if loadCommand.byteSwapped {
                     swap_segment_command_64(&segmentCommand64, byteSwappedOrder)
                 }
-                self.init(command: segmentCommand64)
+                self.init(command: segmentCommand64, dataSlice:data)
                 
                 if (segmentCommand64.nsects <= 0) {
                     return;
@@ -54,6 +58,7 @@ extension MachOLoadCommand {
                     let offset = sectionOffset + 0x50 * Int(i);
                     //print("\(self.name) \(i)", offset.hex )
                     let section:section_64 = loadCommand.data.extract(section_64.self, offset: offset)
+                    
                     let sec = Section64(section: section);
                     self.sections.append(sec);
                 }

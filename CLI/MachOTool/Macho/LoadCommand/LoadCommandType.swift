@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum LoadCommandType: UInt32 {
+public enum LoadCommandType: UInt32 {
     // ref: <mach-o/loader.h>
     /* After MacOS X 10.1 when a new load command is added that is required to be
      understood by the dynamic linker for the image to execute properly the
@@ -70,7 +70,7 @@ enum LoadCommandType: UInt32 {
     case dyldChainedFixups
     case fileSetEntry
 
-    var name: String {
+    public var name: String {
         switch self {
         case .segment:
             return "LC_SEGMENT"

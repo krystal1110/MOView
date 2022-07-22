@@ -12,17 +12,20 @@ extension MachOLoadCommand {
     public struct LC_DyldInfo: MachOLoadCommandType {
         
         public var name: String
-        private(set) var command: dyld_info_command? = nil;
+        public var command: dyld_info_command? = nil;
+        public var dataSlice:Data
         
-        init(command: dyld_info_command) {
+        init(command: dyld_info_command, dataSlice:Data) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
+            self.dataSlice = dataSlice
         }
         
         init(loadCommand: MachOLoadCommand) {
             let command = loadCommand.data.extract(dyld_info_command.self, offset: loadCommand.offset)
-            self.init(command: command)
+            let data = loadCommand.data.cutoutData(segment_command_64.self, offset: loadCommand.offset)
+            self.init(command: command,dataSlice:data)
         }
     }
 }

@@ -12,7 +12,7 @@ extension MachOLoadCommand {
     public struct LC_Unknown: MachOLoadCommandType {
         
         public var name: String
-        private(set) var data: Data? = nil;
+        public var data: Data? = nil;
         
         init(loadCommand: MachOLoadCommand) {
             let types =   LoadCommandType(rawValue: loadCommand.command)
