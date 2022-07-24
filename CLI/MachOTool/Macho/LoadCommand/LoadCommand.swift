@@ -70,6 +70,12 @@ public struct MachOLoadCommand {
             
         case .uuid:
             return LC_Uuid(loadCommand: self)
+        
+        case .codeSignature, .segmentSplitInfo, .functionStarts, .dataInCode, .dylibCodeSigDRs,.linkerOption,.linkerOptimizationHint,.dyldExportsTrie,.dyldChainedFixups:
+            return LinkeditCommand(loadCommand: self)
+            
+        case .idDylib, .loadDylib, .loadWeakDylib, .reexportDylib, .lazyLoadDylib, .loadUpwardDylib:
+            return LC_Load_Dylib(loadCommand: self)
             
         default:
             return LC_Unknown(loadCommand: self)

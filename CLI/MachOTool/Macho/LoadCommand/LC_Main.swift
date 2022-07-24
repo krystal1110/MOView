@@ -20,17 +20,19 @@ extension MachOLoadCommand {
     public struct LC_Main: MachOLoadCommandType {
         
         public var name: String
-        private(set) var command: entry_point_command? = nil;
-        
-        init(command: entry_point_command) {
+        public var command: entry_point_command? = nil;
+        public var dataSlice:Data
+        init(command: entry_point_command, dataSlice:Data) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
+            self.dataSlice = dataSlice
         }
         
         init(loadCommand: MachOLoadCommand) {
             let command = loadCommand.data.extract(entry_point_command.self, offset: loadCommand.offset)
-            self.init(command: command)
+            let data = loadCommand.data.cutoutData(entry_point_command.self, offset: loadCommand.offset)
+            self.init(command: command,dataSlice: data)
         }
     }
 }

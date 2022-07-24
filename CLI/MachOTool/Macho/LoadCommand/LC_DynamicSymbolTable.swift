@@ -16,16 +16,18 @@ extension MachOLoadCommand {
         
         public var name: String
         public var command: dysymtab_command? = nil;
-        
-        init(command: dysymtab_command) {
+        public var dataSlice: Data
+        init(command: dysymtab_command, dataSlice:Data) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
+            self.dataSlice = dataSlice
         }
         
         init(loadCommand: MachOLoadCommand) {
             let command = loadCommand.data.extract(dysymtab_command.self, offset: loadCommand.offset)
-            self.init(command: command)
+            let data = loadCommand.data.cutoutData(dysymtab_command.self, offset: loadCommand.offset)
+            self.init(command: command, dataSlice: data)
         }
     }
 }

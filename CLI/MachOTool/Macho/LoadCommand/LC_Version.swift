@@ -12,17 +12,33 @@ extension MachOLoadCommand {
     public struct LC_Version: MachOLoadCommandType {
         
         public var name: String
-        private(set) var command: build_version_command? = nil;
-        
-        init(command: build_version_command) {
+        public var command: build_version_command? = nil;
+        public var dataSlice:Data
+        public var version:String
+        init(command: build_version_command, dataSlice:Data) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
+            self.dataSlice = dataSlice
+            self.version = MachOLoadCommand.LC_Version.versionString(from: 8)
+           
         }
         
         init(loadCommand: MachOLoadCommand) {
             let command = loadCommand.data.extract(build_version_command.self, offset: loadCommand.offset)
-            self.init(command: command)
+            let data = loadCommand.data.cutoutData(build_version_command.self, offset: loadCommand.offset)
+            self.init(command: command, dataSlice: data)
+        }
+        
+        static func versionString(from versionValue: UInt64) -> String {
+            /* A.B.C.D.E packed as a24.b10.c10.d10.e10 */
+            let mask: Swift.UInt64 = 0x3ff
+            let e = versionValue & mask
+            let d = (versionValue >> 10) & mask
+            let c = (versionValue >> 20) & mask
+            let b = (versionValue >> 30) & mask
+            let a = versionValue >> 40
+            return String(format: "%d.%d.%d.%d.%d", a, b, c, d, e)
         }
     }
 }

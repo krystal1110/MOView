@@ -13,16 +13,19 @@ extension MachOLoadCommand {
         
         public var name: String
         public var command: symtab_command? = nil;
+        public var dataSlice:Data
         
-        init(command: symtab_command) {
+        init(command: symtab_command, dataSlice:Data) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
+            self.dataSlice = dataSlice
         }
         
         init(loadCommand: MachOLoadCommand) {
             let command = loadCommand.data.extract(symtab_command.self, offset: loadCommand.offset)
-            self.init(command: command)
+            let data = loadCommand.data.cutoutData(symtab_command.self, offset: loadCommand.offset)
+            self.init(command: command,dataSlice: data)
         }
     }
 }
