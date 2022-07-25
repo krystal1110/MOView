@@ -28,18 +28,31 @@ public struct MachOLoadCommand {
     let size: Int
     let offset: Int
     let byteSwapped: Bool
-     
+    let displayStore:DisplayStore
     
     init(data: Data, offset: Int, byteSwapped: Bool) {
         var loadCommand = data.extract(load_command.self, offset: offset)
         if byteSwapped {
             swap_load_command(&loadCommand, byteSwappedOrder)
         }
+        
+        
         self.command = loadCommand.cmd
         self.size = Int(loadCommand.cmdsize)
         self.data = data
         self.offset = offset
         self.byteSwapped = byteSwapped
+        
+        let type =   LoadCommandType(rawValue: command)
+        let dataSlice = DataTool.interception(with: data, from: offset, length: Int(loadCommand.cmdsize))
+        let displayStore = DisplayStore(dataSlice: dataSlice)
+        self.displayStore = displayStore
+         
+        
+        displayStore.insert(item: ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: data, start: 0, 4), model: ExplanationModel(description: "Load Command Type", explanation:type?.name ?? "" )))
+        
+        displayStore.insert(item: ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: data, start: 4, 8), model: ExplanationModel(description: "Load Command Size", explanation:data.count.hex)))
+        
     }
     
     func command(from data: Data, offset: Int, byteSwapped: Bool) -> MachOLoadCommandType? {
@@ -60,7 +73,7 @@ public struct MachOLoadCommand {
             return LC_SymbolTable(loadCommand: self)
         
         case .sourceVersion:
-            return LC_Version(loadCommand: self)
+            return LC_SourceVersion(loadCommand: self)
         
         case .dynamicSymbolTable:
             return LC_DynamicSymbolTable(loadCommand: self)

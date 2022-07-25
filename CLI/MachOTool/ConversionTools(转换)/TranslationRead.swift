@@ -7,41 +7,72 @@
 
 import Foundation
 
-class TranslationRead {
-    let machoDataSlice: Data
-    private(set) var translated: Int = 0
+
+// 如果需要显示 则需要存储数据
+class DisplayStore{
+    
     private(set) var items: [ExplanationItem] = []
-
-    init(machoDataSlice: Data) {
-        self.machoDataSlice = machoDataSlice
+    let dataSlice: Data
+    
+    init(dataSlice: Data) {
+        self.dataSlice = dataSlice
     }
-
-    // 读取macho文件信息
-    func translate<T>(next straddle: Straddle, dataInterpreter: (Data) -> T, itemContentGenerator: (T) -> ExplanationModel) -> T {
-        defer { translated += straddle.raw }
-
-        let rawData = DataTool.interception(with: machoDataSlice, from: translated, length: straddle.raw)
-
-        let rawDataAbsoluteRange = machoDataSlice.startIndex + translated ..<  machoDataSlice.startIndex + translated + straddle.raw
-//        machoDataSlice.startOffset + translated ..< machoDataSlice.startOffset + translated + straddle.raw
-
+    
+    func translate<T>(from:Int, length:Int, dataInterpreter: (Data) -> T, itemContentGenerator: (T) -> ExplanationModel) -> T {
+        
+        let rawData = DataTool.interception(with: dataSlice, from: from, length: length)
+        
+        let rawDataAbsoluteRange = dataSlice.startIndex + from ..<  dataSlice.startIndex + from + length
+        
         let interpreted: T = dataInterpreter(rawData)
-
-//        items.append(TranslationItem(sourceDataRange: rawDataAbsoluteRange, content: itemContentGenerator(interpreted)))
-
+        
+        self.items.append(ExplanationItem(sourceDataRange: rawDataAbsoluteRange, model: itemContentGenerator(interpreted)))
+        
         return interpreted
     }
-
-    func skip(_ straddle: Straddle) -> Self {
-        translated = translated + straddle.raw
-        return self
+    
+    func insert(item:ExplanationItem){
+        self.items.append(item)
     }
-
-    func append(_ itemModel: ExplanationModel, forRange range: Range<Int>) {
-        let item = ExplanationItem(sourceDataRange: range, model: itemModel)
-        items.append(item)
-    }
+    
 }
+
+
+//class TranslationRead {
+//    let machoDataSlice: Data
+//    private(set) var translated: Int = 0
+//    private(set) var items: [ExplanationItem] = []
+//
+//    init(machoDataSlice: Data) {
+//        self.machoDataSlice = machoDataSlice
+//    }
+//
+//    // 读取macho文件信息
+//    func translate<T>(next straddle: Straddle, dataInterpreter: (Data) -> T, itemContentGenerator: (T) -> ExplanationModel) -> T {
+//        defer { translated += straddle.raw }
+//
+//        let rawData = DataTool.interception(with: machoDataSlice, from: translated, length: straddle.raw)
+//
+//        let rawDataAbsoluteRange = machoDataSlice.startIndex + translated ..<  machoDataSlice.startIndex + translated + straddle.raw
+////        machoDataSlice.startOffset + translated ..< machoDataSlice.startOffset + translated + straddle.raw
+//
+//        let interpreted: T = dataInterpreter(rawData)
+//
+////        items.append(TranslationItem(sourceDataRange: rawDataAbsoluteRange, content: itemContentGenerator(interpreted)))
+//
+//        return interpreted
+//    }
+//
+//    func skip(_ straddle: Straddle) -> Self {
+//        translated = translated + straddle.raw
+//        return self
+//    }
+//
+//    func append(_ itemModel: ExplanationModel, forRange range: Range<Int>) {
+//        let item = ExplanationItem(sourceDataRange: range, model: itemModel)
+//        items.append(item)
+//    }
+//}
 
 struct JYDataTranslationRead {
     static func UInt32(_ data: Data) -> Swift.UInt32 {

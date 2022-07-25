@@ -13,98 +13,36 @@ extension MachOLoadCommand {
         
         public var name: String
         public var command: dyld_info_command? = nil;
-        public var dataSlice:Data
         
-        init(command: dyld_info_command, dataSlice:Data) {
+        init(command: dyld_info_command, displayStore:DisplayStore) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            self.dataSlice = dataSlice
+            
+            let rebaseoffRange =  DataTool.absoluteRange(with:displayStore.dataSlice , start:8, MemoryLayout<UInt32>.size)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: rebaseoffRange, model: ExplanationModel(description: "File Offset To Rebase Info", explanation: command.rebase_off.hex)))
+            
+            let rebaseSizeRange =  DataTool.absoluteRange(with:displayStore.dataSlice , start:12, MemoryLayout<UInt32>.size)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: rebaseSizeRange, model: ExplanationModel(description: "Size Of Rebase Info", explanation: command.rebase_size.hex)))
+            
+            let bindoffRange =  DataTool.absoluteRange(with:displayStore.dataSlice , start:12, MemoryLayout<UInt32>.size)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: bindoffRange, model: ExplanationModel(description: "File Offset To Binding Info", explanation: command.bind_off.hex)))
+            
+            
+            let bindsizeRange =  DataTool.absoluteRange(with:displayStore.dataSlice , start:20, MemoryLayout<UInt32>.size)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: bindsizeRange, model: ExplanationModel(description: "Size Of Binding Info", explanation: command.bind_size.hex)))
+ 
+            
+            let weakbindoffRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:24, MemoryLayout<UInt32>.size)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: weakbindoffRange, model: ExplanationModel(description: "File Offset To Weak Binding Info", explanation: command.weak_bind_off.hex)))
+
+            let weakbindsizeRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:28, MemoryLayout<UInt32>.size)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: weakbindsizeRange, model: ExplanationModel(description: "Size Of Weak Binding Info", explanation: command.weak_bind_size.hex)))
         }
         
         init(loadCommand: MachOLoadCommand) {
             let command = loadCommand.data.extract(dyld_info_command.self, offset: loadCommand.offset)
-            let data = loadCommand.data.cutoutData(segment_command_64.self, offset: loadCommand.offset)
-            self.init(command: command,dataSlice:data)
+            self.init(command: command,displayStore:loadCommand.displayStore)
         }
     }
 }
-
-
-//
-//
-//class DyldInfoCommand : JYLoadCommand {
-//    let rebaseOffset: UInt32
-//    let rebaseSize: UInt32
-//
-//    let bindOffset: UInt32
-//    let bindSize: UInt32
-//
-//    let weakBindOffset: UInt32
-//    let weakBindSize: UInt32
-//
-//    let lazyBindOffset: UInt32
-//    let lazyBindSize: UInt32
-//
-//    let exportOffset: UInt32
-//    let exportSize: UInt32
-//
-//
-//    required init(with data: Data, commandType: LoadCommandType, translationStore: TranslationRead? = nil) {
-//        let translationStore = TranslationRead(machoDataSlice: data).skip(.quadWords)
-//
-//        self.rebaseOffset =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Rebase Info File Offset", explanation: value.hex) })
-//
-//        self.rebaseSize =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Rebase Info Size", explanation: value.hex) })
-//
-//        self.bindOffset =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Binding Info File Offset", explanation: value.hex) })
-//
-//        self.bindSize =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Binding Info Size", explanation: value.hex) })
-//
-//        self.weakBindOffset =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Weak Binding Info File Offset", explanation: value.hex) })
-//
-//        self.weakBindSize =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Weak Binding Info Size", explanation: value.hex) })
-//
-//        self.lazyBindOffset =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Lazy Binding Info File Offset", explanation: value.hex) })
-//
-//        self.lazyBindSize =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Lazy Binding Info Size", explanation: value.hex) })
-//
-//        self.exportOffset =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Export Info File Offset", explanation: value.hex) })
-//
-//        self.exportSize =
-//        translationStore.translate(next: .doubleWords,
-//                                 dataInterpreter: DataInterpreterPreset.UInt32,
-//                                 itemContentGenerator: { value in ExplanationModel(description: "Export Info Size", explanation: value.hex) })
-//
-//        super.init(with: data, commandType: commandType, translationStore: translationStore)
-//    }
-//
-//
-//}

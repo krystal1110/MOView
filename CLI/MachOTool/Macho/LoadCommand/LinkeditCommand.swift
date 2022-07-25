@@ -33,20 +33,23 @@ extension MachOLoadCommand {
         
         public var name: String
         public var command: linkedit_data_command? = nil;
-        public var dataSlice:Data
- 
         
-        init(command: linkedit_data_command,dataSlice:Data) {
+        init(command: linkedit_data_command,displayStore:DisplayStore) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            self.dataSlice = dataSlice
+            
+            let dataoffRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:8, 4)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: dataoffRange, model: ExplanationModel(description: "Data Offset", explanation: command.dataoff.hex)))
+            
+        
+            let datasizeRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:12, 4)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: datasizeRange, model: ExplanationModel(description: "Data Size", explanation: command.datasize.hex)))
         }
         
         init(loadCommand: MachOLoadCommand) {
             let command = loadCommand.data.extract(linkedit_data_command.self, offset: loadCommand.offset)
-            let data = loadCommand.data.cutoutData(linkedit_data_command.self, offset: loadCommand.offset)
-            self.init(command: command,dataSlice: data)
+            self.init(command: command,displayStore:loadCommand.displayStore)
         }
     }
 }

@@ -21,18 +21,22 @@ extension MachOLoadCommand {
         
         public var name: String
         public var command: entry_point_command? = nil;
-        public var dataSlice:Data
-        init(command: entry_point_command, dataSlice:Data) {
+        
+        init(command: entry_point_command, displayStore:DisplayStore) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            self.dataSlice = dataSlice
+            
+            let entryoffRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:8, 4)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: entryoffRange, model: ExplanationModel(description: "Entry Offset", explanation: command.entryoff.hex)))
+            
+            let stacksizeRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:12, 4)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: stacksizeRange, model: ExplanationModel(description: "Stack Size", explanation: command.stacksize.hex)))
         }
         
         init(loadCommand: MachOLoadCommand) {
             let command = loadCommand.data.extract(entry_point_command.self, offset: loadCommand.offset)
-            let data = loadCommand.data.cutoutData(entry_point_command.self, offset: loadCommand.offset)
-            self.init(command: command,dataSlice: data)
+            self.init(command: command,displayStore: loadCommand.displayStore)
         }
     }
 }

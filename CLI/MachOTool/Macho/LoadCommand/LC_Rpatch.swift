@@ -14,26 +14,24 @@ extension MachOLoadCommand {
         
         public var name: String
         public var command: rpath_command? = nil;
-        public var dataSlice:Data
         public var path: String? = nil
-        init(command: rpath_command, dataSlice:Data) {
+        init(command: rpath_command, displayStore:DisplayStore) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            self.dataSlice = dataSlice
-    
-           let straddress =  dataSlice.count - Int(command.path.offset)
-            if let str = DataTool.interception(with: dataSlice, from: 12, length: straddress).utf8String{
-                self.path = str.spaceRemoved
+
+            let entryoffRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:8, 4)
+            displayStore.insert(item: ExplanationItem(sourceDataRange: entryoffRange, model: ExplanationModel(description: "Path Offset", explanation: command.path.offset.hex)))
+            
+            self.path = displayStore.translate(from: 12, length: (displayStore.dataSlice.count - Int(command.path.offset)), dataInterpreter: {$0.utf8String?.spaceRemoved ?? "unknow path"}) { path in
+                ExplanationModel(description: "Path", explanation: path)
             }
-           
         }
         
         init(loadCommand: MachOLoadCommand) {
             
             let command = loadCommand.data.extract(rpath_command.self, offset: loadCommand.offset)
-            let data = DataTool.interception(with: loadCommand.data, from: loadCommand.offset, length: Int(command.cmdsize))
-            self.init(command: command,dataSlice: data)
+            self.init(command: command,displayStore: loadCommand.displayStore)
         }
     }
 }

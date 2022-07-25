@@ -1,5 +1,5 @@
 //
-//  JYBuildVersionCommand.swift
+//  LC_SourceVersion.swift
 //  MachOTool
 //
 //  Created by karthrine on 2022/5/16.
@@ -9,25 +9,23 @@ import Foundation
 
 
 extension MachOLoadCommand {
-    public struct LC_Version: MachOLoadCommandType {
+    public struct LC_SourceVersion: MachOLoadCommandType {
         
         public var name: String
-        public var command: build_version_command? = nil;
-        public var dataSlice:Data
+        public var command: source_version_command? = nil;
         public var version:String
-        init(command: build_version_command, dataSlice:Data) {
+        init(command: source_version_command, displayStore:DisplayStore) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            self.dataSlice = dataSlice
-            self.version = MachOLoadCommand.LC_Version.versionString(from: 8)
-           
+            self.version = displayStore.translate(from: 8, length: 8, dataInterpreter: {MachOLoadCommand.LC_SourceVersion.versionString(from:$0.UInt64)}) { version in
+                ExplanationModel(description: "Source Version", explanation: version)
+            }
         }
         
         init(loadCommand: MachOLoadCommand) {
-            let command = loadCommand.data.extract(build_version_command.self, offset: loadCommand.offset)
-            let data = loadCommand.data.cutoutData(build_version_command.self, offset: loadCommand.offset)
-            self.init(command: command, dataSlice: data)
+            let command = loadCommand.data.extract(source_version_command.self, offset: loadCommand.offset)
+            self.init(command: command,displayStore: loadCommand.displayStore)
         }
         
         static func versionString(from versionValue: UInt64) -> String {

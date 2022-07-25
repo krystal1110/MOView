@@ -13,23 +13,21 @@ extension MachOLoadCommand {
         
         public var name: String
         public var command: uuid_command? = nil;
-        public var dataSlice:Data
         public var uuid:UUID
         
-        init(command: uuid_command,dataSlice:Data) {
+        init(command: uuid_command,displayStore:DisplayStore) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            self.dataSlice = dataSlice
-            let uuidData = DataTool.interception(with: dataSlice, from: 8, length: 16)
-            self.uuid = MachOLoadCommand.LC_Uuid.uuid(from: [UInt8](uuidData))
-            
+    
+            self.uuid = displayStore.translate(from: 8, length: 16, dataInterpreter: {MachOLoadCommand.LC_Uuid.uuid(from: [UInt8]($0))}) { uuid in
+                ExplanationModel(description: "UUID", explanation: uuid.uuidString)
+            }
         }
         
         init(loadCommand: MachOLoadCommand) {
             let command = loadCommand.data.extract(uuid_command.self, offset: loadCommand.offset)
-            let data = loadCommand.data.cutoutData(uuid_command.self, offset: loadCommand.offset)
-            self.init(command: command,dataSlice: data)
+            self.init(command: command,displayStore: loadCommand.displayStore)
         }
         
         static func uuid(from uuidData: [UInt8]) -> UUID {
