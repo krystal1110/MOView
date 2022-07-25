@@ -78,20 +78,24 @@ public struct MachOLoadCommand {
         case .dynamicSymbolTable:
             return LC_DynamicSymbolTable(loadCommand: self)
             
-        case .rpath:
+        case .rpath, .idDynamicLinker, .loadDynamicLinker, .dyldEnvironment:
             return LC_Rpath(loadCommand: self)
             
         case .uuid:
             return LC_Uuid(loadCommand: self)
-        
-        case .codeSignature, .segmentSplitInfo, .functionStarts, .dataInCode, .dylibCodeSigDRs,.linkerOption,.linkerOptimizationHint,.dyldExportsTrie,.dyldChainedFixups:
-            return LinkeditCommand(loadCommand: self)
             
         case .idDylib, .loadDylib, .loadWeakDylib, .reexportDylib, .lazyLoadDylib, .loadUpwardDylib:
             return LC_Load_Dylib(loadCommand: self)
             
         case .iOSMinVersion, .macOSMinVersion, .tvOSMinVersion, .watchOSMinVersion:
             return LC_MinOSVersion(loadCommand: self)
+            
+        case .encryptionInfo64,. encryptionInfo:
+            return LC_EncryptionInfo(loadCommand: self)
+            
+        case .dataInCode, .codeSignature, .functionStarts, .segmentSplitInfo, .dylibCodeSigDRs, .linkerOptimizationHint, .dyldExportsTrie, .dyldChainedFixups:
+            return LC_LinkeditCommand(loadCommand: self)
+
             
         default:
             return LC_Unknown(loadCommand: self)

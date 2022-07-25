@@ -29,7 +29,7 @@ import Foundation
 //}
 
 extension MachOLoadCommand {
-    public struct LinkeditCommand: MachOLoadCommandType {
+    public struct LC_LinkeditCommand: MachOLoadCommandType {
         
         public var name: String
         public var command: linkedit_data_command? = nil;
