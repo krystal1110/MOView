@@ -12,42 +12,61 @@ import MachO
 extension MachOLoadCommand {
     public struct Segment: MachOLoadCommandType {
         
-        
-        
-        //    public var cmd: UInt32 /* for 64-bit architectures */ /* LC_SEGMENT_64 */
-        //    public var cmdsize: UInt32 /* includes sizeof section_64 structs */
-        //    public var segname: (Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8, Int8) /* segment name */
-        //    public var vmaddr: UInt64 /* memory address of this segment */
-        //    public var vmsize: UInt64 /* memory size of this segment */
-        //    public var fileoff: UInt64 /* file offset of this segment */
-        //    public var filesize: UInt64 /* amount to map from the file */
-        //    public var maxprot: vm_prot_t /* maximum VM protection */
-        //    public var initprot: vm_prot_t /* initial VM protection */
-        //    public var nsects: UInt32 /* number of sections in segment */
-        //    public var flags: UInt32 /* flags */
         public var name: String
         public var command64: segment_command_64? = nil; // neilwu added
         public var sections:[Section64] = []
-        public var dataSlice:Data
         
-        init(command: segment_command_64, dataSlice:Data) {
+        
+        init(command: segment_command_64, displayStore:DisplayStore) {
             var segname = command.segname
             self.name =  Utils.readCharToString(&segname)
             self.command64 = command
-            self.dataSlice = dataSlice
             
+            
+ 
+            let _  =  displayStore.translate(from: 8, length: MemoryLayout<(CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar)>.size, dataInterpreter: {$0.utf8String!.spaceRemoved}) { segmentName in
+                ExplanationModel(description: "Segment Name", explanation:segmentName)
+            }
+            
+            let _  =  displayStore.translate(from: 24, length: MemoryLayout<UInt64>.size, dataInterpreter: {$0.UInt64}) { value in
+                ExplanationModel(description: "VM Address", explanation:value.hex)
+            }
+            
+            let _  =  displayStore.translate(from: 32, length: MemoryLayout<UInt64>.size, dataInterpreter: {$0.UInt64}) { value in
+                ExplanationModel(description: "VM Size", explanation:value.hex)
+            }
+ 
+            let _  =  displayStore.translate(from: 40, length: MemoryLayout<UInt64>.size, dataInterpreter: {$0.UInt64}) { value in
+                ExplanationModel(description: "File Offset", explanation:value.hex)
+            }
+            
+            let _  =  displayStore.translate(from: 48, length: MemoryLayout<UInt64>.size, dataInterpreter: {$0.UInt64}) { value in
+                ExplanationModel(description: "File Size", explanation:value.hex)
+            }
+            
+            let _  =  displayStore.translate(from: 56, length: MemoryLayout<vm_prot_t>.size, dataInterpreter: {$0.UInt32}) { value in
+                ExplanationModel(description: "Maximum VM protection", explanation:VMProtection(raw: value).explanation)
+            }
+
+            
+            let _  =  displayStore.translate(from: 60, length: MemoryLayout<vm_prot_t>.size, dataInterpreter: {$0.UInt32}) { value in
+                ExplanationModel(description: "Initial VM protection", explanation:VMProtection(raw: value).explanation)
+            }
+            
+            let _  =  displayStore.translate(from: 64, length: MemoryLayout<UInt32>.size, dataInterpreter: {$0.UInt32}) { value in
+                ExplanationModel(description: "Number of Sections", explanation:value.hex)
+            }
         }
  
         init(loadCommand: MachOLoadCommand) {
             
                 var segmentCommand64:segment_command_64 = loadCommand.data.extract(segment_command_64.self, offset: loadCommand.offset)
             
-                let data = loadCommand.data.cutoutData(segment_command_64.self, offset: loadCommand.offset)
-            
                 if loadCommand.byteSwapped {
                     swap_segment_command_64(&segmentCommand64, byteSwappedOrder)
                 }
-                self.init(command: segmentCommand64, dataSlice:data)
+           
+            self.init(command: segmentCommand64, displayStore:loadCommand.displayStore)
                 
                 if (segmentCommand64.nsects <= 0) {
                     return;
@@ -64,13 +83,35 @@ extension MachOLoadCommand {
                 }
             
         }
+        
+        
     }
-    
-    
-    
-    
-   
-    
+ 
 }
 
  
+struct VMProtection {
+    
+    let raw: UInt32
+    let readable: Bool
+    let writable: Bool
+    let executable: Bool
+    
+    init(raw: UInt32) {
+        self.raw = raw
+        self.readable = raw & 0x01 != 0
+        self.writable = raw & 0x02 != 0
+        self.executable = raw & 0x04 != 0
+    }
+    
+    var explanation: String {
+        if readable && writable && executable { return "VM_PROT_ALL" }
+        if readable && writable { return "VM_PROT_DEFAULT" }
+        var ret: [String] = []
+        if readable { ret.append("VM_PROT_READ") }
+        if writable { ret.append("VM_PROT_WRITE") }
+        if executable { ret.append("VM_PROT_EXECUTE") }
+        if ret.isEmpty { ret.append("VM_PROT_NONE") }
+        return ret.joined(separator: ",")
+    }
+}

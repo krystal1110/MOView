@@ -23,7 +23,6 @@ extension MachOLoadCommand {
                 ExplanationModel(description: "Path Offset", explanation: "\(number)")
             }
             
-            
             let _ = displayStore.translate(from: 12, length: 4, dataInterpreter: {$0.UInt32}) { number in
                 ExplanationModel(description: "Build Time", explanation: "\(number)")
             }

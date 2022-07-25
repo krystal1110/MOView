@@ -90,6 +90,9 @@ public struct MachOLoadCommand {
         case .idDylib, .loadDylib, .loadWeakDylib, .reexportDylib, .lazyLoadDylib, .loadUpwardDylib:
             return LC_Load_Dylib(loadCommand: self)
             
+        case .iOSMinVersion, .macOSMinVersion, .tvOSMinVersion, .watchOSMinVersion:
+            return LC_MinOSVersion(loadCommand: self)
+            
         default:
             return LC_Unknown(loadCommand: self)
         }

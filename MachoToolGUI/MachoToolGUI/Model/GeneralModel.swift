@@ -92,78 +92,12 @@ public struct Display {
         var list:[DisplayModel] = []
         
         let type  = type(of: loadCommand)
-//        let type1 =   LoadCommandType(rawValue: loadCommand.cmd)
-        if (type == MachOLoadCommand.Segment.self){
-            let segment = loadCommand as! MachOLoadCommand.Segment
-            
-            let segnameRange =  DataTool.absoluteRange(with: segment.dataSlice, start:8, MemoryLayout<(CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar)>.size)
-            list.append(DisplayModel(sourceDataRange: segnameRange, explanationItem: ExplanationItem(description: "Segment Name", explanation: segment.name,extraDescription: "Data HEX",extraExplanation:"")))
-            
-            
-            let types =   LoadCommandType(rawValue: segment.command64!.cmd)
-            let cmdRange =  DataTool.absoluteRange(with: segment.dataSlice, start:0, MemoryLayout<UInt32>.size)
-            list.append(DisplayModel(sourceDataRange: cmdRange, explanationItem: ExplanationItem(description: "Command", explanation: "\(types!.name)",extraDescription: "Data HEX",extraExplanation:segment.command64!.cmd.hex)))
-            
-            
-            let cmdSizeRange =  DataTool.absoluteRange(with: segment.dataSlice, start:4, MemoryLayout<UInt32>.size)
-            list.append(DisplayModel(sourceDataRange: cmdSizeRange, explanationItem: ExplanationItem(description: "Command Size", explanation: "\(segment.command64!.cmdsize)",extraDescription: "Data HEX",extraExplanation:segment.command64!.cmdsize.hex)))
-            
-            
-            let vmAddrRange =  DataTool.absoluteRange(with: segment.dataSlice, start:24, MemoryLayout<UInt64>.size)
-            list.append(DisplayModel(sourceDataRange: vmAddrRange, explanationItem: ExplanationItem(description: "VM Address", explanation: "\(segment.command64!.vmaddr)",extraDescription: "Data HEX",extraExplanation:segment.command64!.vmaddr.hex)))
-            
-            
-            let vmSizeRange =  DataTool.absoluteRange(with: segment.dataSlice, start:32, MemoryLayout<UInt64>.size)
-            list.append(DisplayModel(sourceDataRange: vmSizeRange, explanationItem: ExplanationItem(description: "VM Size", explanation: "\(segment.command64!.vmsize)",extraDescription: "Data HEX",extraExplanation:segment.command64!.vmsize.hex)))
-            
-            
-            let fileoffRange =  DataTool.absoluteRange(with: segment.dataSlice, start:40, MemoryLayout<UInt64>.size)
-            list.append(DisplayModel(sourceDataRange: fileoffRange, explanationItem: ExplanationItem(description: "File Offset", explanation: "\(segment.command64!.fileoff)",extraDescription: "Data HEX",extraExplanation:segment.command64!.fileoff.hex)))
-            
-            
-            let fileSizeRange =  DataTool.absoluteRange(with: segment.dataSlice, start:48, MemoryLayout<UInt64>.size)
-            list.append(DisplayModel(sourceDataRange: fileSizeRange, explanationItem: ExplanationItem(description: "File Size", explanation: "\(segment.command64!.filesize)",extraDescription: "Data HEX",extraExplanation:segment.command64!.filesize.hex)))
-            
-            
-            let maxprotRange =  DataTool.absoluteRange(with: segment.dataSlice, start:56, MemoryLayout<vm_prot_t>.size)
-            list.append(DisplayModel(sourceDataRange: maxprotRange, explanationItem: ExplanationItem(description: "Maximum VM protection", explanation: "\(segment.command64!.maxprot)")))
-            
-            let initprotRange =  DataTool.absoluteRange(with: segment.dataSlice, start:60, MemoryLayout<vm_prot_t>.size)
-            list.append(DisplayModel(sourceDataRange: initprotRange, explanationItem: ExplanationItem(description: "Initial VM protection", explanation: "\(segment.command64!.initprot)")))
-            
-            
-            let nsectsRange =  DataTool.absoluteRange(with: segment.dataSlice, start:64, MemoryLayout<UInt32>.size)
-            list.append(DisplayModel(sourceDataRange: nsectsRange, explanationItem: ExplanationItem(description: "Number of Sections", explanation: "\(segment.command64!.nsects)",extraDescription: "Data HEX",extraExplanation:segment.command64!.nsects.hex)))
-        }
+ 
      
         return list
     }
     
-//    public var cmdsize: UInt32 /* includes pathname string */
-
-//    public var dylib: dylib /* the library identification */
-    
-//    public struct build_version_command {
-//
-//        public init()
-//
-//        public init(cmd: UInt32, cmdsize: UInt32, platform: UInt32, minos: UInt32, sdk: UInt32, ntools: UInt32)
-//
-//        public var cmd: UInt32 /* LC_BUILD_VERSION */
-//
-//        public var cmdsize: UInt32 /* sizeof(struct build_version_command) plus */
-//
-//        /* ntools * sizeof(struct build_tool_version) */
-//        public var platform: UInt32 /* platform */
-//
-//        public var minos: UInt32 /* X.Y.Z is encoded in nibbles xxxx.yy.zz */
-//
-//        public var sdk: UInt32 /* X.Y.Z is encoded in nibbles xxxx.yy.zz */
-//
-//        public var ntools: UInt32 /* number of tool entries following this */
-//    }
-//
-//
+ 
     
     
     
