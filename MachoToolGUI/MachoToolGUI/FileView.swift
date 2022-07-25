@@ -109,8 +109,8 @@ struct FileView: View {
                         }
                     }.frame(minWidth:200,maxWidth: 200)
                     if selectedIndex == -1 {
-                        MachoHexView(Display.machoHeaderDisplay(macho!.header))
-                            .frame(minWidth:300)
+//                        MachoHexView(Display.machoHeaderDisplay(macho!.header))
+//                            .frame(minWidth:300)
                     }else{
                         MachoHexView(Display.loadCommondDisplay(macho!.commands[selectedIndex]))
                             .frame(minWidth:300)

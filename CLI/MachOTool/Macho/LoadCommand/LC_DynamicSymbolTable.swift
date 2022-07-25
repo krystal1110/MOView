@@ -13,7 +13,7 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_DynamicSymbolTable: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command: dysymtab_command? = nil;
         
@@ -21,7 +21,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            
+            self.displayStore = displayStore
             let locsymIndexRange =  DataTool.absoluteRange(with:displayStore.dataSlice , start:8, MemoryLayout<UInt32>.size)
             displayStore.insert(item: ExplanationItem(sourceDataRange: locsymIndexRange, model: ExplanationModel(description: "LocSymbol Index", explanation: command.ilocalsym.hex)))
             

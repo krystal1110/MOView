@@ -10,7 +10,7 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_MinOSVersion: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command: version_min_command? = nil;
         
@@ -18,7 +18,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-             
+            self.displayStore = displayStore
             
            let name = MachOLoadCommand.LC_MinOSVersion.osName(for: types!)
             

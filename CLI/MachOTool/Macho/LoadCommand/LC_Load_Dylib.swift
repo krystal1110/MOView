@@ -10,15 +10,16 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_Load_Dylib: MachOLoadCommandType {
-         public var command: dylib_command? = nil;
-         public var name: String
+        public var displayStore: DisplayStore
+        public var command: dylib_command? = nil;
+        public var name: String
         public var libPath :String
         
         init(command: dylib_command,displayStore:DisplayStore) {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ??  "Unknow Command Name"
             self.command = command
-             
+            self.displayStore = displayStore
             let _ = displayStore.translate(from: 8, length: 4, dataInterpreter: {$0.UInt32}) { number in
                 ExplanationModel(description: "Path Offset", explanation: "\(number)")
             }

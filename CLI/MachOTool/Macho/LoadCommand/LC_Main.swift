@@ -18,7 +18,7 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_Main: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command: entry_point_command? = nil;
         
@@ -26,7 +26,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            
+            self.displayStore = displayStore
             let entryoffRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:8, 4)
             displayStore.insert(item: ExplanationItem(sourceDataRange: entryoffRange, model: ExplanationModel(description: "Entry Offset", explanation: command.entryoff.hex)))
             

@@ -10,7 +10,7 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_SourceVersion: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command: source_version_command? = nil;
         public var version:String
@@ -18,6 +18,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
+            self.displayStore = displayStore
             self.version = displayStore.translate(from: 8, length: 8, dataInterpreter: {MachOLoadCommand.LC_SourceVersion.versionString(from:$0.UInt64)}) { version in
                 ExplanationModel(description: "Source Version", explanation: version)
             }

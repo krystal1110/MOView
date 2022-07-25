@@ -10,7 +10,7 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_Uuid: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command: uuid_command? = nil;
         public var uuid:UUID
@@ -19,7 +19,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-    
+            self.displayStore = displayStore
             self.uuid = displayStore.translate(from: 8, length: 16, dataInterpreter: {MachOLoadCommand.LC_Uuid.uuid(from: [UInt8]($0))}) { uuid in
                 ExplanationModel(description: "UUID", explanation: uuid.uuidString)
             }

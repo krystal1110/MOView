@@ -17,25 +17,27 @@ let byteSwappedOrder = NXByteOrder(rawValue: 0)
 public protocol MachOLoadCommandType {
     
     var name: String { get }
-    
+    var displayStore:DisplayStore { get }
 }
 
 
 
 public struct MachOLoadCommand {
+    public var name: String
+    public var displayStore: DisplayStore
     let data: Data
     let command: UInt32
     let size: Int
     let offset: Int
     let byteSwapped: Bool
-    let displayStore:DisplayStore
+     
     
     init(data: Data, offset: Int, byteSwapped: Bool) {
         var loadCommand = data.extract(load_command.self, offset: offset)
         if byteSwapped {
             swap_load_command(&loadCommand, byteSwappedOrder)
         }
-        
+        self.name = ""
         
         self.command = loadCommand.cmd
         self.size = Int(loadCommand.cmdsize)
@@ -51,7 +53,7 @@ public struct MachOLoadCommand {
         
         displayStore.insert(item: ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: data, start: 0, 4), model: ExplanationModel(description: "Load Command Type", explanation:type?.name ?? "" )))
         
-        displayStore.insert(item: ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: data, start: 4, 8), model: ExplanationModel(description: "Load Command Size", explanation:data.count.hex)))
+        displayStore.insert(item: ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: data, start: 4, 8), model: ExplanationModel(description: "Load Command Size", explanation:loadCommand.cmdsize.hex)))
         
     }
     

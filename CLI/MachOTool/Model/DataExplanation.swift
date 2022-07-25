@@ -8,11 +8,11 @@
 import Foundation
 
 // 解释model
-struct ExplanationModel {
-    let description: String? // 描述
-    let explanation: String // 解释
-    let extraDescription: String?
-    let extraExplanation: String?
+public struct ExplanationModel {
+    public let description: String? // 描述
+    public let explanation: String // 解释
+    public let extraDescription: String?
+    public let extraExplanation: String?
 
     init(description: String?,
          explanation: String,
@@ -27,9 +27,9 @@ struct ExplanationModel {
 }
 
 // 解释器
-struct ExplanationItem {
-    var sourceDataRange: Range<Int>?
-    let model: ExplanationModel
+public struct ExplanationItem {
+    public var sourceDataRange: Range<Int>?
+    public let model: ExplanationModel
 
     init(sourceDataRange: Range<Int>?, model: ExplanationModel) {
         self.sourceDataRange = sourceDataRange

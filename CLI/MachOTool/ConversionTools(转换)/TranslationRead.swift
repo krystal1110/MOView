@@ -9,9 +9,9 @@ import Foundation
 
 
 // 如果需要显示 则需要存储数据
-class DisplayStore{
+public class DisplayStore{
     
-    private(set) var items: [ExplanationItem] = []
+    public var items: [ExplanationItem] = []
     let dataSlice: Data
     
     init(dataSlice: Data) {

@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import MachOTool
 
 struct MachoHexView: View {
     
-    var modelList:[DisplayModel]
+    var modelList:[ExplanationItem]
     var body: some View {
         HStack(alignment: .top, spacing: 4) {
             ScrollViewReader { scrollProxy in
@@ -18,7 +19,7 @@ struct MachoHexView: View {
                         if modelList.count != 0 {
                             ForEach(0..<modelList.count) { index in
                                 if index < modelList.count{
-                                    HexLineView(model: modelList[index])
+                                    HexLineView(item: modelList[index])
                                 }
                             }
                         }
@@ -36,7 +37,7 @@ struct MachoHexView: View {
         .background(.white)
     }
     
-    init(_ modelList:[DisplayModel]){
+    init(_ modelList:[ExplanationItem]){
         self.modelList = modelList
     }
     
@@ -66,9 +67,9 @@ struct HexLineView: View {
         
     }
     
-    init(model:DisplayModel){
-        self.title = model.explanationItem.description
-        self.content = model.explanationItem.explanation
+    init(item:ExplanationItem){
+        self.title = item.model.description ?? ""
+        self.content =  item.model.explanation
     }
     
 }

@@ -10,7 +10,7 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_DyldInfo: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command: dyld_info_command? = nil;
         
@@ -18,7 +18,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            
+            self.displayStore = displayStore
             let rebaseoffRange =  DataTool.absoluteRange(with:displayStore.dataSlice , start:8, MemoryLayout<UInt32>.size)
             displayStore.insert(item: ExplanationItem(sourceDataRange: rebaseoffRange, model: ExplanationModel(description: "File Offset To Rebase Info", explanation: command.rebase_off.hex)))
             

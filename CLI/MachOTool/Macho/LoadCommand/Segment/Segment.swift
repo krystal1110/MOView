@@ -11,7 +11,7 @@ import MachO
  
 extension MachOLoadCommand {
     public struct Segment: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command64: segment_command_64? = nil; // neilwu added
         public var sections:[Section64] = []
@@ -21,7 +21,7 @@ extension MachOLoadCommand {
             var segname = command.segname
             self.name =  Utils.readCharToString(&segname)
             self.command64 = command
-            
+            self.displayStore = displayStore
             
  
             let _  =  displayStore.translate(from: 8, length: MemoryLayout<(CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar, CChar)>.size, dataInterpreter: {$0.utf8String!.spaceRemoved}) { segmentName in

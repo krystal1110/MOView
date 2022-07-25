@@ -30,7 +30,7 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_LinkeditCommand: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command: linkedit_data_command? = nil;
         
@@ -38,7 +38,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-            
+            self.displayStore = displayStore
             let dataoffRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:8, 4)
             displayStore.insert(item: ExplanationItem(sourceDataRange: dataoffRange, model: ExplanationModel(description: "Data Offset", explanation: command.dataoff.hex)))
             

@@ -10,7 +10,7 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_BuildVersion: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command: build_version_command? = nil;
         let buildTools: [LCBuildTool]
@@ -19,7 +19,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-           
+            self.displayStore = displayStore
             let _  =  displayStore.translate(from: 8, length: 4, dataInterpreter: {BuildPlatform(rawValue: $0.UInt32)}) { platform in
                 ExplanationModel(description: "Target Platform", explanation: platform?.readable ?? "unkonw")
             }

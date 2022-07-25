@@ -10,6 +10,7 @@ import Foundation
 
 extension MachOLoadCommand {
     public struct LC_EncryptionInfo: MachOLoadCommandType {
+        public var displayStore: DisplayStore
         public var command: encryption_info_command? = nil;
         public var name: String
         
@@ -17,7 +18,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ??  "Unknow Command Name"
             self.command = command
-            
+            self.displayStore = displayStore
             let _ = displayStore.translate(from: 8, length: 4, dataInterpreter: {$0.UInt32}) { value in
                 ExplanationModel(description: "Crypto File Offset", explanation: value.hex)}
             

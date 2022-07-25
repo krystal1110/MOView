@@ -33,27 +33,10 @@ public struct ExtraData{
 
 public struct DisplayModel{
     var sourceDataRange: Range<Int>
-    var explanationItem: ExplanationItem
     var extraList:ExtraData? = nil
 }
 
-struct ExplanationItem {
-    let description: String // 描述
-    let explanation: String // 解释
-    let extDescription: String?
-    let extExplanation: String?
-    
-    init(description: String,
-         explanation: String,
-         extraDescription: String? = nil,
-         extraExplanation: String? = nil) {
-        self.description = description
-        self.explanation = explanation
-        self.extDescription = extraDescription
-        self.extExplanation = extraExplanation
-    }
-}
-
+ 
 
 
 /// 拼装GUI需要显示的数据
@@ -62,42 +45,61 @@ public struct Display {
     public static func machoHeaderDisplay(_ machoHeader:MachOHeader) -> [DisplayModel] {
         var headerList:[DisplayModel] = []
         
-        let magicTypeRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:0, MemoryLayout<UInt32>.size)
-        headerList.append(DisplayModel(sourceDataRange: magicTypeRange, explanationItem: ExplanationItem(description: "File Magic", explanation: "\(machoHeader.magic)",extraDescription: "Data HEX",extraExplanation: machoHeader.magic.hex)))
-        
-        let cpuTypeRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:4, MemoryLayout<UInt32>.size)
-        headerList.append(DisplayModel(sourceDataRange: cpuTypeRange, explanationItem: ExplanationItem(description: "CPU Type", explanation: "\(machoHeader.cpuType)",extraDescription: "Data HEX",extraExplanation: UInt64(machoHeader.cputype).hex)))
-        
-        
-        let cpuSubTypeRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:8, MemoryLayout<UInt32>.size)
-        headerList.append(DisplayModel(sourceDataRange: cpuSubTypeRange, explanationItem: ExplanationItem(description: "CPU SubType", explanation: "\(machoHeader.cpuSubtype)",extraDescription: "Data HEX",extraExplanation: UInt64(machoHeader.cpusubtype).hex)))
-        
-        
-        let nlcRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:16, MemoryLayout<UInt32>.size)
-        headerList.append(DisplayModel(sourceDataRange: nlcRange, explanationItem: ExplanationItem(description: "Number of Load Commands", explanation: "\(machoHeader.loadCommandCount)",extraDescription: "Data HEX",extraExplanation: machoHeader.loadCommandCount.hex)))
-        
-        let slcRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:20, MemoryLayout<UInt32>.size)
-        headerList.append(DisplayModel(sourceDataRange: slcRange, explanationItem: ExplanationItem(description: "Size of Load Commands", explanation: "\(machoHeader.loadCommandSize)",extraDescription: "Data HEX",extraExplanation: machoHeader.loadCommandSize.hex)))
-        
-        
-        let flagRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:24, MemoryLayout<UInt32>.size)
-        headerList.append(DisplayModel(sourceDataRange: flagRange, explanationItem: ExplanationItem(description: "Flag", explanation: "\(machoHeader.flags)",extraDescription: "Data HEX",extraExplanation: machoHeader.flags.hex)))
+//        let magicTypeRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:0, MemoryLayout<UInt32>.size)
+//        headerList.append(DisplayModel(sourceDataRange: magicTypeRange, explanationItem: ExplanationItem(description: "File Magic", explanation: "\(machoHeader.magic)",extraDescription: "Data HEX",extraExplanation: machoHeader.magic.hex)))
+//
+//        let cpuTypeRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:4, MemoryLayout<UInt32>.size)
+//        headerList.append(DisplayModel(sourceDataRange: cpuTypeRange, explanationItem: ExplanationItem(description: "CPU Type", explanation: "\(machoHeader.cpuType)",extraDescription: "Data HEX",extraExplanation: UInt64(machoHeader.cputype).hex)))
+//
+//
+//        let cpuSubTypeRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:8, MemoryLayout<UInt32>.size)
+//        headerList.append(DisplayModel(sourceDataRange: cpuSubTypeRange, explanationItem: ExplanationItem(description: "CPU SubType", explanation: "\(machoHeader.cpuSubtype)",extraDescription: "Data HEX",extraExplanation: UInt64(machoHeader.cpusubtype).hex)))
+//
+//
+//        let nlcRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:16, MemoryLayout<UInt32>.size)
+//        headerList.append(DisplayModel(sourceDataRange: nlcRange, explanationItem: ExplanationItem(description: "Number of Load Commands", explanation: "\(machoHeader.loadCommandCount)",extraDescription: "Data HEX",extraExplanation: machoHeader.loadCommandCount.hex)))
+//
+//        let slcRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:20, MemoryLayout<UInt32>.size)
+//        headerList.append(DisplayModel(sourceDataRange: slcRange, explanationItem: ExplanationItem(description: "Size of Load Commands", explanation: "\(machoHeader.loadCommandSize)",extraDescription: "Data HEX",extraExplanation: machoHeader.loadCommandSize.hex)))
+//
+//
+//        let flagRange =  DataTool.absoluteRange(with: machoHeader.dataSlice, start:24, MemoryLayout<UInt32>.size)
+//        headerList.append(DisplayModel(sourceDataRange: flagRange, explanationItem: ExplanationItem(description: "Flag", explanation: "\(machoHeader.flags)",extraDescription: "Data HEX",extraExplanation: machoHeader.flags.hex)))
         
         return headerList
     }
     
     
     
-    public static func loadCommondDisplay(_ loadCommand:MachOLoadCommandType) -> [DisplayModel] {
-        var list:[DisplayModel] = []
-        
-        let type  = type(of: loadCommand)
- 
-     
-        return list
+    public static func loadCommondDisplay(_ loadCommand:MachOLoadCommandType) -> [ExplanationItem] {
+        return loadCommand.displayStore.items
     }
     
- 
+//    public var cmdsize: UInt32 /* includes pathname string */
+
+//    public var dylib: dylib /* the library identification */
+    
+//    public struct build_version_command {
+//
+//        public init()
+//
+//        public init(cmd: UInt32, cmdsize: UInt32, platform: UInt32, minos: UInt32, sdk: UInt32, ntools: UInt32)
+//
+//        public var cmd: UInt32 /* LC_BUILD_VERSION */
+//
+//        public var cmdsize: UInt32 /* sizeof(struct build_version_command) plus */
+//
+//        /* ntools * sizeof(struct build_tool_version) */
+//        public var platform: UInt32 /* platform */
+//
+//        public var minos: UInt32 /* X.Y.Z is encoded in nibbles xxxx.yy.zz */
+//
+//        public var sdk: UInt32 /* X.Y.Z is encoded in nibbles xxxx.yy.zz */
+//
+//        public var ntools: UInt32 /* number of tool entries following this */
+//    }
+//
+//
     
     
     

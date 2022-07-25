@@ -11,7 +11,7 @@ import MachO
 
 extension MachOLoadCommand {
     public struct LC_Rpath: MachOLoadCommandType {
-        
+        public var displayStore: DisplayStore
         public var name: String
         public var command: rpath_command? = nil;
         public var path: String? = nil
@@ -19,7 +19,7 @@ extension MachOLoadCommand {
             let types =   LoadCommandType(rawValue: command.cmd)
             self.name = types?.name ?? " Unknow Command Name "
             self.command = command
-
+            self.displayStore = displayStore
             let entryoffRange =  DataTool.absoluteRange(with: displayStore.dataSlice, start:8, 4)
             displayStore.insert(item: ExplanationItem(sourceDataRange: entryoffRange, model: ExplanationModel(description: "Path Offset", explanation: command.path.offset.hex)))
             
