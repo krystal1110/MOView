@@ -12,7 +12,10 @@ import Foundation
 public class DisplayStore{
     
     public var items: [ExplanationItem] = []
-    let dataSlice: Data
+    public let dataSlice: Data
+    public var commandType:String = ""
+    public var commandSize:String = ""
+    
     
     init(dataSlice: Data) {
         self.dataSlice = dataSlice

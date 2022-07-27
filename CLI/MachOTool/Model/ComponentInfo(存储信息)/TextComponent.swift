@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct TextComponent: ComponentInfo{
-    var dataSlice: Data
-    var componentTitle: String?
-    var componentSubTitle: String?
-    var section: Section64?
-    var textInstructionPtr: UnsafeMutablePointer<cs_insn>?
+public struct TextComponent: ComponentInfo{
+    public var dataSlice: Data
+    public var componentTitle: String?
+    public var componentSubTitle: String?
+    public  var section: Section64?
+    public var textInstructionPtr: UnsafeMutablePointer<cs_insn>?
     
     init(_ dataSlice: Data, section: Section64?, textInstructionPtr:  UnsafeMutablePointer<cs_insn>? ) {
         self.dataSlice = dataSlice

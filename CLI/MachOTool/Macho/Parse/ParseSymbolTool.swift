@@ -13,7 +13,7 @@ import MachO
 /*
  用于解析 String Table / Symbol Table / Indirect Symbol Table
  **/
-class ParseSymbolTool{
+public class ParseSymbolTool{
     
     
     var componts: [ComponentInfo] = []
@@ -38,7 +38,6 @@ class ParseSymbolTool{
                // parse 间接符号表
                 let command =  item as! MachOLoadCommand.LC_DynamicSymbolTable
                 parseIndsymTable(data, command:  command.command!, searchProtocol: searchProtocol)
-                
             }
         }
         print("🔥🔥🔥 解析 Symbol 完成  🔥🔥🔥")

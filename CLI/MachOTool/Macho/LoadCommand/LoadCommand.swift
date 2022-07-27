@@ -50,6 +50,10 @@ public struct MachOLoadCommand {
         let displayStore = DisplayStore(dataSlice: dataSlice)
         self.displayStore = displayStore
          
+ 
+        self.displayStore.commandType = type?.name ?? ""
+ 
+        self.displayStore.commandSize = loadCommand.cmdsize.hex
         
         displayStore.insert(item: ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: data, start: 0, 4), model: ExplanationModel(description: "Load Command Type", explanation:type?.name ?? "" )))
         

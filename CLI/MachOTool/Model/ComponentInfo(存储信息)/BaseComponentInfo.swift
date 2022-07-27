@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BaseStoreInfo {
+public class BaseStoreInfo {
     let dataSlice: Data
     var componentTitle: String { title }
     var componentSubTitle: String? { subTitle }
@@ -26,7 +26,7 @@ class BaseStoreInfo {
 
 
 
-protocol ComponentInfo {
+public protocol ComponentInfo {
     var dataSlice: Data { get }
     var componentTitle: String? { get }
     var componentSubTitle: String? { get }

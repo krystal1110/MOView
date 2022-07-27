@@ -17,7 +17,7 @@ struct FileViewCell: View {
     
     let fileName: String
     let arch: String
-    let fileSize: Int
+    let size: String
     let isSelected: Bool
     
     var body: some View {
@@ -31,7 +31,7 @@ struct FileViewCell: View {
                     .lineLimit(1)
                     .font(.system(size: 12))
                     .foregroundColor(isSelected ? .white : .secondary)
-                Text("fileSize.hex")
+                Text("Size - \(size)")
                     .lineLimit(1)
                     .font(.system(size: 12))
                     .foregroundColor(isSelected ? .white : .secondary)
@@ -49,8 +49,8 @@ struct FileViewCell: View {
         
         print("---")
         self.fileName = "Load Command"
-        self.fileSize = 1000
-        self.arch = loadCommand.name
+        self.size =  loadCommand.displayStore.commandSize
+        self.arch = loadCommand.displayStore.commandType
         self.isSelected = isSelected
     }
 }
@@ -67,7 +67,7 @@ struct FileMachoHeaderCell: View{
                     .lineLimit(1)
                     .font(.system(size: 14))
                     .foregroundColor(isSelected ? .white : .black)
-                Text("\(header.cpuType)")
+                Text("\(header.cpuTypeString)")
                     .lineLimit(1)
                     .font(.system(size: 12))
                     .foregroundColor(isSelected ? .white : .secondary)
@@ -106,14 +106,25 @@ struct FileView: View {
                                     self.selectedIndex = index
                                 }
                             }
+                            ForEach(0..<self.macho!.componts.count){ index in
+                                FileViewCompontCell(self.macho!.componts[index], isSelected: index == (self.selectedIndex - self.macho!.commands.count) ) .onTapGesture {
+                                    self.selectedIndex = index + self.macho!.commands.count
+                                }
+                            }
                         }
                     }.frame(minWidth:200,maxWidth: 200)
                     if selectedIndex == -1 {
-//                        MachoHexView(Display.machoHeaderDisplay(macho!.header))
-//                            .frame(minWidth:300)
+                        MachoHexView(Display.machoHeaderDisplay(macho!.header))
+                            .frame(minWidth:300)
                     }else{
+                        if selectedIndex < self.macho!.commands.count {
                         MachoHexView(Display.loadCommondDisplay(macho!.commands[selectedIndex]))
                             .frame(minWidth:300)
+                        }else{
+                            MachoHexView(Display.loadCompontsDisplay(macho!.componts[(selectedIndex - self.macho!.commands.count)]))
+                                .frame(minWidth:300)
+                             
+                        }
                     }
                 }
             }
@@ -126,6 +137,12 @@ struct FileView: View {
         if let macho = MachoTool.parseMacho(fileURL: fileUrl){
             self.macho = macho
         }
+        
+        // 组装TAB数据
+        
+        
+        
+        
     }
 }
 
@@ -152,3 +169,6 @@ private struct SizePreferenceKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
 }
+
+
+ 

@@ -15,14 +15,14 @@ import Foundation
 
  
 
-struct SymbolTableComponent:ComponentInfo{
+public struct SymbolTableComponent:ComponentInfo{
      
     
-    var dataSlice: Data
-    var componentTitle: String?
-    var componentSubTitle: String?
-    var section: Section64?
-    var symbolTableList : [SymbolTableModel]
+    public var dataSlice: Data
+    public var componentTitle: String?
+    public var componentSubTitle: String?
+    public var section: Section64?
+    public var symbolTableList : [SymbolTableModel]
     
     
     init(_ dataSlice: Data, symbolTableList:[SymbolTableModel] ) {

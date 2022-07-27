@@ -150,7 +150,7 @@ struct SymbolRange {
 }
 
 
-struct SymbolTableModel {
+public struct SymbolTableModel {
     
     let searchProtocol: SearchProtocol
     var symbolName: String = ""

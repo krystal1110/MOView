@@ -8,11 +8,11 @@
 import Foundation
 
 
-struct UnknownCmponent: ComponentInfo{
-    var dataSlice: Data
-    var componentTitle: String?
-    var componentSubTitle: String?
-    var section: Section64?
+public struct UnknownCmponent: ComponentInfo{
+    public var dataSlice: Data
+    public var componentTitle: String?
+    public var componentSubTitle: String?
+    public var section: Section64?
     
     init(_ dataSlice: Data, section: Section64?  ) {
         self.dataSlice = dataSlice

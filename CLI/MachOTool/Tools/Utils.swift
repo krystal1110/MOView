@@ -181,8 +181,17 @@ public extension UInt32 {
     func bitAnd(_ v: Self) -> Bool { self & v != 0 }
 }
 
+
+
+
 public extension UInt64 {
-    var hex: String { String(format: "0x%llX", self) }
+    var hex: String {
+        
+        String(format: "0x%llX", self)
+        
+    }
+    
+    
     var isNotZero: Bool { self != .zero }
     func bitAnd(_ v: Self) -> Bool { self & v != 0 }
    

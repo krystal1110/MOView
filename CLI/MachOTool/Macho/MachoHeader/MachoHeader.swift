@@ -33,15 +33,9 @@ public struct MachOHeader {
     public let loadCommandCount: UInt32
     public let loadCommandSize: UInt32
     public let size: Int
-    
-    public let cpuType:String
-    public let magicType:String
-    public let cpuSubtype:String
-    public let machoType:String
-    
     public let dataSlice:Data
-//    public let displayStore:[]
-    
+    public let displayStore:DisplayStore
+    public let cpuTypeString: String
     public init(header: mach_header_64, dataSlice:Data) {
         self.magic = header.magic
         self.cputype = header.cputype
@@ -54,22 +48,48 @@ public struct MachOHeader {
         self.dataSlice = dataSlice
         
         let cpuType  =  CPUType(UInt32(header.cputype))
-        self.cpuType = cpuType.name
-        self.magicType = MagicType.macho64.name
-        self.cpuSubtype = CPUSubtype(UInt32(header.cpusubtype), cpuType: cpuType).name
-        self.machoType = MachoType(with: header.filetype).name
+        self.cpuTypeString = cpuType.name
+//        self.cpuType = cpuType.name
+//        self.magicType = MagicType.macho64.name
+//        self.cpuSubtype = CPUSubtype(UInt32(header.cpusubtype), cpuType: cpuType).name
+//        self.machoType = MachoType(with: header.filetype).name
         
-
-      
+        self.displayStore = DisplayStore(dataSlice: dataSlice)
         
  
-//        let uStringRelativeRange = uStringPosition.relativeStartOffset..<uStringPosition.relativeStartOffset+uStringPosition.length
-//        let uStringAbsoluteRange =  DataTool.absoluteRange(with: self.dataSlice, relativeRange: uStringRelativeRange)
-//        let uStringRaw = DataTool.interception(with: self.dataSlice, from: uStringPosition.relativeStartOffset, length: uStringPosition.length)
-//
-//        if let string = String(data: uStringRaw, encoding: .utf16LittleEndian) {
-//            return ExplanationItem(sourceDataRange: uStringAbsoluteRange,
-//                                   model: ExplanationModel(description: "UTF16-String", explanation: string))
+        
+        
+        let magicTypeRange =  DataTool.absoluteRange(with: dataSlice, start:0, MemoryLayout<UInt32>.size)
+        displayStore.insert(item: ExplanationItem(sourceDataRange: magicTypeRange, model: ExplanationModel(description: "Magic Type", explanation: MagicType.macho64.name)))
+        
+        let cpuTypeRange =  DataTool.absoluteRange(with: dataSlice, start:4, MemoryLayout<UInt32>.size)
+        displayStore.insert(item: ExplanationItem(sourceDataRange: cpuTypeRange, model: ExplanationModel(description: "CPU Type", explanation: cpuType.name)))
+        
+        
+        
+        let cpuSubTypeRange =  DataTool.absoluteRange(with: dataSlice, start:8, MemoryLayout<UInt32>.size)
+        displayStore.insert(item: ExplanationItem(sourceDataRange: cpuSubTypeRange, model: ExplanationModel(description: "CPU SubType", explanation: CPUSubtype(UInt32(header.cpusubtype), cpuType: cpuType).name)))
+        
+        
+        let filetypeRange =  DataTool.absoluteRange(with: dataSlice, start:12, MemoryLayout<UInt32>.size)
+        displayStore.insert(item: ExplanationItem(sourceDataRange: filetypeRange, model: ExplanationModel(description: "File Type", explanation: MachoType(with: header.filetype).name)))
+        
+        let nlcRange =  DataTool.absoluteRange(with: dataSlice, start:16, MemoryLayout<UInt32>.size)
+        displayStore.insert(item: ExplanationItem(sourceDataRange: nlcRange, model: ExplanationModel(description: "Number of Load Commands", explanation: header.ncmds.hex)))
+        
+ 
+        
+        let slcRange =  DataTool.absoluteRange(with: dataSlice, start:20, MemoryLayout<UInt32>.size)
+        displayStore.insert(item: ExplanationItem(sourceDataRange: slcRange, model: ExplanationModel(description: "Size of Load Commands", explanation: header.sizeofcmds.hex)))
+    
+        
+        let flagRange =  DataTool.absoluteRange(with: dataSlice, start:24, MemoryLayout<UInt32>.size)
+        displayStore.insert(item: ExplanationItem(sourceDataRange: flagRange, model: ExplanationModel(description: "Flag", explanation: header.flags.hex)))
+        
+ 
+                
+        
+       
         
     }
  

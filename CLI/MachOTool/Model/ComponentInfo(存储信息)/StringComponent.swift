@@ -15,12 +15,12 @@ import Foundation
  
 
 
-struct StringComponent: ComponentInfo{
-    var dataSlice: Data
-    var componentTitle: String?
-    var componentSubTitle: String?
-    var section: Section64?
-    var stringList : [StringPosition]
+public struct StringComponent: ComponentInfo{
+    public var dataSlice: Data
+    public var componentTitle: String?
+    public var componentSubTitle: String?
+    public var section: Section64?
+    public var stringList : [StringPosition]
     
     init(_ dataSlice: Data, section: Section64?, stringList: [StringPosition] ) {
         self.dataSlice = dataSlice

@@ -27,18 +27,14 @@ public class Macho: Equatable {
     
     public let header: MachOHeader
     
-    var parseSymbolTool: ParseSymbolTool
+    public var parseSymbolTool: ParseSymbolTool
     
     var allBaseStoreInfoList: [BaseStoreInfo] = []
-    
     
     // loadCommands
     public let commands: [MachOLoadCommandType]
     
-    var componts: [ComponentInfo] = []
-    
-    
-    
+    public var componts: [ComponentInfo] = []
     
     init(machoDataRaw: Data, machoFileName: String)  {
         data = machoDataRaw
@@ -59,12 +55,10 @@ public class Macho: Equatable {
         
         let sectionFlagsDic = Macho.loadSectionFlags(from: data, header: header, attributes: Macho.machAttributes(from: data))
  
-        
-        
         // parse LC_SYMTAB    // parse LC_DYSYMTAB
         self.parseSymbolTool = ParseSymbolTool()
         self.parseSymbolTool.parseSymbol(data, commonds: self.commands, searchProtocol: self)
-        
+        self.componts.append(contentsOf: self.parseSymbolTool.componts)
         
         // parse LC_DYSYMTAB
         

@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct StringPosition {
+public struct StringPosition {
     let startOffset: Int
     let virtualAddress: Swift.UInt64
     let length: Int
-    var explanationItem: ExplanationItem? = nil
+    public var explanationItem: ExplanationItem? = nil
 }
  
 
