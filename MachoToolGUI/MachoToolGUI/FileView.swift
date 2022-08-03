@@ -113,6 +113,8 @@ struct FileView: View {
                             }
                         }
                     }.frame(minWidth:200,maxWidth: 200)
+                    
+                
                     if selectedIndex == -1 {
                         MachoHexView(Display.machoHeaderDisplay(macho!.header))
                             .frame(minWidth:300)
@@ -126,6 +128,7 @@ struct FileView: View {
                              
                         }
                     }
+                    DetailsView().frame(minWidth:300)
                 }
             }
         }.padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 10))
@@ -137,11 +140,7 @@ struct FileView: View {
         if let macho = MachoTool.parseMacho(fileURL: fileUrl){
             self.macho = macho
         }
-        
-        // 组装TAB数据
-        
-        
-        
+ 
         
     }
 }

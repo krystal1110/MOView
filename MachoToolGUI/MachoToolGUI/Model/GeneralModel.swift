@@ -58,10 +58,12 @@ public struct Display {
         let type  = type(of: compont)
         if type == StringComponent.self {
             let item = compont as! StringComponent
-            let x = item.stringList.flatMap{$0.explanationItem};
+            let x = item.stringList.compactMap{$0.explanationItem};
             return x
         }else if type == SymbolTableComponent.self{
-
+            let item = compont as! SymbolTableComponent
+//            item.symbolTableList
+            
         }else if type == TextComponent.self{
             
         }else if type == UnknownCmponent.self{
@@ -73,7 +75,7 @@ public struct Display {
          
         return []
     }
-    
+ 
     
 }
 

@@ -170,12 +170,13 @@ public struct SymbolTableModel {
         self.searchProtocol = searchProtocol
         
         var translaitonItems: [ExplanationItem] = []
-        
-        
-        
+
         let indexInStringTable =  DataTool.interception(with: data, from: .zero, length: 4).UInt32
         self.indexInStringTable = indexInStringTable
         self.indexInStringTableRange = DataTool.absoluteRange(with: data, start: .zero, 4)
+        
+        translaitonItems.append(ExplanationItem(sourceDataRange: indexInStringTableRange, model: ExplanationModel(description: "Index In String Table", explanation: "\(indexInStringTable)")))
+        
         
         
         /*
@@ -193,6 +194,9 @@ public struct SymbolTableModel {
         let symbolType = SymbolType(nTypeRaw: nTypeRaw)
         self.symbolType = symbolType
         
+        translaitonItems.append(ExplanationItem(sourceDataRange: nTypeByteRange, model: ExplanationModel(description: "Symbol Type", explanation: symbolType.readable)))
+        
+        
         let isPrivateExternalSymbol = (nTypeRaw & 0x10) != 0 // 0x10 == N_PEXT mask == 00010000 /* private external symbol bit */
         self.isPrivateExternalSymbol = isPrivateExternalSymbol
         let isExternalSymbol = (nTypeRaw & 0x01) != 0 // 0x01 == N_EXT mask == 00000001 /* external symbol bit, set for external symbols */
@@ -205,15 +209,26 @@ public struct SymbolTableModel {
          */
         
         let nSect = DataTool.interception(with: data, from: 5, length: 1).UInt8
+        let nSectRange = DataTool.absoluteRange(with: data, start: 5, 1)
+        translaitonItems.append(ExplanationItem(sourceDataRange: nSectRange, model: ExplanationModel(description: "nSect", explanation: "\(nSect)")))
+        
         let nDesc = DataTool.interception(with: data, from: 6, length: 2).UInt16
-        let nValueRawData = DataTool.interception(with: data, from: 8, length: 8)
-        let nValue = nValueRawData.UInt64
+        let nDescRnage = DataTool.absoluteRange(with: data, start: 6, 2)
+        let nDescExplanation: String = SymbolTableModel.flagsFrom(nDesc: nDesc, symbolType: symbolType).joined(separator: "\n")
+        translaitonItems.append(ExplanationItem(sourceDataRange: nDescRnage, model: ExplanationModel(description: "Descriptions", explanation: nDescExplanation)))
+        
+        
+        let nValue = DataTool.interception(with: data, from: 8, length: 8).UInt64
+        let nValueRawDataRange = DataTool.absoluteRange(with: data, start: 8, 8)
+        translaitonItems.append(ExplanationItem(sourceDataRange: nValueRawDataRange, model: ExplanationModel(description: "nValue", explanation: "\(nValue)")))
+        
+        
+ 
+        
+        
         self.nSect = nSect
         self.nDesc = nDesc
         self.nValue = nValue
-        
-        
-        
         self.translaitonItems = translaitonItems
         
         
