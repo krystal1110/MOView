@@ -11,6 +11,7 @@ import Foundation
  
 
 struct ReferencesCmponent: ComponentInfo{
+    var typeTitle: String?
     var dataSlice: Data
     var componentTitle: String?
     var componentSubTitle: String?
@@ -23,6 +24,7 @@ struct ReferencesCmponent: ComponentInfo{
         self.componentSubTitle = section?.sectname
         self.section = section
         self.referencesPtrList = referencesPtrList
+        self.typeTitle = "Section"
     }
     
 }

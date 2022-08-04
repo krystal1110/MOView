@@ -83,7 +83,6 @@
 				FB554E9C28854D8900DEE366 /* Model */,
 				2D8B720F287FBAD200700929 /* MachoToolGUIApp.swift */,
 				2D8B7211287FBAD200700929 /* ContentView.swift */,
-				FB595A6828805AA8005F9FA0 /* FileView.swift */,
 				FB554E9A2885481A00DEE366 /* LoadCommandsView.swift */,
 				2D8B7213287FBAD300700929 /* Assets.xcassets */,
 				2D8B7218287FBAD300700929 /* MachoToolGUI.entitlements */,
@@ -129,6 +128,7 @@
 		FB5EDF502887EFF4002261CD /* MachoView */ = {
 			isa = PBXGroup;
 			children = (
+				FB595A6828805AA8005F9FA0 /* FileView.swift */,
 				FB5EDF512887F004002261CD /* MachoHexView.swift */,
 				FB0A26332891255400FA01F1 /* FileViewCompontCell.swift */,
 				FB0A26352891663200FA01F1 /* FileViewStringTABCell.swift */,

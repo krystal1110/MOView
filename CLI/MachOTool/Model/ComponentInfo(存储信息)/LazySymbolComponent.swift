@@ -12,6 +12,7 @@ import Foundation
  **/
 
 struct LazySymbolComponent: ComponentInfo{
+    var typeTitle: String?
     var dataSlice: Data
     var componentTitle: String?
     var componentSubTitle: String?
@@ -24,6 +25,7 @@ struct LazySymbolComponent: ComponentInfo{
         self.componentSubTitle = section?.sectname
         self.section = section
         self.lazySymbolTableList = lazySymbolTableList
+        self.typeTitle = "Section"
     }
     
 }

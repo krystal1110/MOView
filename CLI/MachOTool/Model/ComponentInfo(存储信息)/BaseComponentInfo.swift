@@ -30,5 +30,6 @@ public protocol ComponentInfo {
     var dataSlice: Data { get }
     var componentTitle: String? { get }
     var componentSubTitle: String? { get }
+    var typeTitle: String? {get}
     var section:Section64? { set get }
 }

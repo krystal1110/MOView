@@ -8,12 +8,12 @@
 import Foundation
 
 struct ClassListCmponent: ComponentInfo{
+    var typeTitle: String?
     var dataSlice: Data
     var componentTitle: String?
     var componentSubTitle: String?
     var section: Section64?
     var classInfoList:[ClassInfo]
-    
     var classRefSet:Set<String>?
     var classNameSet:Set<String>?
 
@@ -27,7 +27,7 @@ struct ClassListCmponent: ComponentInfo{
         self.classInfoList = classInfoList
         self.classRefSet = classRefSet
         self.classNameSet = classNameSet
-        
+        self.typeTitle = "Section"
     }
     
 }

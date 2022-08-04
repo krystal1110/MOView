@@ -10,6 +10,7 @@ import Foundation
  
 
 struct UStringComponent: ComponentInfo{
+    var typeTitle: String?
     var dataSlice: Data
     var componentTitle: String?
     var componentSubTitle: String?
@@ -22,6 +23,7 @@ struct UStringComponent: ComponentInfo{
         self.componentSubTitle = section?.sectname
         self.section = section
         self.uStringList = uStringList
+        self.typeTitle = "Section"
     }
     
 }

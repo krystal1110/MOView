@@ -10,6 +10,7 @@ import Foundation
  
 
 struct CFStringComponent: ComponentInfo{
+    var typeTitle: String?
     var dataSlice: Data
     var componentTitle: String?
     var componentSubTitle: String?
@@ -22,6 +23,7 @@ struct CFStringComponent: ComponentInfo{
         self.componentSubTitle = section?.sectname
         self.section = section
         self.objcCFStringList = objcCFStringList
+        self.typeTitle = "Section"
     }
     
 }

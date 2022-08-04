@@ -16,6 +16,7 @@ import Foundation
 
 
 public struct StringComponent: ComponentInfo{
+    public var typeTitle: String?
     public var dataSlice: Data
     public var componentTitle: String?
     public var componentSubTitle: String?
@@ -28,6 +29,14 @@ public struct StringComponent: ComponentInfo{
         self.componentSubTitle = section?.sectname
         self.section = section
         self.stringList = stringList
+        if let _ = section {
+            self.typeTitle = "Section"
+        }else{
+            self.typeTitle = "String Table"
+            self.componentTitle =  "__LINKEDIT"
+            self.componentSubTitle =  ""
+            
+        }
     }
     
 }

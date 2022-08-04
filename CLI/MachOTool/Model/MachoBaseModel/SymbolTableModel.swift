@@ -163,7 +163,7 @@ public struct SymbolTableModel {
     let nDesc: Swift.UInt16
     let nValue: UInt64
     
-    let translaitonItems: [ExplanationItem]
+    public var translaitonItems: [ExplanationItem]
     
     init(with data: Data, searchProtocol: SearchProtocol) {
         
@@ -319,7 +319,7 @@ public struct SymbolTableModel {
     
     
     // lazy find Symbol Name
-    func findSymbolName() -> ExplanationItem {
+    public func findSymbolName() -> ExplanationItem {
         let symbolName: String
         if indexInStringTable == 0 {
             symbolName = "" // if zero, means empty string
@@ -346,6 +346,7 @@ public struct SymbolTableModel {
             }
             symbolName = symbolStringFromStringTable
         }
+         
          let str =  runtimeGetDemangledName(symbolName)
         
         return  str

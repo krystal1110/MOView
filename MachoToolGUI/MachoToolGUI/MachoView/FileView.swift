@@ -15,23 +15,23 @@ import Combine
 
 struct FileViewCell: View {
     
-    let fileName: String
-    let arch: String
-    let size: String
-    let isSelected: Bool
+    var title: String = ""
+    var subTitle: String = ""
+    var extraTitle: String = ""
+    var isSelected: Bool = false
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(fileName)
+                Text(title)
                     .lineLimit(1)
                     .font(.system(size: 14))
                     .foregroundColor(isSelected ? .white : .black)
-                Text("\(arch)")
+                Text(subTitle)
                     .lineLimit(1)
                     .font(.system(size: 12))
                     .foregroundColor(isSelected ? .white : .secondary)
-                Text("Size - \(size)")
+                Text(extraTitle)
                     .lineLimit(1)
                     .font(.system(size: 12))
                     .foregroundColor(isSelected ? .white : .secondary)
@@ -44,13 +44,23 @@ struct FileViewCell: View {
         }
         .contentShape(Rectangle())
     }
+ 
     
-    init(_ loadCommand: MachOLoadCommandType, isSelected: Bool) {
+    init<T>(_ loadCommand: T, isSelected: Bool) {
+
         
-        print("---")
-        self.fileName = "Load Command"
-        self.size =  loadCommand.displayStore.commandSize
-        self.arch = loadCommand.displayStore.commandType
+        if let xxx = loadCommand as? MachOLoadCommandType{
+            
+            self.title = "Load Command"
+            self.subTitle = xxx.displayStore.commandType
+            self.extraTitle =  xxx.displayStore.commandSize
+             
+        }else if let xxx = loadCommand as? ComponentInfo{
+            self.title = xxx.typeTitle ?? ""
+            self.subTitle =   "\(xxx.componentTitle ?? ""),\(xxx.componentSubTitle ?? "")"
+            self.extraTitle = ""
+        }
+
         self.isSelected = isSelected
     }
 }
@@ -92,6 +102,7 @@ struct FileMachoHeaderCell: View{
 struct FileView: View {
     
     let fileUrl: URL
+    var typeArray: Array<Any> = []
     @State var selectedIndex: Int
     var macho:Macho? = nil
     var body: some View {
@@ -101,20 +112,13 @@ struct FileView: View {
                     ScrollView {
                         LazyVStack(alignment: .leading, spacing: 4) {
                             FileMachoHeaderCell(self.macho!.header,isSelected: -1 == self.selectedIndex).onTapGesture{self.selectedIndex = -1}
-                            ForEach(0..<self.macho!.commands.count){ index in
-                                FileViewCell(self.macho!.commands[index], isSelected: index == self.selectedIndex) .onTapGesture {
+                            ForEach(0..<self.typeArray.count){ index in
+                                FileViewCell(self.typeArray[index]  , isSelected: index == self.selectedIndex) .onTapGesture {
                                     self.selectedIndex = index
                                 }
                             }
-                            ForEach(0..<self.macho!.componts.count){ index in
-                                FileViewCompontCell(self.macho!.componts[index], isSelected: index == (self.selectedIndex - self.macho!.commands.count) ) .onTapGesture {
-                                    self.selectedIndex = index + self.macho!.commands.count
-                                }
-                            }
                         }
-                    }.frame(minWidth:200,maxWidth: 200)
-                    
-                
+                    }.frame(minWidth:215,maxWidth:215)
                     if selectedIndex == -1 {
                         MachoHexView(Display.machoHeaderDisplay(macho!.header))
                             .frame(minWidth:300)
@@ -139,9 +143,11 @@ struct FileView: View {
         _selectedIndex = State(initialValue: -1)
         if let macho = MachoTool.parseMacho(fileURL: fileUrl){
             self.macho = macho
+            var arr = Array<Any>()
+            arr.append(contentsOf: macho.commands)
+            arr.append(contentsOf: macho.componts)
+            self.typeArray = arr
         }
- 
-        
     }
 }
 

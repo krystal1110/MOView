@@ -8,6 +8,7 @@
 import Foundation
 
 public struct TextComponent: ComponentInfo{
+    public var typeTitle: String?
     public var dataSlice: Data
     public var componentTitle: String?
     public var componentSubTitle: String?
@@ -20,6 +21,7 @@ public struct TextComponent: ComponentInfo{
         self.componentSubTitle = section?.sectname
         self.section = section
         self.textInstructionPtr = textInstructionPtr
+        self.typeTitle = "Section"
     }
     
 }

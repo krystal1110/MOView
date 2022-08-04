@@ -61,9 +61,14 @@ public struct Display {
             let x = item.stringList.compactMap{$0.explanationItem};
             return x
         }else if type == SymbolTableComponent.self{
-            let item = compont as! SymbolTableComponent
-//            item.symbolTableList
+            var item = compont as! SymbolTableComponent
             
+            let symbolNameItem = item.symbolTableList[0].findSymbolName()
+            item.symbolTableList[0].translaitonItems.append(symbolNameItem)
+            
+            return item.symbolTableList[0].translaitonItems
+            
+               
         }else if type == TextComponent.self{
             
         }else if type == UnknownCmponent.self{

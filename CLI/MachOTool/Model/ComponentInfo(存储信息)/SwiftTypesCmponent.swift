@@ -10,6 +10,7 @@ import Foundation
 
 
 struct SwiftTypesCmponent: ComponentInfo{
+    var typeTitle: String?
     var dataSlice: Data
     var componentTitle: String?
     var componentSubTitle: String?
@@ -26,6 +27,7 @@ struct SwiftTypesCmponent: ComponentInfo{
         self.swiftTypesList = swiftTypesList
         self.swiftRefsSet = swiftRefsSet
         self.accessFuncDic = accessFuncDic
+        self.typeTitle = "Section"
     }
     
 }

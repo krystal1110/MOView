@@ -12,8 +12,7 @@ import Foundation
 */
 
 struct IndsymComponent:ComponentInfo{
-     
-    
+    var typeTitle: String?
     var dataSlice: Data
     var componentTitle: String?
     var componentSubTitle: String?
@@ -26,6 +25,7 @@ struct IndsymComponent:ComponentInfo{
         self.componentTitle = section?.segname
         self.componentSubTitle = section?.sectname
         self.indirectSymbolTableList = indirectSymbolTableList
+        self.typeTitle = "Indirect Symbol Table"
     }
     
 }
