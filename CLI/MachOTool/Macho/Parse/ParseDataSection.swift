@@ -10,7 +10,7 @@ import Foundation
 
 class ParseDataSection {
     
-    var componts: [ComponentInfo] = []
+    var modules: [MachoModule] = []
     
     func parseDataSection(_ data:Data ,commonds: [MachOLoadCommandType], searchProtocol: SearchProtocol ){
         
@@ -42,31 +42,31 @@ class ParseDataSection {
             
             let interpreter = ReferencesInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let ptrList = interpreter.transitionData()
-            let compont = ReferencesCmponent(dataSlice, section: section, referencesPtrList: ptrList)
-            componts.append(compont)
+            let module = ReferencesModule(with: dataSlice, section: section, pointers: ptrList)
+            modules.append(module)
         }
         else if  (section.sectname == DataSection.objc_classlist.rawValue){
             // __DATA_objc_classlist  objc_classrefs  objc_supperrefs 存储类的相关信息
             var interpreter = ClassListInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let classInfoList = interpreter.transitionData()
-            let compont = ClassListCmponent(dataSlice, section: section, classInfoList: classInfoList, classRefSet: interpreter.classRefSet,classNameSet: interpreter.classNameSet)
-            componts.append(compont)
+            let module = ClassListModule(with: dataSlice, section: section, pointers: classInfoList,classRefSet: interpreter.classRefSet,classNameSet: interpreter.classNameSet)
+            modules.append(module)
         }
         
         else if  (section.sectname == DataSection.objc_classlist.rawValue || section.sectname == DataSection.objc_classrefs.rawValue || section.sectname == DataSection.objc_superrefs.rawValue  || section.sectname == DataSection.objc_nlclslist.rawValue ){
             // __DATA_objc_classlist  objc_classrefs  objc_supperrefs 存储类的相关信息
             var interpreter = ClassListInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let classInfoList = interpreter.transitionData()
-            let compont = ClassListCmponent(dataSlice, section: section, classInfoList: classInfoList)
-            componts.append(compont)
+            let module = ClassListModule(with: dataSlice, section: section, pointers: classInfoList)
+            modules.append(module)
         }
         
         else if  (section.sectname == DataSection.objc_catlist.rawValue  || section.sectname == DataSection.objc_nlcatlist.rawValue  ){
             //  __DATA_objc_catlist  __DATA_objc_nlcatlist  存储使用到 category的类
             let interpreter = CategoryInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let classInfoList = interpreter.transitionData()
-            let compont = ClassListCmponent(dataSlice, section: section, classInfoList: classInfoList)
-            componts.append(compont)
+            let module = ClassListModule(with: dataSlice, section: section, pointers: classInfoList)
+            modules.append(module)
         }
         
         
@@ -79,26 +79,27 @@ class ParseDataSection {
             
             let interpreter = LazySymbolInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let list = interpreter.transitionData()
-            let compont = LazySymbolComponent(dataSlice, section: section, lazySymbolTableList: list)
-            componts.append(compont)
+            let module = LazyOrNoLazyModule(with: dataSlice, section: section, pointers: list)
+            modules.append(module)
         }
         
         else if (section.sectname == DataSection.objc_selrefs.rawValue){
             let interpreter = ReferencesInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
-            let stringTableList = interpreter.transitionData()
-            let compont = ReferencesCmponent(dataSlice, section: section, referencesPtrList: stringTableList)
-            componts.append(compont)
+            let list = interpreter.transitionData()
+            let module = ReferencesModule(with: dataSlice, section: section, pointers: list)
+            modules.append(module)
             
         }else if (section.sectname == DataSection.cfstring.rawValue){
             // 存储 Objective C 字符串的元数据
             let interpreter = CFStringInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let objcCFStringList = interpreter.transitionData()
-            let compont = CFStringComponent(dataSlice, section: section, objcCFStringList: objcCFStringList)
-            componts.append(compont)
+            
+            let module = CFStringModule(with: dataSlice, section: section, pointers: objcCFStringList)
+            modules.append(module)
             
         }else {
-            let compont = UnknownCmponent(dataSlice, section:section )
-            componts.append(compont)
+            let module = UnknownModule(with: dataSlice, section: section)
+            modules.append(module)
             
         }
         

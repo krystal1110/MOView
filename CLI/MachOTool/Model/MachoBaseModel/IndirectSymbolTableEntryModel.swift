@@ -9,8 +9,6 @@ import Foundation
 
 struct IndirectSymbolTableEntryModel {
     
-    
-    
     let entryRange: Range<Int>
     let symbolTableIndex: Int
     var explanationItem: ExplanationItem?

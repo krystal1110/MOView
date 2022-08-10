@@ -10,18 +10,15 @@ import Foundation
 
 class ParseTextSection {
     
-    var textInstructionPtr: UnsafeMutablePointer<cs_insn>?
+//    var textInstructionPtr: UnsafeMutablePointer<cs_insn>?
     
-    var componts: [ComponentInfo] = []
+    var modules: [MachoModule] = []
     
     func parseTextSection(_ data:Data ,commonds: [MachOLoadCommandType], searchProtocol: SearchProtocol ){
         
         for item in commonds {
             if item.name == SegmentType.TEXT.rawValue {
-                
-                
                 let model =  item as! MachOLoadCommand.Segment
-                
                 let _ =  model.sections.compactMap{parseTextSectionItem(data,section:$0,searchProtocol: searchProtocol)}
                  
             }
@@ -52,8 +49,8 @@ class ParseTextSection {
         if (section.sectname == TextSection.cstring.rawValue ||  section.sectname == TextSection.objc_classname.rawValue || section.sectname == TextSection.objc_methtype.rawValue){
             let interpreter = StringInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let stringTableList = interpreter.transitionData()
-            let compont = StringComponent(dataSlice, section: section, stringList: stringTableList)
-            componts.append(compont)
+            let module = StringModule(with: dataSlice, section: section, stringList: stringTableList)
+            modules.append(module)
         }
         
         
@@ -64,17 +61,15 @@ class ParseTextSection {
              **/
             let interpreter  = UstringInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let uStringList  =  interpreter.transitionData()
-            let compont = UStringComponent(dataSlice, section: section, uStringList: uStringList)
-            componts.append(compont)
+            let module = UStringModule(with: data, section: section, pointers: uStringList)
+            modules.append(module)
             
         }else if (section.sectname == TextSection.text.rawValue){
             // parse __Text  转为汇编
             
-            let textInstructionPtr = CapStoneHelper.instructions(data, from: UInt64(section.info.offset), length: UInt64(section.info.size))
-            self.textInstructionPtr = textInstructionPtr
-            let compont = TextComponent(dataSlice, section: section, textInstructionPtr: textInstructionPtr)
-            componts.append(compont)
-            
+            let csInsnPointer = CapStoneHelper.instructions(data, from: UInt64(section.info.offset), length: UInt64(section.info.size))
+           let module = TextModule(with: dataSlice, section: section, csInsnPointer: csInsnPointer)
+            modules.append(module)
         }else if (section.sectname == TextSection.swift5types.rawValue){
             /*
              __swift5_types 中存储的是 Class 、Struct 、 Enum 的地址
@@ -84,20 +79,17 @@ class ParseTextSection {
             
             var interpreter  = SwiftTypesInterpreter(with: data, dataSlice: dataSlice, section: section, searchProtocol: searchProtocol)
             let swiftTypesList  =  interpreter.transitionData()
-            let compont = SwiftTypesCmponent(dataSlice, section: section, swiftTypesList: swiftTypesList, swiftRefsSet: interpreter.swiftRefsSet, accessFuncDic: interpreter.accessFuncDic)
-            componts.append(compont)
-            
+            let module = SwiftTypesModule(with: dataSlice, section: section, pointers: swiftTypesList, swiftRefsSet: interpreter.swiftRefsSet, accessFuncDic: interpreter.accessFuncDic)
+            modules.append(module)
         }else if (section.sectname == TextSection.swift5reflstr.rawValue){
             
             let interpreter = StringInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let stringTableList = interpreter.transitionData()
-            let compont = StringComponent(dataSlice, section: section, stringList: stringTableList)
-            componts.append(compont)
+            let module = StringModule(with: dataSlice, section: section, stringList: stringTableList)
+            modules.append(module)
         } else {
-            
-            let compont = UnknownCmponent(dataSlice, section:section )
-            componts.append(compont)
-            
+            let module = UnknownModule(with: dataSlice, section: section)
+            modules.append(module)
         }
         
     }

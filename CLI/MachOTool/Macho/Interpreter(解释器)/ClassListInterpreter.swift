@@ -15,7 +15,7 @@ struct ClassInfo{
     var class64: Class64
     var relativeDataOffset: Int
     var pointerValue: Swift.UInt64
-    
+    var explanationItems: [ExplanationItem] = []
     
     init(_ relativeDataOffset: Int, pointerValue: UInt64, class64: Class64, class64Info:Class64Info , className:String? = nil , supclassName:String? = nil ){
         self.relativeDataOffset = relativeDataOffset
@@ -217,6 +217,8 @@ struct ClassListInterpreter: Interpreter {
             return nil
         }
     }
+    
+ 
 }
 
 

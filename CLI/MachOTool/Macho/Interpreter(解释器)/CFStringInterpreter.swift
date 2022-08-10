@@ -18,11 +18,7 @@ struct CFString64
 struct ObjcCFString {
     let cfString64:CFString64
     let stringName:String
-//    let ptr: UInt64
-//    let data: UInt64
-//    let cstrPointer: UInt64
-//    let cstrValue: String?
-//    let size: UInt64
+    var explanationItem: ExplanationItem? = nil
 }
 
 /*
@@ -79,5 +75,7 @@ struct CFStringInterpreter: Interpreter {
         }
         return pointers
     }
+    
+  
     
 }

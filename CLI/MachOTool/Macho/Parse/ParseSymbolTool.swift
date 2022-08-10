@@ -16,13 +16,13 @@ import MachO
 public class ParseSymbolTool{
     
     
-    var componts: [ComponentInfo] = []
+    var modules: [MachoModule] = []
     
     var stringInterpreter: StringInterpreter?
     
-    var symbolTableComponent:SymbolTableComponent?
+    var symbolTableComponent:SymbolTableModule?
     
-    var indsymComponent:IndsymComponent?
+    var indsymComponent:IndsymModule?
     
     func parseSymbol(_ data:Data ,commonds: [MachOLoadCommandType], searchProtocol: SearchProtocol){
         
@@ -67,9 +67,9 @@ public class ParseSymbolTool{
             models.append(model)
         }
         
-        let compont = SymbolTableComponent(symbolTableData, symbolTableList: models)
-        self.symbolTableComponent = compont
-        componts.append(compont)
+        let module = SymbolTableModule(with:symbolTableData, symbolTableList: models)
+        self.symbolTableComponent = module
+        modules.append(module)
     }
     
     
@@ -86,10 +86,8 @@ public class ParseSymbolTool{
         self.stringInterpreter = interpreter
         
         let stringTableList = interpreter.transitionData()
-        
-        let compont = StringComponent(data, section: nil, stringList: stringTableList)
-        
-        componts.append(compont)
+        let module = StringTabModule(with: data, stringTab: stringTableList)
+        modules.append(module)
     }
     
     
@@ -103,16 +101,10 @@ public class ParseSymbolTool{
             return
         }
         let indirectSymbolTableData = DataTool.interception(with: data, from: indirectSymbolTableStartOffset, length: indirectSymbolTableSize)
-        
         let interpreter = IndirectSymbolTableInterpreter(with: indirectSymbolTableData, section: nil, searchProtocol: searchProtocol)
-        
-         
-        
         let indirectTableList = interpreter.transitionData()
-        
-        let compont = IndsymComponent(data, indirectSymbolTableList: indirectTableList)
-        self.indsymComponent = compont
-        componts.append(compont)
+        let module = IndsymModule(with: data, indirectSymTab: indirectTableList)
+        self.indsymComponent = module
     }
     
     
@@ -152,7 +144,7 @@ public class ParseSymbolTool{
     // 根据 间接符号表 索引 来找到字符串
     func findStringInIndirectSymbolList(at index:Int) -> String? {
          
-        guard let indsymList = self.indsymComponent?.indirectSymbolTableList else{return nil}
+        guard let indsymList = self.indsymComponent?.indirectSymTab else{return nil}
         return findStringInSymbolTableList(at: indsymList[index].symbolTableIndex)
     }
  

@@ -33,8 +33,9 @@ public class Macho: Equatable {
     
     // loadCommands
     public let commands: [MachOLoadCommandType]
-    
     public var componts: [ComponentInfo] = []
+    public var modules: [MachoModule] = []
+    
     
     init(machoDataRaw: Data, machoFileName: String)  {
         data = machoDataRaw
@@ -53,37 +54,43 @@ public class Macho: Equatable {
         
         self.commands = Macho.loadCommands(from: data, header: header, attributes: Macho.machAttributes(from: data))
         
+        for command in self.commands {
+            modules.append(LoadCommandModule(with: command.displayStore.dataSlice, displayStore: command.displayStore))
+        }
+ 
+        
         let sectionFlagsDic = Macho.loadSectionFlags(from: data, header: header, attributes: Macho.machAttributes(from: data))
  
         // parse LC_SYMTAB    // parse LC_DYSYMTAB
         self.parseSymbolTool = ParseSymbolTool()
         self.parseSymbolTool.parseSymbol(data, commonds: self.commands, searchProtocol: self)
-        self.componts.append(contentsOf: self.parseSymbolTool.componts)
-        
-        // parse LC_DYSYMTAB
+        self.modules.append(contentsOf: self.parseSymbolTool.modules)
         
         // parse __TEXT
         let parseTextSection = ParseTextSection()
         parseTextSection.parseTextSection(data, commonds: self.commands, searchProtocol: self)
-        self.componts.append(contentsOf: parseTextSection.componts)
+        self.modules.append(contentsOf: parseTextSection.modules)
         
         // parse __DATA
         let parseDataSection = ParseDataSection()
         parseDataSection.parseDataSection(data, commonds: self.commands, searchProtocol: self)
-        self.componts.append(contentsOf: parseDataSection.componts)
+        self.modules.append(contentsOf: parseDataSection.modules)
         
         // parse custome section64
         let parseCustomSection = ParseCustomSection()
         parseCustomSection.parseCustomSections(data, commonds: self.commands, searchProtocol: self)
-        self.componts.append(contentsOf: parseCustomSection.componts)
+        self.modules.append(contentsOf: parseCustomSection.modules)
         
         
          
-        
+        print("----")
         
         
 //        sectionFlagsDic
 //          UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic).scanUselessClasses()
+        
+        
+        
         
     }
     
@@ -93,6 +100,41 @@ public class Macho: Equatable {
     }
     
     
+    func getAllCellModel() {
+        
+        
+        
+    }
+    
+    
+//   public func parseTextInstruction() ->  [[ExplanationItem]]{
+//        // 存储用于显示的asm指令 - 会很耗时
+//        var translaitonItems: [[ExplanationItem]] = []
+//       let textCompontList = componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.text.rawValue}
+//
+//        if textCompontList.count == 1{
+//           let textCompont = textCompontList[0] as! TextModule
+//
+//            if let size =   textCompont.section.info.size{
+//                let count = size/4
+//                var offset = textCompont.section.info.offset
+//                for i in 0..<count {
+//                    var translaitonItem: [ExplanationItem] = []
+//                    var op_str   = textCompont.csInsnPointer![Int(i)].op_str
+//                    var mnemonic = textCompont.textInstructionPtr![Int(i)].mnemonic
+//                    let dataStr =  Utils.readCharToString(&op_str)
+//                    let asmStr =  Utils.readCharToString(&mnemonic)
+//                    translaitonItem.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Offset", explanation: offset.hex)))
+//                    translaitonItem.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Asm", explanation: asmStr)))
+//                    translaitonItem.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Instruction", explanation: dataStr)))
+//                    translaitonItems.append(translaitonItem)
+//                    offset = offset + 4
+//                }
+//            }
+//        }
+//        return translaitonItems
+//    }
+//
     
     
 #warning("TODO  待迁移 dyldInfo段")
@@ -280,7 +322,6 @@ extension Macho {
             if type == .segment || type == .segment64 {
                 var segmentCommand64:segment_command_64 = loadCommand.data.extract(segment_command_64.self, offset: loadCommand.offset)
 
-                
                 let sectionOffset = loadCommand.offset + 0x48;
 
                 for i in 0..<segmentCommand64.nsects {
@@ -294,8 +335,6 @@ extension Macho {
         }
         return sectionDic
     }
-    
-    
 }
 
 

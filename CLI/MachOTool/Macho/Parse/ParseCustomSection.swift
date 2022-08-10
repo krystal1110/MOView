@@ -10,7 +10,7 @@ import Foundation
 
 class ParseCustomSection {
     
-    var componts: [ComponentInfo] = []
+    var modules: [MachoModule] = []
     
     func parseCustomSections(_ data:Data ,commonds: [MachOLoadCommandType], searchProtocol: SearchProtocol ){
         
@@ -38,8 +38,8 @@ class ParseCustomSection {
         
         for i in sections {
             let dataSlice = DataTool.interception(with: data, from: Int(i.info.offset), length: Int(i.info.size))
-            let compont = UnknownCmponent(dataSlice, section: i )
-            componts.append(compont)
+            let module = UnknownModule(with: dataSlice, section: i)
+            modules.append(module)
         }
     }
 }

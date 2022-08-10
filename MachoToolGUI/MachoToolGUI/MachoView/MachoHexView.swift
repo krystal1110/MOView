@@ -16,12 +16,8 @@ struct MachoHexView: View {
             ScrollViewReader { scrollProxy in
                 ScrollView(.vertical, showsIndicators: true)  {
                     LazyVStack(alignment: .leading, spacing: 0) {
-                        if modelList.count != 0 {
-                            ForEach(0..<modelList.count) { index in
-                                if index < modelList.count{
-                                    HexLineView(item: modelList[index])
-                                }
-                            }
+                        ForEach(0..<modelList.count,id:\.self) { index in
+                            HexLineView(item: modelList[index])
                         }
                         VStack(){
                             Divider().background(Color.gray)
@@ -29,7 +25,6 @@ struct MachoHexView: View {
                         }
                     }
                 }
-                
             }
         }
         .padding(4)
@@ -40,7 +35,6 @@ struct MachoHexView: View {
     init(_ modelList:[ExplanationItem]){
         self.modelList = modelList
     }
-    
 }
 
 
@@ -49,6 +43,8 @@ struct HexLineView: View {
     
     var title:String
     var content:String
+    var subTitle:String?
+    var subContent:String?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -62,7 +58,22 @@ struct HexLineView: View {
                 .textSelection(.enabled)
                 .fixedSize()
                 .padding(.leading, 0)
-                 
+            if let subT = subTitle, let subC = subContent {
+                Text(subT)
+                    .font(.system(size: 13))
+                    .foregroundColor(.secondary)
+                    .fixedSize()
+                    .padding(.leading, 0)
+                    .padding(.top, 5)
+                Text(subC)
+                    .font(.system(size: 12).monospaced())
+                    .textSelection(.enabled)
+                    .fixedSize()
+                    .padding(.leading, 0)
+            }
+ 
+            
+            
         }.padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 10))
         
     }
@@ -70,6 +81,8 @@ struct HexLineView: View {
     init(item:ExplanationItem){
         self.title = item.model.description ?? ""
         self.content =  item.model.explanation
+        self.subTitle = item.model.extraDescription
+        self.subContent = item.model.extraExplanation
     }
     
 }

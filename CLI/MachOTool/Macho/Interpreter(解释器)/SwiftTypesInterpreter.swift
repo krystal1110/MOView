@@ -13,6 +13,7 @@ struct SwiftTypeModel{
     var superClass: String? = ""
     var accessOffset: UInt64 = 0
     var fields: [SwiftTypeField]  = []// 存着变量名
+    var explanationItems: [ExplanationItem] = []
 }
 
 

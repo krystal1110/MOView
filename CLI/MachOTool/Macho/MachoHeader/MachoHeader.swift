@@ -85,14 +85,7 @@ public struct MachOHeader {
         
         let flagRange =  DataTool.absoluteRange(with: dataSlice, start:24, MemoryLayout<UInt32>.size)
         displayStore.insert(item: ExplanationItem(sourceDataRange: flagRange, model: ExplanationModel(description: "Flag", explanation: header.flags.hex)))
-        
- 
-                
-        
-       
-        
     }
- 
 }
 
  

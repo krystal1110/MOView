@@ -102,52 +102,18 @@ struct FileMachoHeaderCell: View{
 struct FileView: View {
     
     let fileUrl: URL
-    var typeArray: Array<Any> = []
-    @State var selectedIndex: Int
-    var macho:Macho? = nil
+    @State var macho: Macho
+    
     var body: some View {
         VStack(spacing:0){
-            GeometryReader{ px in
-                HSplitView{
-                    ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 4) {
-                            FileMachoHeaderCell(self.macho!.header,isSelected: -1 == self.selectedIndex).onTapGesture{self.selectedIndex = -1}
-                            ForEach(0..<self.typeArray.count){ index in
-                                FileViewCell(self.typeArray[index]  , isSelected: index == self.selectedIndex) .onTapGesture {
-                                    self.selectedIndex = index
-                                }
-                            }
-                        }
-                    }.frame(minWidth:215,maxWidth:215)
-                    if selectedIndex == -1 {
-                        MachoHexView(Display.machoHeaderDisplay(macho!.header))
-                            .frame(minWidth:300)
-                    }else{
-                        if selectedIndex < self.macho!.commands.count {
-                        MachoHexView(Display.loadCommondDisplay(macho!.commands[selectedIndex]))
-                            .frame(minWidth:300)
-                        }else{
-                            MachoHexView(Display.loadCompontsDisplay(macho!.componts[(selectedIndex - self.macho!.commands.count)]))
-                                .frame(minWidth:300)
-                             
-                        }
-                    }
-                    DetailsView().frame(minWidth:300)
-                }
-            }
+            MachoView($macho)
         }.padding(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 10))
     }
     
     init(fileUrl:URL) {
         self.fileUrl = fileUrl
-        _selectedIndex = State(initialValue: -1)
-        if let macho = MachoTool.parseMacho(fileURL: fileUrl){
-            self.macho = macho
-            var arr = Array<Any>()
-            arr.append(contentsOf: macho.commands)
-            arr.append(contentsOf: macho.componts)
-            self.typeArray = arr
-        }
+        let macho = MachoTool.parseMacho(fileURL: fileUrl)
+        _macho = State(initialValue: macho!)
     }
 }
 

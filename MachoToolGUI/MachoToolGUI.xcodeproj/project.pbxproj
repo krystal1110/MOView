@@ -15,12 +15,13 @@
 		FB0A26342891255400FA01F1 /* FileViewCompontCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A26332891255400FA01F1 /* FileViewCompontCell.swift */; };
 		FB0A26362891663200FA01F1 /* FileViewStringTABCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A26352891663200FA01F1 /* FileViewStringTABCell.swift */; };
 		FB0A263828919F9000FA01F1 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A263728919F9000FA01F1 /* DetailsView.swift */; };
-		FB554E9B2885481A00DEE366 /* LoadCommandsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB554E9A2885481A00DEE366 /* LoadCommandsView.swift */; };
 		FB554E9E28854DD000DEE366 /* GeneralModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB554E9D28854DD000DEE366 /* GeneralModel.swift */; };
 		FB595A6928805AA8005F9FA0 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB595A6828805AA8005F9FA0 /* FileView.swift */; };
 		FB595A6B28806E56005F9FA0 /* libswiftDemangle.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB595A6128802F37005F9FA0 /* libswiftDemangle.tbd */; };
 		FB595A75288114D7005F9FA0 /* iOSToolsTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = FB595A73288114B2005F9FA0 /* iOSToolsTest.zip */; };
 		FB5EDF522887F004002261CD /* MachoHexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EDF512887F004002261CD /* MachoHexView.swift */; };
+		FBD0EE1828A22AC600624731 /* MachoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EE1728A22AC600624731 /* MachoView.swift */; };
+		FBD0EE1A28A22EE500624731 /* MachoViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EE1928A22EE500624731 /* MachoViewItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,12 +37,13 @@
 		FB0A26332891255400FA01F1 /* FileViewCompontCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewCompontCell.swift; sourceTree = "<group>"; };
 		FB0A26352891663200FA01F1 /* FileViewStringTABCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewStringTABCell.swift; sourceTree = "<group>"; };
 		FB0A263728919F9000FA01F1 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
-		FB554E9A2885481A00DEE366 /* LoadCommandsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCommandsView.swift; sourceTree = "<group>"; };
 		FB554E9D28854DD000DEE366 /* GeneralModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralModel.swift; sourceTree = "<group>"; };
 		FB595A6128802F37005F9FA0 /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
 		FB595A6828805AA8005F9FA0 /* FileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
 		FB595A73288114B2005F9FA0 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = iOSToolsTest.zip; path = Resoure/iOSToolsTest.zip; sourceTree = "<group>"; };
 		FB5EDF512887F004002261CD /* MachoHexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoHexView.swift; sourceTree = "<group>"; };
+		FBD0EE1728A22AC600624731 /* MachoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoView.swift; sourceTree = "<group>"; };
+		FBD0EE1928A22EE500624731 /* MachoViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoViewItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +85,6 @@
 				FB554E9C28854D8900DEE366 /* Model */,
 				2D8B720F287FBAD200700929 /* MachoToolGUIApp.swift */,
 				2D8B7211287FBAD200700929 /* ContentView.swift */,
-				FB554E9A2885481A00DEE366 /* LoadCommandsView.swift */,
 				2D8B7213287FBAD300700929 /* Assets.xcassets */,
 				2D8B7218287FBAD300700929 /* MachoToolGUI.entitlements */,
 				2D8B7215287FBAD300700929 /* Preview Content */,
@@ -129,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				FB595A6828805AA8005F9FA0 /* FileView.swift */,
+				FBD0EE1728A22AC600624731 /* MachoView.swift */,
+				FBD0EE1928A22EE500624731 /* MachoViewItem.swift */,
 				FB5EDF512887F004002261CD /* MachoHexView.swift */,
 				FB0A26332891255400FA01F1 /* FileViewCompontCell.swift */,
 				FB0A26352891663200FA01F1 /* FileViewStringTABCell.swift */,
@@ -252,13 +255,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBD0EE1A28A22EE500624731 /* MachoViewItem.swift in Sources */,
 				FB554E9E28854DD000DEE366 /* GeneralModel.swift in Sources */,
 				FB595A6928805AA8005F9FA0 /* FileView.swift in Sources */,
 				FB0A263828919F9000FA01F1 /* DetailsView.swift in Sources */,
 				2D8B7212287FBAD200700929 /* ContentView.swift in Sources */,
 				FB5EDF522887F004002261CD /* MachoHexView.swift in Sources */,
-				FB554E9B2885481A00DEE366 /* LoadCommandsView.swift in Sources */,
 				2D8B7210287FBAD200700929 /* MachoToolGUIApp.swift in Sources */,
+				FBD0EE1828A22AC600624731 /* MachoView.swift in Sources */,
 				FB0A26342891255400FA01F1 /* FileViewCompontCell.swift in Sources */,
 				FB0A26362891663200FA01F1 /* FileViewStringTABCell.swift in Sources */,
 			);

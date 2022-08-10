@@ -24,7 +24,7 @@ class UnusedScanManager {
     //    var macho:Macho
     var componts: [ComponentInfo] = []
     
-    var textCompont : TextComponent?
+    var textCompont : TextModule?
     
     var parseSymbolTool: ParseSymbolTool
     
@@ -55,7 +55,7 @@ class UnusedScanManager {
         let textCompontList = componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.text.rawValue}
         
         if textCompontList.count == 1{
-            textCompont = textCompontList[0] as! TextComponent
+            textCompont = textCompontList[0] as! TextModule
         }
         
         
@@ -78,7 +78,7 @@ class UnusedScanManager {
         let allClassSet: Set<String> = []
         
         // 获取所有的类
-        let componts = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_classlist.rawValue} as! [ClassListCmponent])
+        let componts = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_classlist.rawValue} as! [ClassListModule])
         
         // 枚举等用到的
         if  let refsSet = componts.first?.classRefSet  {
@@ -99,7 +99,7 @@ class UnusedScanManager {
         /* 获取 OC 相关的 直接可以从 __DATA,objc_classrefs 中获取  还需要获取Category中获取  已经load调用的函数 */
         
         // 获取 nlclslist当中的类 16
-        let nlclslist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlclslist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
+        let nlclslist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlclslist.rawValue} as! [ClassListModule]).flatMap{$0.pointers}
         
         for i in nlclslist {
             if let className = i.className {
@@ -108,7 +108,7 @@ class UnusedScanManager {
         }
         
         // 获取 objc_classrefs当中的类   1302
-        let classRefsList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_classrefs.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
+        let classRefsList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_classrefs.rawValue} as! [ClassListModule]).flatMap{$0.pointers}
         
         for i in classRefsList {
             if let className = i.className {
@@ -121,7 +121,7 @@ class UnusedScanManager {
         
         
         // 获取非懒加载的cateory
-        let classCategoryList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlcatlist.rawValue} as! [ClassListCmponent]).flatMap{$0.classInfoList}
+        let classCategoryList = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.objc_nlcatlist.rawValue} as! [ClassListModule]).flatMap{$0.pointers}
         
         for i in classCategoryList {
             if let className = i.className {
@@ -132,7 +132,7 @@ class UnusedScanManager {
         
         
         // 获取__DATA,Cstring -> 解决 NSClassFromString 的导入
-        let cStringlist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.cfstring.rawValue} as! [CFStringComponent]).flatMap{$0.objcCFStringList}
+        let cStringlist = (componts.filter{$0.componentTitle == SegmentType.DATA.rawValue && $0.componentSubTitle == DataSection.cfstring.rawValue} as! [CFStringModule]).flatMap{$0.pointers}
         
         for i in cStringlist {
             refsClassSet.insert(i.stringName)
@@ -143,13 +143,13 @@ class UnusedScanManager {
         
         // 获取 Swift 相关的  通过 __DATA_Swif5types 中获取 Swift类的信息， 然后通过遍历__Text,text段的函数指令来 判断 是否调用 AccessFunc 函数
         
-        let swiftRefsSet = (componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.swift5types.rawValue} as! [SwiftTypesCmponent]).flatMap{$0.swiftRefsSet}
+        let swiftRefsSet = (componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.swift5types.rawValue} as! [SwiftTypesModule]).flatMap{$0.swiftRefsSet}
         
         for i in swiftRefsSet{
             refsClassSet.insert(i)
         }
         
-        let accessFuncList  = (componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.swift5types.rawValue} as! [SwiftTypesCmponent]).flatMap{$0.accessFuncDic}
+        let accessFuncList  = (componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.swift5types.rawValue} as! [SwiftTypesModule]).flatMap{$0.accessFuncDic}
         let symbolTableList  =  sortedSymbolList()
         
         let lock:NSLock = NSLock.init()
@@ -231,31 +231,22 @@ class UnusedScanManager {
         if (begin <  textAddr ){
             return false
         }
-        
         let maxText = textAddr + (section.info.size)
-        
         endAddr = min(maxText, end)
-        
         var beginAddr = begin
-        
-        
-        guard let textInstructionPtr = textCompont?.textInstructionPtr else{
+        guard let textInstructionPtr = textCompont?.csInsnPointer else{
             return false
         }
-        
         repeat {
             let index = (beginAddr - textAddr) / 4
             var op_str   = textInstructionPtr[Int(index)].op_str
             var mnemonic = textInstructionPtr[Int(index)].mnemonic
             let dataStr =  Utils.readCharToString(&op_str)
-            
             asmStr =  Utils.readCharToString(&mnemonic)
             
             if (strcmp(".byte", asmStr) == 0){
                 return false
             }
-           
-             
             if (dataStr.contains(targetStr)){
                 // 直接命中
                 return true
