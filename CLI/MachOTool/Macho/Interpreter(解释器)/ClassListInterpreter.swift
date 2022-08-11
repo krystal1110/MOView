@@ -25,6 +25,13 @@ struct ClassInfo{
         self.className = className
         self.supclassName = supclassName
         
+        explanationItems.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Offset", explanation:"\(relativeDataOffset)")))
+ 
+        explanationItems.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Data", explanation:pointerValue.hex)))
+        
+        if let name = className {
+            explanationItems.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Class Name", explanation:name)))
+        }
     }
 }
 
@@ -73,13 +80,9 @@ struct ClassListInterpreter: Interpreter {
     
     let pointerLength: Int = 8
     
-    var xxxxArray:[String] = []
-    
     var classRefSet: Set<String> = []
     
     var classNameSet: Set<String> = []
-    
-    var inde111x:Int = 0
     
     init(with  dataSlice: Data, section:Section64,  searchProtocol:SearchProtocol){
         self.dataSlice = dataSlice
@@ -129,14 +132,10 @@ struct ClassListInterpreter: Interpreter {
     
     mutating func loadClassList(_ relativeDataOffset:Int) -> ClassInfo?{
         
-         
-        
         var supclassNameStr: String?
         var classNameStr: String?
         
         let data =  dataSlice.select(from: relativeDataOffset, length: pointerLength)
-        
-        //        if data.UInt64 == 0 {return nil}
         
         let machoData = searchProtocol.getMachoData()
         
@@ -184,7 +183,6 @@ struct ClassListInterpreter: Interpreter {
                     classNameStr = className
                     classNameSet.insert(classNameStr!)
                 }
-                 
             }
             
             //enumerate member variables 枚举成员变量
@@ -215,6 +213,7 @@ struct ClassListInterpreter: Interpreter {
             return ClassInfo(relativeDataOffset, pointerValue: data.UInt64,class64: targetClass, class64Info: targetClassInfo, className: classNameStr, supclassName: supclassNameStr)
         }else{
             return nil
+//            return ClassInfo(relativeDataOffset, pointerValue: data.UInt64,class64: nil, class64Info: nil, className: classNameStr, supclassName: supclassNameStr)
         }
     }
     

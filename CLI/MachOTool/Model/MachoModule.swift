@@ -18,19 +18,26 @@ public protocol Reveal {
 
 
 
-public class MachoModule:Reveal {
+public class MachoModule:Reveal,Equatable {
+    let id = UUID()
+    public static func == (lhs: MachoModule, rhs: MachoModule) -> Bool {
+        return lhs.id == rhs.id
+    }
+    // 用于标记懒加载过了 不要重复加载
+    public var lazyIdentifier = [Int:Bool]()
     public let dataSlice:Data
     public var moduleTitle:String = ""
     public var moduleSubTitle:String = ""
-    
+    public var moduleExtraTitle:String?
     // 存储数据的数组 二维数组
     public var translateItems: [[ExplanationItem]]
     
-    init(with dataSlice:Data, translateItems: [[ExplanationItem]],moduleTitle:String = "", moduleSubTitle:String = ""){
+    init(with dataSlice:Data, translateItems: [[ExplanationItem]],moduleTitle:String = "", moduleSubTitle:String = "", moduleExtraTitle:String? = nil){
         self.dataSlice = dataSlice
         self.translateItems = translateItems
         self.moduleTitle = moduleTitle
         self.moduleSubTitle = moduleSubTitle
+        self.moduleExtraTitle = moduleExtraTitle
     }
     
     public func numberOfExplanationItemsSections() -> Int {
@@ -44,5 +51,9 @@ public class MachoModule:Reveal {
     public func cellForExplanationItem(at section: Int, row : Int) -> ExplanationItem{
         return self.translateItems[section][row]
     }
+    /// 需要保证在 cellForExplanationItem 之前使用
+    public func lazyConvertExplanation(at section:Int) {}
+    
+ 
     
 }

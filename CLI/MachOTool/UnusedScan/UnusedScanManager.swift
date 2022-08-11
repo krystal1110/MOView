@@ -153,10 +153,7 @@ class UnusedScanManager {
         let symbolTableList  =  sortedSymbolList()
         
         let lock:NSLock = NSLock.init()
-        print("Begin to start a DispatchApply")
-//        DispatchQueue.global(qos: .userInteractive).async {
             DispatchQueue.concurrentPerform(iterations: accessFuncList.count) { (index) in
-//        for index in 0..<accessFuncList.count {
                     autoreleasepool {
                         let i = accessFuncList[index]
                         let accessFunc = i.value
@@ -167,9 +164,7 @@ class UnusedScanManager {
                             lock.unlock()
                         }
                     }
-//            }
         }
-        print("Iteration have completed.")
     }
     
     
@@ -277,8 +272,6 @@ class UnusedScanManager {
         // 这里用字典实现 因为用数组后面去重 会很影响效率
         var symbolDic : Dictionary<String,UInt64> = [:]
         var symbolList : [SymbolRange] = []
-        
-        
         
         for i in 0..<parseSymbolTool.symbolTableComponent!.symbolTableList.count{
             var item = parseSymbolTool.symbolTableComponent!.symbolTableList[i]

@@ -12,16 +12,12 @@
 		2D8B7214287FBAD300700929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D8B7213287FBAD300700929 /* Assets.xcassets */; };
 		2D8B7217287FBAD300700929 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D8B7216287FBAD300700929 /* Preview Assets.xcassets */; };
 		5945684E2A42EBF7B6853A0B /* Pods_MachoToolGUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF47A9898CD90CFF85129443 /* Pods_MachoToolGUI.framework */; };
-		FB0A26342891255400FA01F1 /* FileViewCompontCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A26332891255400FA01F1 /* FileViewCompontCell.swift */; };
-		FB0A26362891663200FA01F1 /* FileViewStringTABCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A26352891663200FA01F1 /* FileViewStringTABCell.swift */; };
-		FB0A263828919F9000FA01F1 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0A263728919F9000FA01F1 /* DetailsView.swift */; };
 		FB554E9E28854DD000DEE366 /* GeneralModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB554E9D28854DD000DEE366 /* GeneralModel.swift */; };
 		FB595A6928805AA8005F9FA0 /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB595A6828805AA8005F9FA0 /* FileView.swift */; };
-		FB595A6B28806E56005F9FA0 /* libswiftDemangle.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FB595A6128802F37005F9FA0 /* libswiftDemangle.tbd */; };
 		FB595A75288114D7005F9FA0 /* iOSToolsTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = FB595A73288114B2005F9FA0 /* iOSToolsTest.zip */; };
-		FB5EDF522887F004002261CD /* MachoHexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5EDF512887F004002261CD /* MachoHexView.swift */; };
 		FBD0EE1828A22AC600624731 /* MachoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EE1728A22AC600624731 /* MachoView.swift */; };
-		FBD0EE1A28A22EE500624731 /* MachoViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EE1928A22EE500624731 /* MachoViewItem.swift */; };
+		FBD0EE1A28A22EE500624731 /* MachoModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EE1928A22EE500624731 /* MachoModuleView.swift */; };
+		FBF606D628A4062D00EB8057 /* ParseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF606D528A4062D00EB8057 /* ParseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,16 +30,13 @@
 		5A2B14DE29A9FE8E2D7BD34B /* Pods-MachoToolGUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MachoToolGUI.debug.xcconfig"; path = "Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI.debug.xcconfig"; sourceTree = "<group>"; };
 		9A4EECBD937CA736DA65B1F5 /* Pods-MachoToolGUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MachoToolGUI.release.xcconfig"; path = "Target Support Files/Pods-MachoToolGUI/Pods-MachoToolGUI.release.xcconfig"; sourceTree = "<group>"; };
 		DF47A9898CD90CFF85129443 /* Pods_MachoToolGUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MachoToolGUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB0A26332891255400FA01F1 /* FileViewCompontCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewCompontCell.swift; sourceTree = "<group>"; };
-		FB0A26352891663200FA01F1 /* FileViewStringTABCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewStringTABCell.swift; sourceTree = "<group>"; };
-		FB0A263728919F9000FA01F1 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		FB554E9D28854DD000DEE366 /* GeneralModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralModel.swift; sourceTree = "<group>"; };
-		FB595A6128802F37005F9FA0 /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
 		FB595A6828805AA8005F9FA0 /* FileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
 		FB595A73288114B2005F9FA0 /* iOSToolsTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = iOSToolsTest.zip; path = Resoure/iOSToolsTest.zip; sourceTree = "<group>"; };
-		FB5EDF512887F004002261CD /* MachoHexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoHexView.swift; sourceTree = "<group>"; };
 		FBD0EE1728A22AC600624731 /* MachoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoView.swift; sourceTree = "<group>"; };
-		FBD0EE1928A22EE500624731 /* MachoViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoViewItem.swift; sourceTree = "<group>"; };
+		FBD0EE1928A22EE500624731 /* MachoModuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachoModuleView.swift; sourceTree = "<group>"; };
+		FBF606D028A3C9FB00EB8057 /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
+		FBF606D528A4062D00EB8057 /* ParseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +45,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5945684E2A42EBF7B6853A0B /* Pods_MachoToolGUI.framework in Frameworks */,
-				FB595A6B28806E56005F9FA0 /* libswiftDemangle.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +95,7 @@
 		2FDE8457D6EDFDADFAC2A070 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FB595A6128802F37005F9FA0 /* libswiftDemangle.tbd */,
+				FBF606D028A3C9FB00EB8057 /* libswiftDemangle.tbd */,
 				DF47A9898CD90CFF85129443 /* Pods_MachoToolGUI.framework */,
 			);
 			name = Frameworks;
@@ -131,11 +123,8 @@
 			children = (
 				FB595A6828805AA8005F9FA0 /* FileView.swift */,
 				FBD0EE1728A22AC600624731 /* MachoView.swift */,
-				FBD0EE1928A22EE500624731 /* MachoViewItem.swift */,
-				FB5EDF512887F004002261CD /* MachoHexView.swift */,
-				FB0A26332891255400FA01F1 /* FileViewCompontCell.swift */,
-				FB0A26352891663200FA01F1 /* FileViewStringTABCell.swift */,
-				FB0A263728919F9000FA01F1 /* DetailsView.swift */,
+				FBD0EE1928A22EE500624731 /* MachoModuleView.swift */,
+				FBF606D528A4062D00EB8057 /* ParseView.swift */,
 			);
 			path = MachoView;
 			sourceTree = "<group>";
@@ -255,16 +244,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBD0EE1A28A22EE500624731 /* MachoViewItem.swift in Sources */,
+				FBD0EE1A28A22EE500624731 /* MachoModuleView.swift in Sources */,
 				FB554E9E28854DD000DEE366 /* GeneralModel.swift in Sources */,
 				FB595A6928805AA8005F9FA0 /* FileView.swift in Sources */,
-				FB0A263828919F9000FA01F1 /* DetailsView.swift in Sources */,
 				2D8B7212287FBAD200700929 /* ContentView.swift in Sources */,
-				FB5EDF522887F004002261CD /* MachoHexView.swift in Sources */,
+				FBF606D628A4062D00EB8057 /* ParseView.swift in Sources */,
 				2D8B7210287FBAD200700929 /* MachoToolGUIApp.swift in Sources */,
 				FBD0EE1828A22AC600624731 /* MachoView.swift in Sources */,
-				FB0A26342891255400FA01F1 /* FileViewCompontCell.swift in Sources */,
-				FB0A26362891663200FA01F1 /* FileViewStringTABCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

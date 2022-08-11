@@ -12,29 +12,7 @@ import Foundation
    里面存着符号表的信息
    interpreter -> 符号表数组 里面存放着所有的符号模型(SymbolTableEntryModel)
  */
-
  
-
-//public struct SymbolTableComponent:ComponentInfo{
-//    public var section: Section64?
-//    public var typeTitle: String?
-//    public var dataSlice: Data
-//    public var componentTitle: String?
-//    public var componentSubTitle: String?
-//    public var symbolTableList : [SymbolTableModel]
-//
-//
-//    init(_ dataSlice: Data, symbolTableList:[SymbolTableModel] ) {
-//        self.dataSlice = dataSlice
-//        self.componentTitle = "__LINKEDIT"
-//        self.componentSubTitle = ""
-//        self.symbolTableList = symbolTableList
-//        self.typeTitle = "Symbol Table"
-//    }
-//
-//}
-//
-
 
 public class SymbolTableModule:MachoModule{
     
@@ -49,5 +27,18 @@ public class SymbolTableModule:MachoModule{
         }
         super.init(with: dataSlice, translateItems: translateItems,moduleTitle: "__LINKEDIT",moduleSubTitle: "Symbol Table")
     }
+    
+    public override func lazyConvertExplanation(at section:Int) {
+        
+        
+        let value = self.lazyIdentifier[section] ?? false
+        if value {return}
+        self.lazyIdentifier.updateValue(true, forKey: section)
+        let model:SymbolTableModel = self.symbolTableList[section]
+        let item = model.findSymbolNameItem()
+        self.translateItems[section].append(item)
+    }
+    
+    
 }
 

@@ -13,6 +13,6 @@ public class LoadCommandModule:MachoModule{
          displayStore:DisplayStore) {
         var translateItems:[[ExplanationItem]]  = []
         translateItems.append(displayStore.items)
-        super.init(with: displayStore.dataSlice, translateItems: translateItems,moduleTitle:displayStore.commandType,moduleSubTitle: displayStore.commandSize)
+        super.init(with: displayStore.dataSlice, translateItems: translateItems,moduleTitle:"Load Command" ,moduleSubTitle: displayStore.commandType, moduleExtraTitle: displayStore.commandSize)
     }
 }

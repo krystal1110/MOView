@@ -42,46 +42,46 @@ public struct DisplayModel{
 /// 拼装GUI需要显示的数据
 public struct Display {
     
-    public static func machoHeaderDisplay(_ machoHeader:MachOHeader) -> [ExplanationItem] {
-        return machoHeader.displayStore.items
-    }
+//    public static func machoHeaderDisplay(_ machoHeader:MachOHeader) -> [ExplanationItem] {
+//        return machoHeader.displayStore.items
+//    }
     
     
     
-    public static func loadItemDisplay<T>(_ item: T) -> [ExplanationItem] {
-        if let loadCommand = item as? MachOLoadCommandType{
-            return loadCommand.displayStore.items
-        }else if let compont = item as? ComponentInfo{
-            return loadCompontsDisplay(compont)
-        }
-        return []
-        
-    }
+//    public static func loadItemDisplay<T>(_ item: T) -> [ExplanationItem] {
+//        if let loadCommand = item as? MachOLoadCommandType{
+//            return loadCommand.displayStore.items
+//        }else if let compont = item as? ComponentInfo{
+//            return loadCompontsDisplay(compont)
+//        }
+//        return []
+//
+//    }
  
-    public static func loadCompontsDisplay(_ compont:ComponentInfo) -> [ExplanationItem] {
-        
-        
-        let type  = type(of: compont)
-        if type == StringComponent.self {
-            let item = compont as! StringComponent
-            let x = item.stringList.compactMap{$0.explanationItem};
-            return x
-        }else if type == TextComponent.self{
-//            let item = compont as! TextComponent
-//            item.section.
-              
-            
-            
-//            print("---")
-             
-//            var op_str   = item.textInstructionPtr[Int(index)].op_str
-//            var mnemonic = item.textInstructionPtr[Int(index)].mnemonic
-            
-        }else if type == UnknownCmponent.self{
-            
-        }
-        return []
-    }
+//    public static func loadCompontsDisplay(_ compont:ComponentInfo) -> [ExplanationItem] {
+//
+//
+//        let type  = type(of: compont)
+//        if type == StringComponent.self {
+//            let item = compont as! StringComponent
+//            let x = item.stringList.compactMap{$0.explanationItem};
+//            return x
+//        }else if type == TextComponent.self{
+////            let item = compont as! TextComponent
+////            item.section.
+//
+//
+//
+////            print("---")
+//
+////            var op_str   = item.textInstructionPtr[Int(index)].op_str
+////            var mnemonic = item.textInstructionPtr[Int(index)].mnemonic
+//
+//        }else if type == UnknownCmponent.self{
+//
+//        }
+//        return []
+//    }
  
     
 }

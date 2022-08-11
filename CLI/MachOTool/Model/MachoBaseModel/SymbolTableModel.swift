@@ -177,8 +177,6 @@ public struct SymbolTableModel {
         
         translaitonItems.append(ExplanationItem(sourceDataRange: indexInStringTableRange, model: ExplanationModel(description: "Index In String Table", explanation: "\(indexInStringTable)")))
         
-        
-        
         /*
          * n_type
          * The n_type field really contains four fields:
@@ -192,15 +190,9 @@ public struct SymbolTableModel {
         let nTypeByteRange = DataTool.absoluteRange(with: data, start: 4, 1)
         let nTypeRaw = DataTool.interception(with: data, from: 4, length: 1).UInt8
         let symbolType = SymbolType(nTypeRaw: nTypeRaw)
+        var symbolTypeExplanation = "\(symbolType)"
         self.symbolType = symbolType
         
-        translaitonItems.append(ExplanationItem(sourceDataRange: nTypeByteRange, model: ExplanationModel(description: "Symbol Type", explanation: symbolType.readable)))
-        
-        
-        let isPrivateExternalSymbol = (nTypeRaw & 0x10) != 0 // 0x10 == N_PEXT mask == 00010000 /* private external symbol bit */
-        self.isPrivateExternalSymbol = isPrivateExternalSymbol
-        let isExternalSymbol = (nTypeRaw & 0x01) != 0 // 0x01 == N_EXT mask == 00000001 /* external symbol bit, set for external symbols */
-        self.isExternalSymbol = isExternalSymbol
         
         /*
          * n_sect
@@ -223,12 +215,39 @@ public struct SymbolTableModel {
         translaitonItems.append(ExplanationItem(sourceDataRange: nValueRawDataRange, model: ExplanationModel(description: "nValue", explanation: "\(nValue)")))
         
         
- 
-        
-        
         self.nSect = nSect
         self.nDesc = nDesc
         self.nValue = nValue
+        
+        
+ 
+ 
+        
+        switch symbolType {
+   
+        case .undefined:
+            break
+        case .absolute:
+            break
+        case .section:
+            if (Int(nSect) == 40){}
+            symbolTypeExplanation += (searchProtocol.sectionName(at: Int(nSect)) + " (N_SECT)")
+            
+        case .indirect:
+            break
+        default:
+            break;
+        }
+        
+        translaitonItems.append(ExplanationItem(sourceDataRange: nTypeByteRange, model: ExplanationModel(description: "Symbol Type", explanation: symbolTypeExplanation)))
+        
+        
+        let isPrivateExternalSymbol = (nTypeRaw & 0x10) != 0 // 0x10 == N_PEXT mask == 00010000 /* private external symbol bit */
+        self.isPrivateExternalSymbol = isPrivateExternalSymbol
+        let isExternalSymbol = (nTypeRaw & 0x01) != 0 // 0x01 == N_EXT mask == 00000001 /* external symbol bit, set for external symbols */
+        self.isExternalSymbol = isExternalSymbol
+        
+ 
         self.translaitonItems = translaitonItems
         
         
@@ -319,7 +338,7 @@ public struct SymbolTableModel {
     
     
     // lazy find Symbol Name
-    public func findSymbolName() -> ExplanationItem {
+    public func findSymbolNameItem() -> ExplanationItem {
         let symbolName: String
         if indexInStringTable == 0 {
             symbolName = "" // if zero, means empty string
@@ -331,8 +350,7 @@ public struct SymbolTableModel {
         }
         
         return ExplanationItem(sourceDataRange: indexInStringTableRange,
-                               model:  ExplanationModel(description: "String table offset", explanation: indexInStringTable.hex,
-                                                        extraDescription: "Symbol Name", extraExplanation: symbolName))
+                               model:  ExplanationModel(description: "Symbol Name", explanation: symbolName))
     }
     
     

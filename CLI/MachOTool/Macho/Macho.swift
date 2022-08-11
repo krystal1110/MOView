@@ -82,7 +82,7 @@ public class Macho: Equatable {
         self.modules.append(contentsOf: parseCustomSection.modules)
         
         
-         
+        self.modules.sorted(by: {$0.dataSlice.startIndex < $1.dataSlice.startIndex})
         print("----")
         
         
@@ -228,7 +228,9 @@ extension Macho: SearchProtocol {
     
     func sectionName(at ordinal: Int) -> String {
         if ordinal > self.componts.count {
-            fatalError()
+//            fatalError()
+            return ""
+            
         }
         // ordinal starts from 1
         let sectionHeader = self.componts[ordinal - 1]
