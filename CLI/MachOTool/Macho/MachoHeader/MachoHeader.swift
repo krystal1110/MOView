@@ -49,15 +49,8 @@ public struct MachOHeader {
         
         let cpuType  =  CPUType(UInt32(header.cputype))
         self.cpuTypeString = cpuType.name
-//        self.cpuType = cpuType.name
-//        self.magicType = MagicType.macho64.name
-//        self.cpuSubtype = CPUSubtype(UInt32(header.cpusubtype), cpuType: cpuType).name
-//        self.machoType = MachoType(with: header.filetype).name
         
         self.displayStore = DisplayStore(dataSlice: dataSlice)
-        
- 
-        
         
         let magicTypeRange =  DataTool.absoluteRange(with: dataSlice, start:0, MemoryLayout<UInt32>.size)
         displayStore.insert(item: ExplanationItem(sourceDataRange: magicTypeRange, model: ExplanationModel(description: "Magic Type", explanation: MagicType.macho64.name)))
@@ -75,16 +68,53 @@ public struct MachOHeader {
         displayStore.insert(item: ExplanationItem(sourceDataRange: filetypeRange, model: ExplanationModel(description: "File Type", explanation: MachoType(with: header.filetype).name)))
         
         let nlcRange =  DataTool.absoluteRange(with: dataSlice, start:16, MemoryLayout<UInt32>.size)
-        displayStore.insert(item: ExplanationItem(sourceDataRange: nlcRange, model: ExplanationModel(description: "Number of Load Commands", explanation: header.ncmds.hex)))
+        displayStore.insert(item: ExplanationItem(sourceDataRange: nlcRange, model: ExplanationModel(description: "Number of Load Commands", explanation: "\(header.ncmds)")))
         
  
         
         let slcRange =  DataTool.absoluteRange(with: dataSlice, start:20, MemoryLayout<UInt32>.size)
-        displayStore.insert(item: ExplanationItem(sourceDataRange: slcRange, model: ExplanationModel(description: "Size of Load Commands", explanation: header.sizeofcmds.hex)))
+        displayStore.insert(item: ExplanationItem(sourceDataRange: slcRange, model: ExplanationModel(description: "Size of Load Commands", explanation: "\(header.sizeofcmds)")))
     
-        
         let flagRange =  DataTool.absoluteRange(with: dataSlice, start:24, MemoryLayout<UInt32>.size)
-        displayStore.insert(item: ExplanationItem(sourceDataRange: flagRange, model: ExplanationModel(description: "Flag", explanation: header.flags.hex)))
+        displayStore.insert(item: ExplanationItem(sourceDataRange: flagRange, model: ExplanationModel(description: "Flags", explanation: MachOHeader.flagsDescriptionFrom(header.flags))))
+        
+       let _ = displayStore.translate(from: 28, length: 4, dataInterpreter: {$0.UInt32}) { reserved in
+            ExplanationModel(description: "Reserved", explanation: reserved.hex)
+        }
+  
+          
+     
+    }
+    
+    private static func flagsDescriptionFrom(_ flags: UInt32) -> String {
+        // this line of shit I'll never understand.. after today...
+        return [
+            "MH_NOUNDEFS",
+            "MH_INCRLINK",
+            "MH_DYLDLINK",
+            "MH_BINDATLOAD",
+            "MH_PREBOUND",
+            "MH_SPLIT_SEGS",
+            "MH_LAZY_INIT",
+            "MH_TWOLEVEL",
+            "MH_FORCE_FLAT",
+            "MH_NOMULTIDEFS",
+            "MH_NOFIXPREBINDING",
+            "MH_PREBINDABLE",
+            "MH_ALLMODSBOUND",
+            "MH_SUBSECTIONS_VIA_SYMBOLS",
+            "MH_CANONICAL",
+            "MH_WEAK_DEFINES",
+            "MH_BINDS_TO_WEAK",
+            "MH_ALLOW_STACK_EXECUTION",
+            "MH_ROOT_SAFE",
+            "MH_SETUID_SAFE",
+            "MH_NO_REEXPORTED_DYLIBS",
+            "MH_PIE",
+            "MH_DEAD_STRIPPABLE_DYLIB",
+            "MH_HAS_TLV_DESCRIPTORS",
+            "MH_NO_HEAP_EXECUTION",
+        ].enumerated().filter { flags & (0x1 << $0.offset) != 0 }.map { $0.element }.joined(separator: "\n")
     }
 }
 

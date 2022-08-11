@@ -50,6 +50,7 @@ public class Macho: Equatable {
         
         // read headerparseTextSection.componts
         header = Macho.readMachOHeader(dataSlice: data)
+        modules.append(HeaderModule(with: data, header:header))
         
         
         self.commands = Macho.loadCommands(from: data, header: header, attributes: Macho.machAttributes(from: data))

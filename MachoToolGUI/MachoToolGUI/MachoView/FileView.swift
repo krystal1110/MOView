@@ -13,57 +13,57 @@ import Combine
 
 
 
-struct FileViewCell: View {
-    
-    var title: String = ""
-    var subTitle: String = ""
-    var extraTitle: String = ""
-    var isSelected: Bool = false
-    
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(title)
-                    .lineLimit(1)
-                    .font(.system(size: 14))
-                    .foregroundColor(isSelected ? .white : .black)
-                Text(subTitle)
-                    .lineLimit(1)
-                    .font(.system(size: 12))
-                    .foregroundColor(isSelected ? .white : .secondary)
-                Text(extraTitle)
-                    .lineLimit(1)
-                    .font(.system(size: 12))
-                    .foregroundColor(isSelected ? .white : .secondary)
-            }
-            Spacer()
-        }
-        .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
-        .background{
-            RoundedRectangle(cornerRadius: 4, style: .continuous).fill(isSelected ? Theme.selected : .white)
-        }
-        .contentShape(Rectangle())
-    }
- 
-    
-    init<T>(_ loadCommand: T, isSelected: Bool) {
-
-        
-        if let xxx = loadCommand as? MachOLoadCommandType{
-            
-            self.title = "Load Command"
-            self.subTitle = xxx.displayStore.commandType
-            self.extraTitle =  xxx.displayStore.commandSize
-             
-        }else if let xxx = loadCommand as? ComponentInfo{
-            self.title = xxx.typeTitle ?? ""
-            self.subTitle =   "\(xxx.componentTitle ?? ""),\(xxx.componentSubTitle ?? "")"
-            self.extraTitle = ""
-        }
-
-        self.isSelected = isSelected
-    }
-}
+//struct FileViewCell: View {
+//
+//    var title: String = ""
+//    var subTitle: String = ""
+//    var extraTitle: String = ""
+//    var isSelected: Bool = false
+//
+//    var body: some View {
+//        HStack {
+//            VStack(alignment: .leading) {
+//                Text(title)
+//                    .lineLimit(1)
+//                    .font(.system(size: 14))
+//                    .foregroundColor(isSelected ? .white : .black)
+//                Text(subTitle)
+//                    .lineLimit(1)
+//                    .font(.system(size: 12))
+//                    .foregroundColor(isSelected ? .white : .secondary)
+//                Text(extraTitle)
+//                    .lineLimit(1)
+//                    .font(.system(size: 12))
+//                    .foregroundColor(isSelected ? .white : .secondary)
+//            }
+//            Spacer()
+//        }
+//        .padding(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
+//        .background{
+//            RoundedRectangle(cornerRadius: 4, style: .continuous).fill(isSelected ? Theme.selected : .white)
+//        }
+//        .contentShape(Rectangle())
+//    }
+//
+//
+//    init<T>(_ loadCommand: T, isSelected: Bool) {
+//
+//
+//        if let xxx = loadCommand as? MachOLoadCommandType{
+//
+//            self.title = "Load Command"
+//            self.subTitle = xxx.displayStore.commandType
+//            self.extraTitle =  xxx.displayStore.commandSize
+//
+//        }else if let xxx = loadCommand as? ComponentInfo{
+//            self.title = xxx.typeTitle ?? ""
+//            self.subTitle =   "\(xxx.componentTitle ?? ""),\(xxx.componentSubTitle ?? "")"
+//            self.extraTitle = ""
+//        }
+//
+//        self.isSelected = isSelected
+//    }
+//}
 
 struct FileMachoHeaderCell: View{
     

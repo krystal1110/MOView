@@ -14,6 +14,7 @@ public class DisplayStore{
     public var items: [ExplanationItem] = []
     public let dataSlice: Data
     public var commandType:String = ""
+    public var segmentName:String = ""
     public var commandSize:String = ""
     
     
