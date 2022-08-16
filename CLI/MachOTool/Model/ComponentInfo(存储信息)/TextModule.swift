@@ -31,8 +31,15 @@ public class TextModule:MachoModule{
         let asmStr = Utils.readCharToString(&mnemonic)
         explanationItems.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Offset", explanation: offset.hex)))
         explanationItems.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Asm", explanation: asmStr)))
-        explanationItems.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Instruction", explanation: dataStr)))
+        if !asmStr.contains("ret"){
+            explanationItems.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Instruction", explanation: dataStr)))
+        }
+ 
         self.translateItems.append(explanationItems)
+    }
+    
+    public override func numberOfExplanationItems(at section: Int) -> Int {
+        return self.translateItems[section].count
     }
     
     public override func numberOfExplanationItemsSections() -> Int {

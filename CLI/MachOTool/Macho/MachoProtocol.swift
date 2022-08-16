@@ -35,6 +35,8 @@ protocol SearchProtocol: AnyObject {
     func searchStringInSymbolTable(by nValue:UInt64) -> String?
     
     
+    func findSymbol(at value:UInt64) -> String
+    
     // search section name
     func sectionName(at ordinal: Int) -> String
     

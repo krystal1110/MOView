@@ -56,8 +56,7 @@ struct LazySymbolInterpreter: Interpreter {
     
     
     func translationItem(at index:Int) -> ExplanationItem {
-        let pointerRawData = DataTool.interception(with: dataSlice, from: index * pointerSize, length: pointerSize)
-        let pointerRawValue =   pointerRawData.UInt64
+//        let _ = DataTool.interception(with: dataSlice, from: index * pointerSize, length: pointerSize)
         let indirectSymbolTableIndex = index + startIndexInIndirectSymbolTable
         
         var symbolName: String?
@@ -65,25 +64,12 @@ struct LazySymbolInterpreter: Interpreter {
         if let _symbolName = searchProtocol.searchInIndirectSymbolTableList(at: indirectSymbolTableIndex){
             symbolName = _symbolName
         }
-        
-        var description = "Pointer Raw Value"
-        if sectionType == .S_LAZY_SYMBOL_POINTERS {
-            description += " (Stub offset)"
-        } else if sectionType == .S_NON_LAZY_SYMBOL_POINTERS {
-            description += " (To be fixed by dyld)"
-        }
-         
-        return ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: dataSlice, start: index * pointerSize, pointerSize),
-                               model: ExplanationModel(description: description,
-                                                       explanation: pointerRawValue.hex,
-                                                       
-                                                       extraDescription: "Symbol Name of the Corresponding Indirect Symbol Table Entry",
+        let dataRange = DataTool.absoluteRange(with: dataSlice, start: index * pointerSize, pointerSize)
+        return ExplanationItem(sourceDataRange: dataRange,
+                               model: ExplanationModel(description: "Offset",
+                                                       explanation: dataRange.startIndex.hex,
+                                                       extraDescription: "Symbol Name",
                                                        extraExplanation: symbolName))
     }
-    
- 
-    
- 
 
- 
 }

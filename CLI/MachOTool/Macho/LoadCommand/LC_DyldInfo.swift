@@ -12,7 +12,7 @@ extension MachOLoadCommand {
     public struct LC_DyldInfo: MachOLoadCommandType {
         public var displayStore: DisplayStore
         public var name: String
-        public var command: dyld_info_command? = nil;
+        public var command: dyld_info_command
         
         init(command: dyld_info_command, displayStore:DisplayStore) {
             let types =   LoadCommandType(rawValue: command.cmd)

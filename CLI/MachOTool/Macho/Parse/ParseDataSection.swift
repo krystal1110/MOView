@@ -40,10 +40,10 @@ class ParseDataSection {
         
         if (section.sectname == DataSection.objc_protolist.rawValue  ){
             
-            let interpreter = ReferencesInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
-            let ptrList = interpreter.transitionData()
-            let module = ReferencesModule(with: dataSlice, section: section, pointers: ptrList)
-            modules.append(module)
+//            let interpreter = ReferencesInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
+//            let ptrList = interpreter.transitionData()
+//            let module = ReferencesModule(with: dataSlice, section: section, pointers: ptrList)
+//            modules.append(module)
         }
         else if  (section.sectname == DataSection.objc_classlist.rawValue){
             // __DATA_objc_classlist  objc_classrefs  objc_supperrefs 存储类的相关信息

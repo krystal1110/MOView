@@ -26,6 +26,9 @@ enum TextSection: String {
     case swift5replace   = "__swift5_replace"
     case swift5reflstr   = "__swift5_reflstr"
     case swift5typeref   = "__swift5_typeref"
+    
+    case stubs           = "__stubs"
+    case stub_help       = "__stub_helper"
 }
 
 enum DataSection: String {

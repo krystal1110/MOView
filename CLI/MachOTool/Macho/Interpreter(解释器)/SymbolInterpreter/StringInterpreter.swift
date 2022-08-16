@@ -87,7 +87,7 @@ struct StringInterpreter: Interpreter {
         }
 
         return ExplanationItem(sourceDataRange: cStringAbsoluteRange,
-                               model: ExplanationModel(description: "UTF8-String", explanation: explanation, extraExplanation: explanation))
+                               model: ExplanationModel(description: "UTF8-String", explanation: explanation))
     }
     
 }

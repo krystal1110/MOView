@@ -90,36 +90,33 @@ private struct ParseViewItemView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
+            
             if let description = item.item.model.description {
                 Text(description)
                     .font(.system(size: 12))
                     .foregroundColor(.secondary)
                     .padding(.bottom, 2)
             }
-            
-            
-            
-            
             Text(item.item.model.explanation)
+                .foregroundColor(.black)
 //                .foregroundColor(isSelected ? .white : item.content.explanationStyle.fontColor)
-                .font(.system(size: 14))
+//                .font(item.item.monoSpaced ? .system(size: 12).monospaced() : .system(size: 14))
                 .background(isSelected ? Theme.selected : .white)
-            
-//            if let extraDescription = item.content.extraDescription {
-//                Text(extraDescription)
-//                    .font(.system(size: 12))
-//                    .foregroundColor(.secondary)
-//                    .padding(.top, 2)
-//                    .padding(.bottom, 2)
-//            }
-//            if let extraExplanation = item.content.extraExplanation {
-//                Text(extraExplanation)
-//                    .foregroundColor(.gray)
-//                    .font(item.content.monoSpaced ? .system(size: 12).monospaced() : .system(size: 14))
-//            }
-            if item.hasDivider {
-                Divider().background(.blue)
+            if let extraDescription = item.item.model.extraDescription {
+                Text(extraDescription)
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+                    .padding(.top, 2)
+                    .padding(.bottom, 2)
             }
+            if let extraExplanation = item.item.model.extraExplanation {
+                Text(extraExplanation)
+                    .foregroundColor(.black)
+                    .font(.system(size: 12))
+            }
+//            if item.hasDivider {
+                Divider().background(.blue)
+//            }
         }
         .padding(.leading, 4)
         .padding(.bottom, 3)

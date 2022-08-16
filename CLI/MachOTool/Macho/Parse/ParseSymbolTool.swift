@@ -14,7 +14,8 @@ import MachO
  用于解析 String Table / Symbol Table / Indirect Symbol Table
  **/
 public class ParseSymbolTool{
-    
+    // 除了 symtab的数据（Lazy）  其他都有
+    var symbolNames:Dictionary<Int,String> = [:]
     
     var modules: [MachoModule] = []
     
@@ -66,6 +67,8 @@ public class ParseSymbolTool{
             let model = SymbolTableModel(with: modelData, searchProtocol: searchProtocol)
             models.append(model)
         }
+         
+        
         
         let module = SymbolTableModule(with:symbolTableData, symbolTableList: models)
         self.symbolTableComponent = module
@@ -92,9 +95,7 @@ public class ParseSymbolTool{
     
     
     func parseIndsymTable(_ data: Data , command: dysymtab_command , searchProtocol: SearchProtocol){
-        
  
-        
         let indirectSymbolTableStartOffset = Int(command.indirectsymoff)
         let indirectSymbolTableSize = Int(command.nindirectsyms * 4)
         if indirectSymbolTableSize == .zero {
@@ -103,6 +104,7 @@ public class ParseSymbolTool{
         let indirectSymbolTableData = DataTool.interception(with: data, from: indirectSymbolTableStartOffset, length: indirectSymbolTableSize)
         let interpreter = IndirectSymbolTableInterpreter(with: indirectSymbolTableData, section: nil, searchProtocol: searchProtocol)
         let indirectTableList = interpreter.transitionData()
+         
         let module = IndsymModule(with: data, indirectSymTab: indirectTableList)
         self.indsymComponent = module
     }
@@ -115,9 +117,7 @@ public class ParseSymbolTool{
     
     // 根据 符号表 nValue 查找 字符串
     func findStringInSymbolTable(by nValue:UInt64) -> String? {
-        
         guard let symbolTableList = self.symbolTableComponent?.symbolTableList else{return nil}
-        
         for model in symbolTableList {
             if (nValue == model.nValue){
                 return self.findStringWithIndex(at: Int(model.indexInStringTable))
@@ -143,7 +143,6 @@ public class ParseSymbolTool{
     
     // 根据 间接符号表 索引 来找到字符串
     func findStringInIndirectSymbolList(at index:Int) -> String? {
-         
         guard let indsymList = self.indsymComponent?.indirectSymTab else{return nil}
         return findStringInSymbolTableList(at: indsymList[index].symbolTableIndex)
     }

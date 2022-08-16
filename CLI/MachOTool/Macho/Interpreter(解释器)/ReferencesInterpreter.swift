@@ -46,33 +46,24 @@ struct ReferencesInterpreter: Interpreter {
             
             let relativeDataOffset = index * pointerLength
                 let pointerRawData = rawData.select(from: relativeDataOffset, length: pointerLength)
+             
                 var pointer = ReferencesPointer(relativeDataOffset: relativeDataOffset,
                                              pointerValue:pointerRawData.UInt64)
-                pointer.explanationItem  = translationItem(with: pointer);
+                pointer.explanationItem  = ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: dataSlice,
+                                                                                                   start:pointer.relativeDataOffset, self.pointerLength),
+                                                          model: ExplanationModel(description: "Offset",
+                                                                                  explanation: "\(pointerRawData.startIndex.hex)",
+                                                                                  
+                                                                                  extraDescription: "Pointer Value (Virtual Address)",
+                                                                                  extraExplanation: pointer.pointerValue.hex))
+            
                 pointers.append(pointer)
             
         }
         return pointers
     }
     
-    
-    func translationItem(with pointer:ReferencesPointer) -> ExplanationItem {
-        
-        #warning("TODO")
-        var symbolName = ""
-//        self.searchProtocol.searchString(by: pointer.pointerValue)
-        
-//        if (symbolName == nil){
-//            symbolName = self.searchProtocol.searchStringInSymbolTable(by: pointer.pointerValue)
-//        }
-        
-        return ExplanationItem(sourceDataRange: DataTool.absoluteRange(with: dataSlice, start: pointer.relativeDataOffset, self.pointerLength),
-                               model: ExplanationModel(description: "Pointer Value (Virtual Address)",
-                                                       explanation: pointer.pointerValue.hex,
-                                                       
-                                                       extraDescription: "Referenced String Symbol",
-                                                       extraExplanation: symbolName))
-    }
+ 
     
 }
 

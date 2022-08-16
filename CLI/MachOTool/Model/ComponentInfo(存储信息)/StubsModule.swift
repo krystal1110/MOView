@@ -1,27 +1,24 @@
 //
-//  CFStringComponent.swift
-//  MachoTool
+//  StubsModule.swift
+//  MachOTool
 //
-//  Created by karthrine on 2022/6/1.
+//  Created by karthrine on 2022/8/16.
 //
 
 import Foundation
 
- 
-
-public class CFStringModule:MachoModule{
+public class StubsModule:MachoModule{
     
-    var pointers : [ObjcCFString]
+    var pointers : [StubsPointer]
     
     init(with dataSlice: Data ,
          section:Section64,
-         pointers:[ObjcCFString]) {
+         pointers:[StubsPointer]) {
          
         self.pointers = pointers
         var translateItems:[[ExplanationItem]]  = []
-        for item in pointers{
-            translateItems.append(item.explanationItems)
-        }
+        let list = pointers.compactMap{$0.explanationItem}
+        translateItems.append(list)
         let subTitle = "\(section.segname),\(section.sectname)"
         super.init(with: dataSlice, translateItems: translateItems,moduleTitle: "Section",moduleSubTitle: subTitle)
     }

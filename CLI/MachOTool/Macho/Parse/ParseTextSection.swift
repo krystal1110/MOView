@@ -16,6 +16,7 @@ class ParseTextSection {
     
     func parseTextSection(_ data:Data ,commonds: [MachOLoadCommandType], searchProtocol: SearchProtocol ){
         
+       
         for item in commonds {
             if item.name == SegmentType.TEXT.rawValue {
                 let model =  item as! MachOLoadCommand.Segment
@@ -46,7 +47,7 @@ class ParseTextSection {
          __TEXT,__cstring    __TEXT,__objc_classname   __TEXT,__objc_methtype 均会来到此处
          因为都是存储的都为字符串类型
          **/
-        if (section.sectname == TextSection.cstring.rawValue ||  section.sectname == TextSection.objc_classname.rawValue || section.sectname == TextSection.objc_methtype.rawValue){
+        if (section.sectname == TextSection.objc_methname.rawValue || section.sectname == TextSection.cstring.rawValue ||  section.sectname == TextSection.objc_classname.rawValue || section.sectname == TextSection.objc_methtype.rawValue){
             let interpreter = StringInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
             let stringTableList = interpreter.transitionData()
             let module = StringModule(with: dataSlice, section: section, stringList: stringTableList)
@@ -87,7 +88,17 @@ class ParseTextSection {
             let stringTableList = interpreter.transitionData()
             let module = StringModule(with: dataSlice, section: section, stringList: stringTableList)
             modules.append(module)
-        } else {
+        }else if (section.sectname == TextSection.stubs.rawValue){
+            
+            let interpreter = StubsInterpreter(with: dataSlice, section: section, searchProtocol: searchProtocol)
+            let stubsList = interpreter.transitionData()
+            let module = StubsModule(with: dataSlice, section: section, pointers: stubsList)
+            modules.append(module)
+        }else if (section.sectname == TextSection.stub_help.rawValue){
+            print("stub_help")
+        }
+        
+        else {
             let module = UnknownModule(with: dataSlice, section: section)
             modules.append(module)
         }

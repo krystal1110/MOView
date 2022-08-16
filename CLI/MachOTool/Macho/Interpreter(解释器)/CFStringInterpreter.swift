@@ -18,7 +18,7 @@ struct CFString64
 struct ObjcCFString {
     let cfString64:CFString64
     let stringName:String
-    var explanationItem: ExplanationItem? = nil
+    var explanationItems: [ExplanationItem] = []
 }
 
 /*
@@ -64,12 +64,28 @@ struct CFStringInterpreter: Interpreter {
             let cfstring =  CFString64(ptr: ptr, unknown: unknown, stringAddress: stringAddress, size: size)
             let stringOff = searchProtocol.getOffsetFromVmAddress(cfstring.stringAddress)
           
+            var explanationItems: [ExplanationItem] = []
             if (stringOff > 0 && stringOff < searchProtocol.getMachoData().count) {
-                if let string =  searchProtocol.getMachoData().readCStringName(from: Int(stringOff)){
+                
+                let ptrRange = DataTool.absoluteRange(with: pointerRawData, start: 0, 8)
+                explanationItems.append(ExplanationItem(sourceDataRange: ptrRange, model: ExplanationModel(description: "CFString Ptr", explanation: "\(ptr)")))
+                
+                let unknownRange =  DataTool.absoluteRange(with: pointerRawData, start: 8, 8)
+                explanationItems.append(ExplanationItem(sourceDataRange: unknownRange, model: ExplanationModel(description: " ", explanation: unknown.hex)))
+                
+                
+                let string = searchProtocol.getMachoData().readCStringName(from: Int(stringOff))
+                
+                let stringRange = DataTool.absoluteRange(with: pointerRawData, start: 16, 8)
+                explanationItems.append(ExplanationItem(sourceDataRange: stringRange, model: ExplanationModel(description: "String", explanation: string ?? "")))
+                
+                
+                let sizeRange = DataTool.absoluteRange(with: pointerRawData, start: 24, 8)
+                explanationItems.append(ExplanationItem(sourceDataRange: sizeRange, model: ExplanationModel(description: "Size", explanation: "\(size)")))
+                
+                let objcCFString = ObjcCFString(cfString64: cfstring, stringName: "string",explanationItems: explanationItems)
                     
-                    let objcCFString = ObjcCFString(cfString64: cfstring, stringName: string)
-                    pointers.append(objcCFString)
-                }
+                pointers.append(objcCFString)
             }
             
         }

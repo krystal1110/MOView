@@ -58,10 +58,10 @@ public class Macho: Equatable {
         for command in self.commands {
             modules.append(LoadCommandModule(with: command.displayStore.dataSlice, displayStore: command.displayStore))
         }
- 
+        
         
         let sectionFlagsDic = Macho.loadSectionFlags(from: data, header: header, attributes: Macho.machAttributes(from: data))
- 
+        
         // parse LC_SYMTAB    // parse LC_DYSYMTAB
         self.parseSymbolTool = ParseSymbolTool()
         self.parseSymbolTool.parseSymbol(data, commonds: self.commands, searchProtocol: self)
@@ -83,12 +83,19 @@ public class Macho: Equatable {
         self.modules.append(contentsOf: parseCustomSection.modules)
         
         
+        let parseDyldInfo = ParseDyldInfo()
+        parseDyldInfo.parseDyldInfo(data, commonds: self.commands, searchProtocol: self)
+        
+        
         self.modules.sorted(by: {$0.dataSlice.startIndex < $1.dataSlice.startIndex})
         print("----")
         
         
-//        sectionFlagsDic
-//          UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic).scanUselessClasses()
+        
+        
+        
+        //        sectionFlagsDic
+        //          UnusedScanManager.init(with: componts,parseSymbolTool: parseSymbolTool, sectionFlagsDic: sectionFlagsDic).scanUselessClasses()
         
         
         
@@ -108,70 +115,7 @@ public class Macho: Equatable {
     }
     
     
-//   public func parseTextInstruction() ->  [[ExplanationItem]]{
-//        // 存储用于显示的asm指令 - 会很耗时
-//        var translaitonItems: [[ExplanationItem]] = []
-//       let textCompontList = componts.filter{$0.componentTitle == SegmentType.TEXT.rawValue && $0.componentSubTitle == TextSection.text.rawValue}
-//
-//        if textCompontList.count == 1{
-//           let textCompont = textCompontList[0] as! TextModule
-//
-//            if let size =   textCompont.section.info.size{
-//                let count = size/4
-//                var offset = textCompont.section.info.offset
-//                for i in 0..<count {
-//                    var translaitonItem: [ExplanationItem] = []
-//                    var op_str   = textCompont.csInsnPointer![Int(i)].op_str
-//                    var mnemonic = textCompont.textInstructionPtr![Int(i)].mnemonic
-//                    let dataStr =  Utils.readCharToString(&op_str)
-//                    let asmStr =  Utils.readCharToString(&mnemonic)
-//                    translaitonItem.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Offset", explanation: offset.hex)))
-//                    translaitonItem.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Asm", explanation: asmStr)))
-//                    translaitonItem.append(ExplanationItem(sourceDataRange: nil, model: ExplanationModel(description: "Instruction", explanation: dataStr)))
-//                    translaitonItems.append(translaitonItem)
-//                    offset = offset + 4
-//                }
-//            }
-//        }
-//        return translaitonItems
-//    }
-//
-    
-    
-#warning("TODO  待迁移 dyldInfo段")
-    //    func dyldInfoComponts(wiht command:DyldInfoCommand){
-    //
-    //        /*
-    //         处理rebase数据
-    //         **/
-    //        let rebaseInfoStart = Int(command.rebaseOffset)
-    //        let rebaseInfoSize = Int(command.rebaseSize)
-    //        if rebaseInfoStart.isNotZero && rebaseInfoSize.isNotZero { // 非空判断
-    //            let rebaseInfoData = DataTool.interception(with: data, from: rebaseInfoStart, length: rebaseInfoSize)
-    //            DyldInterpreter.init(wiht: <#T##Data#>, is64Bit: <#T##Bool#>, SearchProtocol: <#T##SearchProtocol#>, sectionVirtualAddress: <#T##UInt64#>)
-    //        }
-    //
-    //
-    //
-    //        /*
-    //         处理bind数据
-    //         **/
-    //        let bindInfoStart = Int(command.bindOffset)
-    //        let bindInfoSize = Int(command.bindSize)
-    //        if bindInfoStart.isNotZero && bindInfoSize.isNotZero { // 非空判断
-    //            let bindInfoData = DataTool.interception(with: data, from: bindInfoStart, length: bindInfoSize)
-    //            let interpreter = DyldInterpreter.init(wiht: bindInfoData, is64Bit: is64bit, SearchProtocol: self).operationCodes()
-    //        }
-    //
-    //
-    //    }
-    
-    
-    
-    
-    
-    
-    
+     
 }
 
 extension Macho: SearchProtocol {
@@ -179,7 +123,7 @@ extension Macho: SearchProtocol {
         return self.data.count
     }
     
- 
+    
     
     func getTEXTConst(_ address: UInt64) -> section_64? {
         
@@ -229,9 +173,7 @@ extension Macho: SearchProtocol {
     
     func sectionName(at ordinal: Int) -> String {
         if ordinal > self.componts.count {
-//            fatalError()
             return ""
-            
         }
         // ordinal starts from 1
         let sectionHeader = self.componts[ordinal - 1]
@@ -240,7 +182,6 @@ extension Macho: SearchProtocol {
     
     
     func searchInIndirectSymbolTableList(at index: Int) -> String? {
-        
         return self.parseSymbolTool.findStringInIndirectSymbolList(at: index)
     }
     
@@ -261,8 +202,11 @@ extension Macho: SearchProtocol {
         return self.parseSymbolTool.findStringInSymbolTable(by: nValue)
     }
     
+    func findSymbol(at value: UInt64) -> String {
+        return "1"
+    }
     
- 
+    
 }
 
 
@@ -286,9 +230,9 @@ extension Macho {
     }
     
     private static func header(from data: Data, attributes: MachAttributes) -> MachOHeader {
-            let header =  data.extract(mach_header_64.self)
-            let dataSlice = data.cutoutData(mach_header_64.self)
-            return MachOHeader(header: header, dataSlice: dataSlice)
+        let header =  data.extract(mach_header_64.self)
+        let dataSlice = data.cutoutData(mach_header_64.self)
+        return MachOHeader(header: header, dataSlice: dataSlice)
     }
 }
 
@@ -314,7 +258,7 @@ extension Macho {
     
     
     private static func loadSectionFlags(from data: Data, header: MachOHeader, attributes: MachAttributes) -> Dictionary<Int,Int> {
-         
+        
         var sectionDic :Dictionary<Int,Int> = [:]
         var sectionNum = 1
         var offset = header.size
@@ -324,9 +268,9 @@ extension Macho {
             let type =   LoadCommandType(rawValue: loadCommand.command)
             if type == .segment || type == .segment64 {
                 var segmentCommand64:segment_command_64 = loadCommand.data.extract(segment_command_64.self, offset: loadCommand.offset)
-
+                
                 let sectionOffset = loadCommand.offset + 0x48;
-
+                
                 for i in 0..<segmentCommand64.nsects {
                     let offset = sectionOffset + 0x50 * Int(i);
                     let sectionHeader:section_64 = loadCommand.data.extract(section_64.self, offset: offset)
