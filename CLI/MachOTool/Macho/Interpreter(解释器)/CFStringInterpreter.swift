@@ -71,7 +71,7 @@ struct CFStringInterpreter: Interpreter {
                 explanationItems.append(ExplanationItem(sourceDataRange: ptrRange, model: ExplanationModel(description: "CFString Ptr", explanation: "\(ptr)")))
                 
                 let unknownRange =  DataTool.absoluteRange(with: pointerRawData, start: 8, 8)
-                explanationItems.append(ExplanationItem(sourceDataRange: unknownRange, model: ExplanationModel(description: " ", explanation: unknown.hex)))
+                explanationItems.append(ExplanationItem(sourceDataRange: unknownRange, model: ExplanationModel(description: "Unknown Title", explanation: unknown.hex)))
                 
                 
                 let string = searchProtocol.getMachoData().readCStringName(from: Int(stringOff))
