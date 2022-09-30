@@ -2,6 +2,9 @@
 ###  
 `MOView` 是一个 `Swift` 与 `SwiftUI` 搭建的可视化 `Mach-O` 文件查看工具，目前仅支持 `Arm64` `64Bit` 架构
 
+![image](https://user-images.githubusercontent.com/83936557/193203756-00de8f39-b863-4193-b6dc-eff8243ebd4f.png)
+
+
 #### 开源的
 `MOView` 该项目是用于学习为主的，如果有任何问题，欢迎交流
 
