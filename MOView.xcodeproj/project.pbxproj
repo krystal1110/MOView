@@ -1,0 +1,1181 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4AE8615028E483990033112C /* MOViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8614F28E483990033112C /* MOViewApp.swift */; };
+		4AE8615228E483990033112C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8615128E483990033112C /* ContentView.swift */; };
+		4AE8615428E483990033112C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AE8615328E483990033112C /* Assets.xcassets */; };
+		4AE8615728E483990033112C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AE8615628E483990033112C /* Preview Assets.xcassets */; };
+		4AE861DF28E483FF0033112C /* SwiftClassUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8618028E483FF0033112C /* SwiftClassUtils.swift */; };
+		4AE861E028E483FF0033112C /* CapStoneHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8618328E483FF0033112C /* CapStoneHelper.m */; };
+		4AE861E128E483FF0033112C /* DataTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8618428E483FF0033112C /* DataTool.swift */; };
+		4AE861E228E483FF0033112C /* RuntimeBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8618628E483FF0033112C /* RuntimeBridge.swift */; };
+		4AE861E328E483FF0033112C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8618728E483FF0033112C /* Utils.swift */; };
+		4AE861E528E483FF0033112C /* MachoTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8618928E483FF0033112C /* MachoTool.swift */; };
+		4AE861E628E483FF0033112C /* MachoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8618C28E483FF0033112C /* MachoHeader.swift */; };
+		4AE861E728E483FF0033112C /* MachoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8618D28E483FF0033112C /* MachoProtocol.swift */; };
+		4AE861E828E483FF0033112C /* ClassListInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8618F28E483FF0033112C /* ClassListInterpreter.swift */; };
+		4AE861E928E483FF0033112C /* CFStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619028E483FF0033112C /* CFStringInterpreter.swift */; };
+		4AE861EA28E483FF0033112C /* UStringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619128E483FF0033112C /* UStringInterpreter.swift */; };
+		4AE861EB28E483FF0033112C /* SwiftTypesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619228E483FF0033112C /* SwiftTypesInterpreter.swift */; };
+		4AE861EC28E483FF0033112C /* StubsInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619328E483FF0033112C /* StubsInterpreter.swift */; };
+		4AE861ED28E483FF0033112C /* BaseInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619428E483FF0033112C /* BaseInterpreter.swift */; };
+		4AE861EE28E483FF0033112C /* ReferencesInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619528E483FF0033112C /* ReferencesInterpreter.swift */; };
+		4AE861EF28E483FF0033112C /* CategoryInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619628E483FF0033112C /* CategoryInterpreter.swift */; };
+		4AE861F028E483FF0033112C /* StringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619828E483FF0033112C /* StringInterpreter.swift */; };
+		4AE861F128E483FF0033112C /* IndirectSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619928E483FF0033112C /* IndirectSymbolTableInterpreter.swift */; };
+		4AE861F228E483FF0033112C /* LazySymbolInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619A28E483FF0033112C /* LazySymbolInterpreter.swift */; };
+		4AE861F328E483FF0033112C /* SymbolInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619B28E483FF0033112C /* SymbolInterpreter.swift */; };
+		4AE861F428E483FF0033112C /* ExportInfoInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619D28E483FF0033112C /* ExportInfoInterpreter.swift */; };
+		4AE861F528E483FF0033112C /* BindOperationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619E28E483FF0033112C /* BindOperationCode.swift */; };
+		4AE861F628E483FF0033112C /* OperationCodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619F28E483FF0033112C /* OperationCodeInterpreter.swift */; };
+		4AE861F728E483FF0033112C /* OperationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861A028E483FF0033112C /* OperationCode.swift */; };
+		4AE861F828E483FF0033112C /* RebaseOperationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861A128E483FF0033112C /* RebaseOperationCode.swift */; };
+		4AE861F928E483FF0033112C /* ParseDataSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861A328E483FF0033112C /* ParseDataSection.swift */; };
+		4AE861FA28E483FF0033112C /* ParseSymbolTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861A428E483FF0033112C /* ParseSymbolTool.swift */; };
+		4AE861FB28E483FF0033112C /* ParseTextSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861A528E483FF0033112C /* ParseTextSection.swift */; };
+		4AE861FC28E483FF0033112C /* ParseDyldInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861A628E483FF0033112C /* ParseDyldInfo.swift */; };
+		4AE861FD28E483FF0033112C /* ParseCustomSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861A728E483FF0033112C /* ParseCustomSection.swift */; };
+		4AE861FE28E483FF0033112C /* Macho.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861A828E483FF0033112C /* Macho.swift */; };
+		4AE861FF28E483FF0033112C /* LC_EncryptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861AA28E483FF0033112C /* LC_EncryptionInfo.swift */; };
+		4AE8620028E483FF0033112C /* LoadCommandType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861AB28E483FF0033112C /* LoadCommandType.swift */; };
+		4AE8620128E483FF0033112C /* LC_BuildVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861AC28E483FF0033112C /* LC_BuildVersion.swift */; };
+		4AE8620228E483FF0033112C /* LC_Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861AD28E483FF0033112C /* LC_Main.swift */; };
+		4AE8620328E483FF0033112C /* LC_Unknown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861AE28E483FF0033112C /* LC_Unknown.swift */; };
+		4AE8620428E483FF0033112C /* LC_SymbolTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861AF28E483FF0033112C /* LC_SymbolTable.swift */; };
+		4AE8620528E483FF0033112C /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861B128E483FF0033112C /* Segment.swift */; };
+		4AE8620628E483FF0033112C /* LC_DyldInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861B228E483FF0033112C /* LC_DyldInfo.swift */; };
+		4AE8620728E483FF0033112C /* Section64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861B328E483FF0033112C /* Section64.swift */; };
+		4AE8620828E483FF0033112C /* LC_LinkeditCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861B428E483FF0033112C /* LC_LinkeditCommand.swift */; };
+		4AE8620928E483FF0033112C /* LC_Uuid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861B528E483FF0033112C /* LC_Uuid.swift */; };
+		4AE8620A28E483FF0033112C /* LC_DynamicSymbolTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861B628E483FF0033112C /* LC_DynamicSymbolTable.swift */; };
+		4AE8620B28E483FF0033112C /* LoadCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861B728E483FF0033112C /* LoadCommand.swift */; };
+		4AE8620C28E483FF0033112C /* LC_Rpatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861B828E483FF0033112C /* LC_Rpatch.swift */; };
+		4AE8620D28E483FF0033112C /* LC_Load_Dylib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861B928E483FF0033112C /* LC_Load_Dylib.swift */; };
+		4AE8620E28E483FF0033112C /* LC_SourceVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861BA28E483FF0033112C /* LC_SourceVersion.swift */; };
+		4AE8620F28E483FF0033112C /* LC_MinOSVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861BB28E483FF0033112C /* LC_MinOSVersion.swift */; };
+		4AE8621128E483FF0033112C /* TranslationRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861BE28E483FF0033112C /* TranslationRead.swift */; };
+		4AE8621228E483FF0033112C /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861C028E483FF0033112C /* File.swift */; };
+		4AE8621328E483FF0033112C /* StubsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861C328E483FF0033112C /* StubsModule.swift */; };
+		4AE8621428E483FF0033112C /* LazyOrNoLazyModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861C428E483FF0033112C /* LazyOrNoLazyModule.swift */; };
+		4AE8621528E483FF0033112C /* StringTabModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861C528E483FF0033112C /* StringTabModule.swift */; };
+		4AE8621728E483FF0033112C /* BaseComponentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861C728E483FF0033112C /* BaseComponentInfo.swift */; };
+		4AE8621828E483FF0033112C /* ReferencesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861C828E483FF0033112C /* ReferencesModule.swift */; };
+		4AE8621928E483FF0033112C /* IndsymModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861C928E483FF0033112C /* IndsymModule.swift */; };
+		4AE8621A28E483FF0033112C /* UStringModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861CA28E483FF0033112C /* UStringModule.swift */; };
+		4AE8621B28E483FF0033112C /* SymbolTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861CB28E483FF0033112C /* SymbolTableModule.swift */; };
+		4AE8621C28E483FF0033112C /* SwiftTypesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861CC28E483FF0033112C /* SwiftTypesModule.swift */; };
+		4AE8621D28E483FF0033112C /* HeaderModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861CD28E483FF0033112C /* HeaderModule.swift */; };
+		4AE8621E28E483FF0033112C /* ClassListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861CE28E483FF0033112C /* ClassListModule.swift */; };
+		4AE8621F28E483FF0033112C /* StringModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861CF28E483FF0033112C /* StringModule.swift */; };
+		4AE8622028E483FF0033112C /* TextModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861D028E483FF0033112C /* TextModule.swift */; };
+		4AE8622128E483FF0033112C /* CFStringModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861D128E483FF0033112C /* CFStringModule.swift */; };
+		4AE8622228E483FF0033112C /* UnknownModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861D228E483FF0033112C /* UnknownModule.swift */; };
+		4AE8622328E483FF0033112C /* MachoModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861D328E483FF0033112C /* MachoModule.swift */; };
+		4AE8622528E483FF0033112C /* LazySymbolEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861D628E483FF0033112C /* LazySymbolEntryModel.swift */; };
+		4AE8622628E483FF0033112C /* OperationCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861D728E483FF0033112C /* OperationCodeModel.swift */; };
+		4AE8622728E483FF0033112C /* IndirectSymbolTableEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861D828E483FF0033112C /* IndirectSymbolTableEntryModel.swift */; };
+		4AE8622828E483FF0033112C /* SymbolTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861D928E483FF0033112C /* SymbolTableModel.swift */; };
+		4AE8622928E483FF0033112C /* SwiftNominalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861DA28E483FF0033112C /* SwiftNominalModel.swift */; };
+		4AE8622A28E483FF0033112C /* DataExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861DB28E483FF0033112C /* DataExplanation.swift */; };
+		4AE8622B28E483FF0033112C /* LoadCommandModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE861DC28E483FF0033112C /* LoadCommandModule.swift */; };
+		4AE8629128E4848A0033112C /* cs.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8623628E4848A0033112C /* cs.c */; };
+		4AE8629228E4848A0033112C /* SStream.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8624628E4848A0033112C /* SStream.c */; };
+		4AE8629328E4848A0033112C /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8624728E4848A0033112C /* utils.c */; };
+		4AE8629428E4848A0033112C /* PPCGenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8624C28E4848A0033112C /* PPCGenDisassemblerTables.inc */; };
+		4AE8629528E4848A0033112C /* PPCGenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8624D28E4848A0033112C /* PPCGenSubtargetInfo.inc */; };
+		4AE8629628E4848A0033112C /* PPCGenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8624E28E4848A0033112C /* PPCGenAsmWriter.inc */; };
+		4AE8629728E4848A0033112C /* PPCDisassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8624F28E4848A0033112C /* PPCDisassembler.c */; };
+		4AE8629828E4848A0033112C /* PPCMapping.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625228E4848A0033112C /* PPCMapping.c */; };
+		4AE8629928E4848A0033112C /* PPCGenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625328E4848A0033112C /* PPCGenRegisterInfo.inc */; };
+		4AE8629A28E4848A0033112C /* PPCModule.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625428E4848A0033112C /* PPCModule.c */; };
+		4AE8629B28E4848A0033112C /* PPCInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625528E4848A0033112C /* PPCInstPrinter.c */; };
+		4AE8629C28E4848A0033112C /* PPCGenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625628E4848A0033112C /* PPCGenInstrInfo.inc */; };
+		4AE8629D28E4848A0033112C /* X86Disassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625A28E4848A0033112C /* X86Disassembler.c */; };
+		4AE8629E28E4848A0033112C /* X86GenDisassemblerTables_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625B28E4848A0033112C /* X86GenDisassemblerTables_reduce.inc */; };
+		4AE8629F28E4848A0033112C /* X86ATTInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625C28E4848A0033112C /* X86ATTInstPrinter.c */; };
+		4AE862A028E4848A0033112C /* X86GenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625D28E4848A0033112C /* X86GenRegisterInfo.inc */; };
+		4AE862A128E4848A0033112C /* X86GenAsmWriter_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625E28E4848A0033112C /* X86GenAsmWriter_reduce.inc */; };
+		4AE862A228E4848A0033112C /* X86GenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8625F28E4848A0033112C /* X86GenInstrInfo.inc */; };
+		4AE862A328E4848A0033112C /* X86Module.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626028E4848A0033112C /* X86Module.c */; };
+		4AE862A428E4848A0033112C /* X86DisassemblerDecoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626228E4848A0033112C /* X86DisassemblerDecoder.c */; };
+		4AE862A528E4848A0033112C /* X86GenAsmWriter1.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626528E4848A0033112C /* X86GenAsmWriter1.inc */; };
+		4AE862A628E4848A0033112C /* X86GenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626728E4848A0033112C /* X86GenDisassemblerTables.inc */; };
+		4AE862A728E4848A0033112C /* X86IntelInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626828E4848A0033112C /* X86IntelInstPrinter.c */; };
+		4AE862A828E4848A0033112C /* X86GenAsmWriter1_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626928E4848A0033112C /* X86GenAsmWriter1_reduce.inc */; };
+		4AE862A928E4848A0033112C /* X86Mapping.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626B28E4848A0033112C /* X86Mapping.c */; };
+		4AE862AA28E4848A0033112C /* X86GenInstrInfo_reduce.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626C28E4848A0033112C /* X86GenInstrInfo_reduce.inc */; };
+		4AE862AB28E4848A0033112C /* X86GenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626D28E4848A0033112C /* X86GenAsmWriter.inc */; };
+		4AE862AC28E4848A0033112C /* ARMInstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8626F28E4848A0033112C /* ARMInstPrinter.c */; };
+		4AE862AD28E4848A0033112C /* ARMGenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8627128E4848A0033112C /* ARMGenAsmWriter.inc */; };
+		4AE862AE28E4848A0033112C /* ARMModule.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8627328E4848A0033112C /* ARMModule.c */; };
+		4AE862AF28E4848A0033112C /* ARMMapping.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8627628E4848A0033112C /* ARMMapping.c */; };
+		4AE862B028E4848A0033112C /* ARMGenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8627828E4848A0033112C /* ARMGenInstrInfo.inc */; };
+		4AE862B128E4848A0033112C /* ARMGenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8627928E4848A0033112C /* ARMGenRegisterInfo.inc */; };
+		4AE862B228E4848A0033112C /* ARMGenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8627A28E4848A0033112C /* ARMGenDisassemblerTables.inc */; };
+		4AE862B328E4848A0033112C /* ARMGenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8627B28E4848A0033112C /* ARMGenSubtargetInfo.inc */; };
+		4AE862B428E4848A0033112C /* ARMDisassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8627C28E4848A0033112C /* ARMDisassembler.c */; };
+		4AE862B528E4848A0033112C /* AArch64GenAsmWriter.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628228E4848A0033112C /* AArch64GenAsmWriter.inc */; };
+		4AE862B628E4848A0033112C /* AArch64Mapping.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628328E4848A0033112C /* AArch64Mapping.c */; };
+		4AE862B728E4848A0033112C /* AArch64GenDisassemblerTables.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628428E4848A0033112C /* AArch64GenDisassemblerTables.inc */; };
+		4AE862B828E4848A0033112C /* AArch64GenSubtargetInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628528E4848A0033112C /* AArch64GenSubtargetInfo.inc */; };
+		4AE862B928E4848A0033112C /* AArch64Disassembler.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628628E4848A0033112C /* AArch64Disassembler.c */; };
+		4AE862BA28E4848A0033112C /* AArch64InstPrinter.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628728E4848A0033112C /* AArch64InstPrinter.c */; };
+		4AE862BB28E4848A0033112C /* AArch64BaseInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628828E4848A0033112C /* AArch64BaseInfo.c */; };
+		4AE862BC28E4848A0033112C /* AArch64GenRegisterInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628928E4848A0033112C /* AArch64GenRegisterInfo.inc */; };
+		4AE862BD28E4848A0033112C /* AArch64GenInstrInfo.inc in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628B28E4848A0033112C /* AArch64GenInstrInfo.inc */; };
+		4AE862BE28E4848A0033112C /* AArch64Module.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628C28E4848A0033112C /* AArch64Module.c */; };
+		4AE862BF28E4848A0033112C /* MCInstrDesc.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628D28E4848A0033112C /* MCInstrDesc.c */; };
+		4AE862C028E4848A0033112C /* MCInst.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8628F28E4848A0033112C /* MCInst.c */; };
+		4AE862C128E4848A0033112C /* MCRegisterInfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8629028E4848A0033112C /* MCRegisterInfo.c */; };
+		4AE862C828E486900033112C /* libswiftDemangle.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AE862C728E486900033112C /* libswiftDemangle.tbd */; };
+		4AE862CE28E486D20033112C /* FileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE862CA28E486D20033112C /* FileView.swift */; };
+		4AE862CF28E486D20033112C /* ParseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE862CB28E486D20033112C /* ParseView.swift */; };
+		4AE862D028E486D20033112C /* MachoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE862CC28E486D20033112C /* MachoView.swift */; };
+		4AE862D128E486D20033112C /* MachoModuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE862CD28E486D20033112C /* MachoModuleView.swift */; };
+		4AE862E428E539010033112C /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE862E328E539010033112C /* SectionHeader.swift */; };
+		4AE862E628E5DCD90033112C /* ASCIIInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE862E528E5DCD90033112C /* ASCIIInterpreter.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4AE8614C28E483990033112C /* MOView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MOView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AE8614F28E483990033112C /* MOViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOViewApp.swift; sourceTree = "<group>"; };
+		4AE8615128E483990033112C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4AE8615328E483990033112C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4AE8615628E483990033112C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4AE8615828E483990033112C /* MOView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MOView.entitlements; sourceTree = "<group>"; };
+		4AE8618028E483FF0033112C /* SwiftClassUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftClassUtils.swift; sourceTree = "<group>"; };
+		4AE8618228E483FF0033112C /* CapStoneHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapStoneHelper.h; sourceTree = "<group>"; };
+		4AE8618328E483FF0033112C /* CapStoneHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapStoneHelper.m; sourceTree = "<group>"; };
+		4AE8618428E483FF0033112C /* DataTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTool.swift; sourceTree = "<group>"; };
+		4AE8618528E483FF0033112C /* MachoTool-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MachoTool-Bridging-Header.h"; sourceTree = "<group>"; };
+		4AE8618628E483FF0033112C /* RuntimeBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeBridge.swift; sourceTree = "<group>"; };
+		4AE8618728E483FF0033112C /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		4AE8618928E483FF0033112C /* MachoTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoTool.swift; sourceTree = "<group>"; };
+		4AE8618C28E483FF0033112C /* MachoHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoHeader.swift; sourceTree = "<group>"; };
+		4AE8618D28E483FF0033112C /* MachoProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoProtocol.swift; sourceTree = "<group>"; };
+		4AE8618F28E483FF0033112C /* ClassListInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassListInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619028E483FF0033112C /* CFStringInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFStringInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619128E483FF0033112C /* UStringInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UStringInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619228E483FF0033112C /* SwiftTypesInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftTypesInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619328E483FF0033112C /* StubsInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubsInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619428E483FF0033112C /* BaseInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619528E483FF0033112C /* ReferencesInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferencesInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619628E483FF0033112C /* CategoryInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619828E483FF0033112C /* StringInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619928E483FF0033112C /* IndirectSymbolTableInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619A28E483FF0033112C /* LazySymbolInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazySymbolInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619B28E483FF0033112C /* SymbolInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619D28E483FF0033112C /* ExportInfoInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportInfoInterpreter.swift; sourceTree = "<group>"; };
+		4AE8619E28E483FF0033112C /* BindOperationCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindOperationCode.swift; sourceTree = "<group>"; };
+		4AE8619F28E483FF0033112C /* OperationCodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationCodeInterpreter.swift; sourceTree = "<group>"; };
+		4AE861A028E483FF0033112C /* OperationCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationCode.swift; sourceTree = "<group>"; };
+		4AE861A128E483FF0033112C /* RebaseOperationCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RebaseOperationCode.swift; sourceTree = "<group>"; };
+		4AE861A328E483FF0033112C /* ParseDataSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseDataSection.swift; sourceTree = "<group>"; };
+		4AE861A428E483FF0033112C /* ParseSymbolTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseSymbolTool.swift; sourceTree = "<group>"; };
+		4AE861A528E483FF0033112C /* ParseTextSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseTextSection.swift; sourceTree = "<group>"; };
+		4AE861A628E483FF0033112C /* ParseDyldInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseDyldInfo.swift; sourceTree = "<group>"; };
+		4AE861A728E483FF0033112C /* ParseCustomSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseCustomSection.swift; sourceTree = "<group>"; };
+		4AE861A828E483FF0033112C /* Macho.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macho.swift; sourceTree = "<group>"; };
+		4AE861AA28E483FF0033112C /* LC_EncryptionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_EncryptionInfo.swift; sourceTree = "<group>"; };
+		4AE861AB28E483FF0033112C /* LoadCommandType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadCommandType.swift; sourceTree = "<group>"; };
+		4AE861AC28E483FF0033112C /* LC_BuildVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_BuildVersion.swift; sourceTree = "<group>"; };
+		4AE861AD28E483FF0033112C /* LC_Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_Main.swift; sourceTree = "<group>"; };
+		4AE861AE28E483FF0033112C /* LC_Unknown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_Unknown.swift; sourceTree = "<group>"; };
+		4AE861AF28E483FF0033112C /* LC_SymbolTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_SymbolTable.swift; sourceTree = "<group>"; };
+		4AE861B128E483FF0033112C /* Segment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
+		4AE861B228E483FF0033112C /* LC_DyldInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_DyldInfo.swift; sourceTree = "<group>"; };
+		4AE861B328E483FF0033112C /* Section64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section64.swift; sourceTree = "<group>"; };
+		4AE861B428E483FF0033112C /* LC_LinkeditCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_LinkeditCommand.swift; sourceTree = "<group>"; };
+		4AE861B528E483FF0033112C /* LC_Uuid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_Uuid.swift; sourceTree = "<group>"; };
+		4AE861B628E483FF0033112C /* LC_DynamicSymbolTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_DynamicSymbolTable.swift; sourceTree = "<group>"; };
+		4AE861B728E483FF0033112C /* LoadCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadCommand.swift; sourceTree = "<group>"; };
+		4AE861B828E483FF0033112C /* LC_Rpatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_Rpatch.swift; sourceTree = "<group>"; };
+		4AE861B928E483FF0033112C /* LC_Load_Dylib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_Load_Dylib.swift; sourceTree = "<group>"; };
+		4AE861BA28E483FF0033112C /* LC_SourceVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_SourceVersion.swift; sourceTree = "<group>"; };
+		4AE861BB28E483FF0033112C /* LC_MinOSVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LC_MinOSVersion.swift; sourceTree = "<group>"; };
+		4AE861BE28E483FF0033112C /* TranslationRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationRead.swift; sourceTree = "<group>"; };
+		4AE861C028E483FF0033112C /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		4AE861C328E483FF0033112C /* StubsModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubsModule.swift; sourceTree = "<group>"; };
+		4AE861C428E483FF0033112C /* LazyOrNoLazyModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyOrNoLazyModule.swift; sourceTree = "<group>"; };
+		4AE861C528E483FF0033112C /* StringTabModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTabModule.swift; sourceTree = "<group>"; };
+		4AE861C728E483FF0033112C /* BaseComponentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseComponentInfo.swift; sourceTree = "<group>"; };
+		4AE861C828E483FF0033112C /* ReferencesModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferencesModule.swift; sourceTree = "<group>"; };
+		4AE861C928E483FF0033112C /* IndsymModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndsymModule.swift; sourceTree = "<group>"; };
+		4AE861CA28E483FF0033112C /* UStringModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UStringModule.swift; sourceTree = "<group>"; };
+		4AE861CB28E483FF0033112C /* SymbolTableModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolTableModule.swift; sourceTree = "<group>"; };
+		4AE861CC28E483FF0033112C /* SwiftTypesModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftTypesModule.swift; sourceTree = "<group>"; };
+		4AE861CD28E483FF0033112C /* HeaderModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderModule.swift; sourceTree = "<group>"; };
+		4AE861CE28E483FF0033112C /* ClassListModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassListModule.swift; sourceTree = "<group>"; };
+		4AE861CF28E483FF0033112C /* StringModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringModule.swift; sourceTree = "<group>"; };
+		4AE861D028E483FF0033112C /* TextModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextModule.swift; sourceTree = "<group>"; };
+		4AE861D128E483FF0033112C /* CFStringModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CFStringModule.swift; sourceTree = "<group>"; };
+		4AE861D228E483FF0033112C /* UnknownModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownModule.swift; sourceTree = "<group>"; };
+		4AE861D328E483FF0033112C /* MachoModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoModule.swift; sourceTree = "<group>"; };
+		4AE861D628E483FF0033112C /* LazySymbolEntryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazySymbolEntryModel.swift; sourceTree = "<group>"; };
+		4AE861D728E483FF0033112C /* OperationCodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationCodeModel.swift; sourceTree = "<group>"; };
+		4AE861D828E483FF0033112C /* IndirectSymbolTableEntryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableEntryModel.swift; sourceTree = "<group>"; };
+		4AE861D928E483FF0033112C /* SymbolTableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolTableModel.swift; sourceTree = "<group>"; };
+		4AE861DA28E483FF0033112C /* SwiftNominalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNominalModel.swift; sourceTree = "<group>"; };
+		4AE861DB28E483FF0033112C /* DataExplanation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExplanation.swift; sourceTree = "<group>"; };
+		4AE861DC28E483FF0033112C /* LoadCommandModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadCommandModule.swift; sourceTree = "<group>"; };
+		4AE8622E28E4848A0033112C /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		4AE8622F28E4848A0033112C /* inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inttypes.h; sourceTree = "<group>"; };
+		4AE8623028E4848A0033112C /* SStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SStream.h; sourceTree = "<group>"; };
+		4AE8623128E4848A0033112C /* myinttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myinttypes.h; sourceTree = "<group>"; };
+		4AE8623228E4848A0033112C /* MathExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathExtras.h; sourceTree = "<group>"; };
+		4AE8623328E4848A0033112C /* LEB128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEB128.h; sourceTree = "<group>"; };
+		4AE8623428E4848A0033112C /* MCFixedLenDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCFixedLenDisassembler.h; sourceTree = "<group>"; };
+		4AE8623528E4848A0033112C /* cs_priv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cs_priv.h; sourceTree = "<group>"; };
+		4AE8623628E4848A0033112C /* cs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cs.c; sourceTree = "<group>"; };
+		4AE8623828E4848A0033112C /* capstone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = capstone.h; sourceTree = "<group>"; };
+		4AE8623928E4848A0033112C /* mips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mips.h; sourceTree = "<group>"; };
+		4AE8623A28E4848A0033112C /* sparc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sparc.h; sourceTree = "<group>"; };
+		4AE8623B28E4848A0033112C /* systemz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemz.h; sourceTree = "<group>"; };
+		4AE8623C28E4848A0033112C /* arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arm.h; sourceTree = "<group>"; };
+		4AE8623D28E4848A0033112C /* x86.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86.h; sourceTree = "<group>"; };
+		4AE8623E28E4848A0033112C /* ppc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppc.h; sourceTree = "<group>"; };
+		4AE8623F28E4848A0033112C /* arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arm64.h; sourceTree = "<group>"; };
+		4AE8624028E4848A0033112C /* xcore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcore.h; sourceTree = "<group>"; };
+		4AE8624128E4848A0033112C /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		4AE8624228E4848A0033112C /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		4AE8624328E4848A0033112C /* MCInstrDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInstrDesc.h; sourceTree = "<group>"; };
+		4AE8624428E4848A0033112C /* MCRegisterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRegisterInfo.h; sourceTree = "<group>"; };
+		4AE8624528E4848A0033112C /* MCInst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInst.h; sourceTree = "<group>"; };
+		4AE8624628E4848A0033112C /* SStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SStream.c; sourceTree = "<group>"; };
+		4AE8624728E4848A0033112C /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
+		4AE8624828E4848A0033112C /* MCDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDisassembler.h; sourceTree = "<group>"; };
+		4AE8624B28E4848A0033112C /* PPCMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCMapping.h; sourceTree = "<group>"; };
+		4AE8624C28E4848A0033112C /* PPCGenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenDisassemblerTables.inc; sourceTree = "<group>"; };
+		4AE8624D28E4848A0033112C /* PPCGenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenSubtargetInfo.inc; sourceTree = "<group>"; };
+		4AE8624E28E4848A0033112C /* PPCGenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenAsmWriter.inc; sourceTree = "<group>"; };
+		4AE8624F28E4848A0033112C /* PPCDisassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCDisassembler.c; sourceTree = "<group>"; };
+		4AE8625028E4848A0033112C /* PPCPredicates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCPredicates.h; sourceTree = "<group>"; };
+		4AE8625128E4848A0033112C /* PPCInstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCInstPrinter.h; sourceTree = "<group>"; };
+		4AE8625228E4848A0033112C /* PPCMapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCMapping.c; sourceTree = "<group>"; };
+		4AE8625328E4848A0033112C /* PPCGenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenRegisterInfo.inc; sourceTree = "<group>"; };
+		4AE8625428E4848A0033112C /* PPCModule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCModule.c; sourceTree = "<group>"; };
+		4AE8625528E4848A0033112C /* PPCInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PPCInstPrinter.c; sourceTree = "<group>"; };
+		4AE8625628E4848A0033112C /* PPCGenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = PPCGenInstrInfo.inc; sourceTree = "<group>"; };
+		4AE8625728E4848A0033112C /* PPCDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCDisassembler.h; sourceTree = "<group>"; };
+		4AE8625928E4848A0033112C /* X86InstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86InstPrinter.h; sourceTree = "<group>"; };
+		4AE8625A28E4848A0033112C /* X86Disassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Disassembler.c; sourceTree = "<group>"; };
+		4AE8625B28E4848A0033112C /* X86GenDisassemblerTables_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenDisassemblerTables_reduce.inc; sourceTree = "<group>"; };
+		4AE8625C28E4848A0033112C /* X86ATTInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86ATTInstPrinter.c; sourceTree = "<group>"; };
+		4AE8625D28E4848A0033112C /* X86GenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenRegisterInfo.inc; sourceTree = "<group>"; };
+		4AE8625E28E4848A0033112C /* X86GenAsmWriter_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter_reduce.inc; sourceTree = "<group>"; };
+		4AE8625F28E4848A0033112C /* X86GenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenInstrInfo.inc; sourceTree = "<group>"; };
+		4AE8626028E4848A0033112C /* X86Module.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Module.c; sourceTree = "<group>"; };
+		4AE8626128E4848A0033112C /* X86Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86Mapping.h; sourceTree = "<group>"; };
+		4AE8626228E4848A0033112C /* X86DisassemblerDecoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86DisassemblerDecoder.c; sourceTree = "<group>"; };
+		4AE8626328E4848A0033112C /* X86Disassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86Disassembler.h; sourceTree = "<group>"; };
+		4AE8626428E4848A0033112C /* X86BaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86BaseInfo.h; sourceTree = "<group>"; };
+		4AE8626528E4848A0033112C /* X86GenAsmWriter1.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter1.inc; sourceTree = "<group>"; };
+		4AE8626628E4848A0033112C /* X86DisassemblerDecoderCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86DisassemblerDecoderCommon.h; sourceTree = "<group>"; };
+		4AE8626728E4848A0033112C /* X86GenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenDisassemblerTables.inc; sourceTree = "<group>"; };
+		4AE8626828E4848A0033112C /* X86IntelInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86IntelInstPrinter.c; sourceTree = "<group>"; };
+		4AE8626928E4848A0033112C /* X86GenAsmWriter1_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter1_reduce.inc; sourceTree = "<group>"; };
+		4AE8626A28E4848A0033112C /* X86DisassemblerDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = X86DisassemblerDecoder.h; sourceTree = "<group>"; };
+		4AE8626B28E4848A0033112C /* X86Mapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = X86Mapping.c; sourceTree = "<group>"; };
+		4AE8626C28E4848A0033112C /* X86GenInstrInfo_reduce.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenInstrInfo_reduce.inc; sourceTree = "<group>"; };
+		4AE8626D28E4848A0033112C /* X86GenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = X86GenAsmWriter.inc; sourceTree = "<group>"; };
+		4AE8626F28E4848A0033112C /* ARMInstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMInstPrinter.c; sourceTree = "<group>"; };
+		4AE8627028E4848A0033112C /* ARMMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMMapping.h; sourceTree = "<group>"; };
+		4AE8627128E4848A0033112C /* ARMGenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenAsmWriter.inc; sourceTree = "<group>"; };
+		4AE8627228E4848A0033112C /* ARMDisassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMDisassembler.h; sourceTree = "<group>"; };
+		4AE8627328E4848A0033112C /* ARMModule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMModule.c; sourceTree = "<group>"; };
+		4AE8627428E4848A0033112C /* ARMAddressingModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMAddressingModes.h; sourceTree = "<group>"; };
+		4AE8627528E4848A0033112C /* ARMBaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMBaseInfo.h; sourceTree = "<group>"; };
+		4AE8627628E4848A0033112C /* ARMMapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMMapping.c; sourceTree = "<group>"; };
+		4AE8627728E4848A0033112C /* ARMInstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARMInstPrinter.h; sourceTree = "<group>"; };
+		4AE8627828E4848A0033112C /* ARMGenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenInstrInfo.inc; sourceTree = "<group>"; };
+		4AE8627928E4848A0033112C /* ARMGenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenRegisterInfo.inc; sourceTree = "<group>"; };
+		4AE8627A28E4848A0033112C /* ARMGenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenDisassemblerTables.inc; sourceTree = "<group>"; };
+		4AE8627B28E4848A0033112C /* ARMGenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = ARMGenSubtargetInfo.inc; sourceTree = "<group>"; };
+		4AE8627C28E4848A0033112C /* ARMDisassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ARMDisassembler.c; sourceTree = "<group>"; };
+		4AE8627E28E4848A0033112C /* AArch64Disassembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64Disassembler.h; sourceTree = "<group>"; };
+		4AE8627F28E4848A0033112C /* AArch64BaseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64BaseInfo.h; sourceTree = "<group>"; };
+		4AE8628028E4848A0033112C /* AArch64AddressingModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64AddressingModes.h; sourceTree = "<group>"; };
+		4AE8628128E4848A0033112C /* AArch64InstPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64InstPrinter.h; sourceTree = "<group>"; };
+		4AE8628228E4848A0033112C /* AArch64GenAsmWriter.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenAsmWriter.inc; sourceTree = "<group>"; };
+		4AE8628328E4848A0033112C /* AArch64Mapping.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Mapping.c; sourceTree = "<group>"; };
+		4AE8628428E4848A0033112C /* AArch64GenDisassemblerTables.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenDisassemblerTables.inc; sourceTree = "<group>"; };
+		4AE8628528E4848A0033112C /* AArch64GenSubtargetInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenSubtargetInfo.inc; sourceTree = "<group>"; };
+		4AE8628628E4848A0033112C /* AArch64Disassembler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Disassembler.c; sourceTree = "<group>"; };
+		4AE8628728E4848A0033112C /* AArch64InstPrinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64InstPrinter.c; sourceTree = "<group>"; };
+		4AE8628828E4848A0033112C /* AArch64BaseInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64BaseInfo.c; sourceTree = "<group>"; };
+		4AE8628928E4848A0033112C /* AArch64GenRegisterInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenRegisterInfo.inc; sourceTree = "<group>"; };
+		4AE8628A28E4848A0033112C /* AArch64Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AArch64Mapping.h; sourceTree = "<group>"; };
+		4AE8628B28E4848A0033112C /* AArch64GenInstrInfo.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = AArch64GenInstrInfo.inc; sourceTree = "<group>"; };
+		4AE8628C28E4848A0033112C /* AArch64Module.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AArch64Module.c; sourceTree = "<group>"; };
+		4AE8628D28E4848A0033112C /* MCInstrDesc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCInstrDesc.c; sourceTree = "<group>"; };
+		4AE8628E28E4848A0033112C /* osxkernel_inttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osxkernel_inttypes.h; sourceTree = "<group>"; };
+		4AE8628F28E4848A0033112C /* MCInst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCInst.c; sourceTree = "<group>"; };
+		4AE8629028E4848A0033112C /* MCRegisterInfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MCRegisterInfo.c; sourceTree = "<group>"; };
+		4AE862C728E486900033112C /* libswiftDemangle.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libswiftDemangle.tbd; path = usr/lib/swift/libswiftDemangle.tbd; sourceTree = SDKROOT; };
+		4AE862CA28E486D20033112C /* FileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileView.swift; sourceTree = "<group>"; };
+		4AE862CB28E486D20033112C /* ParseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseView.swift; sourceTree = "<group>"; };
+		4AE862CC28E486D20033112C /* MachoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoView.swift; sourceTree = "<group>"; };
+		4AE862CD28E486D20033112C /* MachoModuleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachoModuleView.swift; sourceTree = "<group>"; };
+		4AE862E328E539010033112C /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		4AE862E528E5DCD90033112C /* ASCIIInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCIIInterpreter.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4AE8614928E483990033112C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AE862C828E486900033112C /* libswiftDemangle.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4AE8614328E483990033112C = {
+			isa = PBXGroup;
+			children = (
+				4AE8614E28E483990033112C /* MOView */,
+				4AE8614D28E483990033112C /* Products */,
+				4AE862C528E486760033112C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4AE8614D28E483990033112C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8614C28E483990033112C /* MOView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4AE8614E28E483990033112C /* MOView */ = {
+			isa = PBXGroup;
+			children = (
+				4AE862C928E486D20033112C /* Views */,
+				4AE8617E28E483FF0033112C /* Tools */,
+				4AE8614F28E483990033112C /* MOViewApp.swift */,
+				4AE8615128E483990033112C /* ContentView.swift */,
+				4AE8615328E483990033112C /* Assets.xcassets */,
+				4AE8615828E483990033112C /* MOView.entitlements */,
+				4AE8615528E483990033112C /* Preview Content */,
+			);
+			path = MOView;
+			sourceTree = "<group>";
+		};
+		4AE8615528E483990033112C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8615628E483990033112C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4AE8617E28E483FF0033112C /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8622D28E4848A0033112C /* Capstone */,
+				4AE8617F28E483FF0033112C /* Tools */,
+				4AE8618928E483FF0033112C /* MachoTool.swift */,
+				4AE8618A28E483FF0033112C /* Macho */,
+				4AE861BD28E483FF0033112C /* ConversionTools(转换) */,
+				4AE861BF28E483FF0033112C /* FileManager */,
+				4AE861C128E483FF0033112C /* Model */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		4AE8617F28E483FF0033112C /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8618128E483FF0033112C /* CapStoneHelper */,
+				4AE8618028E483FF0033112C /* SwiftClassUtils.swift */,
+				4AE8618428E483FF0033112C /* DataTool.swift */,
+				4AE8618528E483FF0033112C /* MachoTool-Bridging-Header.h */,
+				4AE8618628E483FF0033112C /* RuntimeBridge.swift */,
+				4AE8618728E483FF0033112C /* Utils.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		4AE8618128E483FF0033112C /* CapStoneHelper */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8618228E483FF0033112C /* CapStoneHelper.h */,
+				4AE8618328E483FF0033112C /* CapStoneHelper.m */,
+			);
+			path = CapStoneHelper;
+			sourceTree = "<group>";
+		};
+		4AE8618A28E483FF0033112C /* Macho */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8618B28E483FF0033112C /* MachoHeader */,
+				4AE8618D28E483FF0033112C /* MachoProtocol.swift */,
+				4AE8618E28E483FF0033112C /* Interpreter(解释器) */,
+				4AE861A228E483FF0033112C /* Parse */,
+				4AE861A828E483FF0033112C /* Macho.swift */,
+				4AE861A928E483FF0033112C /* LoadCommand */,
+			);
+			path = Macho;
+			sourceTree = "<group>";
+		};
+		4AE8618B28E483FF0033112C /* MachoHeader */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8618C28E483FF0033112C /* MachoHeader.swift */,
+			);
+			path = MachoHeader;
+			sourceTree = "<group>";
+		};
+		4AE8618E28E483FF0033112C /* Interpreter(解释器) */ = {
+			isa = PBXGroup;
+			children = (
+				4AE862E528E5DCD90033112C /* ASCIIInterpreter.swift */,
+				4AE8618F28E483FF0033112C /* ClassListInterpreter.swift */,
+				4AE8619028E483FF0033112C /* CFStringInterpreter.swift */,
+				4AE8619128E483FF0033112C /* UStringInterpreter.swift */,
+				4AE8619228E483FF0033112C /* SwiftTypesInterpreter.swift */,
+				4AE8619328E483FF0033112C /* StubsInterpreter.swift */,
+				4AE8619428E483FF0033112C /* BaseInterpreter.swift */,
+				4AE8619528E483FF0033112C /* ReferencesInterpreter.swift */,
+				4AE8619628E483FF0033112C /* CategoryInterpreter.swift */,
+				4AE8619728E483FF0033112C /* SymbolInterpreter */,
+				4AE8619C28E483FF0033112C /* DyldInfoInterpreter */,
+			);
+			path = "Interpreter(解释器)";
+			sourceTree = "<group>";
+		};
+		4AE8619728E483FF0033112C /* SymbolInterpreter */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8619828E483FF0033112C /* StringInterpreter.swift */,
+				4AE8619928E483FF0033112C /* IndirectSymbolTableInterpreter.swift */,
+				4AE8619A28E483FF0033112C /* LazySymbolInterpreter.swift */,
+				4AE8619B28E483FF0033112C /* SymbolInterpreter.swift */,
+			);
+			path = SymbolInterpreter;
+			sourceTree = "<group>";
+		};
+		4AE8619C28E483FF0033112C /* DyldInfoInterpreter */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8619D28E483FF0033112C /* ExportInfoInterpreter.swift */,
+				4AE8619E28E483FF0033112C /* BindOperationCode.swift */,
+				4AE8619F28E483FF0033112C /* OperationCodeInterpreter.swift */,
+				4AE861A028E483FF0033112C /* OperationCode.swift */,
+				4AE861A128E483FF0033112C /* RebaseOperationCode.swift */,
+			);
+			path = DyldInfoInterpreter;
+			sourceTree = "<group>";
+		};
+		4AE861A228E483FF0033112C /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				4AE861A328E483FF0033112C /* ParseDataSection.swift */,
+				4AE861A428E483FF0033112C /* ParseSymbolTool.swift */,
+				4AE861A528E483FF0033112C /* ParseTextSection.swift */,
+				4AE861A628E483FF0033112C /* ParseDyldInfo.swift */,
+				4AE861A728E483FF0033112C /* ParseCustomSection.swift */,
+			);
+			path = Parse;
+			sourceTree = "<group>";
+		};
+		4AE861A928E483FF0033112C /* LoadCommand */ = {
+			isa = PBXGroup;
+			children = (
+				4AE861AB28E483FF0033112C /* LoadCommandType.swift */,
+				4AE861AA28E483FF0033112C /* LC_EncryptionInfo.swift */,
+				4AE861AC28E483FF0033112C /* LC_BuildVersion.swift */,
+				4AE861AD28E483FF0033112C /* LC_Main.swift */,
+				4AE861AE28E483FF0033112C /* LC_Unknown.swift */,
+				4AE861AF28E483FF0033112C /* LC_SymbolTable.swift */,
+				4AE861B028E483FF0033112C /* Segment */,
+				4AE861B228E483FF0033112C /* LC_DyldInfo.swift */,
+				4AE861B328E483FF0033112C /* Section64.swift */,
+				4AE861B428E483FF0033112C /* LC_LinkeditCommand.swift */,
+				4AE861B528E483FF0033112C /* LC_Uuid.swift */,
+				4AE861B628E483FF0033112C /* LC_DynamicSymbolTable.swift */,
+				4AE861B728E483FF0033112C /* LoadCommand.swift */,
+				4AE861B828E483FF0033112C /* LC_Rpatch.swift */,
+				4AE861B928E483FF0033112C /* LC_Load_Dylib.swift */,
+				4AE861BA28E483FF0033112C /* LC_SourceVersion.swift */,
+				4AE861BB28E483FF0033112C /* LC_MinOSVersion.swift */,
+			);
+			path = LoadCommand;
+			sourceTree = "<group>";
+		};
+		4AE861B028E483FF0033112C /* Segment */ = {
+			isa = PBXGroup;
+			children = (
+				4AE861B128E483FF0033112C /* Segment.swift */,
+				4AE862E328E539010033112C /* SectionHeader.swift */,
+			);
+			path = Segment;
+			sourceTree = "<group>";
+		};
+		4AE861BD28E483FF0033112C /* ConversionTools(转换) */ = {
+			isa = PBXGroup;
+			children = (
+				4AE861BE28E483FF0033112C /* TranslationRead.swift */,
+			);
+			path = "ConversionTools(转换)";
+			sourceTree = "<group>";
+		};
+		4AE861BF28E483FF0033112C /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				4AE861C028E483FF0033112C /* File.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
+		4AE861C128E483FF0033112C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4AE861D328E483FF0033112C /* MachoModule.swift */,
+				4AE861DB28E483FF0033112C /* DataExplanation.swift */,
+				4AE861C228E483FF0033112C /* Module */,
+				4AE861D428E483FF0033112C /* MachoBaseModel */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4AE861C228E483FF0033112C /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				4AE861DC28E483FF0033112C /* LoadCommandModule.swift */,
+				4AE861C328E483FF0033112C /* StubsModule.swift */,
+				4AE861C428E483FF0033112C /* LazyOrNoLazyModule.swift */,
+				4AE861C528E483FF0033112C /* StringTabModule.swift */,
+				4AE861C728E483FF0033112C /* BaseComponentInfo.swift */,
+				4AE861C828E483FF0033112C /* ReferencesModule.swift */,
+				4AE861C928E483FF0033112C /* IndsymModule.swift */,
+				4AE861CA28E483FF0033112C /* UStringModule.swift */,
+				4AE861CB28E483FF0033112C /* SymbolTableModule.swift */,
+				4AE861CC28E483FF0033112C /* SwiftTypesModule.swift */,
+				4AE861CD28E483FF0033112C /* HeaderModule.swift */,
+				4AE861CE28E483FF0033112C /* ClassListModule.swift */,
+				4AE861CF28E483FF0033112C /* StringModule.swift */,
+				4AE861D028E483FF0033112C /* TextModule.swift */,
+				4AE861D128E483FF0033112C /* CFStringModule.swift */,
+				4AE861D228E483FF0033112C /* UnknownModule.swift */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		4AE861D428E483FF0033112C /* MachoBaseModel */ = {
+			isa = PBXGroup;
+			children = (
+				4AE861D628E483FF0033112C /* LazySymbolEntryModel.swift */,
+				4AE861D728E483FF0033112C /* OperationCodeModel.swift */,
+				4AE861D828E483FF0033112C /* IndirectSymbolTableEntryModel.swift */,
+				4AE861D928E483FF0033112C /* SymbolTableModel.swift */,
+				4AE861DA28E483FF0033112C /* SwiftNominalModel.swift */,
+			);
+			path = MachoBaseModel;
+			sourceTree = "<group>";
+		};
+		4AE8622D28E4848A0033112C /* Capstone */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8622E28E4848A0033112C /* utils.h */,
+				4AE8622F28E4848A0033112C /* inttypes.h */,
+				4AE8623028E4848A0033112C /* SStream.h */,
+				4AE8623128E4848A0033112C /* myinttypes.h */,
+				4AE8623228E4848A0033112C /* MathExtras.h */,
+				4AE8623328E4848A0033112C /* LEB128.h */,
+				4AE8623428E4848A0033112C /* MCFixedLenDisassembler.h */,
+				4AE8623528E4848A0033112C /* cs_priv.h */,
+				4AE8623628E4848A0033112C /* cs.c */,
+				4AE8623728E4848A0033112C /* include */,
+				4AE8624328E4848A0033112C /* MCInstrDesc.h */,
+				4AE8624428E4848A0033112C /* MCRegisterInfo.h */,
+				4AE8624528E4848A0033112C /* MCInst.h */,
+				4AE8624628E4848A0033112C /* SStream.c */,
+				4AE8624728E4848A0033112C /* utils.c */,
+				4AE8624828E4848A0033112C /* MCDisassembler.h */,
+				4AE8624928E4848A0033112C /* arch */,
+				4AE8628D28E4848A0033112C /* MCInstrDesc.c */,
+				4AE8628E28E4848A0033112C /* osxkernel_inttypes.h */,
+				4AE8628F28E4848A0033112C /* MCInst.c */,
+				4AE8629028E4848A0033112C /* MCRegisterInfo.c */,
+			);
+			path = Capstone;
+			sourceTree = "<group>";
+		};
+		4AE8623728E4848A0033112C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8623828E4848A0033112C /* capstone.h */,
+				4AE8623928E4848A0033112C /* mips.h */,
+				4AE8623A28E4848A0033112C /* sparc.h */,
+				4AE8623B28E4848A0033112C /* systemz.h */,
+				4AE8623C28E4848A0033112C /* arm.h */,
+				4AE8623D28E4848A0033112C /* x86.h */,
+				4AE8623E28E4848A0033112C /* ppc.h */,
+				4AE8623F28E4848A0033112C /* arm64.h */,
+				4AE8624028E4848A0033112C /* xcore.h */,
+				4AE8624128E4848A0033112C /* module.modulemap */,
+				4AE8624228E4848A0033112C /* platform.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		4AE8624928E4848A0033112C /* arch */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8624A28E4848A0033112C /* PowerPC */,
+				4AE8625828E4848A0033112C /* X86 */,
+				4AE8626E28E4848A0033112C /* ARM */,
+				4AE8627D28E4848A0033112C /* AArch64 */,
+			);
+			path = arch;
+			sourceTree = "<group>";
+		};
+		4AE8624A28E4848A0033112C /* PowerPC */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8624B28E4848A0033112C /* PPCMapping.h */,
+				4AE8624C28E4848A0033112C /* PPCGenDisassemblerTables.inc */,
+				4AE8624D28E4848A0033112C /* PPCGenSubtargetInfo.inc */,
+				4AE8624E28E4848A0033112C /* PPCGenAsmWriter.inc */,
+				4AE8624F28E4848A0033112C /* PPCDisassembler.c */,
+				4AE8625028E4848A0033112C /* PPCPredicates.h */,
+				4AE8625128E4848A0033112C /* PPCInstPrinter.h */,
+				4AE8625228E4848A0033112C /* PPCMapping.c */,
+				4AE8625328E4848A0033112C /* PPCGenRegisterInfo.inc */,
+				4AE8625428E4848A0033112C /* PPCModule.c */,
+				4AE8625528E4848A0033112C /* PPCInstPrinter.c */,
+				4AE8625628E4848A0033112C /* PPCGenInstrInfo.inc */,
+				4AE8625728E4848A0033112C /* PPCDisassembler.h */,
+			);
+			path = PowerPC;
+			sourceTree = "<group>";
+		};
+		4AE8625828E4848A0033112C /* X86 */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8625928E4848A0033112C /* X86InstPrinter.h */,
+				4AE8625A28E4848A0033112C /* X86Disassembler.c */,
+				4AE8625B28E4848A0033112C /* X86GenDisassemblerTables_reduce.inc */,
+				4AE8625C28E4848A0033112C /* X86ATTInstPrinter.c */,
+				4AE8625D28E4848A0033112C /* X86GenRegisterInfo.inc */,
+				4AE8625E28E4848A0033112C /* X86GenAsmWriter_reduce.inc */,
+				4AE8625F28E4848A0033112C /* X86GenInstrInfo.inc */,
+				4AE8626028E4848A0033112C /* X86Module.c */,
+				4AE8626128E4848A0033112C /* X86Mapping.h */,
+				4AE8626228E4848A0033112C /* X86DisassemblerDecoder.c */,
+				4AE8626328E4848A0033112C /* X86Disassembler.h */,
+				4AE8626428E4848A0033112C /* X86BaseInfo.h */,
+				4AE8626528E4848A0033112C /* X86GenAsmWriter1.inc */,
+				4AE8626628E4848A0033112C /* X86DisassemblerDecoderCommon.h */,
+				4AE8626728E4848A0033112C /* X86GenDisassemblerTables.inc */,
+				4AE8626828E4848A0033112C /* X86IntelInstPrinter.c */,
+				4AE8626928E4848A0033112C /* X86GenAsmWriter1_reduce.inc */,
+				4AE8626A28E4848A0033112C /* X86DisassemblerDecoder.h */,
+				4AE8626B28E4848A0033112C /* X86Mapping.c */,
+				4AE8626C28E4848A0033112C /* X86GenInstrInfo_reduce.inc */,
+				4AE8626D28E4848A0033112C /* X86GenAsmWriter.inc */,
+			);
+			path = X86;
+			sourceTree = "<group>";
+		};
+		4AE8626E28E4848A0033112C /* ARM */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8626F28E4848A0033112C /* ARMInstPrinter.c */,
+				4AE8627028E4848A0033112C /* ARMMapping.h */,
+				4AE8627128E4848A0033112C /* ARMGenAsmWriter.inc */,
+				4AE8627228E4848A0033112C /* ARMDisassembler.h */,
+				4AE8627328E4848A0033112C /* ARMModule.c */,
+				4AE8627428E4848A0033112C /* ARMAddressingModes.h */,
+				4AE8627528E4848A0033112C /* ARMBaseInfo.h */,
+				4AE8627628E4848A0033112C /* ARMMapping.c */,
+				4AE8627728E4848A0033112C /* ARMInstPrinter.h */,
+				4AE8627828E4848A0033112C /* ARMGenInstrInfo.inc */,
+				4AE8627928E4848A0033112C /* ARMGenRegisterInfo.inc */,
+				4AE8627A28E4848A0033112C /* ARMGenDisassemblerTables.inc */,
+				4AE8627B28E4848A0033112C /* ARMGenSubtargetInfo.inc */,
+				4AE8627C28E4848A0033112C /* ARMDisassembler.c */,
+			);
+			path = ARM;
+			sourceTree = "<group>";
+		};
+		4AE8627D28E4848A0033112C /* AArch64 */ = {
+			isa = PBXGroup;
+			children = (
+				4AE8627E28E4848A0033112C /* AArch64Disassembler.h */,
+				4AE8627F28E4848A0033112C /* AArch64BaseInfo.h */,
+				4AE8628028E4848A0033112C /* AArch64AddressingModes.h */,
+				4AE8628128E4848A0033112C /* AArch64InstPrinter.h */,
+				4AE8628228E4848A0033112C /* AArch64GenAsmWriter.inc */,
+				4AE8628328E4848A0033112C /* AArch64Mapping.c */,
+				4AE8628428E4848A0033112C /* AArch64GenDisassemblerTables.inc */,
+				4AE8628528E4848A0033112C /* AArch64GenSubtargetInfo.inc */,
+				4AE8628628E4848A0033112C /* AArch64Disassembler.c */,
+				4AE8628728E4848A0033112C /* AArch64InstPrinter.c */,
+				4AE8628828E4848A0033112C /* AArch64BaseInfo.c */,
+				4AE8628928E4848A0033112C /* AArch64GenRegisterInfo.inc */,
+				4AE8628A28E4848A0033112C /* AArch64Mapping.h */,
+				4AE8628B28E4848A0033112C /* AArch64GenInstrInfo.inc */,
+				4AE8628C28E4848A0033112C /* AArch64Module.c */,
+			);
+			path = AArch64;
+			sourceTree = "<group>";
+		};
+		4AE862C528E486760033112C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AE862C728E486900033112C /* libswiftDemangle.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4AE862C928E486D20033112C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AE862CA28E486D20033112C /* FileView.swift */,
+				4AE862CC28E486D20033112C /* MachoView.swift */,
+				4AE862CD28E486D20033112C /* MachoModuleView.swift */,
+				4AE862CB28E486D20033112C /* ParseView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4AE8614B28E483990033112C /* MOView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AE8617128E483990033112C /* Build configuration list for PBXNativeTarget "MOView" */;
+			buildPhases = (
+				4AE8614828E483990033112C /* Sources */,
+				4AE8614928E483990033112C /* Frameworks */,
+				4AE8614A28E483990033112C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MOView;
+			productName = MOView;
+			productReference = 4AE8614C28E483990033112C /* MOView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4AE8614428E483990033112C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					4AE8614B28E483990033112C = {
+						CreatedOnToolsVersion = 14.0;
+					};
+				};
+			};
+			buildConfigurationList = 4AE8614728E483990033112C /* Build configuration list for PBXProject "MOView" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4AE8614328E483990033112C;
+			productRefGroup = 4AE8614D28E483990033112C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4AE8614B28E483990033112C /* MOView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4AE8614A28E483990033112C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AE8615728E483990033112C /* Preview Assets.xcassets in Resources */,
+				4AE8615428E483990033112C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4AE8614828E483990033112C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AE861FE28E483FF0033112C /* Macho.swift in Sources */,
+				4AE861F328E483FF0033112C /* SymbolInterpreter.swift in Sources */,
+				4AE8622028E483FF0033112C /* TextModule.swift in Sources */,
+				4AE862A728E4848A0033112C /* X86IntelInstPrinter.c in Sources */,
+				4AE862A428E4848A0033112C /* X86DisassemblerDecoder.c in Sources */,
+				4AE861F928E483FF0033112C /* ParseDataSection.swift in Sources */,
+				4AE861FC28E483FF0033112C /* ParseDyldInfo.swift in Sources */,
+				4AE862C128E4848A0033112C /* MCRegisterInfo.c in Sources */,
+				4AE8620528E483FF0033112C /* Segment.swift in Sources */,
+				4AE862AE28E4848A0033112C /* ARMModule.c in Sources */,
+				4AE861EF28E483FF0033112C /* CategoryInterpreter.swift in Sources */,
+				4AE862B228E4848A0033112C /* ARMGenDisassemblerTables.inc in Sources */,
+				4AE862AD28E4848A0033112C /* ARMGenAsmWriter.inc in Sources */,
+				4AE8629128E4848A0033112C /* cs.c in Sources */,
+				4AE8620228E483FF0033112C /* LC_Main.swift in Sources */,
+				4AE8621828E483FF0033112C /* ReferencesModule.swift in Sources */,
+				4AE862A628E4848A0033112C /* X86GenDisassemblerTables.inc in Sources */,
+				4AE862B028E4848A0033112C /* ARMGenInstrInfo.inc in Sources */,
+				4AE861E028E483FF0033112C /* CapStoneHelper.m in Sources */,
+				4AE861E228E483FF0033112C /* RuntimeBridge.swift in Sources */,
+				4AE8629628E4848A0033112C /* PPCGenAsmWriter.inc in Sources */,
+				4AE862A028E4848A0033112C /* X86GenRegisterInfo.inc in Sources */,
+				4AE8620D28E483FF0033112C /* LC_Load_Dylib.swift in Sources */,
+				4AE8622228E483FF0033112C /* UnknownModule.swift in Sources */,
+				4AE8620628E483FF0033112C /* LC_DyldInfo.swift in Sources */,
+				4AE8620C28E483FF0033112C /* LC_Rpatch.swift in Sources */,
+				4AE8615228E483990033112C /* ContentView.swift in Sources */,
+				4AE861FF28E483FF0033112C /* LC_EncryptionInfo.swift in Sources */,
+				4AE862BD28E4848A0033112C /* AArch64GenInstrInfo.inc in Sources */,
+				4AE862E428E539010033112C /* SectionHeader.swift in Sources */,
+				4AE8621328E483FF0033112C /* StubsModule.swift in Sources */,
+				4AE861EB28E483FF0033112C /* SwiftTypesInterpreter.swift in Sources */,
+				4AE8629428E4848A0033112C /* PPCGenDisassemblerTables.inc in Sources */,
+				4AE8621B28E483FF0033112C /* SymbolTableModule.swift in Sources */,
+				4AE8622328E483FF0033112C /* MachoModule.swift in Sources */,
+				4AE862D128E486D20033112C /* MachoModuleView.swift in Sources */,
+				4AE8620428E483FF0033112C /* LC_SymbolTable.swift in Sources */,
+				4AE861ED28E483FF0033112C /* BaseInterpreter.swift in Sources */,
+				4AE8622A28E483FF0033112C /* DataExplanation.swift in Sources */,
+				4AE861E728E483FF0033112C /* MachoProtocol.swift in Sources */,
+				4AE861E328E483FF0033112C /* Utils.swift in Sources */,
+				4AE8620028E483FF0033112C /* LoadCommandType.swift in Sources */,
+				4AE8622828E483FF0033112C /* SymbolTableModel.swift in Sources */,
+				4AE862E628E5DCD90033112C /* ASCIIInterpreter.swift in Sources */,
+				4AE8621D28E483FF0033112C /* HeaderModule.swift in Sources */,
+				4AE862B928E4848A0033112C /* AArch64Disassembler.c in Sources */,
+				4AE8622128E483FF0033112C /* CFStringModule.swift in Sources */,
+				4AE862CF28E486D20033112C /* ParseView.swift in Sources */,
+				4AE862B828E4848A0033112C /* AArch64GenSubtargetInfo.inc in Sources */,
+				4AE862B528E4848A0033112C /* AArch64GenAsmWriter.inc in Sources */,
+				4AE8629E28E4848A0033112C /* X86GenDisassemblerTables_reduce.inc in Sources */,
+				4AE861EC28E483FF0033112C /* StubsInterpreter.swift in Sources */,
+				4AE861FA28E483FF0033112C /* ParseSymbolTool.swift in Sources */,
+				4AE8629228E4848A0033112C /* SStream.c in Sources */,
+				4AE862AC28E4848A0033112C /* ARMInstPrinter.c in Sources */,
+				4AE861F128E483FF0033112C /* IndirectSymbolTableInterpreter.swift in Sources */,
+				4AE8620928E483FF0033112C /* LC_Uuid.swift in Sources */,
+				4AE862AF28E4848A0033112C /* ARMMapping.c in Sources */,
+				4AE8621128E483FF0033112C /* TranslationRead.swift in Sources */,
+				4AE862A128E4848A0033112C /* X86GenAsmWriter_reduce.inc in Sources */,
+				4AE862B128E4848A0033112C /* ARMGenRegisterInfo.inc in Sources */,
+				4AE8629728E4848A0033112C /* PPCDisassembler.c in Sources */,
+				4AE8629F28E4848A0033112C /* X86ATTInstPrinter.c in Sources */,
+				4AE861E528E483FF0033112C /* MachoTool.swift in Sources */,
+				4AE861E928E483FF0033112C /* CFStringInterpreter.swift in Sources */,
+				4AE8621A28E483FF0033112C /* UStringModule.swift in Sources */,
+				4AE8620828E483FF0033112C /* LC_LinkeditCommand.swift in Sources */,
+				4AE8621428E483FF0033112C /* LazyOrNoLazyModule.swift in Sources */,
+				4AE8622628E483FF0033112C /* OperationCodeModel.swift in Sources */,
+				4AE861FD28E483FF0033112C /* ParseCustomSection.swift in Sources */,
+				4AE861DF28E483FF0033112C /* SwiftClassUtils.swift in Sources */,
+				4AE861F028E483FF0033112C /* StringInterpreter.swift in Sources */,
+				4AE862C028E4848A0033112C /* MCInst.c in Sources */,
+				4AE8621F28E483FF0033112C /* StringModule.swift in Sources */,
+				4AE8620328E483FF0033112C /* LC_Unknown.swift in Sources */,
+				4AE861F428E483FF0033112C /* ExportInfoInterpreter.swift in Sources */,
+				4AE861E628E483FF0033112C /* MachoHeader.swift in Sources */,
+				4AE8622728E483FF0033112C /* IndirectSymbolTableEntryModel.swift in Sources */,
+				4AE862A828E4848A0033112C /* X86GenAsmWriter1_reduce.inc in Sources */,
+				4AE861E128E483FF0033112C /* DataTool.swift in Sources */,
+				4AE8620128E483FF0033112C /* LC_BuildVersion.swift in Sources */,
+				4AE8629828E4848A0033112C /* PPCMapping.c in Sources */,
+				4AE862A228E4848A0033112C /* X86GenInstrInfo.inc in Sources */,
+				4AE862BA28E4848A0033112C /* AArch64InstPrinter.c in Sources */,
+				4AE8629928E4848A0033112C /* PPCGenRegisterInfo.inc in Sources */,
+				4AE862A528E4848A0033112C /* X86GenAsmWriter1.inc in Sources */,
+				4AE862B628E4848A0033112C /* AArch64Mapping.c in Sources */,
+				4AE8620F28E483FF0033112C /* LC_MinOSVersion.swift in Sources */,
+				4AE861EA28E483FF0033112C /* UStringInterpreter.swift in Sources */,
+				4AE8620728E483FF0033112C /* Section64.swift in Sources */,
+				4AE862B328E4848A0033112C /* ARMGenSubtargetInfo.inc in Sources */,
+				4AE862A328E4848A0033112C /* X86Module.c in Sources */,
+				4AE862D028E486D20033112C /* MachoView.swift in Sources */,
+				4AE8622928E483FF0033112C /* SwiftNominalModel.swift in Sources */,
+				4AE8620E28E483FF0033112C /* LC_SourceVersion.swift in Sources */,
+				4AE8615028E483990033112C /* MOViewApp.swift in Sources */,
+				4AE862AA28E4848A0033112C /* X86GenInstrInfo_reduce.inc in Sources */,
+				4AE8629D28E4848A0033112C /* X86Disassembler.c in Sources */,
+				4AE8621228E483FF0033112C /* File.swift in Sources */,
+				4AE862BB28E4848A0033112C /* AArch64BaseInfo.c in Sources */,
+				4AE8629328E4848A0033112C /* utils.c in Sources */,
+				4AE862A928E4848A0033112C /* X86Mapping.c in Sources */,
+				4AE8621728E483FF0033112C /* BaseComponentInfo.swift in Sources */,
+				4AE861FB28E483FF0033112C /* ParseTextSection.swift in Sources */,
+				4AE8622528E483FF0033112C /* LazySymbolEntryModel.swift in Sources */,
+				4AE861F528E483FF0033112C /* BindOperationCode.swift in Sources */,
+				4AE862B728E4848A0033112C /* AArch64GenDisassemblerTables.inc in Sources */,
+				4AE861EE28E483FF0033112C /* ReferencesInterpreter.swift in Sources */,
+				4AE861F228E483FF0033112C /* LazySymbolInterpreter.swift in Sources */,
+				4AE8629C28E4848A0033112C /* PPCGenInstrInfo.inc in Sources */,
+				4AE8620A28E483FF0033112C /* LC_DynamicSymbolTable.swift in Sources */,
+				4AE862AB28E4848A0033112C /* X86GenAsmWriter.inc in Sources */,
+				4AE862BE28E4848A0033112C /* AArch64Module.c in Sources */,
+				4AE861F728E483FF0033112C /* OperationCode.swift in Sources */,
+				4AE862BC28E4848A0033112C /* AArch64GenRegisterInfo.inc in Sources */,
+				4AE8622B28E483FF0033112C /* LoadCommandModule.swift in Sources */,
+				4AE862B428E4848A0033112C /* ARMDisassembler.c in Sources */,
+				4AE8621C28E483FF0033112C /* SwiftTypesModule.swift in Sources */,
+				4AE862CE28E486D20033112C /* FileView.swift in Sources */,
+				4AE8629A28E4848A0033112C /* PPCModule.c in Sources */,
+				4AE861E828E483FF0033112C /* ClassListInterpreter.swift in Sources */,
+				4AE8629B28E4848A0033112C /* PPCInstPrinter.c in Sources */,
+				4AE8621E28E483FF0033112C /* ClassListModule.swift in Sources */,
+				4AE8621528E483FF0033112C /* StringTabModule.swift in Sources */,
+				4AE861F828E483FF0033112C /* RebaseOperationCode.swift in Sources */,
+				4AE8629528E4848A0033112C /* PPCGenSubtargetInfo.inc in Sources */,
+				4AE862BF28E4848A0033112C /* MCInstrDesc.c in Sources */,
+				4AE8620B28E483FF0033112C /* LoadCommand.swift in Sources */,
+				4AE861F628E483FF0033112C /* OperationCodeInterpreter.swift in Sources */,
+				4AE8621928E483FF0033112C /* IndsymModule.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4AE8616F28E483990033112C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4AE8617028E483990033112C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		4AE8617228E483990033112C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MOView/MOView.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MOView/Preview Content\"";
+				DEVELOPMENT_TEAM = HBMS698372;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = (
+					"-DCAPSTONE_USE_SYS_DYN_MEM",
+					"-D__STDC_CONSTANT_MACROS",
+					"-D__STDC_FORMAT_MACROS",
+					"-D__STDC_LIMIT_MACROS",
+					"-DCAPSTONE_HAS_POWERPC",
+					"-DCAPSTONE_HAS_ARM64",
+					"-DCAPSTONE_HAS_ARM",
+					"-DCAPSTONE_HAS_X86",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.testDemo.MOView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MOView/Tools/Tools/MachoTool-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4AE8617328E483990033112C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MOView/MOView.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MOView/Preview Content\"";
+				DEVELOPMENT_TEAM = HBMS698372;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/swift",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = (
+					"-DCAPSTONE_USE_SYS_DYN_MEM",
+					"-D__STDC_CONSTANT_MACROS",
+					"-D__STDC_FORMAT_MACROS",
+					"-D__STDC_LIMIT_MACROS",
+					"-DCAPSTONE_HAS_POWERPC",
+					"-DCAPSTONE_HAS_ARM64",
+					"-DCAPSTONE_HAS_ARM",
+					"-DCAPSTONE_HAS_X86",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.testDemo.MOView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MOView/Tools/Tools/MachoTool-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4AE8614728E483990033112C /* Build configuration list for PBXProject "MOView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AE8616F28E483990033112C /* Debug */,
+				4AE8617028E483990033112C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AE8617128E483990033112C /* Build configuration list for PBXNativeTarget "MOView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AE8617228E483990033112C /* Debug */,
+				4AE8617328E483990033112C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4AE8614428E483990033112C /* Project object */;
+}
