@@ -14,10 +14,7 @@ struct StringPosition {
     var explanationItem: ExplanationItem? = nil
 }
  
-
-
-
-
+ 
 struct StringInterpreter: Interpreter {
     
     var dataSlice: Data

@@ -30,7 +30,6 @@
 		4AE861F028E483FF0033112C /* StringInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619828E483FF0033112C /* StringInterpreter.swift */; };
 		4AE861F128E483FF0033112C /* IndirectSymbolTableInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619928E483FF0033112C /* IndirectSymbolTableInterpreter.swift */; };
 		4AE861F228E483FF0033112C /* LazySymbolInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619A28E483FF0033112C /* LazySymbolInterpreter.swift */; };
-		4AE861F328E483FF0033112C /* SymbolInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619B28E483FF0033112C /* SymbolInterpreter.swift */; };
 		4AE861F428E483FF0033112C /* ExportInfoInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619D28E483FF0033112C /* ExportInfoInterpreter.swift */; };
 		4AE861F528E483FF0033112C /* BindOperationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619E28E483FF0033112C /* BindOperationCode.swift */; };
 		4AE861F628E483FF0033112C /* OperationCodeInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE8619F28E483FF0033112C /* OperationCodeInterpreter.swift */; };
@@ -170,7 +169,6 @@
 		4AE8619828E483FF0033112C /* StringInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringInterpreter.swift; sourceTree = "<group>"; };
 		4AE8619928E483FF0033112C /* IndirectSymbolTableInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndirectSymbolTableInterpreter.swift; sourceTree = "<group>"; };
 		4AE8619A28E483FF0033112C /* LazySymbolInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazySymbolInterpreter.swift; sourceTree = "<group>"; };
-		4AE8619B28E483FF0033112C /* SymbolInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolInterpreter.swift; sourceTree = "<group>"; };
 		4AE8619D28E483FF0033112C /* ExportInfoInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportInfoInterpreter.swift; sourceTree = "<group>"; };
 		4AE8619E28E483FF0033112C /* BindOperationCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindOperationCode.swift; sourceTree = "<group>"; };
 		4AE8619F28E483FF0033112C /* OperationCodeInterpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationCodeInterpreter.swift; sourceTree = "<group>"; };
@@ -458,7 +456,6 @@
 				4AE8619828E483FF0033112C /* StringInterpreter.swift */,
 				4AE8619928E483FF0033112C /* IndirectSymbolTableInterpreter.swift */,
 				4AE8619A28E483FF0033112C /* LazySymbolInterpreter.swift */,
-				4AE8619B28E483FF0033112C /* SymbolInterpreter.swift */,
 			);
 			path = SymbolInterpreter;
 			sourceTree = "<group>";
@@ -820,7 +817,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AE861FE28E483FF0033112C /* Macho.swift in Sources */,
-				4AE861F328E483FF0033112C /* SymbolInterpreter.swift in Sources */,
 				4AE8622028E483FF0033112C /* TextModule.swift in Sources */,
 				4AE862A728E4848A0033112C /* X86IntelInstPrinter.c in Sources */,
 				4AE862A428E4848A0033112C /* X86DisassemblerDecoder.c in Sources */,

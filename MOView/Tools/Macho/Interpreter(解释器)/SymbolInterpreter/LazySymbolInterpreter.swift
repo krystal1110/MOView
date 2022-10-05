@@ -8,11 +8,7 @@
 import Foundation
 
 struct SymbolPointer {}
-
-/*
-   用于解析懒加载符号表 lazy-symbol / nolazy-symbol
- **/
-
+ 
 struct LazySymbolInterpreter: Interpreter {
     
     var dataSlice: Data

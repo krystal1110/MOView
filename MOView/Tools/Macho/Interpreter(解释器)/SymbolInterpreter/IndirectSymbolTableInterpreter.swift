@@ -7,11 +7,7 @@
 
 import Foundation
 
-
-/*
-   用于解析 间接符号表信息
- **/
-
+ 
 struct IndirectSymbolTableInterpreter: Interpreter {
     
     var dataSlice: Data
